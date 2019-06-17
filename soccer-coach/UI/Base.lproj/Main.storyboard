@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
+    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
+    </dependencies>
+    <scenes>
+        <!--Soccer Team Collection-->
+        <scene sceneID="h8R-e4-KIR">
+            <objects>
+                <viewController id="nlV-Ay-vVf" customClass="SoccerTeamCollection" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="systemGreenColor"/>
+                        <viewLayoutGuide key="safeArea" id="fLt-S8-nS1"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DZR-HA-31D"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="724.1206030150754" y="-681.29496402877703"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EQp-xG-cKb">
+            <objects>
+                <navigationController id="ONx-Ub-AQp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tkz-Ap-5QH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wSe-mD-F9N" kind="relationship" relationship="rootViewController" id="54P-8v-gcx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fA9-Xg-iK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17" y="-1332"/>
+        </scene>
+        <!--Team List-->
+        <scene sceneID="zki-PG-tjX">
+            <objects>
+                <viewController id="wSe-mD-F9N" customClass="TeamList" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JwP-qt-uGh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-7t-vWk">
+                                <rect key="frame" x="0.0" y="50" width="375" height="784"/>
+                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kH0-7t-vWk" firstAttribute="leading" secondItem="8Wc-Lo-X1Y" secondAttribute="leading" id="5ua-ge-l2Y"/>
+                            <constraint firstItem="kH0-7t-vWk" firstAttribute="trailing" secondItem="8Wc-Lo-X1Y" secondAttribute="trailing" id="AUg-on-ZVy"/>
+                            <constraint firstItem="kH0-7t-vWk" firstAttribute="top" secondItem="8Wc-Lo-X1Y" secondAttribute="top" id="UEs-Ur-teR"/>
+                            <constraint firstAttribute="bottom" secondItem="kH0-7t-vWk" secondAttribute="bottom" id="cVe-ua-gdy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8Wc-Lo-X1Y"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UfM-o0-Pob">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="camera.viewfinder" catalog="system" id="E9P-4w-OdS">
+                            <connections>
+                                <action selector="scanTapped:" destination="wSe-mD-F9N" id="f7n-U0-Kl4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-r9-2fg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="702.51256281407041" y="-1334.5323741007196"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="J84-Tp-JJI">
+            <objects>
+                <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="ONx-Ub-AQp" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
+                        <segue destination="MFk-7A-FeN" kind="relationship" relationship="detailViewController" id="t3N-O3-ClY"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dR2-4s-Ym1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-693" y="-1007"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hcn-xt-Xh9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MFk-7A-FeN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SQE-N6-tiv">
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="rootViewController" id="SsJ-vN-KqK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVW-jb-HFO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="16.582914572864322" y="-681.29496402877703"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera.viewfinder" catalog="system" width="64" height="58"/>
+    </resources>
+</document>

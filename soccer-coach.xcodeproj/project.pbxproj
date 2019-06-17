@@ -9,25 +9,29 @@
 /* Begin PBXBuildFile section */
 		EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27684F22B7E708008E4CA1 /* AppDelegate.swift */; };
 		EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685122B7E708008E4CA1 /* SceneDelegate.swift */; };
-		EE27685422B7E708008E4CA1 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685322B7E708008E4CA1 /* FirstViewController.swift */; };
-		EE27685622B7E708008E4CA1 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685522B7E708008E4CA1 /* SecondViewController.swift */; };
+		EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */; };
+		EE27685622B7E708008E4CA1 /* TeamList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685522B7E708008E4CA1 /* TeamList.swift */; };
 		EE27685922B7E708008E4CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27685722B7E708008E4CA1 /* Main.storyboard */; };
 		EE27685C22B7E708008E4CA1 /* soccer_coach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE27685A22B7E708008E4CA1 /* soccer_coach.xcdatamodeld */; };
 		EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE27685D22B7E70B008E4CA1 /* Assets.xcassets */; };
 		EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */; };
+		EE27686C22B7EE6B008E4CA1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686B22B7EE6B008E4CA1 /* Player.swift */; };
+		EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EE27684C22B7E708008E4CA1 /* soccer-coach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "soccer-coach.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE27684F22B7E708008E4CA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE27685122B7E708008E4CA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EE27685322B7E708008E4CA1 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		EE27685522B7E708008E4CA1 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerTeamCollection.swift; sourceTree = "<group>"; };
+		EE27685522B7E708008E4CA1 /* TeamList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamList.swift; sourceTree = "<group>"; };
 		EE27685822B7E708008E4CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE27685B22B7E708008E4CA1 /* soccer_coach.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = soccer_coach.xcdatamodel; sourceTree = "<group>"; };
 		EE27685D22B7E70B008E4CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE27686022B7E70B008E4CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE27686222B7E70B008E4CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE27686B22B7EE6B008E4CA1 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +66,49 @@
 			children = (
 				EE27684F22B7E708008E4CA1 /* AppDelegate.swift */,
 				EE27685122B7E708008E4CA1 /* SceneDelegate.swift */,
-				EE27685322B7E708008E4CA1 /* FirstViewController.swift */,
-				EE27685522B7E708008E4CA1 /* SecondViewController.swift */,
-				EE27685722B7E708008E4CA1 /* Main.storyboard */,
-				EE27685D22B7E70B008E4CA1 /* Assets.xcassets */,
-				EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */,
 				EE27686222B7E70B008E4CA1 /* Info.plist */,
-				EE27685A22B7E708008E4CA1 /* soccer_coach.xcdatamodeld */,
+				EE27686822B7EE1E008E4CA1 /* UI */,
+				EE27686D22B7EE70008E4CA1 /* Data */,
+				EE27686922B7EE33008E4CA1 /* Resources */,
 			);
 			path = "soccer-coach";
+			sourceTree = "<group>";
+		};
+		EE27686822B7EE1E008E4CA1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EE27685722B7E708008E4CA1 /* Main.storyboard */,
+				EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */,
+				EE27685522B7E708008E4CA1 /* TeamList.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EE27686922B7EE33008E4CA1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EE27685D22B7E70B008E4CA1 /* Assets.xcassets */,
+				EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */,
+				EE27686A22B7EE3C008E4CA1 /* CoreData */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EE27686A22B7EE3C008E4CA1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				EE27685A22B7E708008E4CA1 /* soccer_coach.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		EE27686D22B7EE70008E4CA1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EE27686B22B7EE6B008E4CA1 /* Player.swift */,
+				EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,10 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE27685622B7E708008E4CA1 /* SecondViewController.swift in Sources */,
+				EE27685622B7E708008E4CA1 /* TeamList.swift in Sources */,
 				EE27685C22B7E708008E4CA1 /* soccer_coach.xcdatamodeld in Sources */,
-				EE27685422B7E708008E4CA1 /* FirstViewController.swift in Sources */,
+				EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */,
 				EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */,
+				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
+				EE27686C22B7EE6B008E4CA1 /* Player.swift in Sources */,
 				EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

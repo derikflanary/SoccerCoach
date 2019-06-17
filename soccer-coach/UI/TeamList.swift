@@ -10,10 +10,22 @@ import UIKit
 import VisionKit
 
 class TeamList: UIViewController {
-
+    
+    enum Section: CaseIterable {
+        case main
+    }
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
+    var players = [SoccerPlayer]()
+    let cellIdentifier = "cell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        configDataSource()
     }
 
 
@@ -28,6 +40,25 @@ class TeamList: UIViewController {
 }
 
 
+private extension TeamList {
+    
+    func configDataSource() {
+        self.dataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+            cell.textLabel?.text = player.name
+            return cell
+        })
+    }
+    
+    func updateTableUI(animated: Bool = true) {
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
+        currentSnapshot.appendSections([.main])
+        currentSnapshot.appendItems(players)
+        self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
+    }
+}
+
+
 // MARK: - Camera Document Delegate
 
 @available(iOS 13.0, *)
@@ -38,11 +69,11 @@ extension TeamList: VNDocumentCameraViewControllerDelegate {
         controller.dismiss(animated: true)
         recognitionEngine.process(scan) { resultingStrings in
             DispatchQueue.main.async {
-                var players: [SoccerPlayer] = []
                 for string in resultingStrings {
                     let player = SoccerPlayer(name: string)
-                    players.append(player)
+                    self.players.append(player)
                 }
+                self.updateTableUI()
             }
         }
     }

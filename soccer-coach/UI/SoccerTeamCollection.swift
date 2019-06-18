@@ -29,6 +29,7 @@ class SoccerTeamCollection: UIViewController {
         super.viewDidLoad()
         collectionView.register(ActivePlayerCell.nib(), forCellWithReuseIdentifier: ActivePlayerCell.reuseIdentifier)
         collectionView.dropDelegate = self
+        collectionView.dragDelegate = self
         
         for section in Section.allCases {
             switch section {
@@ -104,7 +105,22 @@ private extension SoccerTeamCollection {
         return allActivePlayers.contains(player)
     }
     
+    func replace(with player: SoccerPlayer, at indexPath: IndexPath) {
+        
+    }
+    
+    func swapPlayers(_ playerOne: SoccerPlayer, at indexPathOne: IndexPath,  playerTwo: SoccerPlayer, as indexPathTwo: IndexPath) {
+        
+    }
+    
+    func remove(player: SoccerPlayer, from indexPath: IndexPath) {
+        
+    }
+    
 }
+
+
+// MARK: - CollectionView delegate
 
 extension SoccerTeamCollection: UICollectionViewDelegate {
     
@@ -114,25 +130,56 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     }
 }
 
+
+// MARK: - Drag delegate
+
+extension SoccerTeamCollection: UICollectionViewDragDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard let section = Section(rawValue: indexPath.section), let player = activePlayersPerSection[section]?[indexPath.row] else { return [] }
+        let itemProvider = NSItemProvider(object: player)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = player
+        return [dragItem]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dragPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return nil }
+        let previewParameters = UIDragPreviewParameters()
+        previewParameters.backgroundColor = .clear
+        let path = UIBezierPath(rect: cell.nameLabel.frame)
+        previewParameters.visiblePath = path
+        return previewParameters
+    }
+    
+}
+
+
+// MARK: - Drop delegate
+
 extension SoccerTeamCollection: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
         for item in coordinator.items {
-            guard let player = item.dragItem.localObject as? SoccerPlayer else { continue }
+            guard let movingPlayer = item.dragItem.localObject as? SoccerPlayer else { continue }
             let insertionIndexPath = destinationIndexPath
             guard let section = Section(rawValue: insertionIndexPath.section) else { continue }
-            guard let playersForSection = activePlayersPerSection[section], !activePlayersContains(player) else { continue }
-            if playersForSection.count + 1 <= insertionIndexPath.row {
-                activePlayersPerSection[section]?[insertionIndexPath.row] = player
+            guard let playersForSection = activePlayersPerSection[section] else { continue }
+            if activePlayersContains(movingPlayer) {
+                if let sourceIndexPath = item.sourceIndexPath, let sourceSection = Section(rawValue: sourceIndexPath.section), let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {
+                    activePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                    activePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                }
+            } else if playersForSection.count + 1 >= insertionIndexPath.row {
+                activePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
             } else {
-                activePlayersPerSection[section]?.append(player)
+                activePlayersPerSection[section]?.append(movingPlayer)
             }
-            player.isActive = true
+            movingPlayer.isActive = true
             updateSnapshot()
         }
     }
-    
     
 }
 

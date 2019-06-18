@@ -19,7 +19,7 @@ class TeamList: UIViewController {
     
     var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
-    var players = [SoccerPlayer(name: "Molly Molls")]
+    var players = [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")]
     let cellIdentifier = "cell"
     
     override func viewDidLoad() {

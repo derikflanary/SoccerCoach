@@ -136,6 +136,14 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
 extension SoccerTeamCollection: UICollectionViewDragDelegate {
 
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+    
+    func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
         guard let section = Section(rawValue: indexPath.section), let player = activePlayersPerSection[section]?[indexPath.row] else { return [] }
         let itemProvider = NSItemProvider(object: player)
         let dragItem = UIDragItem(itemProvider: itemProvider)
@@ -158,6 +166,10 @@ extension SoccerTeamCollection: UICollectionViewDragDelegate {
 // MARK: - Drop delegate
 
 extension SoccerTeamCollection: UICollectionViewDropDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
+    }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)

@@ -19,12 +19,13 @@ class TeamList: UIViewController {
     
     var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
-    var players = [SoccerPlayer]()
+    var players = [SoccerPlayer(name: "Molly Molls")]
     let cellIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.dragDelegate = self
         configDataSource()
     }
 
@@ -37,6 +38,10 @@ class TeamList: UIViewController {
         }
     }
     
+    @IBAction func refreshTapped(_ sender: Any) {
+        tableView.reloadData()
+    }
+    
 }
 
 
@@ -46,8 +51,10 @@ private extension TeamList {
         self.dataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             cell.textLabel?.text = player.name
+            cell.imageView?.image = player.isActive ? UIImage(systemName: "circle.fill") : nil
             return cell
         })
+        updateTableUI()
     }
     
     func updateTableUI(animated: Bool = true) {
@@ -78,4 +85,16 @@ extension TeamList: VNDocumentCameraViewControllerDelegate {
         }
     }
 
+}
+
+extension TeamList: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let player = players[indexPath.row]
+        let itemProvider = NSItemProvider(object: player)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = player
+        return [dragItem]
+    }
+    
 }

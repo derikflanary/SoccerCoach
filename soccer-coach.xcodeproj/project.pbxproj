@@ -15,8 +15,12 @@
 		EE27685C22B7E708008E4CA1 /* soccer_coach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE27685A22B7E708008E4CA1 /* soccer_coach.xcdatamodeld */; };
 		EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE27685D22B7E70B008E4CA1 /* Assets.xcassets */; };
 		EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */; };
-		EE27686C22B7EE6B008E4CA1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686B22B7EE6B008E4CA1 /* Player.swift */; };
+		EE27686C22B7EE6B008E4CA1 /* SoccerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */; };
 		EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */; };
+		EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */; };
+		EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */; };
+		EEF7609B22B830FE004D92CF /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7609A22B830FE004D92CF /* ReusableView.swift */; };
+		EEF7609D22B83126004D92CF /* ListView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7609C22B83126004D92CF /* ListView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +34,12 @@
 		EE27685D22B7E70B008E4CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE27686022B7E70B008E4CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE27686222B7E70B008E4CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE27686B22B7EE6B008E4CA1 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayer.swift; sourceTree = "<group>"; };
 		EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionEngine.swift; sourceTree = "<group>"; };
+		EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePlayerCell.swift; sourceTree = "<group>"; };
+		EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivePlayerCell.xib; sourceTree = "<group>"; };
+		EEF7609A22B830FE004D92CF /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		EEF7609C22B83126004D92CF /* ListView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,8 @@
 			children = (
 				EE27685722B7E708008E4CA1 /* Main.storyboard */,
 				EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */,
+				EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */,
+				EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */,
 				EE27685522B7E708008E4CA1 /* TeamList.swift */,
 			);
 			path = UI;
@@ -90,6 +100,8 @@
 				EE27685D22B7E70B008E4CA1 /* Assets.xcassets */,
 				EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */,
 				EE27686A22B7EE3C008E4CA1 /* CoreData */,
+				EEF7609A22B830FE004D92CF /* ReusableView.swift */,
+				EEF7609C22B83126004D92CF /* ListView+Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -105,7 +117,7 @@
 		EE27686D22B7EE70008E4CA1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				EE27686B22B7EE6B008E4CA1 /* Player.swift */,
+				EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */,
 				EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */,
 			);
 			path = Data;
@@ -171,6 +183,7 @@
 			files = (
 				EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */,
 				EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */,
+				EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */,
 				EE27685922B7E708008E4CA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,12 +195,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF7609D22B83126004D92CF /* ListView+Extensions.swift in Sources */,
+				EEF7609B22B830FE004D92CF /* ReusableView.swift in Sources */,
 				EE27685622B7E708008E4CA1 /* TeamList.swift in Sources */,
 				EE27685C22B7E708008E4CA1 /* soccer_coach.xcdatamodeld in Sources */,
+				EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */,
 				EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */,
 				EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
-				EE27686C22B7EE6B008E4CA1 /* Player.swift in Sources */,
+				EE27686C22B7EE6B008E4CA1 /* SoccerPlayer.swift in Sources */,
 				EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

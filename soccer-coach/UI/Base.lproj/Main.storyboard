@@ -3,9 +3,10 @@
     <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Soccer Team Collection-->
@@ -15,10 +16,44 @@
                     <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
                         <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="systemGreenColor"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="R3K-8H-Gn9">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Rqb-QN-C3g">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="nlV-Ay-vVf" id="3r7-g8-TKc"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" name="FieldGreen"/>
+                        <constraints>
+                            <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="1HD-La-Abp"/>
+                            <constraint firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="LRk-ar-uDr"/>
+                            <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
+                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fLt-S8-nS1"/>
                     </view>
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
+                    <connections>
+                        <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -66,6 +101,11 @@
                         <viewLayoutGuide key="safeArea" id="8Wc-Lo-X1Y"/>
                     </view>
                     <navigationItem key="navigationItem" id="UfM-o0-Pob">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="FV1-C0-o2o">
+                            <connections>
+                                <action selector="refreshTapped:" destination="wSe-mD-F9N" id="Q5z-zT-e15"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="camera.viewfinder" catalog="system" id="E9P-4w-OdS">
                             <connections>
                                 <action selector="scanTapped:" destination="wSe-mD-F9N" id="f7n-U0-Kl4"/>
@@ -86,33 +126,19 @@
                 <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="ONx-Ub-AQp" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
-                        <segue destination="MFk-7A-FeN" kind="relationship" relationship="detailViewController" id="t3N-O3-ClY"/>
+                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dR2-4s-Ym1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-693" y="-1007"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Hcn-xt-Xh9">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MFk-7A-FeN" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SQE-N6-tiv">
-                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="rootViewController" id="SsJ-vN-KqK"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVW-jb-HFO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="16.582914572864322" y="-681.29496402877703"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="camera.viewfinder" catalog="system" width="64" height="58"/>
+        <namedColor name="FieldGreen">
+            <color red="0.082999996840953827" green="0.49200001358985901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

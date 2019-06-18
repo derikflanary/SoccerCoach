@@ -7,6 +7,7 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Soccer Team Collection-->
@@ -40,11 +41,27 @@
                                     <outlet property="delegate" destination="nlV-Ay-vVf" id="3r7-g8-TKc"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-gi-usv">
+                                <rect key="frame" x="20" y="766" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dmQ-gi-usv" secondAttribute="height" multiplier="1:1" id="OK5-QC-qxE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="tintColor" cocoaTouchSystemColor="systemYellowColor"/>
+                                <state key="normal" image="arrow.right.arrow.left.circle" catalog="system">
+                                    <color key="titleColor" cocoaTouchSystemColor="systemYellowColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideShowButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="9Cc-oS-IKS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="FieldGreen"/>
                         <constraints>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="1HD-La-Abp"/>
                             <constraint firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="LRk-ar-uDr"/>
+                            <constraint firstAttribute="bottom" secondItem="dmQ-gi-usv" secondAttribute="bottom" constant="20" id="ZOH-td-P5g"/>
+                            <constraint firstItem="dmQ-gi-usv" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" constant="20" id="rl7-qk-9wE"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
                             <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
                         </constraints>
@@ -123,7 +140,7 @@
         <!--Split View Controller-->
         <scene sceneID="J84-Tp-JJI">
             <objects>
-                <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
+                <splitViewController maximumPrimaryColumnWidth="340" preferredPrimaryColumnWidthFraction="0.29999999999999999" id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="ONx-Ub-AQp" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
                         <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
@@ -136,6 +153,7 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
+        <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="62"/>
         <image name="camera.viewfinder" catalog="system" width="64" height="58"/>
         <namedColor name="FieldGreen">
             <color red="0.082999996840953827" green="0.49200001358985901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

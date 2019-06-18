@@ -22,7 +22,7 @@ class ActivePlayerCell: UICollectionViewCell, ReusableView {
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
-        nameLabel.layer.cornerRadius = 12
+        nameLabel.layer.cornerRadius = 8
         nameLabel.clipsToBounds = true
     }
 

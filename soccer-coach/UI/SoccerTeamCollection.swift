@@ -53,6 +53,14 @@ class SoccerTeamCollection: UIViewController {
         configureDataSource()
     }
 
+    @IBAction func hideShowButtonTapped() {
+        let newWidthFraction: CGFloat = self.splitViewController?.preferredPrimaryColumnWidthFraction == 0.3 ? 0.00001 : 0.3
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+            self.splitViewController?.preferredPrimaryColumnWidthFraction = newWidthFraction
+        }, completion: nil)
+    }
+    
 }
 
 
@@ -65,14 +73,13 @@ private extension SoccerTeamCollection {
             guard let collectionSection = Section(rawValue: sectionIndex) else { return nil }
             
             let columns = self.activePlayersPerSection[collectionSection]?.count ?? 0
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)),
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95 / CGFloat(columns)),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 40, bottom: 20, trailing: 40)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(0.2))
-            
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
@@ -105,18 +112,6 @@ private extension SoccerTeamCollection {
         return allActivePlayers.contains(player)
     }
     
-    func replace(with player: SoccerPlayer, at indexPath: IndexPath) {
-        
-    }
-    
-    func swapPlayers(_ playerOne: SoccerPlayer, at indexPathOne: IndexPath,  playerTwo: SoccerPlayer, as indexPathTwo: IndexPath) {
-        
-    }
-    
-    func remove(player: SoccerPlayer, from indexPath: IndexPath) {
-        
-    }
-    
 }
 
 
@@ -125,8 +120,6 @@ private extension SoccerTeamCollection {
 extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .lightGray
     }
 }
 

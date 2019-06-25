@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import Combine
 
 class SoccerPlayer: NSObject, Codable {
     
@@ -15,13 +16,11 @@ class SoccerPlayer: NSObject, Codable {
     var name: String
     var isActive = false
     var number: String?
-    var positions = [String]()
     
     
-    init(name: String, number: String, positions: [String]) {
+    init(name: String, number: String) {
         self.name = name
         self.number = number
-        self.positions = positions
     }
     
     init(name: String) {

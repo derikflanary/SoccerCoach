@@ -19,6 +19,7 @@ class SoccerTeamCollection: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     var activePlayersPerSection: [Section: [SoccerPlayer]] = [:]
+    var masterWidthFraction: CGFloat? = nil
    
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
@@ -54,10 +55,9 @@ class SoccerTeamCollection: UIViewController {
     }
 
     @IBAction func hideShowButtonTapped() {
-        let newWidthFraction: CGFloat = self.splitViewController?.preferredPrimaryColumnWidthFraction == 0.3 ? 0.00001 : 0.3
-        
+        let displayMode: UISplitViewController.DisplayMode = splitViewController?.preferredDisplayMode == .primaryHidden ? .automatic : .primaryHidden
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
-            self.splitViewController?.preferredPrimaryColumnWidthFraction = newWidthFraction
+            self.splitViewController?.preferredDisplayMode = displayMode
         }, completion: nil)
     }
     
@@ -121,6 +121,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
+    
 }
 
 

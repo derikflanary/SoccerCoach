@@ -17,6 +17,8 @@
 		EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */; };
 		EE27686C22B7EE6B008E4CA1 /* SoccerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */; };
 		EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */; };
+		EE59118822C2CA4C0049B71E /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118722C2CA4C0049B71E /* Match.swift */; };
+		EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118A22C2D46F0049B71E /* Int+Extensions.swift */; };
 		EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */; };
 		EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */; };
 		EEF7609B22B830FE004D92CF /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7609A22B830FE004D92CF /* ReusableView.swift */; };
@@ -36,6 +38,8 @@
 		EE27686222B7E70B008E4CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayer.swift; sourceTree = "<group>"; };
 		EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionEngine.swift; sourceTree = "<group>"; };
+		EE59118722C2CA4C0049B71E /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		EE59118A22C2D46F0049B71E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePlayerCell.swift; sourceTree = "<group>"; };
 		EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivePlayerCell.xib; sourceTree = "<group>"; };
 		EEF7609A22B830FE004D92CF /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				EE27686A22B7EE3C008E4CA1 /* CoreData */,
 				EEF7609A22B830FE004D92CF /* ReusableView.swift */,
 				EEF7609C22B83126004D92CF /* ListView+Extensions.swift */,
+				EE59118A22C2D46F0049B71E /* Int+Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				EE27686B22B7EE6B008E4CA1 /* SoccerPlayer.swift */,
+				EE59118722C2CA4C0049B71E /* Match.swift */,
 				EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */,
 			);
 			path = Data;
@@ -202,7 +208,9 @@
 				EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */,
 				EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */,
 				EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */,
+				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
+				EE59118822C2CA4C0049B71E /* Match.swift in Sources */,
 				EE27686C22B7EE6B008E4CA1 /* SoccerPlayer.swift in Sources */,
 				EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */,
 			);

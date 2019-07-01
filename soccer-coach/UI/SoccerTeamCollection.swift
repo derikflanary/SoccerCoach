@@ -119,8 +119,6 @@ private extension SoccerTeamCollection {
 
 extension SoccerTeamCollection: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
     
 }
 

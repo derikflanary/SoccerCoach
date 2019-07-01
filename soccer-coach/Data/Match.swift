@@ -66,7 +66,7 @@ struct Foul: TimeStampable {
     var half: Int
 }
 
-enum SoccerPosition: String {
+enum SoccerPosition: String, Codable {
     case g, rcb, lcb, rob, lob, hm, ram, lam, rw, lw, f
 }
 

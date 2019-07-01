@@ -11,16 +11,30 @@ import VisionKit
 
 class TeamList: UIViewController {
     
-    enum Section: CaseIterable {
-        case main
+    enum Section: Int, CaseIterable {
+        case home
+        case away
     }
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var teamSegmentedControl: UISegmentedControl!
     
     var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
-    var players = [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")]
     let cellIdentifier = "cell"
+    var currentSection = Section.home
+    var homeTeam = Team(name: "Lone Peak", players: [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")])
+    var awayTeam = Team(name: "American Fork", players: [])
+    
+    var currentTeam: Team {
+        switch currentSection {
+        case .home:
+            return homeTeam
+        case .away:
+            return awayTeam
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +56,11 @@ class TeamList: UIViewController {
         tableView.reloadData()
     }
     
+    @IBAction func teamSegmentedControlChanged(_ sender: UISegmentedControl) {
+        currentSection = Section(rawValue: sender.selectedSegmentIndex) ?? .home
+        updateTableUI()
+    }
+    
 }
 
 
@@ -59,8 +78,8 @@ private extension TeamList {
     
     func updateTableUI(animated: Bool = true) {
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
-        currentSnapshot.appendSections([.main])
-        currentSnapshot.appendItems(players)
+        currentSnapshot.appendSections([currentSection])
+        currentSnapshot.appendItems(currentTeam.players)
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
     }
 }
@@ -78,7 +97,12 @@ extension TeamList: VNDocumentCameraViewControllerDelegate {
             DispatchQueue.main.async {
                 for string in resultingStrings {
                     let player = SoccerPlayer(name: string)
-                    self.players.append(player)
+                    switch self.currentSection {
+                    case .home:
+                        self.homeTeam.players.append(player)
+                    case .away:
+                        self.awayTeam.players.append(player)
+                    }
                 }
                 self.updateTableUI()
             }
@@ -90,11 +114,15 @@ extension TeamList: VNDocumentCameraViewControllerDelegate {
 extension TeamList: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let player = players[indexPath.row]
+        let player = currentTeam.players[indexPath.row]
         let itemProvider = NSItemProvider(object: player)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = player
         return [dragItem]
+    }
+    
+    func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
+        tableView.reloadData()
     }
     
 }

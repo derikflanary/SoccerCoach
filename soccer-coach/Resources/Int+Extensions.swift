@@ -15,19 +15,19 @@ extension Int {
     }
     
     var minutes: Int {
-        return self * 60
+        return self / 60
     }
     
     var hours: Int {
-        return minutes * 60
+        return minutes / 60
     }
     
     var days: Int {
-        return hours * 24
+        return hours / 24
     }
     
     var weeks: Int {
-        return days * 7
+        return days / 7
     }
     
     func minute(halfLength: Int, half: Half) -> String {

@@ -16,6 +16,7 @@ class SoccerPlayer: NSObject, Codable {
     var name: String
     var isActive = false
     var number: String?
+    var currentPosition: SoccerPosition?
     
     
     init(name: String, number: String) {

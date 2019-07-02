@@ -9,7 +9,7 @@
 import UIKit
 import VisionKit
 
-class TeamList: UIViewController {
+class CurrentTeams: UIViewController {
     
     enum Section: Int, CaseIterable {
         case home
@@ -64,7 +64,7 @@ class TeamList: UIViewController {
 }
 
 
-private extension TeamList {
+private extension CurrentTeams {
     
     func configDataSource() {
         self.dataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
@@ -82,13 +82,14 @@ private extension TeamList {
         currentSnapshot.appendItems(currentTeam.players)
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
     }
+    
 }
 
 
 // MARK: - Camera Document Delegate
 
 @available(iOS 13.0, *)
-extension TeamList: VNDocumentCameraViewControllerDelegate {
+extension CurrentTeams: VNDocumentCameraViewControllerDelegate {
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         let recognitionEngine = TextRecognitionEngine()
@@ -111,7 +112,7 @@ extension TeamList: VNDocumentCameraViewControllerDelegate {
 
 }
 
-extension TeamList: UITableViewDragDelegate {
+extension CurrentTeams: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let player = currentTeam.players[indexPath.row]

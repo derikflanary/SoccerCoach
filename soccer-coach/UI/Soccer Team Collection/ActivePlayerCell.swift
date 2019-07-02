@@ -16,8 +16,8 @@ class ActivePlayerCell: UICollectionViewCell, ReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let interaction = UIContextMenuInteraction(delegate: self)
-        contentView.addInteraction(interaction)
+//        let interaction = UIContextMenuInteraction(delegate: self)
+//        contentView.addInteraction(interaction)
     }
     
     func configure(with player: SoccerPlayer) {
@@ -67,7 +67,7 @@ extension ActivePlayerCell: UIContextMenuInteractionDelegate {
         let cancel = UIAction(__title: "Cancel", image: nil, options: []) { action in
         }
         let children = player?.currentPosition == .g ? [goal, shotOnTarget, shotOffTarget, yellowCard, redCard, save, cancel] : [goal, shotOnTarget, shotOffTarget, yellowCard, redCard, cancel]
-        return UIMenu(__title: "", image: nil, identifier: nil, children: children)
+        return UIMenu(__title: "", image: nil, identifier: nil, children: [goal, shotOnTarget, shotOffTarget, yellowCard, redCard, cancel])
     }
     
     

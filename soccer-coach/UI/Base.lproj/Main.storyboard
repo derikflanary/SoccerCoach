@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
+                                <rect key="frame" x="0.0" y="80" width="818.5" height="714"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -58,12 +58,12 @@
                         </subviews>
                         <color key="backgroundColor" name="FieldGreen"/>
                         <constraints>
-                            <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="1HD-La-Abp"/>
+                            <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" constant="80" id="1HD-La-Abp"/>
                             <constraint firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="LRk-ar-uDr"/>
                             <constraint firstAttribute="bottom" secondItem="dmQ-gi-usv" secondAttribute="bottom" constant="20" id="ZOH-td-P5g"/>
                             <constraint firstItem="dmQ-gi-usv" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" constant="20" id="rl7-qk-9wE"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
-                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
+                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" constant="40" id="xW8-mF-RCK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fLt-S8-nS1"/>
                     </view>
@@ -76,11 +76,11 @@
             </objects>
             <point key="canvasLocation" x="724.1206030150754" y="-681.29496402877703"/>
         </scene>
-        <!--Team-->
+        <!--Current Teams-->
         <scene sceneID="EQp-xG-cKb">
             <objects>
                 <navigationController id="ONx-Ub-AQp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Team" image="list.dash" catalog="system" id="nwo-gf-ySg"/>
+                    <tabBarItem key="tabBarItem" title="Current Teams" image="list.dash" catalog="system" id="nwo-gf-ySg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tkz-Ap-5QH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -103,15 +103,15 @@
             </objects>
             <point key="canvasLocation" x="481" y="-1929"/>
         </scene>
-        <!--Team List-->
+        <!--Current Teams-->
         <scene sceneID="zki-PG-tjX">
             <objects>
-                <viewController id="wSe-mD-F9N" customClass="TeamList" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wSe-mD-F9N" customClass="CurrentTeams" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JwP-qt-uGh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-7t-vWk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-7t-vWk">
                                 <rect key="frame" x="0.0" y="110" width="375" height="724"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
@@ -142,7 +142,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Wc-Lo-X1Y"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UfM-o0-Pob">
+                    <navigationItem key="navigationItem" title="Current Teams" id="UfM-o0-Pob">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="FV1-C0-o2o">
                             <connections>
                                 <action selector="refreshTapped:" destination="wSe-mD-F9N" id="Q5z-zT-e15"/>
@@ -166,7 +166,7 @@
         <!--Split View Controller-->
         <scene sceneID="J84-Tp-JJI">
             <objects>
-                <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
+                <splitViewController maximumPrimaryColumnWidth="500" preferredPrimaryColumnWidthFraction="1" id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HdY-5x-oAb" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
                         <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
@@ -182,6 +182,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HdY-5x-oAb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IlG-nI-B86">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

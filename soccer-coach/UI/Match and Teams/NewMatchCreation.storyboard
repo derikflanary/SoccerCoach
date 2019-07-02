@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dim-gI-DPa">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Match-->
+        <scene sceneID="Kdn-g2-qAK">
+            <objects>
+                <viewController id="jcc-9f-KgV" customClass="NewMatchCreation" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VrK-j6-2FZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="2a6-az-LnY">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="jcc-9f-KgV" id="Zg5-aR-TbC"/>
+                                    <outlet property="delegate" destination="jcc-9f-KgV" id="Ni5-iN-9hY"/>
+                                </connections>
+                            </tableView>
+                            <datePicker alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="5" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gU9-Kt-To0">
+                                <rect key="frame" x="0.0" y="602" width="414" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="xi6-du-xLv"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="datePickerValueChanged" destination="jcc-9f-KgV" eventType="valueChanged" id="1AF-M5-Ec9"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2a6-az-LnY" firstAttribute="leading" secondItem="9kA-Xg-nVu" secondAttribute="leading" id="Cgl-fF-YML"/>
+                            <constraint firstItem="gU9-Kt-To0" firstAttribute="trailing" secondItem="9kA-Xg-nVu" secondAttribute="trailing" id="DP6-Lc-aI1"/>
+                            <constraint firstItem="gU9-Kt-To0" firstAttribute="bottom" secondItem="9kA-Xg-nVu" secondAttribute="bottom" id="SdW-OA-Ine"/>
+                            <constraint firstItem="2a6-az-LnY" firstAttribute="trailing" secondItem="9kA-Xg-nVu" secondAttribute="trailing" id="gFX-Lr-7X2"/>
+                            <constraint firstItem="2a6-az-LnY" firstAttribute="top" secondItem="9kA-Xg-nVu" secondAttribute="top" id="kph-m9-m9l"/>
+                            <constraint firstAttribute="bottom" secondItem="2a6-az-LnY" secondAttribute="bottom" id="osu-Y6-r2Q"/>
+                            <constraint firstItem="gU9-Kt-To0" firstAttribute="leading" secondItem="9kA-Xg-nVu" secondAttribute="leading" id="zxz-uT-0s0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9kA-Xg-nVu"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Match" id="Hl7-xo-Fzm">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="w2v-s6-h7g">
+                            <connections>
+                                <action selector="cancelTapped:" destination="jcc-9f-KgV" id="Nk0-mY-Fv2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="PHB-4L-sdg"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="gU9-Kt-To0" id="kse-69-uW7"/>
+                        <outlet property="tableView" destination="2a6-az-LnY" id="JOY-yF-crS"/>
+                        <segue destination="Slc-4Z-hqb" kind="show" identifier="showTeamList" destinationCreationSelector="showTeamList:" id="HeN-aP-0qS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AxH-UC-M87" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3181.1594202898555" y="-3135.2678571428569"/>
+        </scene>
+        <!--TeamList-->
+        <scene sceneID="M20-7q-qQ1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TeamList" id="Slc-4Z-hqb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FwV-bV-XaT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2607" y="-3186"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rG5-pr-Uk2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dim-gI-DPa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fbj-Ju-LbE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jcc-9f-KgV" kind="relationship" relationship="rootViewController" id="UDm-1H-Yaq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9QP-qP-SXg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4091.3043478260875" y="-3135.2678571428569"/>
+        </scene>
+    </scenes>
+</document>

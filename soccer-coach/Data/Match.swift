@@ -10,6 +10,7 @@ import Foundation
 
 struct Match {
     
+    var date: Date
     var halfLength: Int
     var score: Score
     var homeTeam: Team
@@ -72,8 +73,13 @@ enum SoccerPosition: String, Codable {
 
 struct Team {
     
+    let id = UUID()
     let name: String
     var players: [SoccerPlayer]
+    
+}
+
+extension Team: Hashable {
     
 }
 

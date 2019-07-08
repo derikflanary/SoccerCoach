@@ -76,7 +76,7 @@ private extension SoccerTeamCollection {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95 / CGFloat(columns)),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 40, bottom: 20, trailing: 40)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 8, bottom: 20, trailing: 8)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(0.2))
@@ -119,6 +119,44 @@ private extension SoccerTeamCollection {
 
 extension SoccerTeamCollection: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
+        let goal = UIAlertAction(title: "Goal", style: .default) { _ in
+          
+        }
+        let shotOnTarget = UIAlertAction(title: "Shot on Target", style: .default) { _ in
+            
+        }
+        let shotOffTarget = UIAlertAction(title: "Shot off Target", style: .default) { _ in
+        
+        }
+        let assist = UIAlertAction(title: "Assist", style: .default) { _ in
+            
+        }
+        let yellowCard = UIAlertAction(title: "Yellow Card", style: .default) { _ in
+            
+        }
+        let redCard = UIAlertAction(title: "Red Card", style: .default) { _ in
+            
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        var actions = [goal, shotOnTarget, shotOffTarget, assist, yellowCard, redCard, cancel]
+        if let section = Section(rawValue: indexPath.section), section == .goalie {
+            let save = UIAlertAction(title: "Save", style: .default) { _ in
+                
+            }
+            actions.append(save)
+        }
+        
+        let alertController = UIAlertController(title: "New Player Action", message: nil, preferredStyle: .actionSheet)
+        for action in actions {
+            alertController.addAction(action)
+        }
+        let rect = view.convert(cell.nameLabel.bounds, to: view)
+        alertController.popoverPresentationController?.sourceView = cell.nameLabel
+        alertController.popoverPresentationController?.sourceRect = rect
+        present(alertController, animated: true, completion: nil)
+    }
     
 }
 

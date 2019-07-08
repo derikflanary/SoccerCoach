@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import VisionKit
 
 class CurrentTeams: UIViewController {
     
@@ -41,15 +40,6 @@ class CurrentTeams: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dragDelegate = self
         configDataSource()
-    }
-
-
-    @IBAction func scanTapped(_ sender: Any) {
-        if #available(iOS 13.0, *) {
-            let documentViewController = VNDocumentCameraViewController()
-            documentViewController.delegate = self
-            present(documentViewController, animated: true, completion: nil)
-        }
     }
     
     @IBAction func refreshTapped(_ sender: Any) {
@@ -85,32 +75,6 @@ private extension CurrentTeams {
     
 }
 
-
-// MARK: - Camera Document Delegate
-
-@available(iOS 13.0, *)
-extension CurrentTeams: VNDocumentCameraViewControllerDelegate {
-    
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        let recognitionEngine = TextRecognitionEngine()
-        controller.dismiss(animated: true)
-        recognitionEngine.process(scan) { resultingStrings in
-            DispatchQueue.main.async {
-                for string in resultingStrings {
-                    let player = SoccerPlayer(name: string)
-                    switch self.currentSection {
-                    case .home:
-                        self.homeTeam.players.append(player)
-                    case .away:
-                        self.awayTeam.players.append(player)
-                    }
-                }
-                self.updateTableUI()
-            }
-        }
-    }
-
-}
 
 extension CurrentTeams: UITableViewDragDelegate {
     

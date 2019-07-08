@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--New Match-->
@@ -32,7 +33,7 @@
                                 </connections>
                             </datePicker>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="2a6-az-LnY" firstAttribute="leading" secondItem="9kA-Xg-nVu" secondAttribute="leading" id="Cgl-fF-YML"/>
                             <constraint firstItem="gU9-Kt-To0" firstAttribute="trailing" secondItem="9kA-Xg-nVu" secondAttribute="trailing" id="DP6-Lc-aI1"/>

@@ -24,12 +24,15 @@ class NewTeamCreation: UIViewController {
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     let cellIdentifier = "cell"
     var players = [SoccerPlayer]()
+    var tapGesture = UITapGestureRecognizer()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         configDataSource()
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        view.addGestureRecognizer(tapGesture)
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
@@ -48,6 +51,10 @@ class NewTeamCreation: UIViewController {
             documentViewController.delegate = self
             present(documentViewController, animated: true, completion: nil)
         }
+    }
+    
+    @objc func tapped() {
+        teamNameTextField.resignFirstResponder()
     }
     
 }

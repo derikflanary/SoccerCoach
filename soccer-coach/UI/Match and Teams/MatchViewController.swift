@@ -31,21 +31,9 @@ class MatchViewController: UIViewController {
             if isRunning {
                 timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerUpdated), userInfo: nil, repeats: true)
                 startPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-                UIView.animate(withDuration: 0.5) {
-                    self.createMatchButton.isHidden = true
-                    self.createMatchButton.alpha = 0.0
-                    self.endMatchButton.isHidden = false
-                    self.endMatchButton.alpha = 1.0
-                }
             } else {
                 timer.invalidate()
                 startPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                UIView.animate(withDuration: 0.5) {
-                    self.createMatchButton.isHidden = false
-                    self.createMatchButton.alpha = 1.0
-                    self.endMatchButton.isHidden = true
-                    self.endMatchButton.alpha = 0.0
-                }
             }
         }
     }

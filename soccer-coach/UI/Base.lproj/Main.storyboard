@@ -148,11 +148,6 @@
                                 <action selector="refreshTapped:" destination="wSe-mD-F9N" id="Q5z-zT-e15"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="camera.viewfinder" catalog="system" id="E9P-4w-OdS">
-                            <connections>
-                                <action selector="scanTapped:" destination="wSe-mD-F9N" id="f7n-U0-Kl4"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kH0-7t-vWk" id="0t9-T1-pEG"/>
@@ -199,7 +194,6 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="62"/>
-        <image name="camera.viewfinder" catalog="system" width="64" height="58"/>
         <image name="list.dash" catalog="system" width="64" height="44"/>
         <namedColor name="FieldGreen">
             <color red="0.082999996840953827" green="0.49200001358985901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

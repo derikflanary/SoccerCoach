@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE20114D22D698B4007A1DAC /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE20114C22D698B4007A1DAC /* Drawing.storyboard */; };
+		EE20114F22D698BA007A1DAC /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE20114E22D698BA007A1DAC /* DrawingViewController.swift */; };
 		EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27684F22B7E708008E4CA1 /* AppDelegate.swift */; };
 		EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685122B7E708008E4CA1 /* SceneDelegate.swift */; };
 		EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE20114C22D698B4007A1DAC /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
+		EE20114E22D698BA007A1DAC /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		EE27684C22B7E708008E4CA1 /* soccer-coach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "soccer-coach.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE27684F22B7E708008E4CA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE27685122B7E708008E4CA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				EE3729B422CBEBBE003FBBFE /* NewPlayerCreation.storyboard */,
 				EE3729B622CBFEEA003FBBFE /* MatchHistoryList.swift */,
 				EE3729B822CBFEF3003FBBFE /* MatchHistoryList.storyboard */,
+				EE20114C22D698B4007A1DAC /* Drawing.storyboard */,
+				EE20114E22D698BA007A1DAC /* DrawingViewController.swift */,
 			);
 			path = "Match and Teams";
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 				EE3729B522CBEBBE003FBBFE /* NewPlayerCreation.storyboard in Resources */,
 				EE7E9B0222C9A57E001773AA /* MatchViewController.storyboard in Resources */,
 				EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */,
+				EE20114D22D698B4007A1DAC /* Drawing.storyboard in Resources */,
 				EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */,
 				EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */,
 				EE27685922B7E708008E4CA1 /* Main.storyboard in Resources */,
@@ -291,6 +298,7 @@
 				EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */,
 				EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */,
 				EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */,
+				EE20114F22D698BA007A1DAC /* DrawingViewController.swift in Sources */,
 				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
 				EE59118822C2CA4C0049B71E /* Match.swift in Sources */,

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JfW-Qu-rRv">
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Drawing View Controller-->
+        <scene sceneID="HdU-DY-XsD">
+            <objects>
+                <viewController id="bZ9-11-iui" customClass="DrawingViewController" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fMD-Ku-Nks">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MK-lh-b6t" customClass="PKCanvasView">
+                                <rect key="frame" x="0.0" y="50" width="1366" height="904"/>
+                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Uoz-y4-ugt" firstAttribute="trailing" secondItem="2MK-lh-b6t" secondAttribute="trailing" id="45J-aT-hsV"/>
+                            <constraint firstItem="Uoz-y4-ugt" firstAttribute="bottom" secondItem="2MK-lh-b6t" secondAttribute="bottom" id="GY4-iG-I5B"/>
+                            <constraint firstItem="2MK-lh-b6t" firstAttribute="top" secondItem="Uoz-y4-ugt" secondAttribute="top" id="gjS-6q-dWp"/>
+                            <constraint firstItem="2MK-lh-b6t" firstAttribute="leading" secondItem="Uoz-y4-ugt" secondAttribute="leading" id="r1E-P1-u9X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Uoz-y4-ugt"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="LAS-oT-VUu">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="xmark" catalog="system" id="Uk9-WZ-dQp">
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="bZ9-11-iui" id="ucH-1k-tZ3"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="photo.on.rectangle.fill" catalog="system" id="LFr-MT-0J5">
+                                <connections>
+                                    <action selector="imagesButtonTapped:" destination="bZ9-11-iui" id="jUa-X0-qoY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="arrow.uturn.right.circle" catalog="system" id="h5T-54-R6K">
+                                <connections>
+                                    <action selector="redo:" destination="4mq-8J-1os" id="gqC-VO-6Hd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="arrow.uturn.left.circle" catalog="system" id="hXK-XL-UCN">
+                                <connections>
+                                    <action selector="undo:" destination="4mq-8J-1os" id="tqQ-m8-Veh"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="canvasView" destination="2MK-lh-b6t" id="jZu-Sy-7qx"/>
+                        <outlet property="imagesButton" destination="LFr-MT-0J5" id="fd8-Kr-lMa"/>
+                        <outlet property="redoButton" destination="h5T-54-R6K" id="fWr-el-BsM"/>
+                        <outlet property="undoButton" destination="hXK-XL-UCN" id="97J-GL-3Oq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4mq-8J-1os" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776.57393850658855" y="256.0546875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TU3-0P-4AO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JfW-Qu-rRv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4IS-4e-KWe">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bZ9-11-iui" kind="relationship" relationship="rootViewController" id="5W4-85-cYd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RhF-Lp-b8e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-133.33333333333334" y="256.47321428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.uturn.left.circle" catalog="system" width="64" height="62"/>
+        <image name="arrow.uturn.right.circle" catalog="system" width="64" height="62"/>
+        <image name="photo.on.rectangle.fill" catalog="system" width="64" height="48"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
+    </resources>
+</document>

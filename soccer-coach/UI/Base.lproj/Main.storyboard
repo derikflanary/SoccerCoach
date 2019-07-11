@@ -67,14 +67,28 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fLt-S8-nS1"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DZR-HA-31D"/>
+                    <navigationItem key="navigationItem" id="DZR-HA-31D">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.and.outline" catalog="system" id="tCw-xS-uYx">
+                            <connections>
+                                <segue destination="2Wx-gc-lDl" kind="presentation" modalPresentationStyle="fullScreen" id="Hat-iU-ddj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724.1206030150754" y="-681.29496402877703"/>
+            <point key="canvasLocation" x="1431.6582914572864" y="-681.29496402877703"/>
+        </scene>
+        <!--Drawing-->
+        <scene sceneID="p0z-u8-mu2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Drawing" id="2Wx-gc-lDl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyh-a3-UVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="-788"/>
         </scene>
         <!--Current Teams-->
         <scene sceneID="EQp-xG-cKb">
@@ -164,7 +178,7 @@
                 <splitViewController maximumPrimaryColumnWidth="500" preferredPrimaryColumnWidthFraction="1" id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HdY-5x-oAb" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
-                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
+                        <segue destination="KWj-1x-3CC" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dR2-4s-Ym1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -190,11 +204,30 @@
             </objects>
             <point key="canvasLocation" x="16.582914572864322" y="-1332.3741007194246"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QLg-IC-bo2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KWj-1x-3CC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uRB-6u-4pd">
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="rootViewController" id="fYA-qp-Op7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ey9-pZ-hJo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="724.1206030150754" y="-681.29496402877703"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="62"/>
         <image name="list.dash" catalog="system" width="64" height="44"/>
+        <image name="pencil.and.outline" catalog="system" width="64" height="60"/>
         <namedColor name="FieldGreen">
             <color red="0.082999996840953827" green="0.49200001358985901" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

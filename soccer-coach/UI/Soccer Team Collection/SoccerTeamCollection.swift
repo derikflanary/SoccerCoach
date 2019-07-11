@@ -73,10 +73,10 @@ private extension SoccerTeamCollection {
             guard let collectionSection = Section(rawValue: sectionIndex) else { return nil }
             
             let columns = self.activePlayersPerSection[collectionSection]?.count ?? 0
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95 / CGFloat(columns)),
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 8, bottom: 20, trailing: 8)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(0.2))

@@ -21,8 +21,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-na-RNq">
                                 <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
-                                <rect key="frame" x="0.0" y="50" width="818.5" height="784"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
+                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -68,7 +68,7 @@
                             <constraint firstAttribute="bottom" secondItem="dmQ-gi-usv" secondAttribute="bottom" constant="20" id="ZOH-td-P5g"/>
                             <constraint firstItem="dmQ-gi-usv" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" constant="20" id="rl7-qk-9wE"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
-                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
+                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" constant="20" id="xW8-mF-RCK"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="ybM-BU-Mgv"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="fLt-S8-nS1" secondAttribute="top" id="yiV-cA-2s1"/>
                         </constraints>

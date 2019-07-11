@@ -10,13 +10,21 @@ import UIKit
 
 class CurrentTeams: UIViewController {
     
+    // MARK: - Enums
+    
     enum Section: Int, CaseIterable {
         case home
         case away
     }
     
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamSegmentedControl: UISegmentedControl!
+    
+    
+    // MARK: - Properties
     
     var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
@@ -35,12 +43,17 @@ class CurrentTeams: UIViewController {
     }
     
     
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dragDelegate = self
         configDataSource()
     }
+    
+    
+    // MARK: - Actions
     
     @IBAction func refreshTapped(_ sender: Any) {
         tableView.reloadData()
@@ -53,6 +66,8 @@ class CurrentTeams: UIViewController {
     
 }
 
+
+// MARK: - Private functions
 
 private extension CurrentTeams {
     
@@ -75,6 +90,8 @@ private extension CurrentTeams {
     
 }
 
+
+// MARK: - Drag delegate
 
 extension CurrentTeams: UITableViewDragDelegate {
     

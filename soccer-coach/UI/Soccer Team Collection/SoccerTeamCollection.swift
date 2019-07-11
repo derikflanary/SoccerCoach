@@ -10,11 +10,19 @@ import UIKit
 
 class SoccerTeamCollection: UIViewController {
     
+    // MARK: - Enums
+    
     enum Section: Int, CaseIterable {
         case frontLine, attackingMid, holdingMid, backLine, goalie
     }
 
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    // MARK: - Properties
     
     var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
@@ -25,6 +33,8 @@ class SoccerTeamCollection: UIViewController {
         return activePlayersPerSection.values.flatMap { $0 }
     }
     
+    
+    // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +64,9 @@ class SoccerTeamCollection: UIViewController {
         configureDataSource()
     }
 
+    
+    // MARK: = Actions
+    
     @IBAction func hideShowButtonTapped() {
         let displayMode: UISplitViewController.DisplayMode = splitViewController?.preferredDisplayMode == .primaryHidden ? .automatic : .primaryHidden
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
@@ -63,6 +76,8 @@ class SoccerTeamCollection: UIViewController {
     
 }
 
+
+// MARK: - Private functions
 
 private extension SoccerTeamCollection {
     
@@ -74,9 +89,9 @@ private extension SoccerTeamCollection {
             
             let columns = self.activePlayersPerSection[collectionSection]?.count ?? 0
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)),
-                                                  heightDimension: .fractionalHeight(1.0))
+                                                  heightDimension: .fractionalHeight(0.9))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 16, trailing: 8)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(0.2))
@@ -224,4 +239,3 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
     }
     
 }
-

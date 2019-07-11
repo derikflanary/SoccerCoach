@@ -36,7 +36,7 @@ class DrawingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        canvasView.tool = PKInkingTool(.pen, color: .black, width: 100) // set the starting tool
+        canvasView.tool = PKInkingTool(.marker, color: .red, width: 100) // set the starting tool
         canvasView.maximumZoomScale = 3 // make it zoomable
         canvasView.bouncesZoom = true
         initializeToolPicker() // hook up the toolkit to the canvasView

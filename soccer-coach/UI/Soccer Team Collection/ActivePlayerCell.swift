@@ -11,6 +11,7 @@ import UIKit
 class ActivePlayerCell: UICollectionViewCell, ReusableView {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     var player: SoccerPlayer?
     
@@ -18,6 +19,9 @@ class ActivePlayerCell: UICollectionViewCell, ReusableView {
         super.draw(rect)
         nameLabel.layer.cornerRadius = nameLabel.frame.width / 2
         nameLabel.clipsToBounds = true
+        visualEffectView.layer.cornerRadius = nameLabel.frame.width / 2
+        visualEffectView.clipsToBounds = true
+
     }
     
     func configure(with player: SoccerPlayer) {

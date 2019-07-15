@@ -27,11 +27,12 @@ class MatchViewController: UIViewController {
     
     // MARK: - Properties
     
+    var match: Match?
     var half: Half = .first
     var timer = Timer()
     var firstHalfCount: Int = 0
     var secondHalfCount: Int = 0
-    var savedDate = Date()
+    var savedDate: Date?
 
     var isRunning = false {
         didSet {
@@ -58,11 +59,13 @@ class MatchViewController: UIViewController {
     // MARK: - Actions
 
     @objc func appPaused() {
+        guard timer.isValid else { return }
         savedDate = Date()
         isRunning.toggle()
     }
     
     @objc func resumedApp() {
+        guard let savedDate = savedDate else { return }
         let difference = abs(Int(savedDate.timeIntervalSinceNow))
         switch half {
         case .first:
@@ -101,6 +104,9 @@ class MatchViewController: UIViewController {
         case .second:
             secondHalfCount += 1
             timeLabel.text = timeString(from: secondHalfCount)
+        }
+        if let halfLength = match?.halfLength, firstHalfCount.minutes >= halfLength + 10 {
+            timer.invalidate()
         }
     }
     

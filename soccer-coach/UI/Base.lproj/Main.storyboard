@@ -15,14 +15,14 @@
             <objects>
                 <viewController id="nlV-Ay-vVf" customClass="SoccerTeamCollection" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
-                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="784"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-na-RNq">
-                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="764"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
-                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="764"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-gi-usv">
-                                <rect key="frame" x="20" y="766" width="48" height="48"/>
+                                <rect key="frame" x="20" y="716" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dmQ-gi-usv" secondAttribute="height" multiplier="1:1" id="OK5-QC-qxE"/>
                                 </constraints>
@@ -81,6 +81,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                     </connections>
@@ -240,4 +241,5 @@
             <color red="0.25490196078431371" green="0.45882352941176469" blue="0.019607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="tintGreen"/>
 </document>

@@ -3,52 +3,61 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivePlayerCell" id="gTV-IL-0wX" customClass="ActivePlayerCell" customModule="soccer_coach" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="center" reuseIdentifier="ActivePlayerCell" id="gTV-IL-0wX" customClass="ActivePlayerCell" customModule="soccer_coach" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="302" height="242"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="302" height="242"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.97999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKs-3a-NJ7">
-                        <rect key="frame" x="0.0" y="22" width="200" height="200"/>
-                        <color key="backgroundColor" name="player"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="GKs-3a-NJ7" secondAttribute="height" multiplier="1:1" id="dFx-YL-LYa"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                        <attributedString key="userComments">
-                            <fragment content="Do not translate"/>
-                        </attributedString>
-                    </label>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jND-06-piy">
+                        <rect key="frame" x="30" y="22" width="242" height="242"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LHY-ir-aPw">
+                            <rect key="frame" x="0.0" y="0.0" width="2" height="114"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.97999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKs-3a-NJ7">
+                                    <rect key="frame" x="0.0" y="0.0" width="2" height="114"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <attributedString key="userComments">
+                                        <fragment content="Do not translate"/>
+                                    </attributedString>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="GKs-3a-NJ7" secondAttribute="trailing" id="5j4-7I-Ndc"/>
+                                <constraint firstAttribute="bottom" secondItem="GKs-3a-NJ7" secondAttribute="bottom" id="W8f-ld-EBx"/>
+                                <constraint firstItem="GKs-3a-NJ7" firstAttribute="leading" secondItem="LHY-ir-aPw" secondAttribute="leading" id="oTZ-gI-ctT"/>
+                                <constraint firstItem="GKs-3a-NJ7" firstAttribute="top" secondItem="LHY-ir-aPw" secondAttribute="top" id="qIb-fF-dxO"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="prominent"/>
+                    </visualEffectView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="GKs-3a-NJ7" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="UrB-ee-gnM"/>
-                <constraint firstItem="GKs-3a-NJ7" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="e2u-Nr-9N2"/>
-                <constraint firstItem="GKs-3a-NJ7" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" priority="750" id="zEo-ak-gYo"/>
+                <constraint firstItem="jND-06-piy" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="Ldx-Un-KEc"/>
+                <constraint firstItem="jND-06-piy" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="1:1" id="fvh-Wm-GgT"/>
+                <constraint firstItem="jND-06-piy" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="rA1-Sc-E2I"/>
+                <constraint firstItem="jND-06-piy" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="snI-dX-qJC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="196" height="172"/>
+            <size key="customSize" width="298" height="214"/>
             <connections>
                 <outlet property="nameLabel" destination="GKs-3a-NJ7" id="TCQ-WG-zMT"/>
+                <outlet property="visualEffectView" destination="jND-06-piy" id="WW4-XM-AeD"/>
             </connections>
-            <point key="canvasLocation" x="243.47826086956525" y="169.41964285714286"/>
+            <point key="canvasLocation" x="317.39130434782612" y="155.35714285714286"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <namedColor name="player">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

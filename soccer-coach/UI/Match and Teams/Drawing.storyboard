@@ -91,4 +91,5 @@
         <image name="photo.on.rectangle.fill" catalog="system" width="64" height="48"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
+    <color key="tintColor" name="tintGreen"/>
 </document>

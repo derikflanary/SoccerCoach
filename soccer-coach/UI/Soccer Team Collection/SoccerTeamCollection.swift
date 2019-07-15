@@ -200,7 +200,7 @@ extension SoccerTeamCollection: UICollectionViewDragDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return nil }
         let previewParameters = UIDragPreviewParameters()
         previewParameters.backgroundColor = .clear
-        let path = UIBezierPath(rect: cell.nameLabel.frame)
+        let path = UIBezierPath(roundedRect: cell.visualEffectView.frame, cornerRadius: cell.visualEffectView.frame.width / 2)
         previewParameters.visiblePath = path
         return previewParameters
     }

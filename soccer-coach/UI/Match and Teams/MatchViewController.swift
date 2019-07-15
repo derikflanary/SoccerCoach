@@ -31,6 +31,7 @@ class MatchViewController: UIViewController {
     var timer = Timer()
     var firstHalfCount: Int = 0
     var secondHalfCount: Int = 0
+    var savedDate = Date()
 
     var isRunning = false {
         didSet {
@@ -44,8 +45,35 @@ class MatchViewController: UIViewController {
         }
     }
     
-
+    
+    // MARK: - View life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(appPaused), name: UIApplication.didEnterBackgroundNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resumedApp), name: UIApplication.didBecomeActiveNotification , object: nil)
+    }
+    
+      
     // MARK: - Actions
+
+    @objc func appPaused() {
+        savedDate = Date()
+        isRunning.toggle()
+    }
+    
+    @objc func resumedApp() {
+        let difference = abs(Int(savedDate.timeIntervalSinceNow))
+        switch half {
+        case .first:
+            firstHalfCount += difference
+            timeLabel.text = timeString(from: firstHalfCount)
+        case .second:
+            secondHalfCount += difference
+            timeLabel.text = timeString(from: secondHalfCount)
+        }
+        isRunning.toggle()
+    }
     
     @IBAction func startPauseButtonTapped() {
         isRunning.toggle()

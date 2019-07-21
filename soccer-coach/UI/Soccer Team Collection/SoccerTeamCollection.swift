@@ -28,6 +28,7 @@ class SoccerTeamCollection: UIViewController {
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     var activePlayersPerSection: [Section: [SoccerPlayer]] = [:]
     var masterWidthFraction: CGFloat? = nil
+    var selectedPlayer: SoccerPlayer?
    
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
@@ -72,6 +73,11 @@ class SoccerTeamCollection: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.splitViewController?.preferredDisplayMode = displayMode
         }, completion: nil)
+    }
+    
+    @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let selectedPlayer = selectedPlayer else { return nil }
+        return PlayerDetails(coder: coder, player: selectedPlayer)
     }
     
 }
@@ -136,6 +142,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
+        selectedPlayer = cell.player
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
           
         }
@@ -162,12 +169,12 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             }
             actions.append(save)
         }
-        let details = UIAlertAction(title: "Match Stats", style: .default) { _ in
-            // TODO: - Show player details for the current match
+        let details = UIAlertAction(title: "View Player Stats", style: .default) { _ in
+            self.performSegue(withIdentifier: .presentPlayerDetails, sender: nil)
         }
         actions.append(details)
         
-        let alertController = UIAlertController(title: "New Player Action", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Player Actions", message: nil, preferredStyle: .actionSheet)
         for action in actions {
             alertController.addAction(action)
         }
@@ -240,6 +247,17 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
             movingPlayer.isActive = true
             updateSnapshot()
         }
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension SoccerTeamCollection: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case presentPlayerDetails
     }
     
 }

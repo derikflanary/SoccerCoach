@@ -32,6 +32,7 @@ class CurrentTeams: UIViewController {
     var currentSection = Section.home
     var homeTeam = Team(name: "Lone Peak", players: [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")])
     var awayTeam = Team(name: "American Fork", players: [])
+    var selectedPlayer: SoccerPlayer?
     
     var currentTeam: Team {
         switch currentSection {
@@ -60,6 +61,10 @@ class CurrentTeams: UIViewController {
         updateTableUI()
     }
     
+    @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let selectedPlayer = selectedPlayer else { return nil }
+        return PlayerDetails(coder: coder, player: selectedPlayer)
+    }
 }
 
 
@@ -93,8 +98,8 @@ extension CurrentTeams: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let player = currentTeam.players[indexPath.row]
-        // TODO: - show player details
+        selectedPlayer = currentTeam.players[indexPath.row]
+        performSegue(withIdentifier: .presentPlayerDetails, sender: nil)
     }
     
 }
@@ -114,6 +119,17 @@ extension CurrentTeams: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
         tableView.reloadData()
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension CurrentTeams: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case presentPlayerDetails
     }
     
 }

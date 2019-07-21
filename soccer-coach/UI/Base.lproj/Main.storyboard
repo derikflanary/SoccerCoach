@@ -77,11 +77,20 @@
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
+                        <segue destination="edZ-nT-tXK" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="VvR-TK-aN6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1431.6582914572864" y="-681.29496402877703"/>
+        </scene>
+        <!--PlayerDetails-->
+        <scene sceneID="S2E-wL-kSn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PlayerDetails" id="edZ-nT-tXK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLn-Ih-uA0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1789" y="-1042"/>
         </scene>
         <!--Drawing-->
         <scene sceneID="p0z-u8-mu2">
@@ -167,6 +176,7 @@
                     <connections>
                         <outlet property="tableView" destination="kH0-7t-vWk" id="0t9-T1-pEG"/>
                         <outlet property="teamSegmentedControl" destination="Jjt-Ut-EjF" id="8PJ-NI-Mdo"/>
+                        <segue destination="edZ-nT-tXK" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="OYH-lh-dTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-r9-2fg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -226,5 +236,8 @@
             <color red="0.25490196078431371" green="0.45882352941176469" blue="0.019607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VvR-TK-aN6"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" name="tintGreen"/>
 </document>

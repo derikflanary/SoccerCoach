@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
@@ -77,7 +78,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="406.5"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" name="emptyStateBackgroun"/>
                     <constraints>
                         <constraint firstItem="T9A-8h-VLE" firstAttribute="leading" secondItem="cEv-sa-zM3" secondAttribute="leading" constant="40" id="2A7-sJ-dS6"/>
                         <constraint firstAttribute="trailing" secondItem="oik-ep-dyV" secondAttribute="trailing" id="2wk-zn-gYB"/>
@@ -123,5 +124,8 @@
     <resources>
         <image name="desert" width="1216" height="912"/>
         <image name="plus" catalog="system" width="64" height="58"/>
+        <namedColor name="emptyStateBackgroun">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

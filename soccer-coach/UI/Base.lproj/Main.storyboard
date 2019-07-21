@@ -15,14 +15,14 @@
             <objects>
                 <viewController id="nlV-Ay-vVf" customClass="SoccerTeamCollection" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
-                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="784"/>
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-na-RNq">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="764"/>
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="764"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-gi-usv">
-                                <rect key="frame" x="20" y="716" width="48" height="48"/>
+                                <rect key="frame" x="20" y="766" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dmQ-gi-usv" secondAttribute="height" multiplier="1:1" id="OK5-QC-qxE"/>
                                 </constraints>
@@ -62,26 +62,19 @@
                         <color key="backgroundColor" name="FieldGreen"/>
                         <constraints>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="XOF-na-RNq" secondAttribute="bottom" id="9ck-B3-hiQ"/>
-                            <constraint firstItem="XOF-na-RNq" firstAttribute="top" secondItem="fLt-S8-nS1" secondAttribute="top" id="FEE-Ca-BaM"/>
+                            <constraint firstItem="XOF-na-RNq" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="FEE-Ca-BaM"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="R0L-hH-Fv5"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="XOF-na-RNq" secondAttribute="trailing" id="UsV-FV-bye"/>
                             <constraint firstAttribute="bottom" secondItem="dmQ-gi-usv" secondAttribute="bottom" constant="20" id="ZOH-td-P5g"/>
                             <constraint firstItem="dmQ-gi-usv" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" constant="20" id="rl7-qk-9wE"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
-                            <constraint firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" constant="20" id="xW8-mF-RCK"/>
+                            <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="ybM-BU-Mgv"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="fLt-S8-nS1" secondAttribute="top" id="yiV-cA-2s1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fLt-S8-nS1"/>
                     </view>
-                    <navigationItem key="navigationItem" id="DZR-HA-31D">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.and.outline" catalog="system" id="tCw-xS-uYx">
-                            <connections>
-                                <segue destination="2Wx-gc-lDl" kind="presentation" modalPresentationStyle="fullScreen" id="Hat-iU-ddj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                     </connections>
@@ -96,13 +89,13 @@
                 <viewControllerPlaceholder storyboardName="Drawing" id="2Wx-gc-lDl" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyh-a3-UVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1841" y="-788"/>
+            <point key="canvasLocation" x="1795" y="-1468"/>
         </scene>
-        <!--Current Teams-->
+        <!--Current-->
         <scene sceneID="EQp-xG-cKb">
             <objects>
                 <navigationController id="ONx-Ub-AQp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Current Teams" image="list.dash" catalog="system" id="nwo-gf-ySg"/>
+                    <tabBarItem key="tabBarItem" title="Current" image="list.dash" catalog="system" id="nwo-gf-ySg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tkz-Ap-5QH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -165,9 +158,9 @@
                         <viewLayoutGuide key="safeArea" id="8Wc-Lo-X1Y"/>
                     </view>
                     <navigationItem key="navigationItem" title="Current Teams" id="UfM-o0-Pob">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="FV1-C0-o2o">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil.and.outline" catalog="system" id="J5Q-rh-sxS">
                             <connections>
-                                <action selector="refreshTapped:" destination="wSe-mD-F9N" id="Q5z-zT-e15"/>
+                                <segue destination="2Wx-gc-lDl" kind="presentation" modalPresentationStyle="fullScreen" id="rmL-rO-l4g"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -186,7 +179,7 @@
                 <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HdY-5x-oAb" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
-                        <segue destination="KWj-1x-3CC" kind="relationship" relationship="detailViewController" id="CW3-G0-tp4"/>
+                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="eVN-xE-a2I"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dR2-4s-Ym1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -206,33 +199,25 @@
                     <connections>
                         <segue destination="ONx-Ub-AQp" kind="relationship" relationship="viewControllers" id="45f-o4-gay"/>
                         <segue destination="5Tv-hW-Ubx" kind="relationship" relationship="viewControllers" id="OxN-NJ-Qsj"/>
+                        <segue destination="wkO-UN-r55" kind="relationship" relationship="viewControllers" id="Cae-TE-bJr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2pS-In-W8F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="16.582914572864322" y="-1332.3741007194246"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="QLg-IC-bo2">
+        <!--MatchHistoryList-->
+        <scene sceneID="I4n-Ok-jox">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KWj-1x-3CC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uRB-6u-4pd">
-                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nlV-Ay-vVf" kind="relationship" relationship="rootViewController" id="fYA-qp-Op7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ey9-pZ-hJo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="MatchHistoryList" id="wkO-UN-r55" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Lbe-Py-xe0"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gee-Rp-BJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724.1206030150754" y="-681.29496402877703"/>
+            <point key="canvasLocation" x="356" y="-942"/>
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="62"/>
         <image name="field" width="1995" height="2149"/>
         <image name="list.dash" catalog="system" width="64" height="44"/>

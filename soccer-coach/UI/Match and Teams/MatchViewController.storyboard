@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xu2-95-WjX">
+                            <stackView opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xu2-95-WjX">
                                 <rect key="frame" x="0.0" y="143" width="414" height="327"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeu-3K-GWN">
@@ -91,7 +91,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5JI-ys-0HR">
-                                <rect key="frame" x="20" y="697" width="374" height="96"/>
+                                <rect key="frame" x="20" y="749" width="374" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-ol-a7t" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -109,8 +109,8 @@
                                             <segue destination="jeN-4E-qYt" kind="presentation" id="aeT-vC-ndO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSx-DU-5Ll" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="52" width="374" height="44"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSx-DU-5Ll" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="systemPinkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Fer-n3-aH7"/>
@@ -127,7 +127,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OBr-dT-oy1">
+                            <segmentedControl opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OBr-dT-oy1">
                                 <rect key="frame" x="20" y="104" width="374" height="32"/>
                                 <segments>
                                     <segment title="First"/>
@@ -163,6 +163,7 @@
                         <outlet property="homeGoalLabel" destination="zWk-ua-yL4" id="xdN-0I-6vx"/>
                         <outlet property="homeLabel" destination="thF-9f-jBZ" id="v6s-WQ-vu9"/>
                         <outlet property="homeStepper" destination="lpD-u4-dgY" id="Rxj-VR-yxQ"/>
+                        <outlet property="mainStackView" destination="xu2-95-WjX" id="Ocs-j8-yWg"/>
                         <outlet property="startPauseButton" destination="EbZ-h2-zEH" id="HDa-ZB-J10"/>
                         <outlet property="timeLabel" destination="xeu-3K-GWN" id="Gzo-kA-GU3"/>
                     </connections>

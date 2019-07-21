@@ -23,11 +23,31 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var awayStepper: UIStepper!
     @IBOutlet weak var createMatchButton: UIButton!
     @IBOutlet weak var endMatchButton: RoundedButton!
+    @IBOutlet weak var mainStackView: UIStackView!
     
     
     // MARK: - Properties
     
-    var match: Match?
+    var match: Match? {
+        didSet {
+            guard match != oldValue else { return }
+            if match == nil {
+                mainStackView.alpha = 0.2
+                mainStackView.isUserInteractionEnabled = false
+                halfSegmentedControl.alpha = 0.2
+                halfSegmentedControl.isUserInteractionEnabled = false
+                endMatchButton.isHidden = true
+                createMatchButton.isHidden = false
+            } else {
+                mainStackView.alpha = 1.0
+                mainStackView.isUserInteractionEnabled = true
+                halfSegmentedControl.alpha = 1.0
+                halfSegmentedControl.isUserInteractionEnabled = true
+                endMatchButton.isHidden = false
+                createMatchButton.isHidden = true
+            }
+        }
+    }
     var half: Half = .first
     var timer = Timer()
     var firstHalfCount: Int = 0

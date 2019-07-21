@@ -55,10 +55,6 @@ class CurrentTeams: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func refreshTapped(_ sender: Any) {
-        tableView.reloadData()
-    }
-    
     @IBAction func teamSegmentedControlChanged(_ sender: UISegmentedControl) {
         currentSection = Section(rawValue: sender.selectedSegmentIndex) ?? .home
         updateTableUI()
@@ -86,6 +82,19 @@ private extension CurrentTeams {
         currentSnapshot.appendSections([currentSection])
         currentSnapshot.appendItems(currentTeam.players)
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
+    }
+    
+}
+
+
+// MARK: - Tableview delegate
+
+extension CurrentTeams: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let player = currentTeam.players[indexPath.row]
+        // TODO: - show player details
     }
     
 }

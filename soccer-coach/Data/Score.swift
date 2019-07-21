@@ -10,7 +10,7 @@ import Foundation
 
 struct Score {
     
-    var home: Int
-    var away: Int
+    var home: Int = 0
+    var away: Int = 0
     
 }

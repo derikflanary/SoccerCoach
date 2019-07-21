@@ -17,6 +17,7 @@ class NewMatchCreation: UIViewController {
     var awayTeam: Team?
     var halfLength: Int = 40
     var date = Date()
+    var selectedSection: Section?
     
     private let cellIdentifier = "matchCreationCell"
     
@@ -118,16 +119,29 @@ extension NewMatchCreation: UITableViewDelegate {
             hideDatePicker()
             performSegue(withIdentifier: .showTeamList, sender: nil)
         case .halfLength:
-            datePicker.datePickerMode = .countDownTimer
-            datePicker.minuteInterval = 5
-            datePicker.countDownDuration = TimeInterval(halfLength * 60)
-            showDatePicker()
+            if selectedSection == section {
+                hideDatePicker()
+                selectedSection = nil
+            } else {
+                datePicker.datePickerMode = .countDownTimer
+                datePicker.minuteInterval = 5
+                datePicker.countDownDuration = TimeInterval(halfLength * 60)
+                showDatePicker()
+                selectedSection = section
+            }
         case .date:
-            datePicker.datePickerMode = .date
-            datePicker.date = date
-            showDatePicker()
+            if selectedSection == section {
+                hideDatePicker()
+                selectedSection = nil
+            } else {
+                datePicker.datePickerMode = .date
+                datePicker.date = date
+                showDatePicker()
+                selectedSection = section
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
 }
 
@@ -137,6 +151,7 @@ extension NewMatchCreation: UITableViewDelegate {
 private extension NewMatchCreation {
     
     func showDatePicker() {
+        guard datePicker.alpha == 0.0 else { return }
         datePicker.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.datePicker.transform = .identity
@@ -145,9 +160,11 @@ private extension NewMatchCreation {
     }
     
     func hideDatePicker() {
-        UIView.animate(withDuration: 0.25) {
+        datePicker.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+            self.datePicker.transform = .identity
             self.datePicker.alpha = 0.0
-        }
+        })
     }
     
 }

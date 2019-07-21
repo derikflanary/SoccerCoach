@@ -10,21 +10,68 @@ import UIKit
 
 class MatchHistoryList: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    // MARK: - Enums
+    
+    enum Section: Int, CaseIterable {
+        case main
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
+    
+    
+    // MARK: - Properties
+    
+    var dataSource: UITableViewDiffableDataSource<Section, Match>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Match>! = nil
+    let cellIdentifier = "cell"
+    var matches = [Match]()
+    
+    
+    // MARK: - Overrides
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        configDataSource()
     }
-    */
+    
+}
 
+
+// MARK: - Private functions
+
+private extension MatchHistoryList {
+    
+    func configDataSource() {
+        self.dataSource = UITableViewDiffableDataSource<Section, Match>(tableView: tableView, cellProvider: { tableView, indexPath, match -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+            cell.textLabel?.text = "\(match.homeTeam.name) \(match.score.home) - \(match.score.away) \(match.awayTeam.name)"
+            cell.detailTextLabel?.text = match.date.monthDayYearString
+            return cell
+        })
+        updateTableUI()
+    }
+    
+    func updateTableUI(animated: Bool = true) {
+        tableView.backgroundView = matches.isEmpty ? emptyView : nil
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, Match>()
+        currentSnapshot.appendSections([.main])
+        currentSnapshot.appendItems(matches)
+        self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
+    }
+    
+}
+
+
+// MARK: - Tableview delegate
+
+extension MatchHistoryList: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let match = matches[indexPath.row]
+    }
+    
 }

@@ -33,6 +33,7 @@
 		EE3729B922CBFEF3003FBBFE /* MatchHistoryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3729B822CBFEF3003FBBFE /* MatchHistoryList.storyboard */; };
 		EE59118822C2CA4C0049B71E /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118722C2CA4C0049B71E /* Match.swift */; };
 		EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118A22C2D46F0049B71E /* Int+Extensions.swift */; };
+		EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D436822E4FC3A005B759D /* Date+Helpers.swift */; };
 		EE7E9B0022C9A56B001773AA /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7E9AFF22C9A56B001773AA /* MatchViewController.swift */; };
 		EE7E9B0222C9A57E001773AA /* MatchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7E9B0122C9A57E001773AA /* MatchViewController.storyboard */; };
 		EED39CFE22DC090F00EFEF5F /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED39CFD22DC090F00EFEF5F /* Score.swift */; };
@@ -77,6 +78,7 @@
 		EE3729B822CBFEF3003FBBFE /* MatchHistoryList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchHistoryList.storyboard; sourceTree = "<group>"; };
 		EE59118722C2CA4C0049B71E /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		EE59118A22C2D46F0049B71E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		EE6D436822E4FC3A005B759D /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		EE7E9AFF22C9A56B001773AA /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		EE7E9B0122C9A57E001773AA /* MatchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchViewController.storyboard; sourceTree = "<group>"; };
 		EED39CFD22DC090F00EFEF5F /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				EEF7609C22B83126004D92CF /* ListView+Extensions.swift */,
 				EE59118A22C2D46F0049B71E /* Int+Extensions.swift */,
 				EE3729AB22CBBB43003FBBFE /* SegueHandling.swift */,
+				EE6D436822E4FC3A005B759D /* Date+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				EE27685022B7E708008E4CA1 /* AppDelegate.swift in Sources */,
 				EE20114F22D698BA007A1DAC /* DrawingViewController.swift in Sources */,
 				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
+				EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
 				EE59118822C2CA4C0049B71E /* Match.swift in Sources */,
 				EE3729A622CBB6C2003FBBFE /* TeamList.swift in Sources */,

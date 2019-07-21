@@ -10,16 +10,28 @@ import UIKit
 
 class TeamList: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    // MARK: - Enums
     
     enum Section: Int, CaseIterable {
         case main
     }
     
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
+    
+    
+    // MARK: - Properties
+    
     var dataSource: UITableViewDiffableDataSource<Section, Team>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Team>! = nil
     let cellIdentifier = "cell"
-    var teams: [Team] = [Team(name: "Lone Peak", players: [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")]), Team(name: "American Fork", players: [])]
+    var teams = [Team]()
+    
+    
+    // MARK: - Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +39,17 @@ class TeamList: UIViewController {
         configDataSource()
     }
 
+    
+    // MARK: - Actions
+    
     @IBAction func newButtonTapped(_ sender: Any) {
         
     }
     
 }
+
+
+// MARK: - Private functions
 
 private extension TeamList {
     
@@ -45,6 +63,7 @@ private extension TeamList {
     }
     
     func updateTableUI(animated: Bool = true) {
+        tableView.backgroundView = teams.isEmpty ? emptyView : nil
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, Team>()
         currentSnapshot.appendSections([.main])
         currentSnapshot.appendItems(teams)
@@ -52,6 +71,9 @@ private extension TeamList {
     }
     
 }
+
+
+// MARK: - Tableview delegate
 
 extension TeamList: UITableViewDelegate {
     

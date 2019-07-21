@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Teams-->
@@ -46,10 +47,49 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyView" destination="cFh-R4-0F2" id="Ewt-AT-yeh"/>
                         <outlet property="tableView" destination="YSr-8h-h5t" id="gmn-Hp-1xY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEz-ZO-JwC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="cFh-R4-0F2">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="T9A-8h-VLE">
+                            <rect key="frame" x="40" y="414.5" width="334" height="77"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing Here..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As2-FC-xpf">
+                                    <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and save a new team to see it appear here!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="187-hv-5uw">
+                                    <rect key="frame" x="0.0" y="36.5" width="334" height="40.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                    <color key="textColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="desert" translatesAutoresizingMaskIntoConstraints="NO" id="oik-ep-dyV">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="406.5"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="T9A-8h-VLE" firstAttribute="leading" secondItem="cEv-sa-zM3" secondAttribute="leading" constant="40" id="2A7-sJ-dS6"/>
+                        <constraint firstAttribute="trailing" secondItem="oik-ep-dyV" secondAttribute="trailing" id="2wk-zn-gYB"/>
+                        <constraint firstItem="oik-ep-dyV" firstAttribute="top" secondItem="cFh-R4-0F2" secondAttribute="top" id="Mxb-K7-YQc"/>
+                        <constraint firstItem="T9A-8h-VLE" firstAttribute="top" secondItem="oik-ep-dyV" secondAttribute="bottom" constant="8" id="crk-7U-hYj"/>
+                        <constraint firstItem="cEv-sa-zM3" firstAttribute="trailing" secondItem="T9A-8h-VLE" secondAttribute="trailing" constant="40" id="dZq-Wh-vNw"/>
+                        <constraint firstItem="oik-ep-dyV" firstAttribute="leading" secondItem="cEv-sa-zM3" secondAttribute="leading" id="exp-0j-Bo6"/>
+                        <constraint firstItem="T9A-8h-VLE" firstAttribute="centerX" secondItem="cEv-sa-zM3" secondAttribute="centerX" id="gQz-nG-Nsg"/>
+                        <constraint firstItem="T9A-8h-VLE" firstAttribute="centerY" secondItem="cEv-sa-zM3" secondAttribute="centerY" id="lKf-9U-wwc"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="cEv-sa-zM3"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="776.81159420289862" y="30.803571428571427"/>
         </scene>
@@ -81,6 +121,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="desert" width="1216" height="912"/>
         <image name="plus" catalog="system" width="64" height="58"/>
     </resources>
 </document>

@@ -91,7 +91,7 @@ private extension SoccerTeamCollection {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)),
                                                   heightDimension: .fractionalHeight(0.9))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 16, trailing: 8)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(0.2))
@@ -162,6 +162,10 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             }
             actions.append(save)
         }
+        let details = UIAlertAction(title: "Match Stats", style: .default) { _ in
+            // TODO: - Show player details for the current match
+        }
+        actions.append(details)
         
         let alertController = UIAlertController(title: "New Player Action", message: nil, preferredStyle: .actionSheet)
         for action in actions {

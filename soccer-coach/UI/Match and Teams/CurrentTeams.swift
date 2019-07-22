@@ -22,6 +22,7 @@ class CurrentTeams: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamSegmentedControl: UISegmentedControl!
+    @IBOutlet var emptyStateView: UIView!
     
     
     // MARK: - Properties
@@ -30,16 +31,15 @@ class CurrentTeams: UIViewController {
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     let cellIdentifier = "cell"
     var currentSection = Section.home
-    var homeTeam: Team?
-    var awayTeam: Team?
     var selectedPlayer: SoccerPlayer?
+    var currentMatch: Match?
     
     var currentTeam: Team? {
         switch currentSection {
         case .home:
-            return homeTeam
+            return currentMatch?.homeTeam
         case .away:
-            return awayTeam
+            return currentMatch?.awayTeam
         }
     }
     
@@ -85,6 +85,7 @@ private extension CurrentTeams {
     func updateTableUI(animated: Bool = true) {
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
         currentSnapshot.appendSections([currentSection])
+        tableView.backgroundView = currentMatch == nil ? emptyStateView : nil
         guard let currentTeam = currentTeam else { return }
         currentSnapshot.appendItems(Array(currentTeam.players))
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)

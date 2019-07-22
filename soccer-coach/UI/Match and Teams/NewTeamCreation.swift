@@ -8,6 +8,7 @@
 
 import UIKit
 import VisionKit
+import CoreData
 
 class NewTeamCreation: UIViewController {
     
@@ -104,7 +105,10 @@ extension NewTeamCreation: VNDocumentCameraViewControllerDelegate {
         recognitionEngine.process(scan) { resultingStrings in
             DispatchQueue.main.async {
                 for name in resultingStrings {
-                    let player = SoccerPlayer(name: name)
+                    let newPlayer = SoccerPlayer.entity()
+                    newPlayer.setValue(name, forKey: SoccerPlayer.CodingKeys.name.rawValue)
+                    newPlayer.setValue(UUID().uuidString, forKey: SoccerPlayer.CodingKeys.id.rawValue)
+                    let player = SoccerPlayer(entity: newPlayer, insertInto: nil)
                     self.players.append(player)
                 }
                 self.updateTableUI()

@@ -30,11 +30,11 @@ class CurrentTeams: UIViewController {
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     let cellIdentifier = "cell"
     var currentSection = Section.home
-    var homeTeam = Team(name: "Lone Peak", players: [SoccerPlayer(name: "Molly Molls"), SoccerPlayer(name: "Melissa Happybottom"), SoccerPlayer(name: "Ally Allison")])
-    var awayTeam = Team(name: "American Fork", players: [])
+    var homeTeam: Team?
+    var awayTeam: Team?
     var selectedPlayer: SoccerPlayer?
     
-    var currentTeam: Team {
+    var currentTeam: Team? {
         switch currentSection {
         case .home:
             return homeTeam
@@ -85,7 +85,8 @@ private extension CurrentTeams {
     func updateTableUI(animated: Bool = true) {
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
         currentSnapshot.appendSections([currentSection])
-        currentSnapshot.appendItems(currentTeam.players)
+        guard let currentTeam = currentTeam else { return }
+        currentSnapshot.appendItems(Array(currentTeam.players))
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
     }
     
@@ -98,7 +99,7 @@ extension CurrentTeams: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedPlayer = currentTeam.players[indexPath.row]
+        selectedPlayer = dataSource.itemIdentifier(for: indexPath)
         performSegue(withIdentifier: .presentPlayerDetails, sender: nil)
     }
     
@@ -110,7 +111,7 @@ extension CurrentTeams: UITableViewDelegate {
 extension CurrentTeams: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let player = currentTeam.players[indexPath.row]
+        guard let player = dataSource.itemIdentifier(for: indexPath) else { return [] }
         let itemProvider = NSItemProvider(object: player)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = player

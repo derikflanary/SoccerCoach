@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14838.19" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <elements/>
+    <entity name="SoccerPlayer" representedClassName=".SoccerPlayer" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString="0"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="🏃🏻‍♀️"/>
+        <attribute name="number" optional="YES" attributeType="String" defaultValueString="100"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="players" inverseEntity="Team"/>
+    </entity>
+    <entity name="Team" representedClassName=".Team" syncable="YES">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="Team"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="team" inverseEntity="SoccerPlayer"/>
+    </entity>
+    <elements>
+        <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="118"/>
+        <element name="Team" positionX="-45" positionY="-9" width="128" height="88"/>
+    </elements>
 </model>

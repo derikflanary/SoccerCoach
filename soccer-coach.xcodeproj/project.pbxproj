@@ -153,10 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				EE27685722B7E708008E4CA1 /* Main.storyboard */,
+				EE37299F22CBA597003FBBFE /* Common */,
 				EE3729A922CBB6DD003FBBFE /* Soccer Team Collection */,
 				EE3729AA22CBB6F0003FBBFE /* Match and Teams */,
 				EE6D436A22E510AD005B759D /* Drawings */,
-				EE37299F22CBA597003FBBFE /* Common */,
 			);
 			path = UI;
 			sourceTree = "<group>";

@@ -19,11 +19,12 @@ struct SoccerPlayerController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func createPlayer(with name: String) -> SoccerPlayer? {
+    func createPlayer(with name: String, number: String? = nil) -> SoccerPlayer? {
         guard let context = context else { return nil }
         let player = SoccerPlayer(context: context)
         player.id = UUID().uuidString
         player.name = name
+        player.number = number
         try? context.save()
         return player
     }
@@ -35,6 +36,12 @@ struct SoccerPlayerController {
         } catch {
             return []
         }
+    }
+    
+    func update(_ player: SoccerPlayer) {
+        print(player.isUpdated)
+        guard let context = context else { return }
+        try? context.save()
     }
 
 }

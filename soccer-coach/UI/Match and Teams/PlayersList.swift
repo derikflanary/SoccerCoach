@@ -51,10 +51,6 @@ class PlayersList: UIViewController {
         configDataSource()
         title = team?.name
     }
-
-    @IBSegueAction func showPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
-        return PlayerDetails(coder: coder, player: selectedPlayer)
-    }
     
 }
 
@@ -67,7 +63,7 @@ private extension PlayersList {
         self.dataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             cell.textLabel?.text = player.name
-            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel?.text = player.number
             return cell
         })
         updateTableUI()
@@ -106,4 +102,10 @@ extension PlayersList: SegueHandling {
         case showPlayerDetails
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailNav = segue.destination as? UINavigationController else { return }
+        guard let detail = detailNav.topViewController as? NewPlayerCreation else { return }
+        detail.player = selectedPlayer
+    }
 }

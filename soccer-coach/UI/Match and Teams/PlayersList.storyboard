@@ -34,17 +34,17 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="DPj-Na-GoT" id="YkA-DV-RSQ"/>
-                        <segue destination="ZRl-Tc-iwS" kind="show" identifier="showPlayerDetails" destinationCreationSelector="showPlayerDetails:sender:segueIdentifier:" id="2IE-EN-qIi"/>
+                        <segue destination="ZRl-Tc-iwS" kind="presentation" identifier="showPlayerDetails" id="2IE-EN-qIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tRm-nH-TdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2.8985507246376816" y="26.785714285714285"/>
         </scene>
-        <!--PlayerDetails-->
+        <!--NewPlayerCreation-->
         <scene sceneID="Izu-HP-avb">
             <objects>
-                <viewControllerPlaceholder storyboardName="PlayerDetails" id="ZRl-Tc-iwS" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="NewPlayerCreation" id="ZRl-Tc-iwS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vV1-Wf-gIh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="649" y="-24"/>

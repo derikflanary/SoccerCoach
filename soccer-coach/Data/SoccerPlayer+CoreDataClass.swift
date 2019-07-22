@@ -14,22 +14,6 @@ import MobileCoreServices
 
 public class SoccerPlayer: NSManagedObject, Codable {
     
-    convenience init(name: String) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { fatalError("Failed to init player") }
-         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "SoccerPlayer", in: managedContext)!
-        let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
-        managedObject.setValue(name, forKey: CodingKeys.name.rawValue)
-        managedObject.setValue(UUID().uuidString, forKey: CodingKeys.id.rawValue)
-        do {
-            try managedContext.save()
-            self.init(context: managedContext)
-        } catch {
-            print(error)
-            fatalError("Failed to init player")
-        }
-    }
-    
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -38,6 +22,7 @@ public class SoccerPlayer: NSManagedObject, Codable {
         case team
     }
 
+    
     // MARK: - Decodable
     
     required convenience public init(from decoder: Decoder) throws {

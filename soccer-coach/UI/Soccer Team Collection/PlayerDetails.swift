@@ -11,7 +11,8 @@ import UIKit
 class PlayerDetails: UIViewController {
     
     var player: SoccerPlayer?
-    init?(coder: NSCoder, player: SoccerPlayer) {
+    
+    init?(coder: NSCoder, player: SoccerPlayer?) {
         self.player = player
         super.init(coder: coder)
     }

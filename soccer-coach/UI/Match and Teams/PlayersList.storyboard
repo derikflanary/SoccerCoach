@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NUl-5a-dnL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Players List-->
+        <scene sceneID="aWd-2c-hSx">
+            <objects>
+                <viewController id="NUl-5a-dnL" customClass="PlayersList" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rps-CB-XZ3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="DPj-Na-GoT">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NUl-5a-dnL" id="Ir0-t2-TVp"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DPj-Na-GoT" secondAttribute="trailing" id="7hZ-TM-m0q"/>
+                            <constraint firstItem="DPj-Na-GoT" firstAttribute="leading" secondItem="taT-hN-79D" secondAttribute="leading" id="Kf4-CN-xyk"/>
+                            <constraint firstItem="DPj-Na-GoT" firstAttribute="top" secondItem="taT-hN-79D" secondAttribute="top" id="OBa-Ef-1YP"/>
+                            <constraint firstAttribute="bottom" secondItem="DPj-Na-GoT" secondAttribute="bottom" id="Z5T-OK-UV1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="taT-hN-79D"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="DPj-Na-GoT" id="YkA-DV-RSQ"/>
+                        <segue destination="ZRl-Tc-iwS" kind="show" identifier="showPlayerDetails" destinationCreationSelector="showPlayerDetails:sender:segueIdentifier:" id="2IE-EN-qIi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tRm-nH-TdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2.8985507246376816" y="26.785714285714285"/>
+        </scene>
+        <!--PlayerDetails-->
+        <scene sceneID="Izu-HP-avb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PlayerDetails" id="ZRl-Tc-iwS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vV1-Wf-gIh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="649" y="-24"/>
+        </scene>
+    </scenes>
+</document>

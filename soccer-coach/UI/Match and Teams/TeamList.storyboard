@@ -50,6 +50,7 @@
                     <connections>
                         <outlet property="emptyView" destination="cFh-R4-0F2" id="Ewt-AT-yeh"/>
                         <outlet property="tableView" destination="YSr-8h-h5t" id="gmn-Hp-1xY"/>
+                        <segue destination="2eu-O4-QZU" kind="show" identifier="showPlayersList" destinationCreationSelector="showPlayersList:sender:segueIdentifier:" id="9TG-yF-eMj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEz-ZO-JwC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -101,6 +102,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxP-Nj-el9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1409" y="-131"/>
+        </scene>
+        <!--PlayersList-->
+        <scene sceneID="eVe-56-V3f">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PlayersList" id="2eu-O4-QZU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iqC-al-sDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411" y="-47"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ak3-2G-4of">

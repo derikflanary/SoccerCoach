@@ -8,7 +8,7 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="players" inverseEntity="Team"/>
     </entity>
     <entity name="Team" representedClassName=".Team" syncable="YES">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String" defaultValueString="0"/>
         <attribute name="name" attributeType="String" defaultValueString="Team"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="team" inverseEntity="SoccerPlayer"/>
     </entity>

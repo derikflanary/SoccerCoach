@@ -14,6 +14,21 @@ class SoccerTeamCollection: UIViewController {
     
     enum Section: Int, CaseIterable {
         case frontLine, attackingMid, holdingMid, backLine, goalie
+        
+        var maxCount: Int {
+            switch self {
+            case .frontLine:
+                return 3
+            case .attackingMid:
+                return 2
+            case .holdingMid:
+                return 1
+            case .backLine:
+                return 4
+            case .goalie:
+                return 1
+            }
+        }
     }
 
     
@@ -27,8 +42,8 @@ class SoccerTeamCollection: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     var activePlayersPerSection: [Section: [SoccerPlayer]] = [:]
-    var masterWidthFraction: CGFloat? = nil
     var selectedPlayer: SoccerPlayer?
+    var currentTeam: Team?
    
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
@@ -43,19 +58,16 @@ class SoccerTeamCollection: UIViewController {
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
         
+        var players = SoccerPlayerController.shared.fetchAllPlayers()
+        guard players.count >= 11 else { return }
+            
         for section in Section.allCases {
-            switch section {
-            case .goalie:
-                activePlayersPerSection[section] = [SoccerPlayer(name: "🏃🏻‍♀️")]
-            case .backLine:
-                activePlayersPerSection[section] = [SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️")]
-            case .holdingMid:
-                activePlayersPerSection[section] = [SoccerPlayer(name: "🏃🏻‍♀️")]
-            case .attackingMid:
-                activePlayersPerSection[section] = [SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️")]
-            case .frontLine:
-                activePlayersPerSection[section] = [SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️"), SoccerPlayer(name: "🏃🏻‍♀️")]
+            var playersForSection = [SoccerPlayer]()
+            for _ in 0..<section.maxCount {
+                playersForSection.append(players.first!)
+                players.removeFirst()
             }
+            activePlayersPerSection[section] = playersForSection
         }
     }
     

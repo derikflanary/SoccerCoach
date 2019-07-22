@@ -37,9 +37,13 @@ class NewTeamCreation: UIViewController {
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+        guard let name = teamNameTextField.text else { return }
+        TeamController.shared.createTeam(with: name, players: players)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func addPlayerTapped(_ sender: Any) {
@@ -89,10 +93,26 @@ extension NewTeamCreation: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let player = players[indexPath.row]
+        // TODO: - Open ability to edit player
     }
     
 }
 
+
+// MARK: - Presentation controller delegate
+
+extension NewTeamCreation: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        print("attempt")
+    }
+    
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        guard let parent = self.presentingViewController as? TeamList else { return }
+        parent.viewWillAppear(true)
+    }
+    
+}
 
 // MARK: - Camera Document Delegate
 
@@ -105,11 +125,9 @@ extension NewTeamCreation: VNDocumentCameraViewControllerDelegate {
         recognitionEngine.process(scan) { resultingStrings in
             DispatchQueue.main.async {
                 for name in resultingStrings {
-                    let newPlayer = SoccerPlayer.entity()
-                    newPlayer.setValue(name, forKey: SoccerPlayer.CodingKeys.name.rawValue)
-                    newPlayer.setValue(UUID().uuidString, forKey: SoccerPlayer.CodingKeys.id.rawValue)
-                    let player = SoccerPlayer(entity: newPlayer, insertInto: nil)
-                    self.players.append(player)
+                    if let newPlayer = SoccerPlayerController.shared.createPlayer(with: name) {
+                        self.players.append(newPlayer)                        
+                    }
                 }
                 self.updateTableUI()
             }

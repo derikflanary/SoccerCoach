@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
-    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -15,14 +15,14 @@
             <objects>
                 <viewController id="nlV-Ay-vVf" customClass="SoccerTeamCollection" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
-                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-na-RNq">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-S4-tjA">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y27-YQ-idS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-gi-usv">
-                                <rect key="frame" x="20" y="766" width="48" height="48"/>
+                                <rect key="frame" x="20" y="700" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dmQ-gi-usv" secondAttribute="height" multiplier="1:1" id="OK5-QC-qxE"/>
                                 </constraints>
@@ -106,7 +106,7 @@
                 <navigationController id="ONx-Ub-AQp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Current" image="list.dash" catalog="system" id="nwo-gf-ySg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tkz-Ap-5QH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -132,18 +132,18 @@
             <objects>
                 <viewController id="wSe-mD-F9N" customClass="CurrentTeams" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JwP-qt-uGh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-7t-vWk">
-                                <rect key="frame" x="0.0" y="110" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="110" width="320" height="658"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="delegate" destination="wSe-mD-F9N" id="PVH-mn-DfT"/>
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jjt-Ut-EjF">
-                                <rect key="frame" x="20" y="65" width="335" height="31"/>
+                                <rect key="frame" x="20" y="65" width="280" height="31"/>
                                 <segments>
                                     <segment title="Home"/>
                                     <segment title="Away"/>
@@ -186,7 +186,7 @@
         <!--Split View Controller-->
         <scene sceneID="J84-Tp-JJI">
             <objects>
-                <splitViewController id="xyP-Bu-AHd" sceneMemberID="viewController">
+                <splitViewController maximumPrimaryColumnWidth="400" preferredPrimaryColumnWidthFraction="1" id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HdY-5x-oAb" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
                         <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="eVN-xE-a2I"/>

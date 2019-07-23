@@ -21,6 +21,7 @@ extension Shot {
     @NSManaged public var isGoal: Bool
     @NSManaged public var half: Int64
     @NSManaged public var timeStamp: Int64
+    @NSManaged public var rating: Int64
     @NSManaged public var playingTime: PlayingTime?
 
 }

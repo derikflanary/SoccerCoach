@@ -44,29 +44,78 @@
                                     <outlet property="delegate" destination="nlV-Ay-vVf" id="3r7-g8-TKc"/>
                                 </connections>
                             </collectionView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmQ-gi-usv">
-                                <rect key="frame" x="20" y="700" width="48" height="48"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
+                                <rect key="frame" x="211" y="271" width="281.5" height="226"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-D4-MId">
+                                        <rect key="frame" x="20" y="12" width="241.5" height="202"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shot Difficulty Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEk-Jq-dyN">
+                                                <rect key="frame" x="36" y="0.0" width="170" height="22.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average quality shot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="526-JU-WGH">
+                                                <rect key="frame" x="63" y="38.5" width="115.5" height="16"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <color key="textColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-mu-kNd">
+                                                <rect key="frame" x="-2" y="70.5" width="245.5" height="34"/>
+                                                <connections>
+                                                    <action selector="ratingSliderValueChanged" destination="nlV-Ay-vVf" eventType="valueChanged" id="i5t-vS-bQP"/>
+                                                </connections>
+                                            </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qC-Rp-1kx">
+                                                <rect key="frame" x="114.5" y="119.5" width="12.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAv-mg-yPk" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="162" width="241.5" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="5oj-1G-tw0"/>
+                                                </constraints>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="shotRatingSubmitButtonTaped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="2bc-Kd-ocO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="NSA-mu-kNd" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="8L9-uY-z8J"/>
+                                            <constraint firstItem="zAv-mg-yPk" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="ALP-9A-5Zz"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="emptyStateBackground"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="dmQ-gi-usv" secondAttribute="height" multiplier="1:1" id="OK5-QC-qxE"/>
+                                    <constraint firstItem="cLs-D4-MId" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" constant="20" id="7Kt-Dm-wah"/>
+                                    <constraint firstAttribute="trailing" secondItem="cLs-D4-MId" secondAttribute="trailing" constant="20" id="KDH-M1-JEa"/>
+                                    <constraint firstItem="cLs-D4-MId" firstAttribute="top" secondItem="eSp-k5-Pa6" secondAttribute="top" constant="12" id="R9X-2N-ekF"/>
+                                    <constraint firstItem="cLs-D4-MId" firstAttribute="centerY" secondItem="eSp-k5-Pa6" secondAttribute="centerY" id="kTc-DP-2nG"/>
+                                    <constraint firstAttribute="bottom" secondItem="cLs-D4-MId" secondAttribute="bottom" constant="12" id="ogw-U6-9SG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="tintColor" cocoaTouchSystemColor="systemYellowColor"/>
-                                <state key="normal" image="arrow.right.arrow.left.circle" catalog="system">
-                                    <color key="titleColor" cocoaTouchSystemColor="systemYellowColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="hideShowButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="9Cc-oS-IKS"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="FieldGreen"/>
                         <constraints>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="XOF-na-RNq" secondAttribute="bottom" id="9ck-B3-hiQ"/>
+                            <constraint firstItem="eSp-k5-Pa6" firstAttribute="width" secondItem="fLt-S8-nS1" secondAttribute="width" multiplier="0.4" id="DeB-w9-gSR"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="FEE-Ca-BaM"/>
+                            <constraint firstItem="eSp-k5-Pa6" firstAttribute="centerX" secondItem="fLt-S8-nS1" secondAttribute="centerX" id="JfA-yT-YCA"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="R0L-hH-Fv5"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="XOF-na-RNq" secondAttribute="trailing" id="UsV-FV-bye"/>
-                            <constraint firstAttribute="bottom" secondItem="dmQ-gi-usv" secondAttribute="bottom" constant="20" id="ZOH-td-P5g"/>
-                            <constraint firstItem="dmQ-gi-usv" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" constant="20" id="rl7-qk-9wE"/>
+                            <constraint firstItem="eSp-k5-Pa6" firstAttribute="centerY" secondItem="fLt-S8-nS1" secondAttribute="centerY" id="m8W-7d-b1B"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="ybM-BU-Mgv"/>
@@ -77,12 +126,16 @@
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
+                        <outlet property="ratingLabel" destination="8qC-Rp-1kx" id="HFi-ie-5JA"/>
+                        <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
+                        <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
+                        <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
                         <segue destination="edZ-nT-tXK" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="VvR-TK-aN6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1431.6582914572864" y="-681.29496402877703"/>
+            <point key="canvasLocation" x="1431.4453125" y="-682.03125"/>
         </scene>
         <!--PlayerDetails-->
         <scene sceneID="S2E-wL-kSn">
@@ -267,7 +320,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="62"/>
         <image name="field" width="1995" height="2149"/>
         <image name="list.dash" catalog="system" width="64" height="44"/>
         <image name="notFound" width="1216" height="912"/>
@@ -280,7 +332,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OYH-lh-dTt"/>
+        <segue reference="VvR-TK-aN6"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="tintGreen"/>
 </document>

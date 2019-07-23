@@ -44,6 +44,7 @@
         <attribute name="half" attributeType="Integer 64" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isGoal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="onTarget" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 64" defaultValueString="50" usesScalarValueType="YES"/>
         <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="shots" inverseEntity="PlayingTime"/>
     </entity>
@@ -68,7 +69,7 @@
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="163"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
         <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="178"/>
-        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="118"/>
+        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="133"/>
         <element name="Assist" positionX="51.40234375" positionY="402.96875" width="128" height="88"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="88"/>
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="73"/>

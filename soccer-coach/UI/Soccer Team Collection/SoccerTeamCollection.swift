@@ -35,6 +35,10 @@ class SoccerTeamCollection: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var shotRatingView: UIView!
+    @IBOutlet weak var shotDescriptionLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var ratingSlider: UISlider!
     
     
     // MARK: - Properties
@@ -58,7 +62,7 @@ class SoccerTeamCollection: UIViewController {
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
         
-        var players = SoccerPlayerController.shared.fetchAllFillerPlayers()
+        var players = SoccerPlayerController.shared.fetchAllPlayers()
         guard players.count >= 11 else { return }
             
         for section in Section.allCases {
@@ -75,6 +79,11 @@ class SoccerTeamCollection: UIViewController {
         super.viewDidAppear(animated)
         configureCollectionViewLayout()
         configureDataSource()
+        shotRatingView.layer.cornerRadius = 8
+        shotRatingView.clipsToBounds = true
+        let value = Int(ratingSlider.value * 100)
+        ratingLabel.text = "\(value)"
+        shotDescriptionLabel.text = value.shotRatingDescription()
     }
 
     
@@ -90,6 +99,20 @@ class SoccerTeamCollection: UIViewController {
     @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
         guard let selectedPlayer = selectedPlayer else { return nil }
         return PlayerDetails(coder: coder, player: selectedPlayer)
+    }
+    
+    @IBAction func ratingSliderValueChanged() {
+        let value = Int(ratingSlider.value * 100)
+        ratingLabel.text = "\(value)"
+        shotDescriptionLabel.text = value.shotRatingDescription()
+
+    }
+    
+    @IBAction func shotRatingSubmitButtonTaped() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+            self.shotRatingView.alpha = 0.0
+        })
+        // TODO: - Create and save new shot
     }
     
 }
@@ -145,6 +168,14 @@ private extension SoccerTeamCollection {
         return allActivePlayers.contains(player)
     }
     
+    func showShotRatingView() {
+        shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+            self.shotRatingView.transform = .identity
+            self.shotRatingView.alpha = 1.0
+        })
+    }
+    
 }
 
 
@@ -156,13 +187,13 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
         selectedPlayer = cell.player
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
-          
+            self.showShotRatingView()
         }
         let shotOnTarget = UIAlertAction(title: "Shot on Target", style: .default) { _ in
-            
+            self.showShotRatingView()
         }
         let shotOffTarget = UIAlertAction(title: "Shot off Target", style: .default) { _ in
-        
+            self.showShotRatingView()
         }
         let assist = UIAlertAction(title: "Assist", style: .default) { _ in
             
@@ -190,6 +221,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         for action in actions {
             alertController.addAction(action)
         }
+        
         let rect = view.convert(cell.nameLabel.bounds, to: view)
         alertController.popoverPresentationController?.sourceView = cell.nameLabel
         alertController.popoverPresentationController?.sourceRect = rect

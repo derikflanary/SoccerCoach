@@ -40,6 +40,27 @@ extension Int {
         }
     }
     
+    func shotRatingDescription() -> String {
+        switch self {
+        case 0:
+            return "Impossible shot"
+        case 1...25:
+            return "Poor quality shot"
+        case 26...40:
+            return "Low quality shot"
+        case 41...59:
+            return "Average quality shot"
+        case 60...75:
+            return "Good quality shot"
+        case 76...99:
+            return "Great quality shot"
+        case 100:
+            return "Penalty Kick"
+        default:
+            return ""
+        }
+    }
+    
 }
 
 

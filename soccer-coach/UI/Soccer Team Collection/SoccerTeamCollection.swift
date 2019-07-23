@@ -58,7 +58,7 @@ class SoccerTeamCollection: UIViewController {
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
         
-        var players = SoccerPlayerController.shared.fetchAllPlayers()
+        var players = SoccerPlayerController.shared.fetchAllFillerPlayers()
         guard players.count >= 11 else { return }
             
         for section in Section.allCases {

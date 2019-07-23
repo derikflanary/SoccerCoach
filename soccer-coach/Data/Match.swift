@@ -37,5 +37,5 @@ enum Card: String {
 }
 
 enum Half: Int {
-    case first, second
+    case first, second, extra
 }

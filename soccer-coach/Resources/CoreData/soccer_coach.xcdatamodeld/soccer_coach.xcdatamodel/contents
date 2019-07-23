@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14838.19" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Assist" representedClassName=".Assist" syncable="YES" codeGenerationType="category">
+        <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Card" representedClassName=".Card" syncable="YES" codeGenerationType="category">
+        <attribute name="type" attributeType="String" defaultValueString="yellow"/>
+    </entity>
+    <entity name="Foul" representedClassName=".Foul" syncable="YES" codeGenerationType="category">
+        <attribute name="half" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Match" representedClassName=".Match" syncable="YES" codeGenerationType="category">
+        <attribute name="date" attributeType="Date" defaultDateTimeInterval="585544500" usesScalarValueType="NO"/>
+        <attribute name="halfLength" attributeType="Integer 64" defaultValueString="40" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String" defaultValueString="0"/>
+        <relationship name="awayPlayingTime" toMany="YES" deletionRule="Nullify" destinationEntity="PlayingTime"/>
+        <relationship name="awayTeam" maxCount="1" deletionRule="Nullify" destinationEntity="Team"/>
+        <relationship name="homePlayingTime" toMany="YES" deletionRule="Nullify" destinationEntity="PlayingTime"/>
+        <relationship name="homeTeam" maxCount="1" deletionRule="Nullify" destinationEntity="Team"/>
+        <relationship name="score" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Score"/>
+    </entity>
+    <entity name="PlayingTime" representedClassName=".PlayingTime" syncable="YES" codeGenerationType="category">
+        <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="length" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="assists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assist"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card"/>
+        <relationship name="fouls" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Foul"/>
+        <relationship name="match" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SoccerPlayer"/>
+        <relationship name="shots" toMany="YES" deletionRule="Nullify" destinationEntity="Shot"/>
+    </entity>
+    <entity name="Score" representedClassName=".Score" syncable="YES" codeGenerationType="class">
+        <attribute name="away" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="home" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Shot" representedClassName=".Shot" syncable="YES" codeGenerationType="category">
+        <attribute name="half" attributeType="Integer 64" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isGoal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="onTarget" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="SoccerPlayer" representedClassName=".SoccerPlayer" syncable="YES">
         <attribute name="id" attributeType="String" defaultValueString="0"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
@@ -15,5 +56,12 @@
     <elements>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="118"/>
         <element name="Team" positionX="-45" positionY="-9" width="128" height="88"/>
+        <element name="Match" positionX="-216" positionY="36" width="128" height="28"/>
+        <element name="Score" positionX="-207" positionY="54" width="128" height="28"/>
+        <element name="PlayingTime" positionX="-198" positionY="54" width="128" height="28"/>
+        <element name="Shot" positionX="-189" positionY="63" width="128" height="28"/>
+        <element name="Assist" positionX="-180" positionY="72" width="128" height="28"/>
+        <element name="Foul" positionX="-171" positionY="81" width="128" height="28"/>
+        <element name="Card" positionX="-162" positionY="90" width="128" height="28"/>
     </elements>
 </model>

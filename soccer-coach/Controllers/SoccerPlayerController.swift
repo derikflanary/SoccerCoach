@@ -38,6 +38,18 @@ struct SoccerPlayerController {
         }
     }
     
+    func fetchAllFillerPlayers() -> [SoccerPlayer] {
+        guard let context = context else { return [] }
+        let request = NSFetchRequest<SoccerPlayer>(entityName: "SoccerPlayer")
+        let predicate = NSPredicate(format: "name == %@", "🏃🏻‍♀️")
+        request.predicate = predicate
+        do {
+            return try context.fetch(request)
+        } catch {
+            return []
+        }
+    }
+    
     func update(_ player: SoccerPlayer) {
         print(player.isUpdated)
         guard let context = context else { return }

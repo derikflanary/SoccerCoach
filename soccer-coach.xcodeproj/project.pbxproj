@@ -44,10 +44,13 @@
 		EE3729B522CBEBBE003FBBFE /* NewPlayerCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3729B422CBEBBE003FBBFE /* NewPlayerCreation.storyboard */; };
 		EE3729B722CBFEEA003FBBFE /* MatchHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3729B622CBFEEA003FBBFE /* MatchHistoryList.swift */; };
 		EE3729B922CBFEF3003FBBFE /* MatchHistoryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3729B822CBFEF3003FBBFE /* MatchHistoryList.storyboard */; };
+		EE3D61E522E7B54D0092CBB6 /* TeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61E422E7B54D0092CBB6 /* TeamController.swift */; };
+		EE3D61E722E7B5540092CBB6 /* MatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61E622E7B5540092CBB6 /* MatchController.swift */; };
+		EE3D61ED22E7B5640092CBB6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61E922E7B5640092CBB6 /* AppState.swift */; };
+		EE3D61EE22E7B5640092CBB6 /* Reactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EA22E7B5640092CBB6 /* Reactor.swift */; };
+		EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */; };
 		EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118A22C2D46F0049B71E /* Int+Extensions.swift */; };
 		EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D436822E4FC3A005B759D /* Date+Helpers.swift */; };
-		EE6D436C22E510E4005B759D /* PlayerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D436B22E510E4005B759D /* PlayerDetails.swift */; };
-		EE6D436E22E510ED005B759D /* PlayerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE6D436D22E510ED005B759D /* PlayerDetails.storyboard */; };
 		EE6D438322E6238E005B759D /* SoccerPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D438222E6238E005B759D /* SoccerPlayerController.swift */; };
 		EE6D438822E62CE2005B759D /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D438422E62CE1005B759D /* Team+CoreDataProperties.swift */; };
 		EE6D438922E62CE2005B759D /* SoccerPlayer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D438522E62CE1005B759D /* SoccerPlayer+CoreDataClass.swift */; };
@@ -103,10 +106,13 @@
 		EE3729B422CBEBBE003FBBFE /* NewPlayerCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPlayerCreation.storyboard; sourceTree = "<group>"; };
 		EE3729B622CBFEEA003FBBFE /* MatchHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistoryList.swift; sourceTree = "<group>"; };
 		EE3729B822CBFEF3003FBBFE /* MatchHistoryList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchHistoryList.storyboard; sourceTree = "<group>"; };
+		EE3D61E422E7B54D0092CBB6 /* TeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamController.swift; sourceTree = "<group>"; };
+		EE3D61E622E7B5540092CBB6 /* MatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchController.swift; sourceTree = "<group>"; };
+		EE3D61E922E7B5640092CBB6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		EE3D61EA22E7B5640092CBB6 /* Reactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reactor.swift; sourceTree = "<group>"; };
+		EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericEvents.swift; sourceTree = "<group>"; };
 		EE59118A22C2D46F0049B71E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		EE6D436822E4FC3A005B759D /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
-		EE6D436B22E510E4005B759D /* PlayerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetails.swift; sourceTree = "<group>"; };
-		EE6D436D22E510ED005B759D /* PlayerDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerDetails.storyboard; sourceTree = "<group>"; };
 		EE6D438222E6238E005B759D /* SoccerPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayerController.swift; sourceTree = "<group>"; };
 		EE6D438422E62CE1005B759D /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE6D438522E62CE1005B759D /* SoccerPlayer+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoccerPlayer+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 				EE27684F22B7E708008E4CA1 /* AppDelegate.swift */,
 				EE27685122B7E708008E4CA1 /* SceneDelegate.swift */,
 				EE27686222B7E70B008E4CA1 /* Info.plist */,
+				EE3D61F022E7B56A0092CBB6 /* State */,
 				EE27686822B7EE1E008E4CA1 /* UI */,
 				EE6D438122E62376005B759D /* Controllers */,
 				EE27686D22B7EE70008E4CA1 /* Data */,
@@ -232,8 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */,
-				EE6D436B22E510E4005B759D /* PlayerDetails.swift */,
-				EE6D436D22E510ED005B759D /* PlayerDetails.storyboard */,
 				EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */,
 				EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */,
 			);
@@ -274,6 +279,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		EE3D61F022E7B56A0092CBB6 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				EE3D61E922E7B5640092CBB6 /* AppState.swift */,
+				EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */,
+				EE3D61EA22E7B5640092CBB6 /* Reactor.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
 		EE6D436A22E510AD005B759D /* Drawings */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				EE6D438222E6238E005B759D /* SoccerPlayerController.swift */,
+				EE3D61E422E7B54D0092CBB6 /* TeamController.swift */,
+				EE3D61E622E7B5540092CBB6 /* MatchController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -360,7 +377,6 @@
 				EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */,
 				EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */,
 				EE27685922B7E708008E4CA1 /* Main.storyboard in Resources */,
-				EE6D436E22E510ED005B759D /* PlayerDetails.storyboard in Resources */,
 				EE3729B122CBBE0B003FBBFE /* NewTeamCreation.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +392,7 @@
 				EEF7609D22B83126004D92CF /* ListView+Extensions.swift in Sources */,
 				EE7E9B0022C9A56B001773AA /* MatchViewController.swift in Sources */,
 				EE16B9D622E6BA7E00EFE52B /* Shot+CoreDataClass.swift in Sources */,
+				EE3D61EE22E7B5640092CBB6 /* Reactor.swift in Sources */,
 				EE6D438D22E62E15005B759D /* PlayersList.swift in Sources */,
 				EE3729A122CBA5C3003FBBFE /* NewMatchCreation.swift in Sources */,
 				EE16B9D222E6BA7E00EFE52B /* Foul+CoreDataClass.swift in Sources */,
@@ -391,6 +408,7 @@
 				EE20114F22D698BA007A1DAC /* DrawingViewController.swift in Sources */,
 				EE16B9D822E6BA7E00EFE52B /* Score+CoreDataClass.swift in Sources */,
 				EE16B9D422E6BA7E00EFE52B /* Match+CoreDataClass.swift in Sources */,
+				EE3D61E722E7B5540092CBB6 /* MatchController.swift in Sources */,
 				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
 				EE16B9D022E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift in Sources */,
 				EE16B9D722E6BA7E00EFE52B /* Shot+CoreDataProperties.swift in Sources */,
@@ -398,17 +416,19 @@
 				EE16B9DA22E6BA7E00EFE52B /* Card+CoreDataClass.swift in Sources */,
 				EE16B9D122E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
+				EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */,
 				EE16B9CF22E6BA7E00EFE52B /* Assist+CoreDataProperties.swift in Sources */,
-				EE6D436C22E510E4005B759D /* PlayerDetails.swift in Sources */,
 				EE3729A622CBB6C2003FBBFE /* TeamList.swift in Sources */,
 				EE37299E22CAC2EE003FBBFE /* RoundedButton.swift in Sources */,
 				EE3729B722CBFEEA003FBBFE /* MatchHistoryList.swift in Sources */,
 				EE3729B322CBEBA5003FBBFE /* NewPlayerCreation.swift in Sources */,
 				EE6D438822E62CE2005B759D /* Team+CoreDataProperties.swift in Sources */,
 				EE27685222B7E708008E4CA1 /* SceneDelegate.swift in Sources */,
+				EE3D61E522E7B54D0092CBB6 /* TeamController.swift in Sources */,
 				EE16B9D322E6BA7E00EFE52B /* Foul+CoreDataProperties.swift in Sources */,
 				EE6D438B22E62CE2005B759D /* SoccerPlayer+CoreDataProperties.swift in Sources */,
 				EE16B9CE22E6BA7E00EFE52B /* Assist+CoreDataClass.swift in Sources */,
+				EE3D61ED22E7B5640092CBB6 /* AppState.swift in Sources */,
 				EE16B9D522E6BA7E00EFE52B /* Match+CoreDataProperties.swift in Sources */,
 				EE16B9DB22E6BA7E00EFE52B /* Card+CoreDataProperties.swift in Sources */,
 				EE6D438A22E62CE2005B759D /* Team+CoreDataClass.swift in Sources */,

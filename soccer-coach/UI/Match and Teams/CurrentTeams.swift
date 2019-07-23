@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class CurrentTeams: UIViewController {
     
@@ -34,6 +35,10 @@ class CurrentTeams: UIViewController {
     var selectedPlayer: SoccerPlayer?
     var currentMatch: Match?
     
+    
+    var cancellables = [AnyCancellable]()
+    var currentMatchSubscriber: AnyCancellable?
+    
     var currentTeam: Team? {
         switch currentSection {
         case .home:
@@ -51,8 +56,15 @@ class CurrentTeams: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dragDelegate = self
         configDataSource()
+        configureSubscribers()
     }
     
+    func configureSubscribers() {
+//        let matchState = App.sharedCore.state.matchState
+//        currentMatchSubscriber = matchState.$currentMatch
+//            .assign(to: \.currentMatch, on: self)
+//            .store(in: &cancellables)
+    }
     
     // MARK: - Actions
     
@@ -61,10 +73,6 @@ class CurrentTeams: UIViewController {
         updateTableUI()
     }
     
-    @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
-        guard let selectedPlayer = selectedPlayer else { return nil }
-        return PlayerDetails(coder: coder, player: selectedPlayer)
-    }
 }
 
 

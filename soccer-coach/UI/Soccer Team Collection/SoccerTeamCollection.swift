@@ -96,10 +96,6 @@ class SoccerTeamCollection: UIViewController {
         }, completion: nil)
     }
     
-    @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
-        guard let selectedPlayer = selectedPlayer else { return nil }
-        return PlayerDetails(coder: coder, player: selectedPlayer)
-    }
     
     @IBAction func ratingSliderValueChanged() {
         let value = Int(ratingSlider.value * 100)

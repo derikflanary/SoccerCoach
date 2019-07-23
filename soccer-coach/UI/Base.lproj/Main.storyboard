@@ -130,20 +130,11 @@
                         <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
                         <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
                         <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
-                        <segue destination="edZ-nT-tXK" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="VvR-TK-aN6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1431.4453125" y="-682.03125"/>
-        </scene>
-        <!--PlayerDetails-->
-        <scene sceneID="S2E-wL-kSn">
-            <objects>
-                <viewControllerPlaceholder storyboardName="PlayerDetails" id="edZ-nT-tXK" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JLn-Ih-uA0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1789" y="-1042"/>
         </scene>
         <!--Drawing-->
         <scene sceneID="p0z-u8-mu2">
@@ -230,7 +221,6 @@
                         <outlet property="emptyStateView" destination="lqd-d4-Kis" id="cA7-er-0Wi"/>
                         <outlet property="tableView" destination="kH0-7t-vWk" id="0t9-T1-pEG"/>
                         <outlet property="teamSegmentedControl" destination="Jjt-Ut-EjF" id="8PJ-NI-Mdo"/>
-                        <segue destination="edZ-nT-tXK" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="OYH-lh-dTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-r9-2fg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -331,8 +321,5 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="VvR-TK-aN6"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" name="tintGreen"/>
 </document>

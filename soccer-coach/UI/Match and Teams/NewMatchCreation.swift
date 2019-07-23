@@ -33,6 +33,12 @@ class NewMatchCreation: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let homeTeam = homeTeam, let awayTeam = awayTeam else { return }
+        let match = MatchController.shared.createMatch(with: homeTeam, awayTeam: awayTeam, halfLength: halfLength, date: date)
+        App.sharedCore.fire(event: Selected(item: match))
+    }
+    
     @IBAction func datePickerValueChanged() {
         switch datePicker.datePickerMode {
         case .countDownTimer:

@@ -51,7 +51,11 @@
                                 <action selector="cancelTapped:" destination="jcc-9f-KgV" id="Nk0-mY-Fv2"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="PHB-4L-sdg"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="PHB-4L-sdg">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="jcc-9f-KgV" id="Unk-8K-OkA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="gU9-Kt-To0" id="kse-69-uW7"/>

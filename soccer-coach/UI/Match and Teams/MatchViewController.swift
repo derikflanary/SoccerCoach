@@ -94,6 +94,9 @@ class MatchViewController: UIViewController {
         case .second:
             secondHalfCount += difference
             timeLabel.text = timeString(from: secondHalfCount)
+        case .extra:
+            break
+            // TODO: Add extra time support
         }
         isRunning.toggle()
     }
@@ -112,6 +115,9 @@ class MatchViewController: UIViewController {
             timeLabel.text = timeString(from: firstHalfCount)
         case .second:
             timeLabel.text = timeString(from: secondHalfCount)
+        case .extra:
+            break
+            // TODO: Add extra time support
         }
         
     }
@@ -124,6 +130,9 @@ class MatchViewController: UIViewController {
         case .second:
             secondHalfCount += 1
             timeLabel.text = timeString(from: secondHalfCount)
+        case .extra:
+            break
+            // TODO: Add extra time support
         }
         if let halfLength = match?.halfLength, firstHalfCount.minutes >= halfLength + 10 {
             timer.invalidate()

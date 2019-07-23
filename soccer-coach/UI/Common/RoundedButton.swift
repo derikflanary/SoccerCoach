@@ -18,7 +18,7 @@ import UIKit
         case none = 0
     }
     
-    var loadingIndicator = UIActivityIndicatorView(style: .white)
+    var loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     var roundedEdgeType: RoundedEdgeType = .simple {
         didSet {

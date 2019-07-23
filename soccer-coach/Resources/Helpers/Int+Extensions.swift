@@ -41,3 +41,12 @@ extension Int {
     }
     
 }
+
+
+enum CardType: String {
+    case red, yellow
+}
+
+enum Half: Int {
+    case first, second, extra
+}

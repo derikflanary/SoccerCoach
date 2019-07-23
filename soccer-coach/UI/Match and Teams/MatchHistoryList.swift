@@ -48,7 +48,7 @@ private extension MatchHistoryList {
     func configDataSource() {
         self.dataSource = UITableViewDiffableDataSource<Section, Match>(tableView: tableView, cellProvider: { tableView, indexPath, match -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
-            cell.textLabel?.text = "\(match.homeTeam.name) \(match.score.home) - \(match.score.away) \(match.awayTeam.name)"
+            cell.textLabel?.text = "\(String(describing: match.homeTeam?.name)) \(String(describing: match.score?.home)) - \(String(describing: match.score?.away)) \(String(describing: match.awayTeam?.name))"
             cell.detailTextLabel?.text = match.date.monthDayYearString
             return cell
         })

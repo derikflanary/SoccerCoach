@@ -42,7 +42,7 @@ class NewTeamCreation: UIViewController {
     
     @IBAction func saveTapped(_ sender: Any) {
         guard let name = teamNameTextField.text else { return }
-        TeamController.shared.createTeam(with: name, players: players)
+        _ = TeamController.shared.createTeam(with: name, players: players)
         dismiss(animated: true, completion: nil)
     }
     

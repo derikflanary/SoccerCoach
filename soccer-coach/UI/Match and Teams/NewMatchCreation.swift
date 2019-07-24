@@ -16,13 +16,17 @@ class NewMatchCreation: UIViewController {
     
     var homeTeam: Team? {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     var awayTeam: Team? {
-       didSet {
-           tableView.reloadData()
-       }
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     var halfLength: Int = 40
     var date = Date()
@@ -36,18 +40,18 @@ class NewMatchCreation: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        configureSubscribers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSubscribers()
     }
     
     
     // MARK: - Actions
     
     @IBAction func cancelTapped(_ sender: Any) {
-        App.sharedCore.fire(event: Selected<Team?>(item: nil))
+        App.sharedCore.fire(event: Selected<Match?>(item: nil))
         dismiss(animated: true, completion: nil)
     }
     
@@ -55,6 +59,7 @@ class NewMatchCreation: UIViewController {
         guard let homeTeam = homeTeam, let awayTeam = awayTeam else { return }
         let match = MatchController.shared.createMatch(with: homeTeam, awayTeam: awayTeam, halfLength: halfLength, date: date)
         App.sharedCore.fire(event: Selected(item: match))
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func datePickerValueChanged() {
@@ -83,7 +88,6 @@ extension NewMatchCreation: Subscriberable {
     func configureSubscribers() {
         let state = App.sharedCore.state
         homeTeamSubscriber = state.matchState.$newMatchHomeTeam
-            .receive(on: RunLoop.main)
             .assign(to: \.homeTeam, on: self)
         
         awayTeamSubscriber = state.matchState.$newMatchAwayTeam

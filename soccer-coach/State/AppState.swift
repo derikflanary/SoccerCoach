@@ -15,11 +15,11 @@ enum App {
     
 }
 
-struct AppState: State {
+class AppState: State {
     
-    @Published var matchState = MatchState()
+    var matchState = MatchState()
     
-    mutating func react(to event: Event) {
+    func react(to event: Event) {
         switch event {
         default:
             break
@@ -30,13 +30,13 @@ struct AppState: State {
 }
 
 
-struct MatchState: State {
+class MatchState: State {
     
-    @Published var newMatchHomeTeam: Team?
-    @Published var newMatchAwayTeam: Team?
-    var currentMatch: Match?
+    @Published var newMatchHomeTeam: Team? = nil
+    @Published var newMatchAwayTeam: Team? = nil
+    @Published var currentMatch: Match? = nil
     
-    mutating func react(to event: Event) {
+    func react(to event: Event) {
         switch event {
         case let event as Selected<Match?>:
             currentMatch = event.item

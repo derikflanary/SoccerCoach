@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class MatchViewController: UIViewController {
     
@@ -31,21 +32,7 @@ class MatchViewController: UIViewController {
     var match: Match? {
         didSet {
             guard match != oldValue else { return }
-            if match == nil {
-                mainStackView.alpha = 0.2
-                mainStackView.isUserInteractionEnabled = false
-                halfSegmentedControl.alpha = 0.2
-                halfSegmentedControl.isUserInteractionEnabled = false
-                endMatchButton.isHidden = true
-                createMatchButton.isHidden = false
-            } else {
-                mainStackView.alpha = 1.0
-                mainStackView.isUserInteractionEnabled = true
-                halfSegmentedControl.alpha = 1.0
-                halfSegmentedControl.isUserInteractionEnabled = true
-                endMatchButton.isHidden = false
-                createMatchButton.isHidden = true
-            }
+            updateUI(with: match)
         }
     }
     var half: Half = .first
@@ -53,6 +40,7 @@ class MatchViewController: UIViewController {
     var firstHalfCount: Int = 0
     var secondHalfCount: Int = 0
     var savedDate: Date?
+    var currentMatchSubscriber: AnyCancellable?
 
     var isRunning = false {
         didSet {
@@ -73,6 +61,7 @@ class MatchViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(appPaused), name: UIApplication.didEnterBackgroundNotification , object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resumedApp), name: UIApplication.didBecomeActiveNotification , object: nil)
+        configureSubscribers()
     }
     
       
@@ -161,6 +150,39 @@ class MatchViewController: UIViewController {
     
     @IBAction func endMatchTapped() {
         
+    }
+    
+    func updateUI(with match: Match?) {
+        DispatchQueue.main.async {
+            if match == nil {
+                self.mainStackView.alpha = 0.2
+                self.mainStackView.isUserInteractionEnabled = false
+                self.halfSegmentedControl.alpha = 0.2
+                self.halfSegmentedControl.isUserInteractionEnabled = false
+                self.endMatchButton.isHidden = true
+                self.createMatchButton.isHidden = false
+            } else {
+                self.mainStackView.alpha = 1.0
+                self.mainStackView.isUserInteractionEnabled = true
+                self.halfSegmentedControl.alpha = 1.0
+                self.halfSegmentedControl.isUserInteractionEnabled = true
+                self.endMatchButton.isHidden = false
+                self.createMatchButton.isHidden = true
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - Subscriberable
+
+extension MatchViewController: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        currentMatchSubscriber = state.matchState.$currentMatch
+            .assign(to: \.match, on: self)
     }
     
 }

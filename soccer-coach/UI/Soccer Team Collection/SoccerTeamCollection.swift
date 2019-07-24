@@ -61,18 +61,6 @@ class SoccerTeamCollection: UIViewController {
         collectionView.register(ActivePlayerCell.nib(), forCellWithReuseIdentifier: ActivePlayerCell.reuseIdentifier)
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
-        
-        var players = SoccerPlayerController.shared.fetchAllPlayers()
-        guard players.count >= 11 else { return }
-            
-        for section in Section.allCases {
-            var playersForSection = [SoccerPlayer]()
-            for _ in 0..<section.maxCount {
-                playersForSection.append(players.first!)
-                players.removeFirst()
-            }
-            activePlayersPerSection[section] = playersForSection
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -33,12 +33,12 @@ class CurrentTeams: UIViewController {
     let cellIdentifier = "cell"
     var currentSection = Section.home
     var selectedPlayer: SoccerPlayer?
-    var currentMatch: Match?
-    
-    
-    var cancellables = [AnyCancellable]()
     var currentMatchSubscriber: AnyCancellable?
-    
+    var currentMatch: Match? {
+        didSet {
+            updateTableUI()
+        }
+    }
     var currentTeam: Team? {
         switch currentSection {
         case .home:
@@ -69,20 +69,6 @@ class CurrentTeams: UIViewController {
     
 }
 
-extension CurrentTeams: Subscriberable {
-    
-    func configureSubscribers() {
-        let state = App.sharedCore.state
-        currentMatchSubscriber = state.$matchState
-            .map { matchState in
-                return matchState.currentMatch
-            }
-            .assign(to: \.currentMatch, on: self)
-        //            .store(in: &cancellables)
-    }
-    
-}
-
 
 // MARK: - Private functions
 
@@ -99,12 +85,14 @@ private extension CurrentTeams {
     }
     
     func updateTableUI(animated: Bool = true) {
-        currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
-        currentSnapshot.appendSections([currentSection])
-        tableView.backgroundView = currentMatch == nil ? emptyStateView : nil
-        guard let currentTeam = currentTeam else { return }
-        currentSnapshot.appendItems(Array(currentTeam.players))
-        self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
+        DispatchQueue.main.async {
+            self.currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
+            self.currentSnapshot.appendSections([self.currentSection])
+            self.tableView.backgroundView = self.currentMatch == nil ? self.emptyStateView : nil
+            guard let currentTeam = self.currentTeam else { return }
+            self.currentSnapshot.appendItems(Array(currentTeam.players))
+            self.dataSource.apply(self.currentSnapshot, animatingDifferences: animated)
+        }
     }
     
 }
@@ -148,6 +136,17 @@ extension CurrentTeams: SegueHandling {
     
     enum SegueIdentifier: String {
         case presentPlayerDetails
+    }
+    
+}
+
+
+extension CurrentTeams: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        currentMatchSubscriber = state.matchState.$currentMatch
+            .assign(to: \.currentMatch, on: self)
     }
     
 }

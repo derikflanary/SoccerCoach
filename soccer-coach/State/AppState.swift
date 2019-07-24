@@ -17,14 +17,50 @@ enum App {
 
 struct AppState: State {
     
-//    @Published var matchState = MatchState()
+    @Published var matchState = MatchState()
     
     mutating func react(to event: Event) {
         switch event {
         default:
             break
         }
-//        matchState.react(to: event)
+        matchState.react(to: event)
     }
     
+}
+
+
+struct MatchState: State {
+    
+    @Published var newMatchHomeTeam: Team?
+    @Published var newMatchAwayTeam: Team?
+    var currentMatch: Match?
+    
+    mutating func react(to event: Event) {
+        switch event {
+        case let event as Selected<Match?>:
+            currentMatch = event.item
+            newMatchHomeTeam = nil
+            newMatchAwayTeam = nil
+        case let event as NewMatchTeamSelected:
+            switch event.teamType {
+            case .home:
+                newMatchHomeTeam = event.team
+            case .away:
+                newMatchAwayTeam = event.team
+            }
+        default:
+            break
+        }
+    }
+    
+}
+
+enum TeamType {
+    case home, away
+}
+
+struct NewMatchTeamSelected: Event {
+    let teamType: TeamType
+    let team: Team
 }

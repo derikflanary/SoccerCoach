@@ -13,6 +13,13 @@ public protocol State {
 public protocol Event {}
 
 
+// MARK: - Subscriberable
+
+public protocol Subscriberable: class {
+    func configureSubscribers()
+}
+
+
 // MARK: - Commands
 
 public protocol Command {

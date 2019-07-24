@@ -7,17 +7,29 @@
 //
 
 import UIKit
+import Combine
 
 class NewMatchCreation: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    var homeTeam: Team?
-    var awayTeam: Team?
+    var homeTeam: Team? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    var awayTeam: Team? {
+       didSet {
+           tableView.reloadData()
+       }
+    }
     var halfLength: Int = 40
     var date = Date()
     var selectedSection: Section?
+    var selectedTeamType = TeamType.home
+    var awayTeamSubscriber: AnyCancellable?
+    var homeTeamSubscriber: AnyCancellable?
     
     private let cellIdentifier = "matchCreationCell"
     
@@ -26,10 +38,16 @@ class NewMatchCreation: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSubscribers()
+    }
+    
     
     // MARK: - Actions
     
     @IBAction func cancelTapped(_ sender: Any) {
+        App.sharedCore.fire(event: Selected<Team?>(item: nil))
         dismiss(animated: true, completion: nil)
     }
     
@@ -51,6 +69,26 @@ class NewMatchCreation: UIViewController {
         tableView.reloadData()
     }
     
+    @IBSegueAction func showTeamList(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        return TeamList(coder: coder, teamType: selectedTeamType)
+    }
+    
+}
+
+
+// MARK: - Subscriberable
+
+extension NewMatchCreation: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        homeTeamSubscriber = state.matchState.$newMatchHomeTeam
+            .receive(on: RunLoop.main)
+            .assign(to: \.homeTeam, on: self)
+        
+        awayTeamSubscriber = state.matchState.$newMatchAwayTeam
+            .assign(to: \.awayTeam, on: self)
+    }
     
 }
 
@@ -121,7 +159,12 @@ extension NewMatchCreation: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = Section(rawValue: indexPath.section) else { return }
         switch section {
-        case .homeTeam, .awayTeam:
+        case .homeTeam:
+            selectedTeamType = .home
+            hideDatePicker()
+            performSegue(withIdentifier: .showTeamList, sender: nil)
+        case .awayTeam:
+            selectedTeamType = .away
             hideDatePicker()
             performSegue(withIdentifier: .showTeamList, sender: nil)
         case .halfLength:

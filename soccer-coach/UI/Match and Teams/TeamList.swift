@@ -30,7 +30,20 @@ class TeamList: UIViewController {
     let cellIdentifier = "cell"
     var teams = [Team]()
     var selectedTeam: Team?
+    var teamType = TeamType.home
     
+    
+    // MARK: - Initializers
+       
+       init?(coder: NSCoder, teamType: TeamType) {
+           self.teamType = teamType
+           super.init(coder: coder)
+       }
+       
+       required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+
     
     // MARK: - Overrides
     
@@ -106,6 +119,7 @@ extension TeamList: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let team = teams[indexPath.row]
+        App.sharedCore.fire(event: NewMatchTeamSelected(teamType: teamType, team: team))
         navigationController?.popViewController(animated: true)
     }
     

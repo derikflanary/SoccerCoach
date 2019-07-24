@@ -59,18 +59,26 @@ class CurrentTeams: UIViewController {
         configureSubscribers()
     }
     
-    func configureSubscribers() {
-//        let matchState = App.sharedCore.state.matchState
-//        currentMatchSubscriber = matchState.$currentMatch
-//            .assign(to: \.currentMatch, on: self)
-//            .store(in: &cancellables)
-    }
     
     // MARK: - Actions
     
     @IBAction func teamSegmentedControlChanged(_ sender: UISegmentedControl) {
         currentSection = Section(rawValue: sender.selectedSegmentIndex) ?? .home
         updateTableUI()
+    }
+    
+}
+
+extension CurrentTeams: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        currentMatchSubscriber = state.$matchState
+            .map { matchState in
+                return matchState.currentMatch
+            }
+            .assign(to: \.currentMatch, on: self)
+        //            .store(in: &cancellables)
     }
     
 }

@@ -35,6 +35,7 @@ class MatchState: State {
     @Published var newMatchHomeTeam: Team? = nil
     @Published var newMatchAwayTeam: Team? = nil
     @Published var currentMatch: Match? = nil
+    @Published var selectedTeamType: TeamType = .home
     
     func react(to event: Event) {
         switch event {
@@ -49,6 +50,8 @@ class MatchState: State {
             case .away:
                 newMatchAwayTeam = event.team
             }
+        case let event as Selected<TeamType>:
+            selectedTeamType = event.item
         default:
             break
         }
@@ -56,7 +59,7 @@ class MatchState: State {
     
 }
 
-enum TeamType {
+enum TeamType: Int, CaseIterable {
     case home, away
 }
 

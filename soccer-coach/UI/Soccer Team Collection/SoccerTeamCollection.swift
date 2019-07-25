@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class SoccerTeamCollection: UIViewController {
     
@@ -43,11 +44,35 @@ class SoccerTeamCollection: UIViewController {
     
     // MARK: - Properties
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
-    var activePlayersPerSection: [Section: [SoccerPlayer]] = [:]
+    var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>? = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>? = nil
     var selectedPlayer: SoccerPlayer?
-    var currentTeam: Team?
+    var currentMatch: Match? {
+        didSet {
+            resetPlayers()
+            updateSnapshot()
+        }
+    }
+    var currentTeamType: TeamType = .home {
+        didSet {
+            updateSnapshot()
+        }
+    }
+    var currentMatchSubscriber: AnyCancellable?
+    var teamTypeSubscriber: AnyCancellable?
+
+    var homeActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
+    var awayActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
+    var fillerPlayers = [SoccerPlayer]()
+    
+    var activePlayersPerSection: [Section: [SoccerPlayer]] {
+        switch currentTeamType {
+        case .home:
+            return homeActivePlayersPerSection
+        case .away:
+            return awayActivePlayersPerSection
+        }
+    }
    
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
@@ -61,6 +86,8 @@ class SoccerTeamCollection: UIViewController {
         collectionView.register(ActivePlayerCell.nib(), forCellWithReuseIdentifier: ActivePlayerCell.reuseIdentifier)
         collectionView.dropDelegate = self
         collectionView.dragDelegate = self
+        configureFillerData()
+        configureSubscribers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,7 +100,7 @@ class SoccerTeamCollection: UIViewController {
         ratingLabel.text = "\(value)"
         shotDescriptionLabel.text = value.shotRatingDescription()
     }
-
+    
     
     // MARK: = Actions
     
@@ -105,6 +132,31 @@ class SoccerTeamCollection: UIViewController {
 // MARK: - Private functions
 
 private extension SoccerTeamCollection {
+    
+    func configureFillerData() {
+        let savedFillerPlayers = UserDefaults.standard.bool(forKey: Keys.savedFillerPlayers)
+        if !savedFillerPlayers {
+            for _ in 0..<11 {
+                _ = SoccerPlayerController.shared.createPlayer(with: Keys.fillerPlayerName)
+            }
+            UserDefaults.standard.set(true, forKey: Keys.savedFillerPlayers)
+        }
+        fillerPlayers = SoccerPlayerController.shared.fetchAllFillerPlayers()
+        resetPlayers()
+    }
+    
+    func resetPlayers() {
+        var players = fillerPlayers
+        for section in Section.allCases {
+            var playersForSection = [SoccerPlayer]()
+            for _ in 0..<section.maxCount {
+                playersForSection.append(players.first!)
+                players.removeFirst()
+            }
+            homeActivePlayersPerSection[section] = playersForSection
+        }
+        awayActivePlayersPerSection = homeActivePlayersPerSection
+    }
     
     func configureCollectionViewLayout() {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
@@ -140,12 +192,16 @@ private extension SoccerTeamCollection {
     }
     
     func updateSnapshot() {
-        currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
-        Section.allCases.forEach {
-            currentSnapshot.appendSections([$0])
-            currentSnapshot.appendItems(activePlayersPerSection[$0] ?? [])
+        guard let dataSource = dataSource else { return }
+        DispatchQueue.main.async {
+            self.currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
+            guard let currentSnapshot = self.currentSnapshot else { return }
+            Section.allCases.forEach {
+                currentSnapshot.appendSections([$0])
+                currentSnapshot.appendItems(self.activePlayersPerSection[$0] ?? [])
+            }
+            dataSource.apply(currentSnapshot, animatingDifferences: true)
         }
-        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
     func activePlayersContains(_ player: SoccerPlayer) -> Bool {
@@ -169,6 +225,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
+        guard cell.player?.name != Keys.fillerPlayerName else { return }
         selectedPlayer = cell.player
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
             self.showShotRatingView()
@@ -264,13 +321,30 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
             guard let playersForSection = activePlayersPerSection[section] else { continue }
             if activePlayersContains(movingPlayer) {
                 if let sourceIndexPath = item.sourceIndexPath, let sourceSection = Section(rawValue: sourceIndexPath.section), let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {
-                    activePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
-                    activePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                    switch currentTeamType {
+                    case .home:
+                        homeActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                        homeActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                    case .away:
+                        awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                        awayActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                    }
                 }
-            } else if playersForSection.count + 1 >= insertionIndexPath.row {
-                activePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+            } else if playersForSection.count + 1 >= insertionIndexPath.row, let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {
+                switch currentTeamType {
+                case .home:
+                    homeActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                case .away:
+                    awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                }
+                destinationPlayer.isActive = false
             } else {
-                activePlayersPerSection[section]?.append(movingPlayer)
+                switch currentTeamType {
+                case .home:
+                    homeActivePlayersPerSection[section]?.append(movingPlayer)
+                case .away:
+                    awayActivePlayersPerSection[section]?.append(movingPlayer)
+                }
             }
             movingPlayer.isActive = true
             updateSnapshot()
@@ -289,3 +363,17 @@ extension SoccerTeamCollection: SegueHandling {
     }
     
 }
+
+
+extension SoccerTeamCollection: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        currentMatchSubscriber = state.matchState.$currentMatch
+            .assign(to: \.currentMatch, on: self)
+        teamTypeSubscriber = state.matchState.$selectedTeamType
+            .assign(to: \.currentTeamType, on: self)
+    }
+    
+}
+

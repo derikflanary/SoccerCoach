@@ -11,14 +11,6 @@ import Combine
 
 class CurrentTeams: UIViewController {
     
-    // MARK: - Enums
-    
-    enum Section: Int, CaseIterable {
-        case home
-        case away
-    }
-    
-    
     // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,10 +20,10 @@ class CurrentTeams: UIViewController {
     
     // MARK: - Properties
     
-    var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
+    var dataSource: UITableViewDiffableDataSource<TeamType, SoccerPlayer>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<TeamType, SoccerPlayer>! = nil
     let cellIdentifier = "cell"
-    var currentSection = Section.home
+    var currentSection = TeamType.home
     var selectedPlayer: SoccerPlayer?
     var currentMatchSubscriber: AnyCancellable?
     var currentMatch: Match? {
@@ -63,7 +55,8 @@ class CurrentTeams: UIViewController {
     // MARK: - Actions
     
     @IBAction func teamSegmentedControlChanged(_ sender: UISegmentedControl) {
-        currentSection = Section(rawValue: sender.selectedSegmentIndex) ?? .home
+        currentSection = TeamType(rawValue: sender.selectedSegmentIndex) ?? .home
+        App.sharedCore.fire(event: Selected(item: currentSection))
         updateTableUI()
     }
     
@@ -75,7 +68,7 @@ class CurrentTeams: UIViewController {
 private extension CurrentTeams {
     
     func configDataSource() {
-        self.dataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
+        self.dataSource = UITableViewDiffableDataSource<TeamType, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             cell.textLabel?.text = player.name
             cell.imageView?.image = player.isActive ? UIImage(systemName: "circle.fill") : nil
@@ -86,11 +79,20 @@ private extension CurrentTeams {
     
     func updateTableUI(animated: Bool = true) {
         DispatchQueue.main.async {
-            self.currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
+            self.currentSnapshot = NSDiffableDataSourceSnapshot<TeamType, SoccerPlayer>()
             self.currentSnapshot.appendSections([self.currentSection])
             self.tableView.backgroundView = self.currentMatch == nil ? self.emptyStateView : nil
             guard let currentTeam = self.currentTeam else { return }
-            self.currentSnapshot.appendItems(Array(currentTeam.players))
+            let filteredPlayers = currentTeam.players.sorted(by: { (playerOne, playerTwo) -> Bool in
+                if playerOne.isActive && playerTwo.isActive {
+                    return playerOne.name < playerTwo.name
+                }
+                if !playerOne.isActive && !playerTwo.isActive {
+                    return playerOne.name < playerTwo.name
+                }
+                return playerOne.isActive && !playerTwo.isActive
+            })
+            self.currentSnapshot.appendItems(filteredPlayers)
             self.dataSource.apply(self.currentSnapshot, animatingDifferences: animated)
         }
     }
@@ -105,7 +107,6 @@ extension CurrentTeams: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedPlayer = dataSource.itemIdentifier(for: indexPath)
-        performSegue(withIdentifier: .presentPlayerDetails, sender: nil)
     }
     
 }
@@ -124,6 +125,7 @@ extension CurrentTeams: UITableViewDragDelegate {
     }
     
     func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession) {
+        updateTableUI()
         tableView.reloadData()
     }
     

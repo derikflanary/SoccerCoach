@@ -17,6 +17,7 @@ extension PlayingTime {
         return NSFetchRequest<PlayingTime>(entityName: "PlayingTime")
     }
 
+    @NSManaged public var startTime: Double
     @NSManaged public var length: Double
     @NSManaged public var half: Int64
     @NSManaged public var player: SoccerPlayer?

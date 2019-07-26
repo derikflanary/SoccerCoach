@@ -143,7 +143,7 @@ private extension SoccerTeamCollection {
         let savedFillerPlayers = UserDefaults.standard.bool(forKey: Keys.savedFillerPlayers)
         if !savedFillerPlayers {
             for _ in 0..<11 {
-                _ = SoccerPlayerController.shared.createPlayer(with: Keys.fillerPlayerName)
+                _ = SoccerPlayerController.shared.createPlayer(with: Keys.fillerPlayerName, isFiller: true)
             }
             UserDefaults.standard.set(true, forKey: Keys.savedFillerPlayers)
         }
@@ -156,7 +156,7 @@ private extension SoccerTeamCollection {
         for section in Section.allCases {
             var playersForSection = [SoccerPlayer]()
             for position in section.positions {
-                let player = players.first!
+                guard let player = players.first else { continue }
                 player.name = position.name
                 playersForSection.append(player)
                 players.removeFirst()

@@ -21,5 +21,6 @@ extension SoccerPlayer {
     @NSManaged public var isActive: Bool
     @NSManaged public var number: String?
     @NSManaged public var team: Team?
+    @NSManaged public var isFiller: Bool
 
 }

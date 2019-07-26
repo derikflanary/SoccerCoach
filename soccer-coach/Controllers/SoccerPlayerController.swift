@@ -19,12 +19,13 @@ struct SoccerPlayerController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func createPlayer(with name: String, number: String? = nil) -> SoccerPlayer? {
+    func createPlayer(with name: String, number: String? = nil, isFiller: Bool = false) -> SoccerPlayer? {
         guard let context = context else { return nil }
         let player = SoccerPlayer(context: context)
         player.id = UUID().uuidString
         player.name = name
         player.number = number
+        player.isFiller = isFiller
         try? context.save()
         return player
     }
@@ -41,7 +42,7 @@ struct SoccerPlayerController {
     func fetchAllFillerPlayers() -> [SoccerPlayer] {
         guard let context = context else { return [] }
         let request = NSFetchRequest<SoccerPlayer>(entityName: Keys.Entity.soccerPlayer)
-        let predicate = NSPredicate(format: "name == %@", "🏃🏻‍♀️")
+        let predicate =  NSPredicate(format: "isFiller = %@", "@YES")
         request.predicate = predicate
         do {
             return try context.fetch(request)

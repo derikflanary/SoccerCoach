@@ -51,6 +51,12 @@ class SoccerTeamCollection: UIViewController {
         didSet {
             resetPlayers()
             updateSnapshot()
+            guard let currentMatch = currentMatch else { return }
+            let matchSubscriber = currentMatch.$hasStarted.sink { _ in
+                guard currentMatch.hasStarted else { return }
+                MatchController.shared.start(currentMatch, activeHomePlayers: self.homeActivePlayers, activeAwayPlayers: self.awayActivePlayers)
+            }
+            matchStartedSubscriber = AnyCancellable(matchSubscriber)
         }
     }
     var currentTeamType: TeamType = .home {
@@ -60,6 +66,7 @@ class SoccerTeamCollection: UIViewController {
     }
     var currentMatchSubscriber: AnyCancellable?
     var teamTypeSubscriber: AnyCancellable?
+    var matchStartedSubscriber: AnyCancellable?
 
     var homeActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
     var awayActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
@@ -73,7 +80,12 @@ class SoccerTeamCollection: UIViewController {
             return awayActivePlayersPerSection
         }
     }
-   
+    var homeActivePlayers: [SoccerPlayer] {
+        return homeActivePlayersPerSection.values.flatMap { $0 }.filter  { $0.name != Keys.fillerPlayerName }
+    }
+    var awayActivePlayers: [SoccerPlayer] {
+        return awayActivePlayersPerSection.values.flatMap { $0 }.filter  { $0.name != Keys.fillerPlayerName }
+    }
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
     }

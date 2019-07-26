@@ -23,6 +23,12 @@ struct MatchController {
         guard let context = context else { return nil }
         let match = Match(context: context)
         match.id = UUID().uuidString
+        homeTeam.players.forEach {
+            $0.isActive = false
+        }
+        awayTeam.players.forEach {
+            $0.isActive = false
+        }
         match.homeTeam = homeTeam
         match.awayTeam = awayTeam
         match.halfLength = Int64(halfLength)

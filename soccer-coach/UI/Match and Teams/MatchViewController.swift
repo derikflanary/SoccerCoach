@@ -87,6 +87,8 @@ class MatchViewController: UIViewController {
     }
     
     
+    // MARK: - Actions
+    
     @IBAction func startPauseButtonTapped() {
         isRunning.toggle()
     }
@@ -112,33 +114,6 @@ class MatchViewController: UIViewController {
         }
     }
     
-    func showHalfNotOverAlert() {
-        let alert = UIAlertController(title: "Half not over", message: "The current half has not yet reached its limit. Are you sure you want to continue?", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "Sure", style: .default) { _ in
-            self.updateHalfSelected()
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func updateHalfSelected() {
-        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
-        half = selectedHalf
-        match.half = Int64(half.rawValue)
-        isRunning = false
-        switch half {
-        case .first:
-            timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
-        case .second:
-            timeLabel.text = Int(match.secondHalfTimeElapsed).timeString()
-        case .extra:
-            timeLabel.text = Int(match.extraTimeTimeElaspsed).timeString()
-        }
-    }
-    
-    
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
         homeGoalLabel.text = "\(Int(sender.value))"
         match?.score?.home = Int64(sender.value)
@@ -149,14 +124,32 @@ class MatchViewController: UIViewController {
         match?.score?.away = Int64(sender.value)
     }
     
-    @IBAction func createMatchButtonTapped() {
-        
-    }
-    
     @IBAction func endMatchTapped() {
         guard let match = match else { return }
-        MatchController.shared.save(match)
+        if match.isComplete {
+            MatchController.shared.save(match)
+        } else {
+            let alert = UIAlertController(title: "End Match?", message: "The current match isn't yet complete. Are you sure you want to end and save this match?", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Yes", style: .default) { _ in
+                MatchController.shared.save(match)
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        }
     }
+    
+    @IBAction func createMatchButtonTapped() {
+            
+    }
+
+}
+
+
+// MARK: - Private functions
+
+private extension MatchViewController {
     
     func updateUI(with match: Match?) {
         DispatchQueue.main.async {
@@ -175,6 +168,34 @@ class MatchViewController: UIViewController {
                 self.endMatchButton.isHidden = false
                 self.createMatchButton.isHidden = true
             }
+        }
+    }
+    
+    func showHalfNotOverAlert() {
+        let alert = UIAlertController(title: "Half not over", message: "The current half has not yet reached its limit. Are you sure you want to continue?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Yes", style: .default) { _ in
+            self.updateHalfSelected()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.halfSegmentedControl.selectedSegmentIndex = self.half.rawValue
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+        
+    func updateHalfSelected() {
+        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
+        half = selectedHalf
+        match.half = Int64(half.rawValue)
+        isRunning = false
+        switch half {
+        case .first:
+            timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
+        case .second:
+            timeLabel.text = Int(match.secondHalfTimeElapsed).timeString()
+        case .extra:
+            timeLabel.text = Int(match.extraTimeTimeElaspsed).timeString()
         }
     }
     

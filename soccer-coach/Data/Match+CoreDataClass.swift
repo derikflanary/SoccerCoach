@@ -14,19 +14,22 @@ import Combine
 
 public class Match: NSManagedObject {
 
-    var hasStarted = false
     var timerPublisher = Timer.publish(every: 1, tolerance: 0, on: .current, in: .default, options: nil)
     var timerAnyCancellable: AnyCancellable? = nil
     var enterBackgroundCancellable: AnyCancellable? = nil
     var becomeActiveCancellable: AnyCancellable? = nil
     var savedDate = Date()
 
+    @Published var hasStarted = false
     @Published var firstHalfTimeElapsed: TimeInterval = 0
     @Published var secondHalfTimeElapsed: TimeInterval = 0
     @Published var extraTimeTimeElaspsed: TimeInterval = 0
 
     var currentHalf: Half {
         return Half(rawValue: Int(half)) ?? .first
+    }
+    var isComplete: Bool {
+        return firstHalfTimeElapsed >= TimeInterval(halfLength) && secondHalfTimeElapsed >= TimeInterval(halfLength)
     }
     var timerSubscriber: Subscribers.Sink<Date, Never> {
         return timerPublisher

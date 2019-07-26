@@ -50,6 +50,7 @@
 		EE3D61ED22E7B5640092CBB6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61E922E7B5640092CBB6 /* AppState.swift */; };
 		EE3D61EE22E7B5640092CBB6 /* Reactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EA22E7B5640092CBB6 /* Reactor.swift */; };
 		EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */; };
+		EE55D15922EB7CA1004C6EE7 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE55D15822EB7CA1004C6EE7 /* Position.swift */; };
 		EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118A22C2D46F0049B71E /* Int+Extensions.swift */; };
 		EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D436822E4FC3A005B759D /* Date+Helpers.swift */; };
 		EE6D438322E6238E005B759D /* SoccerPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D438222E6238E005B759D /* SoccerPlayerController.swift */; };
@@ -113,6 +114,7 @@
 		EE3D61E922E7B5640092CBB6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		EE3D61EA22E7B5640092CBB6 /* Reactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reactor.swift; sourceTree = "<group>"; };
 		EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericEvents.swift; sourceTree = "<group>"; };
+		EE55D15822EB7CA1004C6EE7 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Position.swift; path = "../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/Resources/Position.swift"; sourceTree = "<group>"; };
 		EE59118A22C2D46F0049B71E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		EE6D436822E4FC3A005B759D /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		EE6D438222E6238E005B759D /* SoccerPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayerController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				EE27686A22B7EE3C008E4CA1 /* CoreData */,
 				EE3729AD22CBBB4A003FBBFE /* Helpers */,
 				EE28E76422EA143B003EB983 /* Keys.swift */,
+				EE55D15822EB7CA1004C6EE7 /* Position.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				EE3D61E722E7B5540092CBB6 /* MatchController.swift in Sources */,
 				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
 				EE16B9D022E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift in Sources */,
+				EE55D15922EB7CA1004C6EE7 /* Position.swift in Sources */,
 				EE16B9D722E6BA7E00EFE52B /* Shot+CoreDataProperties.swift in Sources */,
 				EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */,
 				EE16B9DA22E6BA7E00EFE52B /* Card+CoreDataClass.swift in Sources */,

@@ -9,12 +9,6 @@
 import UIKit
 import Combine
 
-enum Position: Int, CaseIterable {
-    case one = 1
-    case two = 2
-    case three, four, five, six, seven, eight, nine, ten, eleven
-}
-
 class SoccerTeamCollection: UIViewController {
     
     // MARK: - Enums
@@ -161,8 +155,10 @@ private extension SoccerTeamCollection {
         var players = fillerPlayers
         for section in Section.allCases {
             var playersForSection = [SoccerPlayer]()
-            for _ in 0..<section.positions.count {
-                playersForSection.append(players.first!)
+            for position in section.positions {
+                let player = players.first!
+                player.name = position.name
+                playersForSection.append(player)
                 players.removeFirst()
             }
             homeActivePlayersPerSection[section] = playersForSection

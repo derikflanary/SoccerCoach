@@ -26,6 +26,7 @@ extension PlayingTime {
     @NSManaged public var cards: NSSet?
     @NSManaged public var homeMatch: Match?
     @NSManaged public var awayMatch: Match?
+    @NSManaged public var positionValue: Int64
 
 }
 

@@ -46,28 +46,41 @@ struct MatchController {
         }
     }
     
-    func start(_ match: Match, activeHomePlayers: [SoccerPlayer], activeAwayPlayers: [SoccerPlayer]) {
-        guard let context = context else { return }
-        let homePlayingTimes = activeHomePlayers.map {
-            let playingTime = PlayingTime(context: context)
-            playingTime.player = $0
-            playingTime.length = 0
-            playingTime.half = 0
-        }
-        let awayPlayingTimes = activeHomePlayers.map {
-            let playingTime = PlayingTime(context: context)
-            playingTime.player = $0
-            playingTime.length = 0
-            playingTime.half = 0
-        }
-        match.addToHomePlayingTime(NSSet(array: homePlayingTimes))
-        match.addToAwayPlayingTime(NSSet(array: awayPlayingTimes))
-    }
-    
     func save(_ match: Match) {
         guard let context = context else { return }
         try? context.save()
     }
     
+    func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position) {
+        guard let context = context else { return }
+        let playingTime = PlayingTime(context: context)
+        playingTime.player = player
+        playingTime.length = 0
+        playingTime.half = match.half
+        playingTime.isActive = true
+        playingTime.positionValue = Int64(position.rawValue)
+        switch teamType {
+        case .home:
+            match.addToHomePlayingTime(playingTime)
+        case .away:
+            match.addToAwayPlayingTime(playingTime)
+        }
+    }
+    
+    func endPlayingTime(for player: SoccerPlayer, match: Match, teamType: TeamType) {
+        switch teamType {
+        case .home:
+            let playingTime = match.homePlayingTime?.first(where: { (playingTime) -> Bool in
+                return playingTime.player == player && playingTime.isActive
+            })
+            playingTime?.isActive = false
+        case .away:
+            let playingTime = match.awayPlayingTime?.first(where: { (playingTime) -> Bool in
+                return playingTime.player == player && playingTime.isActive
+            })
+            playingTime?.isActive = false
+        }
+
+    }
 }
 

@@ -27,9 +27,10 @@
         <relationship name="homeTeam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="homeMatches" inverseEntity="Team"/>
         <relationship name="score" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Score" inverseName="match" inverseEntity="Score"/>
     </entity>
-    <entity name="PlayingTime" representedClassName="PlayingTime" syncable="YES">
+    <entity name="PlayingTime" representedClassName=".PlayingTime" syncable="YES">
         <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="length" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="positionValue" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="assists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assist" inverseName="playingTime" inverseEntity="Assist"/>
         <relationship name="awayMatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match" inverseName="awayPlayingTime" inverseEntity="Match"/>
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="playingTime" inverseEntity="Card"/>
@@ -71,7 +72,7 @@
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="73"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="88"/>
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="208"/>
-        <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="178"/>
+        <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="193"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
         <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="133"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="133"/>

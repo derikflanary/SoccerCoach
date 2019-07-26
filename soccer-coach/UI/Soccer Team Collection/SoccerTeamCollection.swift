@@ -9,6 +9,12 @@
 import UIKit
 import Combine
 
+enum Position: Int, CaseIterable {
+    case one = 1
+    case two = 2
+    case three, four, five, six, seven, eight, nine, ten, eleven
+}
+
 class SoccerTeamCollection: UIViewController {
     
     // MARK: - Enums
@@ -16,22 +22,23 @@ class SoccerTeamCollection: UIViewController {
     enum Section: Int, CaseIterable {
         case frontLine, attackingMid, holdingMid, backLine, goalie
         
-        var maxCount: Int {
+        var positions: [Position] {
             switch self {
             case .frontLine:
-                return 3
+                return [.eleven, .nine, .seven]
             case .attackingMid:
-                return 2
+                return [.ten, .eight]
             case .holdingMid:
-                return 1
+                return [.six]
             case .backLine:
-                return 4
+                return [.three, .five, .four, .two]
             case .goalie:
-                return 1
+                return [.one]
             }
         }
+        
     }
-
+    
     
     // MARK: - Outlets
     
@@ -51,12 +58,6 @@ class SoccerTeamCollection: UIViewController {
         didSet {
             resetPlayers()
             updateSnapshot()
-            guard let currentMatch = currentMatch else { return }
-            let matchSubscriber = currentMatch.$hasStarted.sink { _ in
-                guard currentMatch.hasStarted else { return }
-                MatchController.shared.start(currentMatch, activeHomePlayers: self.homeActivePlayers, activeAwayPlayers: self.awayActivePlayers)
-            }
-            matchStartedSubscriber = AnyCancellable(matchSubscriber)
         }
     }
     var currentTeamType: TeamType = .home {
@@ -66,7 +67,6 @@ class SoccerTeamCollection: UIViewController {
     }
     var currentMatchSubscriber: AnyCancellable?
     var teamTypeSubscriber: AnyCancellable?
-    var matchStartedSubscriber: AnyCancellable?
 
     var homeActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
     var awayActivePlayersPerSection: [Section: [SoccerPlayer]] = [:]
@@ -161,7 +161,7 @@ private extension SoccerTeamCollection {
         var players = fillerPlayers
         for section in Section.allCases {
             var playersForSection = [SoccerPlayer]()
-            for _ in 0..<section.maxCount {
+            for _ in 0..<section.positions.count {
                 playersForSection.append(players.first!)
                 players.removeFirst()
             }
@@ -226,6 +226,11 @@ private extension SoccerTeamCollection {
             self.shotRatingView.transform = .identity
             self.shotRatingView.alpha = 1.0
         })
+    }
+    
+    func position(for indexPath: IndexPath) -> Position? {
+        guard let section = Section(rawValue: indexPath.section) else { return nil }
+        return section.positions[indexPath.row]
     }
     
 }
@@ -350,13 +355,9 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
                     awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
                 }
                 destinationPlayer.isActive = false
-            } else {
-                switch currentTeamType {
-                case .home:
-                    homeActivePlayersPerSection[section]?.append(movingPlayer)
-                case .away:
-                    awayActivePlayersPerSection[section]?.append(movingPlayer)
-                }
+                guard let match = currentMatch, let position = self.position(for: insertionIndexPath) else { return }
+                MatchController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position)
+                MatchController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
             }
             movingPlayer.isActive = true
             updateSnapshot()

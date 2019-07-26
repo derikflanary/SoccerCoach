@@ -13,4 +13,10 @@ import CoreData
 
 public class PlayingTime: NSManagedObject {
 
+    var isActive = false
+    
+    var position: Position {
+        return Position(rawValue: Int(positionValue)) ?? .six
+    }
+    
 }

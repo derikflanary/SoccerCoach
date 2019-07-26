@@ -25,6 +25,9 @@ extension Match {
     @NSManaged public var score: Score?
     @NSManaged public var homePlayingTime: Set<PlayingTime>?
     @NSManaged public var awayPlayingTime: Set<PlayingTime>?
+    @NSManaged public var half: Int64
+    @NSManaged public var firstHalfCount: Int64
+    @NSManaged public var secondHalfCount: Int64
 
 }
 

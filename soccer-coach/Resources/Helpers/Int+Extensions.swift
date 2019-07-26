@@ -40,6 +40,14 @@ extension Int {
         }
     }
     
+    func timeString() -> String {
+            let mins = self.minutes
+            let remainingSeconds = self - (mins * 60)
+            let minuteString = mins < 10 ? "0\(mins)" : "\(mins)"
+            let secondsString = remainingSeconds < 10 ? "0\(remainingSeconds)" : "\(remainingSeconds)"
+            return "\(minuteString):\(secondsString)"
+        }
+    
     func shotRatingDescription() -> String {
         switch self {
         case 0:

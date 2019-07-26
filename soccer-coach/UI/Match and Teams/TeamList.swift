@@ -50,34 +50,22 @@ class TeamList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        configDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configDataSource()
         fetchData()
+        updateTableUI()
     }
+    
+    
+    // MARK: Navigation
     
     @IBAction func unwindToTeamList(_ segue: UIStoryboardSegue) {
         tableView.reloadData()
     }
     
-    func fetchData() {
-        teams = TeamController.shared.fetchAllTeams()
-        updateTableUI()
-    }
-
-    @IBSegueAction func showPlayersList(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
-        return PlayersList(coder: coder, team: selectedTeam)
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func newButtonTapped(_ sender: Any) {
-        
-    }
-    
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != SegueIdentifier.showPlayersList.rawValue {
             let detailNav = segue.destination as! UINavigationController
@@ -86,12 +74,20 @@ class TeamList: UIViewController {
         }
     }
     
+    @IBSegueAction func showPlayersList(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        return PlayersList(coder: coder, team: selectedTeam)
+    }
+    
 }
 
 
 // MARK: - Private functions
 
 private extension TeamList {
+    
+    func fetchData() {
+        teams = TeamController.shared.fetchAllTeams()
+    }
     
     func configDataSource() {
         self.dataSource = UITableViewDiffableDataSource<Section, Team>(tableView: tableView, cellProvider: { tableView, indexPath, team -> UITableViewCell? in

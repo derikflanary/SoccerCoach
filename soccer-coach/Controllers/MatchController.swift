@@ -28,7 +28,6 @@ struct MatchController {
         match.halfLength = Int64(halfLength)
         match.date = date
         match.score = Score(context: context)
-        try? context.save()
         return match
     }
     
@@ -39,6 +38,29 @@ struct MatchController {
         } catch {
             return []
         }
+    }
+    
+    func start(_ match: Match, activeHomePlayers: [SoccerPlayer], activeAwayPlayers: [SoccerPlayer]) {
+        guard let context = context else { return }
+        let homePlayingTimes = activeHomePlayers.map {
+            let playingTime = PlayingTime(context: context)
+            playingTime.player = $0
+            playingTime.length = 0
+            playingTime.half = 0
+        }
+        let awayPlayingTimes = activeHomePlayers.map {
+            let playingTime = PlayingTime(context: context)
+            playingTime.player = $0
+            playingTime.length = 0
+            playingTime.half = 0
+        }
+        match.addToHomePlayingTime(NSSet(array: homePlayingTimes))
+        match.addToAwayPlayingTime(NSSet(array: awayPlayingTimes))
+    }
+    
+    func save(_ match: Match) {
+        guard let context = context else { return }
+        try? context.save()
     }
     
 }

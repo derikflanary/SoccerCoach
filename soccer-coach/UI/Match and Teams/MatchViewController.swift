@@ -27,28 +27,52 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var mainStackView: UIStackView!
     
     
+    
     // MARK: - Properties
     
     var match: Match? {
         didSet {
             guard match != oldValue else { return }
             updateUI(with: match)
+            firstHalfTimeSubscriber = match?.$firstHalfTimeElapsed
+                .map({
+                    Int($0).timeString()
+                })
+                .receive(on: RunLoop.main)
+                .assign(to: \.timeLabel.text, on: self)
+            secondHalfTimeSubscriber = match?.$secondHalfTimeElapsed
+                .map({
+                    Int($0).timeString()
+                })
+                .receive(on: RunLoop.main)
+                .assign(to: \.timeLabel.text, on: self)
+            extraTimeSubscriber = match?.$firstHalfTimeElapsed
+                .map({
+                    Int($0).timeString()
+                })
+                .receive(on: RunLoop.main)
+                .assign(to: \.timeLabel.text, on: self)
         }
     }
     var half: Half = .first
-    var timer = Timer()
-    var firstHalfCount: Int = 0
-    var secondHalfCount: Int = 0
-    var savedDate: Date?
     var currentMatchSubscriber: AnyCancellable?
+    var firstHalfTimeSubscriber: AnyCancellable?
+    var secondHalfTimeSubscriber: AnyCancellable?
+    var extraTimeSubscriber: AnyCancellable?
 
     var isRunning = false {
         didSet {
+            guard let match = match else { return }
             if isRunning {
-                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerUpdated), userInfo: nil, repeats: true)
+                if match.hasStarted {
+                    match.resume()
+                } else {
+                    match.start()
+                }
+                match.hasStarted = true
                 startPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             } else {
-                timer.invalidate()
+                match.pause()
                 startPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             }
         }
@@ -59,89 +83,70 @@ class MatchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(appPaused), name: UIApplication.didEnterBackgroundNotification , object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(resumedApp), name: UIApplication.didBecomeActiveNotification , object: nil)
         configureSubscribers()
     }
     
-      
-    // MARK: - Actions
-
-    @objc func appPaused() {
-        guard timer.isValid else { return }
-        savedDate = Date()
-        isRunning.toggle()
-    }
-    
-    @objc func resumedApp() {
-        guard let savedDate = savedDate else { return }
-        let difference = abs(Int(savedDate.timeIntervalSinceNow))
-        switch half {
-        case .first:
-            firstHalfCount += difference
-            timeLabel.text = timeString(from: firstHalfCount)
-        case .second:
-            secondHalfCount += difference
-            timeLabel.text = timeString(from: secondHalfCount)
-        case .extra:
-            break
-            // TODO: Add extra time support
-        }
-        isRunning.toggle()
-    }
     
     @IBAction func startPauseButtonTapped() {
         isRunning.toggle()
-        
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        guard let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
+        guard let match = match else { return }
+        switch half {
+        case .first:
+            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+                showHalfNotOverAlert()
+                return
+            }
+        case .second:
+            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+                showHalfNotOverAlert()
+                return
+            }
+        case .extra:
+            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+                showHalfNotOverAlert()
+                return
+            }
+        }
+    }
+    
+    func showHalfNotOverAlert() {
+        let alert = UIAlertController(title: "Half not over", message: "The current half has not yet reached its limit. Are you sure you want to continue?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Sure", style: .default) { _ in
+            self.updateHalfSelected()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func updateHalfSelected() {
+        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
         half = selectedHalf
+        match.half = Int64(half.rawValue)
         isRunning = false
         switch half {
         case .first:
-            timeLabel.text = timeString(from: firstHalfCount)
+            timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
         case .second:
-            timeLabel.text = timeString(from: secondHalfCount)
+            timeLabel.text = Int(match.secondHalfTimeElapsed).timeString()
         case .extra:
-            break
-            // TODO: Add extra time support
-        }
-        
-    }
-    
-    @objc func timerUpdated() {
-        switch half {
-        case .first:
-            firstHalfCount += 1
-            timeLabel.text = timeString(from: firstHalfCount)
-        case .second:
-            secondHalfCount += 1
-            timeLabel.text = timeString(from: secondHalfCount)
-        case .extra:
-            break
-            // TODO: Add extra time support
-        }
-        if let halfLength = match?.halfLength, firstHalfCount.minutes >= halfLength + 10 {
-            timer.invalidate()
+            timeLabel.text = Int(match.extraTimeTimeElaspsed).timeString()
         }
     }
     
-    func timeString(from seconds: Int) -> String {
-        let mins = seconds.minutes
-        let remainingSeconds = seconds - (mins * 60)
-        let minuteString = mins < 10 ? "0\(mins)" : "\(mins)"
-        let secondsString = remainingSeconds < 10 ? "0\(remainingSeconds)" : "\(remainingSeconds)"
-        return "\(minuteString):\(secondsString)"
-    }
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
         homeGoalLabel.text = "\(Int(sender.value))"
+        match?.score?.home = Int64(sender.value)
     }
     
     @IBAction func awayStepperChanged(_ sender: UIStepper) {
         awayGoalLabel.text = "\(Int(sender.value))"
+        match?.score?.away = Int64(sender.value)
     }
     
     @IBAction func createMatchButtonTapped() {
@@ -149,7 +154,8 @@ class MatchViewController: UIViewController {
     }
     
     @IBAction func endMatchTapped() {
-        
+        guard let match = match else { return }
+        MatchController.shared.save(match)
     }
     
     func updateUI(with match: Match?) {
@@ -183,6 +189,7 @@ extension MatchViewController: Subscriberable {
         let state = App.sharedCore.state
         currentMatchSubscriber = state.matchState.$currentMatch
             .assign(to: \.match, on: self)
+        
     }
     
 }

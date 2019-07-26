@@ -15,7 +15,7 @@ import Combine
 public class Match: NSManagedObject {
 
     var hasStarted = false
-    var timerPublisher = Timer.publish(every: 1, on: .main, in: .default)
+    var timerPublisher = Timer.publish(every: 1, tolerance: 0, on: .current, in: .default, options: nil)
     var timerAnyCancellable: AnyCancellable? = nil
     var enterBackgroundCancellable: AnyCancellable? = nil
     var becomeActiveCancellable: AnyCancellable? = nil
@@ -45,11 +45,9 @@ public class Match: NSManagedObject {
     
     func start() {
         let backgroundSub = NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
-            .map({ _ -> Date in
-                return Date()
-            })
             .print()
-            .sink(receiveValue: { date in
+            .sink(receiveValue: { _ in
+                self.savedDate = Date()
                 self.pause()
             })
         enterBackgroundCancellable = AnyCancellable(backgroundSub)
@@ -58,14 +56,15 @@ public class Match: NSManagedObject {
             .map({ _ -> TimeInterval in
                 return Date().timeIntervalSince(self.savedDate)
             })
+            .print()
             .sink(receiveValue: { timeInterval in
                 switch self.currentHalf {
                 case .first:
-                    self.firstHalfTimeElapsed += 1
+                    self.firstHalfTimeElapsed += timeInterval
                 case .second:
-                    self.secondHalfTimeElapsed += 1
+                    self.secondHalfTimeElapsed += timeInterval
                 case .extra:
-                    self.extraTimeTimeElaspsed += 1
+                    self.extraTimeTimeElaspsed += timeInterval
                 }
                 self.resume()
             })
@@ -80,7 +79,7 @@ public class Match: NSManagedObject {
     }
     
     func resume() {
-        timerPublisher = Timer.publish(every: 1, on: .main, in: .default)
+        timerPublisher = Timer.publish(every: 1, tolerance: 0, on: .current, in: .default, options: nil)
         timerAnyCancellable = AnyCancellable(timerSubscriber)
         savedDate = Date()
     }

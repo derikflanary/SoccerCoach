@@ -48,6 +48,7 @@ class SoccerTeamCollection: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, SoccerPlayer>? = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>? = nil
     var selectedPlayer: SoccerPlayer?
+    var temporaryShot: TemporaryShot?
     var currentMatch: Match? {
         didSet {
             resetPlayers()
@@ -129,7 +130,9 @@ class SoccerTeamCollection: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.alpha = 0.0
         })
-        // TODO: - Create and save new shot
+        guard let temporaryShot = temporaryShot, let match = currentMatch else { return }
+        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal)
+        self.temporaryShot = nil
     }
     
 }
@@ -238,31 +241,39 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
-        guard cell.player?.name != Keys.fillerPlayerName else { return }
-        selectedPlayer = cell.player
+        guard let player = cell.player, let match = currentMatch, !player.isFiller else { return }
+        selectedPlayer = player
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
+            self.temporaryShot = TemporaryShot(player: player, onTarget: true, isGoal: true)
             self.showShotRatingView()
         }
         let shotOnTarget = UIAlertAction(title: "Shot on Target", style: .default) { _ in
+            self.temporaryShot = TemporaryShot(player: player, onTarget: true, isGoal: false)
             self.showShotRatingView()
         }
         let shotOffTarget = UIAlertAction(title: "Shot off Target", style: .default) { _ in
+            self.temporaryShot = TemporaryShot(player: player, onTarget: false, isGoal: false)
             self.showShotRatingView()
         }
         let assist = UIAlertAction(title: "Assist", style: .default) { _ in
-            
+            PlayingTimeController.shared.addAssist(to: player, match: match, teamType: self.currentTeamType)
+        }
+        let foul = UIAlertAction(title: "Foul", style: .default) { _ in
+            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType)
         }
         let yellowCard = UIAlertAction(title: "Yellow Card", style: .default) { _ in
-            
+            PlayingTimeController.shared.addCard(to: player, match: match, teamType: self.currentTeamType, cardType: .yellow)
         }
         let redCard = UIAlertAction(title: "Red Card", style: .default) { _ in
-            
+            PlayingTimeController.shared.addCard(to: player, match: match, teamType: self.currentTeamType, cardType: .red)
+            PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: self.currentTeamType)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        var actions = [goal, shotOnTarget, shotOffTarget, assist, yellowCard, redCard, cancel]
+        var actions = [goal, shotOnTarget, shotOffTarget, assist, foul, yellowCard, redCard, cancel]
+        
         if let section = Section(rawValue: indexPath.section), section == .goalie {
             let save = UIAlertAction(title: "Save", style: .default) { _ in
-                
+                // TODO: Functionality for saves
             }
             actions.append(save)
         }
@@ -352,8 +363,8 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
                 }
                 destinationPlayer.isActive = false
                 guard let match = currentMatch, let position = self.position(for: insertionIndexPath) else { return }
-                MatchController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position)
-                MatchController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
+                PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position)
+                PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
             }
             movingPlayer.isActive = true
             updateSnapshot()

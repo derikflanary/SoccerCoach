@@ -17,7 +17,10 @@ extension Card {
         return NSFetchRequest<Card>(entityName: "Card")
     }
 
-    @NSManaged public var type: String?
+    @NSManaged public var type: String
+    @NSManaged public var timeStamp: Int64
+    @NSManaged public var half: Int64
+
     @NSManaged public var playingTime: PlayingTime?
 
 }

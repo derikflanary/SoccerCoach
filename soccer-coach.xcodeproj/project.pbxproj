@@ -51,6 +51,7 @@
 		EE3D61EE22E7B5640092CBB6 /* Reactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EA22E7B5640092CBB6 /* Reactor.swift */; };
 		EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */; };
 		EE55D15922EB7CA1004C6EE7 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE55D15822EB7CA1004C6EE7 /* Position.swift */; };
+		EE55D15B22EB829D004C6EE7 /* PlayingTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE55D15A22EB829D004C6EE7 /* PlayingTimeController.swift */; };
 		EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE59118A22C2D46F0049B71E /* Int+Extensions.swift */; };
 		EE6D436922E4FC3A005B759D /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D436822E4FC3A005B759D /* Date+Helpers.swift */; };
 		EE6D438322E6238E005B759D /* SoccerPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D438222E6238E005B759D /* SoccerPlayerController.swift */; };
@@ -115,6 +116,7 @@
 		EE3D61EA22E7B5640092CBB6 /* Reactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reactor.swift; sourceTree = "<group>"; };
 		EE3D61EB22E7B5640092CBB6 /* GenericEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericEvents.swift; sourceTree = "<group>"; };
 		EE55D15822EB7CA1004C6EE7 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Position.swift; path = "../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/Resources/Position.swift"; sourceTree = "<group>"; };
+		EE55D15A22EB829D004C6EE7 /* PlayingTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayingTimeController.swift; path = "../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/Controllers/PlayingTimeController.swift"; sourceTree = "<group>"; };
 		EE59118A22C2D46F0049B71E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		EE6D436822E4FC3A005B759D /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		EE6D438222E6238E005B759D /* SoccerPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoccerPlayerController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				EE6D438222E6238E005B759D /* SoccerPlayerController.swift */,
 				EE3D61E422E7B54D0092CBB6 /* TeamController.swift */,
 				EE3D61E622E7B5540092CBB6 /* MatchController.swift */,
+				EE55D15A22EB829D004C6EE7 /* PlayingTimeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				EE3729AC22CBBB43003FBBFE /* SegueHandling.swift in Sources */,
 				EE27685622B7E708008E4CA1 /* CurrentTeams.swift in Sources */,
 				EE27685C22B7E708008E4CA1 /* soccer_coach.xcdatamodeld in Sources */,
+				EE55D15B22EB829D004C6EE7 /* PlayingTimeController.swift in Sources */,
 				EE6D438922E62CE2005B759D /* SoccerPlayer+CoreDataClass.swift in Sources */,
 				EEF7609822B82EF6004D92CF /* ActivePlayerCell.swift in Sources */,
 				EE27685422B7E708008E4CA1 /* SoccerTeamCollection.swift in Sources */,

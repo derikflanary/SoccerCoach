@@ -23,5 +23,6 @@ extension Shot {
     @NSManaged public var timeStamp: Int64
     @NSManaged public var rating: Int64
     @NSManaged public var playingTime: PlayingTime?
+    @NSManaged public var shotDescription: String?
 
 }

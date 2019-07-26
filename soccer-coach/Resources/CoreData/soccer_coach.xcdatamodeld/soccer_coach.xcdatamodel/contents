@@ -6,6 +6,8 @@
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="assists" inverseEntity="PlayingTime"/>
     </entity>
     <entity name="Card" representedClassName=".Card" syncable="YES">
+        <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" attributeType="String" defaultValueString="yellow"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="cards" inverseEntity="PlayingTime"/>
     </entity>
@@ -45,11 +47,12 @@
         <attribute name="home" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="match" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match" inverseName="score" inverseEntity="Match"/>
     </entity>
-    <entity name="Shot" representedClassName="Shot" syncable="YES">
+    <entity name="Shot" representedClassName=".Shot" syncable="YES">
         <attribute name="half" attributeType="Integer 64" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isGoal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="onTarget" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 64" defaultValueString="50" usesScalarValueType="YES"/>
+        <attribute name="shotDescription" optional="YES" attributeType="String"/>
         <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="shots" inverseEntity="PlayingTime"/>
     </entity>
@@ -71,12 +74,12 @@
     </entity>
     <elements>
         <element name="Assist" positionX="51.40234375" positionY="402.96875" width="128" height="88"/>
-        <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="73"/>
+        <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="88"/>
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="208"/>
         <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="208"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
-        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="133"/>
+        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="148"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="148"/>
         <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
     </elements>

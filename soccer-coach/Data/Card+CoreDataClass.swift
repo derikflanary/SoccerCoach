@@ -12,5 +12,9 @@ import CoreData
 
 
 public class Card: NSManagedObject {
-
+    
+    var cardType: CardType {
+        return CardType(rawValue: self.type) ?? .yellow
+    }
+    
 }

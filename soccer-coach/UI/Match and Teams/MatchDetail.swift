@@ -29,6 +29,10 @@ class MatchDetail: UIViewController {
     var awayCurrentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>? = nil
     let cellIdentifier = "cell"
     var match: Match?
+    
+    var matchStats: MatchStats {
+        return MatchStats(match: match)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +56,11 @@ class MatchDetail: UIViewController {
     
     func configureDataSource() {
         homeTeamDataSource = UITableViewDiffableDataSource<Section, SoccerPlayer>(tableView: homeTableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
-            cell.textLabel?.text = player.name
-            cell.detailTextLabel?.text = player.number
+            guard let match = self.match else { return nil }
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlayerDetailCell.reuseIdentifier, for: indexPath) as! PlayerDetailCell
+            let playingTimes = match.homePlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTimes)
+            cell.configure(with: playerMatchStats)
             cell.accessoryType = .disclosureIndicator
             return cell
         })

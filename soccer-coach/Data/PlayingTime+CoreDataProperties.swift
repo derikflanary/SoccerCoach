@@ -21,10 +21,10 @@ extension PlayingTime {
     @NSManaged public var length: Double
     @NSManaged public var half: Int64
     @NSManaged public var player: SoccerPlayer?
-    @NSManaged public var shots: NSSet?
-    @NSManaged public var assists: NSSet?
-    @NSManaged public var fouls: NSSet?
-    @NSManaged public var cards: NSSet?
+    @NSManaged public var shots: Set<Shot>?
+    @NSManaged public var assists: Set<Assist>?
+    @NSManaged public var fouls: Set<Foul>?
+    @NSManaged public var cards: Set<Card>?
     @NSManaged public var homeMatch: Match?
     @NSManaged public var awayMatch: Match?
     @NSManaged public var positionValue: Int64

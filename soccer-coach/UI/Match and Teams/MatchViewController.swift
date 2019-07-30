@@ -86,7 +86,7 @@ class MatchViewController: UIViewController {
         configureSubscribers()
     }
     
-    
+
     // MARK: - Actions
     
     @IBAction func startPauseButtonTapped() {

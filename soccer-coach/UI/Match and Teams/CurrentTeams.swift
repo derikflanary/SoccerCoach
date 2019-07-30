@@ -45,7 +45,6 @@ class CurrentTeams: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dragDelegate = self
         configDataSource()
         configureSubscribers()
@@ -71,6 +70,7 @@ private extension CurrentTeams {
         self.dataSource = UITableViewDiffableDataSource<TeamType, SoccerPlayer>(tableView: tableView, cellProvider: { tableView, indexPath, player -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
             cell.textLabel?.text = player.name
+            cell.detailTextLabel?.text = player.number
             cell.imageView?.image = player.isActive ? UIImage(systemName: "circle.fill") : nil
             return cell
         })

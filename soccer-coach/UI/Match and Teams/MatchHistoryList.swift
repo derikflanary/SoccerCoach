@@ -28,14 +28,23 @@ class MatchHistoryList: UIViewController {
     var dataSource: UITableViewDiffableDataSource<Section, Match>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Match>! = nil
     let cellIdentifier = "cell"
-    var matches = [Match]()
+    var matches = [Match]() {
+        didSet {
+            updateTableUI()
+        }
+    }
+    var selectedMatch: Match?
     
     
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         configDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        matches = MatchController.shared.fetchAllMatches()
     }
     
 }
@@ -48,11 +57,10 @@ private extension MatchHistoryList {
     func configDataSource() {
         self.dataSource = UITableViewDiffableDataSource<Section, Match>(tableView: tableView, cellProvider: { tableView, indexPath, match -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
-            cell.textLabel?.text = "\(String(describing: match.homeTeam?.name)) \(String(describing: match.score?.home)) - \(String(describing: match.score?.away)) \(String(describing: match.awayTeam?.name))"
+            cell.textLabel?.text = match.summary
             cell.detailTextLabel?.text = match.date.monthDayYearString
             return cell
         })
-        updateTableUI()
     }
     
     func updateTableUI(animated: Bool = true) {
@@ -71,7 +79,26 @@ private extension MatchHistoryList {
 extension MatchHistoryList: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let match = matches[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedMatch = matches[indexPath.row]
+        performSegue(withIdentifier: .presentMatchDetails, sender: nil)
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension MatchHistoryList: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case presentMatchDetails
+    }
+        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailNav = segue.destination as? UINavigationController else { return }
+        guard let detail = detailNav.topViewController as? MatchDetail else { return }
+        detail.match = selectedMatch
     }
     
 }

@@ -108,4 +108,5 @@ extension PlayersList: SegueHandling {
         guard let detail = detailNav.topViewController as? NewPlayerCreation else { return }
         detail.player = selectedPlayer
     }
+    
 }

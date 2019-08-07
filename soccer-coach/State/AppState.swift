@@ -36,6 +36,8 @@ class MatchState: State {
     @Published var newMatchAwayTeam: Team? = nil
     @Published var currentMatch: Match? = nil
     @Published var selectedTeamType: TeamType = .home
+    @Published var homeGoals: Int = 0
+    @Published var awayGoals: Int = 0
     
     func react(to event: Event) {
         switch event {
@@ -52,6 +54,10 @@ class MatchState: State {
             }
         case let event as Selected<TeamType>:
             selectedTeamType = event.item
+        case _ as HomeGoalScored:
+            homeGoals += 1
+        case _ as AwayGoalScored:
+            awayGoals += 1
         default:
             break
         }

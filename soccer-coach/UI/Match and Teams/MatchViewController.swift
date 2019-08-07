@@ -27,7 +27,6 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var mainStackView: UIStackView!
     
     
-    
     // MARK: - Properties
     
     var match: Match? {
@@ -54,8 +53,25 @@ class MatchViewController: UIViewController {
                 .assign(to: \.timeLabel.text, on: self)
         }
     }
+    var homeGoals: Int = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.homeGoalLabel.text = String(self.homeGoals)
+            }
+        }
+    }
+    var awayGoals: Int = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.awayGoalLabel.text = String(self.homeGoals)
+            }
+        }
+    }
+
     var half: Half = .first
     var currentMatchSubscriber: AnyCancellable?
+    var homeGoalSubscriber: AnyCancellable?
+    var awayGoalSubscriber: AnyCancellable?
     var firstHalfTimeSubscriber: AnyCancellable?
     var secondHalfTimeSubscriber: AnyCancellable?
     var extraTimeSubscriber: AnyCancellable?
@@ -115,13 +131,13 @@ class MatchViewController: UIViewController {
     }
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
+        let goalCount = Int64(sender.value)
         homeGoalLabel.text = "\(Int(sender.value))"
-        match?.score?.home = Int64(sender.value)
     }
     
     @IBAction func awayStepperChanged(_ sender: UIStepper) {
-        awayGoalLabel.text = "\(Int(sender.value))"
-        match?.score?.away = Int64(sender.value)
+        let goalCount = Int64(sender.value)
+        awayLabel.text = "\(Int(sender.value))"
     }
     
     @IBAction func endMatchTapped() {
@@ -130,19 +146,23 @@ class MatchViewController: UIViewController {
             MatchController.shared.save(match)
         } else {
             let alert = UIAlertController(title: "End Match?", message: "The current match isn't yet complete. Are you sure you want to end and save this match?", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "Yes", style: .default) { _ in
+            let save = UIAlertAction(title: "Save and End", style: .default) { _ in
                 MatchController.shared.save(match)
+                App.sharedCore.fire(event: Selected<Match?>(item: nil))
+            }
+            let noSave = UIAlertAction(title: "End without Saving", style: .destructive) { _ in
+                MatchController.shared.delete(match)
+                App.sharedCore.fire(event: Selected<Match?>(item: nil))
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alert.addAction(ok)
+            alert.addAction(save)
+            alert.addAction(noSave)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
         }
     }
     
-    @IBAction func createMatchButtonTapped() {
-            
-    }
+    @IBAction func createMatchButtonTapped() { }
 
 }
 
@@ -187,8 +207,8 @@ private extension MatchViewController {
     func updateHalfSelected() {
         guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
         half = selectedHalf
-        match.half = Int64(half.rawValue)
         isRunning = false
+        match.half = Int64(half.rawValue)
         switch half {
         case .first:
             timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
@@ -210,7 +230,11 @@ extension MatchViewController: Subscriberable {
         let state = App.sharedCore.state
         currentMatchSubscriber = state.matchState.$currentMatch
             .assign(to: \.match, on: self)
-        
+//        homeGoalSubscriber = state.matchState.$homeGoals
+//            .assign(to: \.homeGoals, on: self)
+//
+//        awayGoalSubscriber = state.matchState.$awayGoals
+//            .assign(to: \.awayGoals, on: self)
     }
     
 }

@@ -241,7 +241,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
-        guard let player = cell.player, let match = currentMatch, !player.isFiller else { return }
+        guard let player = cell.player, let match = currentMatch else { return }
         selectedPlayer = player
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
             self.temporaryShot = TemporaryShot(player: player, onTarget: true, isGoal: true)
@@ -309,7 +309,7 @@ extension SoccerTeamCollection: UICollectionViewDragDelegate {
     }
     
     func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
-        guard let section = Section(rawValue: indexPath.section), let player = activePlayersPerSection[section]?[indexPath.row] else { return [] }
+        guard let section = Section(rawValue: indexPath.section), let player = activePlayersPerSection[section]?[indexPath.row], Int(player.name) == nil  else { return [] }
         let itemProvider = NSItemProvider(object: player)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = player
@@ -344,14 +344,28 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
             guard let section = Section(rawValue: insertionIndexPath.section) else { continue }
             guard let playersForSection = activePlayersPerSection[section] else { continue }
             if activePlayersContains(movingPlayer) {
-                if let sourceIndexPath = item.sourceIndexPath, let sourceSection = Section(rawValue: sourceIndexPath.section), let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {
+                if let sourceIndexPath = item.sourceIndexPath, let sourceSection = Section(rawValue: sourceIndexPath.section), let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row], let match = currentMatch {
                     switch currentTeamType {
                     case .home:
+                        guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         homeActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
+                        PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
+                        
+                        guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         homeActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
+                        PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
                     case .away:
+                        guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
+                        PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
+                        
+                        guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         awayActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
+                        PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
                     }
                 }
             } else if playersForSection.count + 1 >= insertionIndexPath.row, let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {

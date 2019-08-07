@@ -51,5 +51,10 @@ struct MatchController {
         try? context.save()
     }
     
+    func delete(_ match: Match) {
+        guard let context = context else { return }
+        context.delete(match)
+    }
+    
 }
 

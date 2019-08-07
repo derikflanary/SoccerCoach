@@ -26,7 +26,11 @@ struct SoccerPlayerController {
         player.name = name
         player.number = number
         player.isFiller = isFiller
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            print(error)
+        }
         return player
     }
     
@@ -41,8 +45,8 @@ struct SoccerPlayerController {
     
     func fetchAllFillerPlayers() -> [SoccerPlayer] {
         guard let context = context else { return [] }
-        let request = NSFetchRequest<SoccerPlayer>(entityName: Keys.Entity.soccerPlayer)
-        let predicate =  NSPredicate(format: "isFiller = %@", "@YES")
+        let request: NSFetchRequest<SoccerPlayer> = SoccerPlayer.fetchRequest()
+        let predicate =  NSPredicate(format: "isFiller == YES")
         request.predicate = predicate
         do {
             return try context.fetch(request)

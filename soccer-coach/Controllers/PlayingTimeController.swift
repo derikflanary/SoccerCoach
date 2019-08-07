@@ -70,7 +70,6 @@ struct PlayingTimeController {
                 playingTime.length = match.extraTimeTimeElaspsed - playingTime.startTime
             }
         }
-        print(playingTime)
     }
     
     func addAssist(to player: SoccerPlayer, match: Match, teamType: TeamType) {
@@ -109,6 +108,14 @@ struct PlayingTimeController {
             shot.timeStamp = Int64(match.extraTimeTimeElaspsed)
         }
         playingTime.addToShots(shot)
+        if shot.isGoal {
+            switch teamType {
+            case .home:
+                App.sharedCore.fire(event: HomeGoalScored())
+            case .away:
+                App.sharedCore.fire(event: AwayGoalScored())
+            }
+        }
     }
 
     func addFoul(to player: SoccerPlayer, match: Match, teamType: TeamType) {

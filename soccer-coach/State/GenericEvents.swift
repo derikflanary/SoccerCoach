@@ -33,3 +33,7 @@ struct Deleted<T>: Event {
 struct Reset<T>: Event {
     var customReset: ((T) -> T)?
 }
+
+struct HomeGoalScored: Event { }
+
+struct AwayGoalScored: Event { }

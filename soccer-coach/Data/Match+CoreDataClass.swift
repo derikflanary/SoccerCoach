@@ -32,10 +32,18 @@ public class Match: NSManagedObject {
     var currentHalf: Half {
         return Half(rawValue: Int(half)) ?? .first
     }
+    var homeGoals: Int {
+        let shots = homePlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+        return shots?.filter { $0.isGoal }.count ?? 0
+    }
+    var awayGoals: Int {
+        let shots = awayPlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+        return shots?.filter { $0.isGoal }.count ?? 0
+    }
     var isComplete: Bool {
         return firstHalfTimeElapsed >= TimeInterval(halfLength) && secondHalfTimeElapsed >= TimeInterval(halfLength)
     }
-    var timerSubscriber: Subscribers.Sink<Date, Never> {
+    var timerSubscriber: AnyCancellable {
         return timerPublisher
             .autoconnect()
             .sink(receiveValue: { _ in

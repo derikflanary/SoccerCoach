@@ -47,6 +47,10 @@ class CurrentTeams: UIViewController {
         super.viewDidLoad()
         tableView.dragDelegate = self
         configDataSource()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         configureSubscribers()
     }
     

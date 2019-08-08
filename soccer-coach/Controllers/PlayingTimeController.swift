@@ -32,6 +32,23 @@ struct PlayingTimeController {
         }
     }
     
+    func playingTimes(for player: SoccerPlayer, match: Match, teamType: TeamType) -> [PlayingTime] {
+        switch teamType {
+        case .home:
+            let playingTimes = match.homePlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            if let playingTime = playingTimes.last {
+                playingTime.setCurrentLength(match: match)
+            }
+            return playingTimes
+        case .away:
+            let playingTimes = match.awayPlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            if let playingTime = playingTimes.first {
+                playingTime.setCurrentLength(match: match)
+            }
+            return playingTimes
+        }
+    }
+    
     func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position) {
         guard let context = context else { return }
         let playingTime = PlayingTime(context: context)

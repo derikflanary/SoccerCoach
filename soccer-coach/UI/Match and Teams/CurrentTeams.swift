@@ -63,6 +63,13 @@ class CurrentTeams: UIViewController {
         updateTableUI()
     }
     
+    @IBSegueAction func presentPlayerMatchDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let player = selectedPlayer, let match = currentMatch else { return nil }
+        let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: currentSection)
+        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime)
+        return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
+    }
+    
 }
 
 
@@ -111,6 +118,7 @@ extension CurrentTeams: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedPlayer = dataSource.itemIdentifier(for: indexPath)
+        performSegue(withIdentifier: .presentPlayerDetails, sender: self)
     }
     
 }

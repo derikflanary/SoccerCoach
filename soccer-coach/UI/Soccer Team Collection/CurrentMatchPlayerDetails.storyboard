@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9l5-wm-ita">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Current Match Player Details-->
+        <scene sceneID="cS7-Zj-UXe">
+            <objects>
+                <viewController id="9l5-wm-ita" customClass="CurrentMatchPlayerDetails" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9PI-Sa-u4R">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1Vw-I0-OwE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="9l5-wm-ita" id="2Ii-5v-cQz"/>
+                                    <outlet property="delegate" destination="9l5-wm-ita" id="YPw-8s-jat"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1Vw-I0-OwE" secondAttribute="bottom" id="Psq-VU-knu"/>
+                            <constraint firstItem="1Vw-I0-OwE" firstAttribute="trailing" secondItem="Zad-1H-21B" secondAttribute="trailing" id="Sbl-cF-CV7"/>
+                            <constraint firstItem="1Vw-I0-OwE" firstAttribute="leading" secondItem="Zad-1H-21B" secondAttribute="leading" id="TLV-oO-K0S"/>
+                            <constraint firstItem="1Vw-I0-OwE" firstAttribute="top" secondItem="Zad-1H-21B" secondAttribute="top" id="s9p-2Z-Lob"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zad-1H-21B"/>
+                    </view>
+                    <connections>
+                        <outlet property="emptyStateView" destination="zi4-sQ-hl0" id="9Ww-7D-FDE"/>
+                        <outlet property="tableView" destination="1Vw-I0-OwE" id="D4m-zx-UIk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qA-0u-GsQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="zi4-sQ-hl0">
+                    <rect key="frame" x="0.0" y="0.0" width="742" height="271"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Yuo-bM-EVi">
+                            <rect key="frame" x="40" y="112.5" width="662" height="56"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This player has not yet entered the game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgQ-Fe-f1F">
+                                    <rect key="frame" x="0.0" y="0.0" width="662" height="20.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🤷‍♂️" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BY-2t-Glx">
+                                    <rect key="frame" x="0.0" y="36.5" width="662" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="emptyStateBackground"/>
+                    <constraints>
+                        <constraint firstItem="Yuo-bM-EVi" firstAttribute="centerY" secondItem="tXY-8X-Y1l" secondAttribute="centerY" id="8R3-n5-Rnm"/>
+                        <constraint firstItem="Yuo-bM-EVi" firstAttribute="leading" secondItem="tXY-8X-Y1l" secondAttribute="leading" constant="40" id="iFz-nW-a1W"/>
+                        <constraint firstItem="Yuo-bM-EVi" firstAttribute="centerX" secondItem="tXY-8X-Y1l" secondAttribute="centerX" id="iiG-eD-F9c"/>
+                        <constraint firstItem="tXY-8X-Y1l" firstAttribute="trailing" secondItem="Yuo-bM-EVi" secondAttribute="trailing" constant="40" id="pBt-L5-aiv"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="tXY-8X-Y1l"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="44.927536231884062" y="167.41071428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="emptyStateBackground">
+            <color red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

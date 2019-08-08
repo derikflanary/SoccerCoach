@@ -113,21 +113,22 @@ class MatchViewController: UIViewController {
         guard let match = match else { return }
         switch half {
         case .first:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
                 showHalfNotOverAlert()
                 return
             }
         case .second:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
                 showHalfNotOverAlert()
                 return
             }
         case .extra:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) {
+            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
                 showHalfNotOverAlert()
                 return
             }
         }
+        updateHalfSelected()
     }
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
@@ -192,7 +193,7 @@ private extension MatchViewController {
     }
     
     func showHalfNotOverAlert() {
-        let alert = UIAlertController(title: "Half not over", message: "The current half has not yet reached its limit. Are you sure you want to continue?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Half not over", message: "The current half has not yet reached its limit. Are you sure you want to end the current half and continue?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "Yes", style: .default) { _ in
             self.updateHalfSelected()
         }

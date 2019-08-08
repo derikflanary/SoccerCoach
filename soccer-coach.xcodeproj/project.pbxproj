@@ -34,6 +34,8 @@
 		EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27685F22B7E70B008E4CA1 /* LaunchScreen.storyboard */; };
 		EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */; };
 		EE28E76522EA143B003EB983 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E76422EA143B003EB983 /* Keys.swift */; };
+		EE2CBAF822FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CBAF722FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift */; };
+		EE2CBAFA22FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2CBAF922FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard */; };
 		EE37299E22CAC2EE003FBBFE /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE37299D22CAC2EE003FBBFE /* RoundedButton.swift */; };
 		EE3729A122CBA5C3003FBBFE /* NewMatchCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3729A022CBA5C3003FBBFE /* NewMatchCreation.swift */; };
 		EE3729A322CBA5CE003FBBFE /* NewMatchCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3729A222CBA5CE003FBBFE /* NewMatchCreation.storyboard */; };
@@ -105,6 +107,8 @@
 		EE27686222B7E70B008E4CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE27686F22B7FC4B008E4CA1 /* TextRecognitionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionEngine.swift; sourceTree = "<group>"; };
 		EE28E76422EA143B003EB983 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = "../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/Resources/Keys.swift"; sourceTree = "<group>"; };
+		EE2CBAF722FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMatchPlayerDetails.swift; sourceTree = "<group>"; };
+		EE2CBAF922FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrentMatchPlayerDetails.storyboard; sourceTree = "<group>"; };
 		EE37299D22CAC2EE003FBBFE /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		EE3729A022CBA5C3003FBBFE /* NewMatchCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchCreation.swift; sourceTree = "<group>"; };
 		EE3729A222CBA5CE003FBBFE /* NewMatchCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewMatchCreation.storyboard; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				EE27685322B7E708008E4CA1 /* SoccerTeamCollection.swift */,
 				EEF7609622B82EF6004D92CF /* ActivePlayerCell.swift */,
 				EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */,
+				EE2CBAF722FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift */,
+				EE2CBAF922FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard */,
 			);
 			path = "Soccer Team Collection";
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				EE7E9B0222C9A57E001773AA /* MatchViewController.storyboard in Resources */,
 				EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */,
 				EE20114D22D698B4007A1DAC /* Drawing.storyboard in Resources */,
+				EE2CBAFA22FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard in Resources */,
 				EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */,
 				EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */,
 				EE27685922B7E708008E4CA1 /* Main.storyboard in Resources */,
@@ -449,6 +456,7 @@
 				EE16B9D122E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift in Sources */,
 				EE28E76522EA143B003EB983 /* Keys.swift in Sources */,
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
+				EE2CBAF822FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift in Sources */,
 				EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */,
 				EE16B9CF22E6BA7E00EFE52B /* Assist+CoreDataProperties.swift in Sources */,
 				EE3729A622CBB6C2003FBBFE /* TeamList.swift in Sources */,

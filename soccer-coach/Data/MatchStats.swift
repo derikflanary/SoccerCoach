@@ -85,11 +85,13 @@ struct PlayerMatchStats {
         let seconds = playingTimes.map { $0.length }.reduce(0, +)
         return Int(seconds).minutes
     }
-    
+    var positions: [Position] {
+        return playingTimes.compactMap { $0.position }
+    }
     var goals: [Shot] {
         return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { $0.isGoal }
     }
-    var shotCount: [Shot] {
+    var shots: [Shot] {
         return playingTimes.compactMap { $0.shots }.flatMap { $0 }
     }
     var shotsOnTarget: [Shot] {
@@ -97,6 +99,11 @@ struct PlayerMatchStats {
     }
     var shotsOffTarget: [Shot] {
         return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { !$0.onTarget }
+    }
+    var averageShotRating: Int {
+        let shots = playingTimes.compactMap { $0.shots }.flatMap { $0 }
+        guard shots.count > 0 else { return 0 }
+        return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }
     var assists: [Assist] {
         return playingTimes.compactMap { $0.assists }.flatMap { $0 }

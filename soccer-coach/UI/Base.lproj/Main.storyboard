@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Soccer Team Collection-->
@@ -59,7 +58,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average quality shot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="526-JU-WGH">
                                                 <rect key="frame" x="63" y="38.5" width="115.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-mu-kNd">
@@ -76,12 +75,12 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAv-mg-yPk" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="162" width="241.5" height="40"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                                <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5oj-1G-tw0"/>
                                                 </constraints>
                                                 <state key="normal" title="Submit">
-                                                    <color key="titleColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
@@ -130,6 +129,7 @@
                         <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
                         <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
                         <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
+                        <segue destination="DOV-OY-cYz" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="TZe-h8-HSu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqs-VD-Rfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -143,6 +143,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyh-a3-UVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1795" y="-1468"/>
+        </scene>
+        <!--CurrentMatchPlayerDetails-->
+        <scene sceneID="NbT-QD-uW3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CurrentMatchPlayerDetails" id="DOV-OY-cYz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gzL-Bo-qih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="-1364"/>
         </scene>
         <!--Current-->
         <scene sceneID="EQp-xG-cKb">
@@ -181,7 +189,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-7t-vWk">
                                 <rect key="frame" x="0.0" y="110" width="320" height="658"/>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="yvG-mE-NZI" detailTextLabel="CQj-Yc-HAz" style="IBUITableViewCellStyleValue1" id="0SG-Uk-Ffl">
                                         <rect key="frame" x="15" y="55.5" width="290" height="60"/>
@@ -223,7 +231,7 @@
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="kH0-7t-vWk" firstAttribute="leading" secondItem="8Wc-Lo-X1Y" secondAttribute="leading" id="5ua-ge-l2Y"/>
                             <constraint firstItem="kH0-7t-vWk" firstAttribute="trailing" secondItem="8Wc-Lo-X1Y" secondAttribute="trailing" id="AUg-on-ZVy"/>
@@ -247,6 +255,7 @@
                         <outlet property="emptyStateView" destination="lqd-d4-Kis" id="cA7-er-0Wi"/>
                         <outlet property="tableView" destination="kH0-7t-vWk" id="0t9-T1-pEG"/>
                         <outlet property="teamSegmentedControl" destination="Jjt-Ut-EjF" id="8PJ-NI-Mdo"/>
+                        <segue destination="DOV-OY-cYz" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerMatchDetails:sender:segueIdentifier:" id="yNw-FB-nFj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-r9-2fg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -266,7 +275,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new match and the teams will show up here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySC-ti-D5h">
                                     <rect key="frame" x="0.0" y="36.5" width="662" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                    <color key="textColor" cocoaTouchSystemColor="secondaryLabelColor"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -344,8 +353,11 @@
             <color red="0.25490196078431371" green="0.45882352941176469" blue="0.019607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="emptyStateBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TZe-h8-HSu"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" name="tintGreen"/>
 </document>

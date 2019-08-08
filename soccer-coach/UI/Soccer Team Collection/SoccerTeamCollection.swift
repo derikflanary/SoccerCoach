@@ -131,8 +131,15 @@ class SoccerTeamCollection: UIViewController {
             self.shotRatingView.alpha = 0.0
         })
         guard let temporaryShot = temporaryShot, let match = currentMatch else { return }
-        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal)
+        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal)
         self.temporaryShot = nil
+    }
+    
+    @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let player = selectedPlayer, let match = currentMatch else { return nil }
+        let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: currentTeamType)
+        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime)
+        return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
     }
     
 }

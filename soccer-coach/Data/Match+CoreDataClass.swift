@@ -26,8 +26,8 @@ public class Match: NSManagedObject {
     @Published var extraTimeTimeElaspsed: TimeInterval = 0
 
     var summary: String {
-        guard let homeTeam = homeTeam, let score = score, let awayTeam = awayTeam else { return ""}
-        return "\(homeTeam.name) \(score.home) - \(score.away) \(awayTeam.name)"
+        guard let homeTeam = homeTeam, let awayTeam = awayTeam else { return ""}
+        return "\(homeTeam.name) \(homeGoals) - \(awayGoals) \(awayTeam.name)"
     }
     var currentHalf: Half {
         return Half(rawValue: Int(half)) ?? .first

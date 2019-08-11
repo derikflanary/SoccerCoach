@@ -41,6 +41,9 @@ class SoccerTeamCollection: UIViewController {
     @IBOutlet weak var shotDescriptionLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var ratingSlider: UISlider!
+    @IBOutlet weak var addAssistButton: RoundedButton!
+    @IBOutlet weak var assistTableView: UITableView!
+    @IBOutlet weak var shotViewTitleLabel: UILabel!
     
     
     // MARK: - Properties
@@ -49,6 +52,8 @@ class SoccerTeamCollection: UIViewController {
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>? = nil
     var selectedPlayer: SoccerPlayer?
     var temporaryShot: TemporaryShot?
+    var assistee: SoccerPlayer?
+    let cellIdentifier = "cell"
     var currentMatch: Match? {
         didSet {
             resetPlayers()
@@ -95,6 +100,7 @@ class SoccerTeamCollection: UIViewController {
         collectionView.dragDelegate = self
         configureFillerData()
         configureSubscribers()
+        assistTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -123,7 +129,6 @@ class SoccerTeamCollection: UIViewController {
         let value = Int(ratingSlider.value * 100)
         ratingLabel.text = "\(value)"
         shotDescriptionLabel.text = value.shotRatingDescription()
-
     }
     
     @IBAction func shotRatingSubmitButtonTaped() {
@@ -131,8 +136,10 @@ class SoccerTeamCollection: UIViewController {
             self.shotRatingView.alpha = 0.0
         })
         guard let temporaryShot = temporaryShot, let match = currentMatch else { return }
-        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal)
+        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: nil, assistee: assistee)
         self.temporaryShot = nil
+        self.assistee = nil
+        self.addAssistButton.setTitle("Add Assist", for: .normal)
     }
     
     @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
@@ -140,6 +147,14 @@ class SoccerTeamCollection: UIViewController {
         let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: currentTeamType)
         let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime)
         return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
+    }
+    
+    @IBAction func addAssistButtonTapped() {
+        UIView.animate(withDuration: 0.5) {
+            self.assistTableView.alpha = 1.0
+            self.shotViewTitleLabel.text = "Select Player"
+        }
+        assistTableView.reloadData()
     }
     
 }
@@ -418,3 +433,52 @@ extension SoccerTeamCollection: Subscriberable {
     
 }
 
+
+// MARK: - Tableview data source
+
+extension SoccerTeamCollection: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch currentTeamType {
+        case .home:
+            return homeActivePlayers.count
+        case .away:
+            return awayActivePlayers.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath)
+        switch currentTeamType {
+        case .home:
+            let player = homeActivePlayers[indexPath.row]
+            cell.textLabel?.text = player.name
+        case .away:
+            let player = awayActivePlayers[indexPath.row]
+            cell.textLabel?.text = player.name
+        }
+        return cell
+    }
+    
+}
+
+
+// MARK: - Tableview delegate
+
+extension SoccerTeamCollection: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch currentTeamType {
+        case .home:
+            assistee = homeActivePlayers[indexPath.row]
+        case .away:
+            assistee = awayActivePlayers[indexPath.row]
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.assistTableView.alpha = 0.0
+            self.shotViewTitleLabel.text = "Shot Difficulty Rating"
+            guard let assistee = self.assistee else { return }
+            self.addAssistButton.setTitle("Assist: \(assistee.name)", for: .normal)
+        }
+    }
+}

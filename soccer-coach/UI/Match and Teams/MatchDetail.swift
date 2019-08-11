@@ -77,13 +77,28 @@ class MatchDetail: UIViewController {
     func updateTableUI(animated: Bool = true) {
         DispatchQueue.main.async {
             guard let homeTeamDataSource = self.homeTeamDataSource, let awayTeamDataSource = self.awayTeamDataSource else { return }
-            guard let homeTeam = self.match?.homeTeam, let awayTeam = self.match?.awayTeam else { return }
+            guard let match = self.match, let homeTeam = match.homeTeam, let awayTeam = match.awayTeam else { return }
             self.homeCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
             self.homeCurrentSnapshot?.appendSections([.home])
-            self.homeCurrentSnapshot?.appendItems(Array(homeTeam.players))
+            let homePlayers = homeTeam.players.sorted { playerOne, playerTwo -> Bool in
+                let playingTimesOne = match.homePlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
+                let playingTimesTwo = match.homePlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
+                let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
+                let statsTwo = PlayerMatchStats(player: playerTwo, playingTimes: playingTimesTwo)
+                return statsOne.minutesPlayed > statsTwo.minutesPlayed
+            }
+            let awayPlayers = awayTeam.players.sorted { playerOne, playerTwo -> Bool in
+                let playingTimesOne = match.awayPlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
+                let playingTimesTwo = match.awayPlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
+                let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
+                let statsTwo = PlayerMatchStats(player: playerTwo, playingTimes: playingTimesTwo)
+                return statsOne.minutesPlayed > statsTwo.minutesPlayed
+            }
+
+            self.homeCurrentSnapshot?.appendItems(homePlayers)
             self.awayCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
             self.awayCurrentSnapshot?.appendSections([.away])
-            self.awayCurrentSnapshot?.appendItems(Array(awayTeam.players))
+            self.awayCurrentSnapshot?.appendItems(awayPlayers)
             guard let homeCurrentSnapshot = self.homeCurrentSnapshot, let awayCurrentSnapshot = self.awayCurrentSnapshot else { return }
             homeTeamDataSource.apply(homeCurrentSnapshot, animatingDifferences: animated)
             awayTeamDataSource.apply(awayCurrentSnapshot, animatingDifferences: animated)

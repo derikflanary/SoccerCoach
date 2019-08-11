@@ -106,7 +106,7 @@ struct PlayingTimeController {
         playingTime.addToAssists(assist)
     }
     
-    func addShot(to player: SoccerPlayer, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil) {
+    func addShot(to player: SoccerPlayer, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil, assistee: SoccerPlayer?) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let shot = Shot(context: context)
@@ -123,6 +123,14 @@ struct PlayingTimeController {
             shot.timeStamp = Int64(match.secondHalfTimeElapsed)
         case .extra:
             shot.timeStamp = Int64(match.extraTimeTimeElaspsed)
+        }
+        if let assistee = assistee {
+            let assist = Assist(context: context)
+            assist.half = playingTime.half
+            assist.timeStamp = shot.timeStamp
+            assist.goal = shot
+            shot.assist = assist
+            playingTime.addToAssists(assist)
         }
         playingTime.addToShots(shot)
         if shot.isGoal {

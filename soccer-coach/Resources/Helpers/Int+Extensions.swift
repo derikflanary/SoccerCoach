@@ -31,12 +31,14 @@ extension Int {
     }
     
     func minute(halfLength: Int, half: Half) -> String {
-        let time = half.rawValue * halfLength
-        if self > time {
-            return "Extra time"
-        } else {
-            let minute = time / self
-            return "\(minute)th minute"
+        let minute = self == 0 ? 1 : self
+        switch half {
+        case .first:
+            return "\(minute)'"
+        case .second:
+            return "\(minute + halfLength)'"
+        case .extra:
+            return "\(minute + (halfLength * 2))'"
         }
     }
     

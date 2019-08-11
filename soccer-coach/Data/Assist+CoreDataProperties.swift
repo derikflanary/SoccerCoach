@@ -20,5 +20,6 @@ extension Assist {
     @NSManaged public var timeStamp: Int64
     @NSManaged public var half: Int64
     @NSManaged public var playingTime: PlayingTime?
+    @NSManaged public var goal: Shot?
 
 }

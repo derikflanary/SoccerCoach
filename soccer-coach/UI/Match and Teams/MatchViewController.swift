@@ -144,11 +144,26 @@ class MatchViewController: UIViewController {
     @IBAction func endMatchTapped() {
         guard let match = match else { return }
         if match.isComplete {
+            let alert = UIAlertController(title: "End Match?", message: "Are you sure you want to end and save this match?", preferredStyle: .alert)
+            let save = UIAlertAction(title: "Save and End", style: .default) { _ in
+                MatchController.shared.end(match)
+                App.sharedCore.fire(event: Selected<Match?>(item: nil))
+            }
+            let noSave = UIAlertAction(title: "End without Saving", style: .destructive) { _ in
+                MatchController.shared.delete(match)
+                App.sharedCore.fire(event: Selected<Match?>(item: nil))
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(save)
+            alert.addAction(noSave)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+
             MatchController.shared.save(match)
         } else {
             let alert = UIAlertController(title: "End Match?", message: "The current match isn't yet complete. Are you sure you want to end and save this match?", preferredStyle: .alert)
             let save = UIAlertAction(title: "Save and End", style: .default) { _ in
-                MatchController.shared.save(match)
+                MatchController.shared.end(match)
                 App.sharedCore.fire(event: Selected<Match?>(item: nil))
             }
             let noSave = UIAlertAction(title: "End without Saving", style: .destructive) { _ in

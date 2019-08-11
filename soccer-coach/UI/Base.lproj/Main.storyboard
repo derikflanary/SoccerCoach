@@ -44,38 +44,67 @@
                                 </connections>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
-                                <rect key="frame" x="211" y="271" width="281.5" height="226"/>
+                                <rect key="frame" x="211" y="212.5" width="281.5" height="343"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-D4-MId">
-                                        <rect key="frame" x="20" y="12" width="241.5" height="202"/>
+                                        <rect key="frame" x="20" y="12" width="241.5" height="319"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shot Difficulty Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEk-Jq-dyN">
-                                                <rect key="frame" x="36" y="0.0" width="170" height="22.5"/>
+                                                <rect key="frame" x="36" y="0.0" width="170" height="23.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average quality shot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="526-JU-WGH">
-                                                <rect key="frame" x="63" y="38.5" width="115.5" height="16"/>
+                                                <rect key="frame" x="63" y="39.5" width="115.5" height="17"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-mu-kNd">
-                                                <rect key="frame" x="-2" y="70.5" width="245.5" height="34"/>
+                                                <rect key="frame" x="-2" y="72.5" width="245.5" height="36"/>
                                                 <connections>
                                                     <action selector="ratingSliderValueChanged" destination="nlV-Ay-vVf" eventType="valueChanged" id="i5t-vS-bQP"/>
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qC-Rp-1kx">
-                                                <rect key="frame" x="114.5" y="119.5" width="12.5" height="26.5"/>
+                                                <rect key="frame" x="114.5" y="123.5" width="12.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpF-lu-pH5" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="167" width="241.5" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="bfI-DI-pkq"/>
+                                                </constraints>
+                                                <state key="normal" title="Add Assist">
+                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addAssistButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="d6O-pm-c1E"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQW-Ro-yFJ" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="223" width="241.5" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="kJO-7R-gvk"/>
+                                                </constraints>
+                                                <state key="normal" title="Add Description">
+                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAv-mg-yPk" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="162" width="241.5" height="40"/>
-                                                <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="279" width="241.5" height="40"/>
+                                                <color key="backgroundColor" name="tintGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5oj-1G-tw0"/>
                                                 </constraints>
@@ -91,16 +120,30 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="xpF-lu-pH5" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="0RM-Md-vwV"/>
                                             <constraint firstItem="NSA-mu-kNd" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="8L9-uY-z8J"/>
                                             <constraint firstItem="zAv-mg-yPk" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="ALP-9A-5Zz"/>
+                                            <constraint firstItem="eQW-Ro-yFJ" firstAttribute="width" secondItem="xpF-lu-pH5" secondAttribute="width" id="Thw-q2-tA8"/>
                                         </constraints>
                                     </stackView>
+                                    <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foR-YA-M82">
+                                        <rect key="frame" x="0.0" y="41" width="281.5" height="302"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="nlV-Ay-vVf" id="jLM-gZ-v29"/>
+                                            <outlet property="delegate" destination="nlV-Ay-vVf" id="lou-vR-c5h"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" name="emptyStateBackground"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="foR-YA-M82" secondAttribute="trailing" id="0qw-As-ymt"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" constant="20" id="7Kt-Dm-wah"/>
+                                    <constraint firstItem="foR-YA-M82" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" id="BGY-C1-yDC"/>
+                                    <constraint firstItem="foR-YA-M82" firstAttribute="top" secondItem="eSp-k5-Pa6" secondAttribute="top" constant="41" id="Bpa-k5-4Ss"/>
                                     <constraint firstAttribute="trailing" secondItem="cLs-D4-MId" secondAttribute="trailing" constant="20" id="KDH-M1-JEa"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="top" secondItem="eSp-k5-Pa6" secondAttribute="top" constant="12" id="R9X-2N-ekF"/>
+                                    <constraint firstAttribute="bottom" secondItem="foR-YA-M82" secondAttribute="bottom" id="jgG-4i-RTE"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="centerY" secondItem="eSp-k5-Pa6" secondAttribute="centerY" id="kTc-DP-2nG"/>
                                     <constraint firstAttribute="bottom" secondItem="cLs-D4-MId" secondAttribute="bottom" constant="12" id="ogw-U6-9SG"/>
                                 </constraints>
@@ -124,11 +167,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
+                        <outlet property="addAssistButton" destination="xpF-lu-pH5" id="cUP-Fq-xRK"/>
+                        <outlet property="assistTableView" destination="foR-YA-M82" id="a6U-ox-lfX"/>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                         <outlet property="ratingLabel" destination="8qC-Rp-1kx" id="HFi-ie-5JA"/>
                         <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
                         <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
                         <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
+                        <outlet property="shotViewTitleLabel" destination="EEk-Jq-dyN" id="B9G-oW-aNw"/>
                         <segue destination="DOV-OY-cYz" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="TZe-h8-HSu"/>
                     </connections>
                 </viewController>
@@ -275,7 +321,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new match and the teams will show up here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySC-ti-D5h">
                                     <rect key="frame" x="0.0" y="36.5" width="662" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -354,6 +400,9 @@
         </namedColor>
         <namedColor name="emptyStateBackground">
             <color red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="tintGreen">
+            <color red="0.38823529411764707" green="0.56470588235294117" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

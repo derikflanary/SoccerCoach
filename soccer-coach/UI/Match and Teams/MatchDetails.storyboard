@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2w-Tn-saM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2w-Tn-saM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,8 +16,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="44" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KNH-7J-88F">
-                                <rect key="frame" x="0.0" y="208" width="207" height="688"/>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="88" width="207" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3de-IQ-EBV">
                                     <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -29,7 +29,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstItem="aeo-BG-Kup" firstAttribute="leading" secondItem="3de-IQ-EBV" secondAttribute="leading" constant="20" id="Nrx-0C-d2s"/>
                                         <constraint firstItem="aeo-BG-Kup" firstAttribute="centerY" secondItem="3de-IQ-EBV" secondAttribute="centerY" id="bcb-uX-w2w"/>
@@ -37,21 +37,32 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayerDetailCell" id="Gfy-gg-qp7" customClass="PlayerDetailCell" customModule="soccer_coach" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="99.5" width="175" height="45"/>
+                                        <rect key="frame" x="16" y="99.5" width="175" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gfy-gg-qp7" id="BRu-qw-Ilk">
-                                            <rect key="frame" x="0.0" y="0.0" width="175" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="175" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-jd-Da4">
-                                                    <rect key="frame" x="16" y="12" width="159" height="21"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-jd-Da4">
+                                                    <rect key="frame" x="16" y="12" width="159" height="37"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Iq-QD-xV8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="159" height="21"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Cq-td-wW0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="159" height="37"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Iq-QD-xV8">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="159" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="DNP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJk-Ca-YNT">
+                                                                    <rect key="frame" x="0.0" y="20.5" width="159" height="16.5"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -63,12 +74,13 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="minutesPlayedLabel" destination="BJk-Ca-YNT" id="y2O-zP-gmK"/>
                                             <outlet property="nameLabel" destination="9Iq-QD-xV8" id="vxf-S4-Ybk"/>
                                             <outlet property="stackView" destination="cvr-jd-Da4" id="wcy-4Q-ryG"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="I7f-OW-Dj3">
-                                        <rect key="frame" x="16" y="144.5" width="175" height="43.5"/>
+                                        <rect key="frame" x="16" y="160.5" width="175" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I7f-OW-Dj3" id="4wl-mq-o26">
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="43.5"/>
@@ -78,8 +90,8 @@
                                 </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bAA-gk-4lB">
-                                <rect key="frame" x="207" y="208" width="207" height="688"/>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="207" y="88" width="207" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ObD-IH-ekn">
                                     <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -91,7 +103,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstItem="KT2-oS-bMA" firstAttribute="centerY" secondItem="ObD-IH-ekn" secondAttribute="centerY" id="KnN-rF-nJz"/>
                                         <constraint firstItem="KT2-oS-bMA" firstAttribute="leading" secondItem="ObD-IH-ekn" secondAttribute="leading" constant="20" id="W0g-9B-IUt"/>
@@ -125,12 +137,12 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="KNH-7J-88F" firstAttribute="leading" secondItem="a22-Z3-Qe7" secondAttribute="leading" id="9YI-d1-b2z"/>
-                            <constraint firstItem="KNH-7J-88F" firstAttribute="top" secondItem="a22-Z3-Qe7" secondAttribute="top" constant="120" id="IyU-5q-w3k"/>
+                            <constraint firstItem="KNH-7J-88F" firstAttribute="top" secondItem="a22-Z3-Qe7" secondAttribute="top" id="IyU-5q-w3k"/>
                             <constraint firstItem="bAA-gk-4lB" firstAttribute="leading" secondItem="KNH-7J-88F" secondAttribute="trailing" id="Na6-xI-Ewa"/>
-                            <constraint firstItem="bAA-gk-4lB" firstAttribute="top" secondItem="a22-Z3-Qe7" secondAttribute="top" constant="120" id="QuM-MI-ehF"/>
+                            <constraint firstItem="bAA-gk-4lB" firstAttribute="top" secondItem="a22-Z3-Qe7" secondAttribute="top" id="QuM-MI-ehF"/>
                             <constraint firstItem="KNH-7J-88F" firstAttribute="width" secondItem="bAA-gk-4lB" secondAttribute="width" id="ZcY-8U-wfC"/>
                             <constraint firstAttribute="bottom" secondItem="bAA-gk-4lB" secondAttribute="bottom" id="gpC-TZ-JwZ"/>
                             <constraint firstItem="bAA-gk-4lB" firstAttribute="trailing" secondItem="a22-Z3-Qe7" secondAttribute="trailing" id="ojc-4O-NyB"/>

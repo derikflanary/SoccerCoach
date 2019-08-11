@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14877.5" systemVersion="19A512f" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14886.2" systemVersion="19A526h" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Assist" representedClassName=".Assist" syncable="YES">
         <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shot" inverseName="assist" inverseEntity="Shot"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="assists" inverseEntity="PlayingTime"/>
     </entity>
     <entity name="Card" representedClassName=".Card" syncable="YES">
@@ -54,6 +55,7 @@
         <attribute name="rating" optional="YES" attributeType="Integer 64" defaultValueString="50" usesScalarValueType="YES"/>
         <attribute name="shotDescription" optional="YES" attributeType="String"/>
         <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="assist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assist" inverseName="goal" inverseEntity="Assist"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="shots" inverseEntity="PlayingTime"/>
     </entity>
     <entity name="SoccerPlayer" representedClassName=".SoccerPlayer" syncable="YES">
@@ -73,13 +75,13 @@
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="team" inverseEntity="SoccerPlayer"/>
     </entity>
     <elements>
-        <element name="Assist" positionX="51.40234375" positionY="402.96875" width="128" height="88"/>
+        <element name="Assist" positionX="51.40234375" positionY="402.96875" width="128" height="103"/>
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="88"/>
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="208"/>
         <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="208"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
-        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="148"/>
+        <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="163"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="148"/>
         <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
     </elements>

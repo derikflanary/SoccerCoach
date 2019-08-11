@@ -46,6 +46,20 @@ struct MatchController {
         }
     }
     
+    func end(_ match: Match) {
+        if let homeTeam = match.homeTeam {
+            for player in homeTeam.players {
+                PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home)
+            }
+        }
+        if let awayTeam = match.awayTeam {
+            for player in awayTeam.players {
+                PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away)
+            }
+        }
+        save(match)
+    }
+    
     func save(_ match: Match) {
         guard let context = context else { return }
         try? context.save()

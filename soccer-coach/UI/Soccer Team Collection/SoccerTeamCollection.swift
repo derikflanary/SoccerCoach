@@ -44,6 +44,8 @@ class SoccerTeamCollection: UIViewController {
     @IBOutlet weak var addAssistButton: RoundedButton!
     @IBOutlet weak var assistTableView: UITableView!
     @IBOutlet weak var shotViewTitleLabel: UILabel!
+    @IBOutlet weak var shotDescriptionTextView: UITextView!
+    @IBOutlet weak var addDescriptionButton: RoundedButton!
     
     
     // MARK: - Properties
@@ -132,14 +134,18 @@ class SoccerTeamCollection: UIViewController {
     }
     
     @IBAction func shotRatingSubmitButtonTaped() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.shotRatingView.alpha = 0.0
-        })
-        guard let temporaryShot = temporaryShot, let match = currentMatch else { return }
-        PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: currentTeamType, rating: Int(ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: nil, assistee: assistee)
-        self.temporaryShot = nil
-        self.assistee = nil
-        self.addAssistButton.setTitle("Add Assist", for: .normal)
+        }) { _ in
+            guard let temporaryShot = self.temporaryShot, let match = self.currentMatch else { return }
+            PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: nil, assistee: self.assistee)
+            self.temporaryShot = nil
+            self.assistee = nil
+            self.addAssistButton.setTitle("Add Assist", for: .normal)
+            self.shotDescriptionTextView.text = ""
+            self.shotDescriptionTextView.isHidden = true
+            self.addDescriptionButton.isHidden = false
+        }
     }
     
     @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
@@ -155,6 +161,13 @@ class SoccerTeamCollection: UIViewController {
             self.shotViewTitleLabel.text = "Select Player"
         }
         assistTableView.reloadData()
+    }
+    
+    @IBAction func addDescriptionButtonTapped() {
+        UIView.animate(withDuration: 0.5) {
+            self.shotDescriptionTextView.isHidden = false
+            self.addDescriptionButton.isHidden = true
+        }
     }
     
 }
@@ -242,6 +255,8 @@ private extension SoccerTeamCollection {
     }
     
     func showShotRatingView() {
+        guard let tempShot = self.temporaryShot else { return }
+        self.addAssistButton.isHidden = !tempShot.isGoal
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.transform = .identity
@@ -312,6 +327,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         let rect = view.convert(cell.nameLabel.bounds, to: view)
         alertController.popoverPresentationController?.sourceView = cell.nameLabel
         alertController.popoverPresentationController?.sourceRect = rect
+        alertController.view.tintColor = .label
         present(alertController, animated: true, completion: nil)
     }
     

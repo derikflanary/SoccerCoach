@@ -44,10 +44,10 @@
                                 </connections>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
-                                <rect key="frame" x="211" y="212.5" width="281.5" height="343"/>
+                                <rect key="frame" x="211" y="241" width="281.5" height="286"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-D4-MId">
-                                        <rect key="frame" x="20" y="12" width="241.5" height="319"/>
+                                        <rect key="frame" x="20" y="12" width="241.5" height="262"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shot Difficulty Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEk-Jq-dyN">
                                                 <rect key="frame" x="36" y="0.0" width="170" height="23.5"/>
@@ -56,25 +56,25 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average quality shot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="526-JU-WGH">
-                                                <rect key="frame" x="63" y="39.5" width="115.5" height="17"/>
+                                                <rect key="frame" x="63" y="39.5" width="115.5" height="16.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-mu-kNd">
-                                                <rect key="frame" x="-2" y="72.5" width="245.5" height="36"/>
+                                                <rect key="frame" x="-2" y="72" width="245.5" height="35.5"/>
                                                 <connections>
                                                     <action selector="ratingSliderValueChanged" destination="nlV-Ay-vVf" eventType="valueChanged" id="i5t-vS-bQP"/>
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qC-Rp-1kx">
-                                                <rect key="frame" x="114.5" y="123.5" width="12.5" height="27.5"/>
+                                                <rect key="frame" x="114.5" y="122.5" width="12.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpF-lu-pH5" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="167" width="241.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="166" width="241.5" height="40"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="bfI-DI-pkq"/>
@@ -89,8 +89,8 @@
                                                     <action selector="addAssistButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="d6O-pm-c1E"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQW-Ro-yFJ" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="223" width="241.5" height="40"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQW-Ro-yFJ" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="214" width="241.5" height="40"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="kJO-7R-gvk"/>
@@ -101,9 +101,19 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addDescriptionButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="9QE-9r-aAl"/>
+                                                </connections>
                                             </button>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Shot description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DI2-BN-ZxK">
+                                                <rect key="frame" x="1" y="214" width="240" height="0.0"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAv-mg-yPk" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="279" width="241.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="222" width="241.5" height="40"/>
                                                 <color key="backgroundColor" name="tintGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5oj-1G-tw0"/>
@@ -127,7 +137,7 @@
                                         </constraints>
                                     </stackView>
                                     <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foR-YA-M82">
-                                        <rect key="frame" x="0.0" y="41" width="281.5" height="302"/>
+                                        <rect key="frame" x="0.0" y="41" width="281.5" height="245"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="nlV-Ay-vVf" id="jLM-gZ-v29"/>
@@ -168,11 +178,13 @@
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="addAssistButton" destination="xpF-lu-pH5" id="cUP-Fq-xRK"/>
+                        <outlet property="addDescriptionButton" destination="eQW-Ro-yFJ" id="hCP-6h-fxi"/>
                         <outlet property="assistTableView" destination="foR-YA-M82" id="a6U-ox-lfX"/>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                         <outlet property="ratingLabel" destination="8qC-Rp-1kx" id="HFi-ie-5JA"/>
                         <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
                         <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
+                        <outlet property="shotDescriptionTextView" destination="DI2-BN-ZxK" id="XYg-JL-Vb7"/>
                         <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
                         <outlet property="shotViewTitleLabel" destination="EEk-Jq-dyN" id="B9G-oW-aNw"/>
                         <segue destination="DOV-OY-cYz" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="TZe-h8-HSu"/>

@@ -162,11 +162,20 @@
                         <outlet property="awayTableView" destination="bAA-gk-4lB" id="w1m-hK-5j3"/>
                         <outlet property="homeSectionHeaderTitleLabel" destination="aeo-BG-Kup" id="NmO-5s-vE4"/>
                         <outlet property="homeTableView" destination="KNH-7J-88F" id="yvP-Sx-lzL"/>
+                        <segue destination="JBW-Bo-vyS" kind="show" identifier="showMatchPlayerDetails" destinationCreationSelector="showMatchPlayerDetails:sender:segueIdentifier:" id="KmL-eN-FqZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSe-1C-DzW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="813.04347826086962" y="44.866071428571423"/>
+        </scene>
+        <!--CurrentMatchPlayerDetails-->
+        <scene sceneID="nVy-4b-acp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CurrentMatchPlayerDetails" id="JBW-Bo-vyS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Po4-WC-HEr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1354" y="-15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OpG-bb-2Tl">

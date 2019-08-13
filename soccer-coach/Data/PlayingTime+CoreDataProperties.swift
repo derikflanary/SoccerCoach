@@ -22,7 +22,7 @@ extension PlayingTime {
     @NSManaged public var half: Int64
     @NSManaged public var player: SoccerPlayer?
     @NSManaged public var shots: Set<Shot>?
-    @NSManaged public var assists: Set<Assist>?
+
     @NSManaged public var fouls: Set<Foul>?
     @NSManaged public var cards: Set<Card>?
     @NSManaged public var homeMatch: Match?
@@ -48,22 +48,6 @@ extension PlayingTime {
 
 }
 
-// MARK: Generated accessors for assists
-extension PlayingTime {
-
-    @objc(addAssistsObject:)
-    @NSManaged public func addToAssists(_ value: Assist)
-
-    @objc(removeAssistsObject:)
-    @NSManaged public func removeFromAssists(_ value: Assist)
-
-    @objc(addAssists:)
-    @NSManaged public func addToAssists(_ values: NSSet)
-
-    @objc(removeAssists:)
-    @NSManaged public func removeFromAssists(_ values: NSSet)
-
-}
 
 // MARK: Generated accessors for fouls
 extension PlayingTime {

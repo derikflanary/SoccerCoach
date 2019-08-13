@@ -60,5 +60,10 @@ struct SoccerPlayerController {
         guard let context = context else { return }
         try? context.save()
     }
+    
+    func delete(_ player: SoccerPlayer) {
+        context?.delete(player)
+        try? context?.save()
+    }
 
 }

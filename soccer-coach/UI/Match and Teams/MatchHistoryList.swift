@@ -37,11 +37,12 @@ class MatchHistoryList: UIViewController {
     
     
     // MARK: - Overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configDataSource()
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         matches = MatchController.shared.fetchAllMatches()

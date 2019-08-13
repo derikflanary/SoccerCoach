@@ -63,7 +63,8 @@ class TeamList: UIViewController {
     // MARK: Navigation
     
     @IBAction func unwindToTeamList(_ segue: UIStoryboardSegue) {
-        tableView.reloadData()
+        fetchData()
+        updateTableUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,6 +124,17 @@ extension TeamList: UITableViewDelegate {
         selectedTeam = teams[indexPath.row]
         performSegue(withIdentifier: .showPlayersList, sender: nil)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
+            guard let team = self.dataSource.itemIdentifier(for: indexPath) else { return }
+            TeamController.shared.delete(team)
+            self.fetchData()
+            self.updateTableUI()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+
     
 }
 

@@ -24,6 +24,6 @@ extension Shot {
     @NSManaged public var rating: Int64
     @NSManaged public var playingTime: PlayingTime?
     @NSManaged public var shotDescription: String?
-    @NSManaged public var assist: Assist?
+    @NSManaged public var assistee: SoccerPlayer?
 
 }

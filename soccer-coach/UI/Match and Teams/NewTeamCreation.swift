@@ -26,6 +26,7 @@ class NewTeamCreation: UIViewController {
     let cellIdentifier = "cell"
     var players = [SoccerPlayer]()
     var tapGesture = UITapGestureRecognizer()
+    var selectedPlayer: SoccerPlayer? = nil
     
     
     override func viewDidLoad() {
@@ -37,13 +38,13 @@ class NewTeamCreation: UIViewController {
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: .unwindToTeamList, sender: nil)
     }
     
     @IBAction func saveTapped(_ sender: Any) {
         guard let name = teamNameTextField.text else { return }
         _ = TeamController.shared.createTeam(with: name, players: players)
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: .unwindToTeamList, sender: nil)
     }
     
     @IBAction func addPlayerTapped(_ sender: Any) {
@@ -92,8 +93,8 @@ private extension NewTeamCreation {
 extension NewTeamCreation: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let player = players[indexPath.row]
-        // TODO: - Open ability to edit player
+        selectedPlayer = players[indexPath.row]
+        performSegue(withIdentifier: .showPlayerDetails, sender: nil)
     }
     
 }
@@ -132,6 +133,25 @@ extension NewTeamCreation: VNDocumentCameraViewControllerDelegate {
                 self.updateTableUI()
             }
         }
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension NewTeamCreation: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case showPlayerDetails
+        case unwindToTeamList
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailNav = segue.destination as? UINavigationController else { return }
+        guard let detail = detailNav.topViewController as? NewPlayerCreation else { return }
+        detail.player = selectedPlayer
     }
     
 }

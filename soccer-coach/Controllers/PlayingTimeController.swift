@@ -89,23 +89,6 @@ struct PlayingTimeController {
         }
     }
     
-    func addAssist(to player: SoccerPlayer, match: Match, teamType: TeamType) {
-        guard let context = context else { return }
-        guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
-        let assist = Assist(context: context)
-        assist.half = playingTime.half
-        guard let half = Half(rawValue: Int(assist.half)) else { return }
-        switch half {
-        case .first:
-            assist.timeStamp = Int64(match.firstHalfTimeElapsed)
-        case .second:
-            assist.timeStamp = Int64(match.secondHalfTimeElapsed)
-        case .extra:
-            assist.timeStamp = Int64(match.extraTimeTimeElaspsed)
-        }
-        playingTime.addToAssists(assist)
-    }
-    
     func addShot(to player: SoccerPlayer, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil, assistee: SoccerPlayer?) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
@@ -115,6 +98,7 @@ struct PlayingTimeController {
         shot.onTarget = onTarget
         shot.isGoal = isGoal
         shot.shotDescription = description
+        shot.assistee = assistee
         guard let half = Half(rawValue: Int(shot.half)) else { return }
         switch half {
         case .first:
@@ -123,14 +107,6 @@ struct PlayingTimeController {
             shot.timeStamp = Int64(match.secondHalfTimeElapsed)
         case .extra:
             shot.timeStamp = Int64(match.extraTimeTimeElaspsed)
-        }
-        if let assistee = assistee {
-            let assist = Assist(context: context)
-            assist.half = playingTime.half
-            assist.timeStamp = shot.timeStamp
-            assist.goal = shot
-            shot.assist = assist
-            playingTime.addToAssists(assist)
         }
         playingTime.addToShots(shot)
         if shot.isGoal {

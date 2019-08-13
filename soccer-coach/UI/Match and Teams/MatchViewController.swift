@@ -100,6 +100,8 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSubscribers()
+        homeStepper.isHidden = true
+        awayStepper.isHidden = true
     }
     
 

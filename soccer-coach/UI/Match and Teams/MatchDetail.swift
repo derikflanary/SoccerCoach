@@ -29,6 +29,10 @@ class MatchDetail: UIViewController {
     var awayCurrentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>? = nil
     let cellIdentifier = "cell"
     var match: Match?
+    var selectedPlayer: SoccerPlayer? = nil
+    var playerTeamType: TeamType = .home
+    var homePlayers = [SoccerPlayer]()
+    var awayPlayers = [SoccerPlayer]()
     
     var matchStats: MatchStats {
         return MatchStats(match: match)
@@ -52,6 +56,12 @@ class MatchDetail: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBSegueAction func showMatchPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let player = selectedPlayer, let match = match else { return nil }
+        let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: playerTeamType)
+        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime)
+        return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
+    }
     
     
     func configureDataSource() {
@@ -80,14 +90,14 @@ class MatchDetail: UIViewController {
             guard let match = self.match, let homeTeam = match.homeTeam, let awayTeam = match.awayTeam else { return }
             self.homeCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
             self.homeCurrentSnapshot?.appendSections([.home])
-            let homePlayers = homeTeam.players.sorted { playerOne, playerTwo -> Bool in
+            self.homePlayers = homeTeam.players.sorted { playerOne, playerTwo -> Bool in
                 let playingTimesOne = match.homePlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
                 let playingTimesTwo = match.homePlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
                 let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
                 let statsTwo = PlayerMatchStats(player: playerTwo, playingTimes: playingTimesTwo)
                 return statsOne.minutesPlayed > statsTwo.minutesPlayed
             }
-            let awayPlayers = awayTeam.players.sorted { playerOne, playerTwo -> Bool in
+            self.awayPlayers = awayTeam.players.sorted { playerOne, playerTwo -> Bool in
                 let playingTimesOne = match.awayPlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
                 let playingTimesTwo = match.awayPlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
                 let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
@@ -95,10 +105,10 @@ class MatchDetail: UIViewController {
                 return statsOne.minutesPlayed > statsTwo.minutesPlayed
             }
 
-            self.homeCurrentSnapshot?.appendItems(homePlayers)
+            self.homeCurrentSnapshot?.appendItems(self.homePlayers)
             self.awayCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
             self.awayCurrentSnapshot?.appendSections([.away])
-            self.awayCurrentSnapshot?.appendItems(awayPlayers)
+            self.awayCurrentSnapshot?.appendItems(self.awayPlayers)
             guard let homeCurrentSnapshot = self.homeCurrentSnapshot, let awayCurrentSnapshot = self.awayCurrentSnapshot else { return }
             homeTeamDataSource.apply(homeCurrentSnapshot, animatingDifferences: animated)
             awayTeamDataSource.apply(awayCurrentSnapshot, animatingDifferences: animated)
@@ -110,5 +120,26 @@ class MatchDetail: UIViewController {
 
 extension MatchDetail: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == homeTableView {
+            selectedPlayer = homePlayers[indexPath.row]
+            playerTeamType = .home
+        }
+        if tableView == awayTableView {
+            selectedPlayer = awayPlayers[indexPath.row]
+            playerTeamType = .away
+        }
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension MatchDetail: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case showMatchPlayerDetails
+    }
     
 }

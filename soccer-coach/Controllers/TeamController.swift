@@ -38,4 +38,9 @@ struct TeamController {
         }
     }
     
+    func delete(_ team: Team) {
+        context?.delete(team)
+        try? context?.save()
+    }
+    
 }

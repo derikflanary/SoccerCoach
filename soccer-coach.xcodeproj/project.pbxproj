@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EE018CC722F0B35B00C45ACA /* PlayerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE018CC622F0B35B00C45ACA /* PlayerDetailCell.swift */; };
-		EE16B9CE22E6BA7E00EFE52B /* Assist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C022E6BA7E00EFE52B /* Assist+CoreDataClass.swift */; };
-		EE16B9CF22E6BA7E00EFE52B /* Assist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C122E6BA7E00EFE52B /* Assist+CoreDataProperties.swift */; };
 		EE16B9D022E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C222E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift */; };
 		EE16B9D122E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C322E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift */; };
 		EE16B9D222E6BA7E00EFE52B /* Foul+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C422E6BA7E00EFE52B /* Foul+CoreDataClass.swift */; };
@@ -79,8 +77,6 @@
 
 /* Begin PBXFileReference section */
 		EE018CC622F0B35B00C45ACA /* PlayerDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailCell.swift; sourceTree = "<group>"; };
-		EE16B9C022E6BA7E00EFE52B /* Assist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assist+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EE16B9C122E6BA7E00EFE52B /* Assist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assist+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE16B9C222E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayingTime+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE16B9C322E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayingTime+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE16B9C422E6BA7E00EFE52B /* Foul+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foul+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -232,8 +228,6 @@
 				EE6D438722E62CE2005B759D /* SoccerPlayer+CoreDataProperties.swift */,
 				EE6D438622E62CE1005B759D /* Team+CoreDataClass.swift */,
 				EE6D438422E62CE1005B759D /* Team+CoreDataProperties.swift */,
-				EE16B9C022E6BA7E00EFE52B /* Assist+CoreDataClass.swift */,
-				EE16B9C122E6BA7E00EFE52B /* Assist+CoreDataProperties.swift */,
 				EE16B9C222E6BA7E00EFE52B /* PlayingTime+CoreDataClass.swift */,
 				EE16B9C322E6BA7E00EFE52B /* PlayingTime+CoreDataProperties.swift */,
 				EE16B9C422E6BA7E00EFE52B /* Foul+CoreDataClass.swift */,
@@ -458,7 +452,6 @@
 				EE27687022B7FC4B008E4CA1 /* TextRecognitionEngine.swift in Sources */,
 				EE2CBAF822FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift in Sources */,
 				EE3D61EF22E7B5640092CBB6 /* GenericEvents.swift in Sources */,
-				EE16B9CF22E6BA7E00EFE52B /* Assist+CoreDataProperties.swift in Sources */,
 				EE3729A622CBB6C2003FBBFE /* TeamList.swift in Sources */,
 				EE37299E22CAC2EE003FBBFE /* RoundedButton.swift in Sources */,
 				EEE0D30922EF8A48001433D9 /* MatchDetail.swift in Sources */,
@@ -469,7 +462,6 @@
 				EE3D61E522E7B54D0092CBB6 /* TeamController.swift in Sources */,
 				EE16B9D322E6BA7E00EFE52B /* Foul+CoreDataProperties.swift in Sources */,
 				EE6D438B22E62CE2005B759D /* SoccerPlayer+CoreDataProperties.swift in Sources */,
-				EE16B9CE22E6BA7E00EFE52B /* Assist+CoreDataClass.swift in Sources */,
 				EE018CC722F0B35B00C45ACA /* PlayerDetailCell.swift in Sources */,
 				EE3D61ED22E7B5640092CBB6 /* AppState.swift in Sources */,
 				EE16B9D522E6BA7E00EFE52B /* Match+CoreDataProperties.swift in Sources */,

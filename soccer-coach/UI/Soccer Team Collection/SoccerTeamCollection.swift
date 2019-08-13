@@ -46,6 +46,8 @@ class SoccerTeamCollection: UIViewController {
     @IBOutlet weak var shotViewTitleLabel: UILabel!
     @IBOutlet weak var shotDescriptionTextView: UITextView!
     @IBOutlet weak var addDescriptionButton: RoundedButton!
+    @IBOutlet weak var cancelSaveStackView: UIStackView!
+    @IBOutlet weak var saveShotDetailButton: UIButton!
     
     
     // MARK: - Properties
@@ -138,7 +140,7 @@ class SoccerTeamCollection: UIViewController {
             self.shotRatingView.alpha = 0.0
         }) { _ in
             guard let temporaryShot = self.temporaryShot, let match = self.currentMatch else { return }
-            PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: nil, assistee: self.assistee)
+            PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: self.shotDescriptionTextView.text, assistee: self.assistee)
             self.temporaryShot = nil
             self.assistee = nil
             self.addAssistButton.setTitle("Add Assist", for: .normal)
@@ -156,17 +158,45 @@ class SoccerTeamCollection: UIViewController {
     }
     
     @IBAction func addAssistButtonTapped() {
+        self.saveShotDetailButton.isHidden = true
         UIView.animate(withDuration: 0.5) {
             self.assistTableView.alpha = 1.0
             self.shotViewTitleLabel.text = "Select Player"
+            self.cancelSaveStackView.isHidden = false
         }
         assistTableView.reloadData()
     }
     
     @IBAction func addDescriptionButtonTapped() {
         UIView.animate(withDuration: 0.5) {
-            self.shotDescriptionTextView.isHidden = false
-            self.addDescriptionButton.isHidden = true
+            self.shotDescriptionTextView.alpha = 1.0
+            self.cancelSaveStackView.isHidden = false
+            self.saveShotDetailButton.isHidden = false
+        }
+    }
+    
+    @IBAction func saveShotDetailTapped(_ sender: Any) {
+        if shotDescriptionTextView.alpha == 1.0 && shotDescriptionTextView.text != "" {
+            addDescriptionButton.setTitle(shotDescriptionTextView.text, for: .normal)
+        }
+        hideSaveCancelViews()
+    }
+    
+    @IBAction func cancelShotDetailTapped(_ sender: Any) {
+        if shotDescriptionTextView.alpha == 1.0 {
+            shotDescriptionTextView.text = ""
+        }
+        hideSaveCancelViews()
+    }
+    
+    func hideSaveCancelViews() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.cancelSaveStackView.isHidden = true
+            self.shotDescriptionTextView.alpha = 0.0
+            self.assistTableView.alpha = 0.0
+            self.addAssistButton.setTitle("Add Assist", for: .normal)
+        }) { _ in
+            self.saveShotDetailButton.isHidden = false
         }
     }
     
@@ -256,6 +286,8 @@ private extension SoccerTeamCollection {
     
     func showShotRatingView() {
         guard let tempShot = self.temporaryShot else { return }
+        shotDescriptionTextView.text = ""
+        ratingSlider.value = 0.5
         self.addAssistButton.isHidden = !tempShot.isGoal
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
@@ -292,9 +324,6 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             self.temporaryShot = TemporaryShot(player: player, onTarget: false, isGoal: false)
             self.showShotRatingView()
         }
-        let assist = UIAlertAction(title: "Assist", style: .default) { _ in
-            PlayingTimeController.shared.addAssist(to: player, match: match, teamType: self.currentTeamType)
-        }
         let foul = UIAlertAction(title: "Foul", style: .default) { _ in
             PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType)
         }
@@ -306,7 +335,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: self.currentTeamType)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        var actions = [goal, shotOnTarget, shotOffTarget, assist, foul, yellowCard, redCard, cancel]
+        var actions = [goal, shotOnTarget, shotOffTarget, foul, yellowCard, redCard, cancel]
         
         if let section = Section(rawValue: indexPath.section), section == .goalie {
             let save = UIAlertAction(title: "Save", style: .default) { _ in
@@ -484,11 +513,16 @@ extension SoccerTeamCollection: UITableViewDataSource {
 extension SoccerTeamCollection: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch currentTeamType {
         case .home:
             assistee = homeActivePlayers[indexPath.row]
         case .away:
             assistee = awayActivePlayers[indexPath.row]
+        }
+        if assistee == temporaryShot?.player {
+            assistee = nil
+            return
         }
         UIView.animate(withDuration: 0.5) {
             self.assistTableView.alpha = 0.0

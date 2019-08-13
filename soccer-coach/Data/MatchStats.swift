@@ -44,10 +44,10 @@ struct MatchStats {
         return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }
     var homeAssistsTotal: Int {
-        return homePlayingTime.compactMap { $0.assists }.flatMap { $0 }.count
+        return homePlayingTime.compactMap { $0.shots }.flatMap { $0 }.filter { $0.assistee != nil }.count
     }
     var awayAssistsTotal: Int {
-        return awayPlayingTime.compactMap { $0.assists }.flatMap { $0 }.count
+        return awayPlayingTime.compactMap { $0.shots }.flatMap { $0 }.filter { $0.assistee != nil }.count
     }
     var homeFoulsTotal: Int {
         return homePlayingTime.compactMap { $0.fouls }.flatMap { $0 }.count
@@ -105,8 +105,8 @@ struct PlayerMatchStats {
         guard shots.count > 0 else { return 0 }
         return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }
-    var assists: [Assist] {
-        return playingTimes.compactMap { $0.assists }.flatMap { $0 }
+    var assists: [Shot] {
+        return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { $0.assistee != nil }
     }
     var fouls: [Foul] {
         return playingTimes.compactMap { $0.fouls }.flatMap { $0 }

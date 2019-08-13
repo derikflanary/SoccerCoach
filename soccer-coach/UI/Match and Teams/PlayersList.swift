@@ -91,6 +91,16 @@ extension PlayersList: UITableViewDelegate {
         performSegue(withIdentifier: .showPlayerDetails, sender: nil)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
+            guard let player = self.dataSource.itemIdentifier(for: indexPath) else { return }
+            SoccerPlayerController.shared.delete(player)
+            self.team?.removeFromPlayers(player)
+            self.updateTableUI()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
 }
 
 

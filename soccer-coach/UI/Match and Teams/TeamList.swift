@@ -135,7 +135,6 @@ extension TeamList: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 
-    
 }
 
 

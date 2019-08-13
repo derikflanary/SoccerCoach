@@ -45,6 +45,10 @@ class MatchHistoryList: UIViewController {
      
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
+    }
+    
+    func fetchData() {
         matches = MatchController.shared.fetchAllMatches()
     }
     
@@ -83,6 +87,16 @@ extension MatchHistoryList: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedMatch = matches[indexPath.row]
         performSegue(withIdentifier: .presentMatchDetails, sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
+            guard let match = self.dataSource.itemIdentifier(for: indexPath) else { return }
+            MatchController.shared.delete(match)
+            self.fetchData()
+            self.updateTableUI()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
 }

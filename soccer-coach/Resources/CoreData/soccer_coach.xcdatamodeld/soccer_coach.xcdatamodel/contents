@@ -35,7 +35,7 @@
         <relationship name="homeMatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match" inverseName="homePlayingTime" inverseEntity="Match"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="playingTimes" inverseEntity="SoccerPlayer"/>
         <relationship name="shots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shot" inverseName="playingTime" inverseEntity="Shot"/>
-        <relationship name="turnover" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Turnover" inverseName="playingTime" inverseEntity="Turnover"/>
+        <relationship name="turnovers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Turnover" inverseName="playingTime" inverseEntity="Turnover"/>
     </entity>
     <entity name="Score" representedClassName=".Score" syncable="YES">
         <attribute name="away" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -69,10 +69,12 @@
         <relationship name="homeMatches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="homeTeam" inverseEntity="Match"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="team" inverseEntity="SoccerPlayer"/>
     </entity>
-    <entity name="Turnover" representedClassName="Turnover" syncable="YES" codeGenerationType="class">
+    <entity name="Turnover" representedClassName=".Turnover" syncable="YES">
         <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isBadPass" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isBadTouch" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="timeStamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="turnover" inverseEntity="PlayingTime"/>
+        <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="turnovers" inverseEntity="PlayingTime"/>
     </entity>
     <elements>
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
@@ -83,6 +85,6 @@
         <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="163"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="163"/>
         <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
-        <element name="Turnover" positionX="-369" positionY="144" width="128" height="88"/>
+        <element name="Turnover" positionX="-369" positionY="144" width="128" height="118"/>
     </elements>
 </model>

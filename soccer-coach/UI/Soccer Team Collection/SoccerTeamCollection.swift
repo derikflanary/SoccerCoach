@@ -161,7 +161,6 @@ class SoccerTeamCollection: UIViewController {
         self.saveShotDetailButton.isHidden = true
         UIView.animate(withDuration: 0.5) {
             self.assistTableView.alpha = 1.0
-            self.shotViewTitleLabel.text = "Select Player"
             self.cancelSaveStackView.isHidden = false
         }
         assistTableView.reloadData()

@@ -118,6 +118,26 @@ struct PlayingTimeController {
             }
         }
     }
+    
+    func addTurnover(to player: SoccerPlayer, match: Match, teamType: TeamType, badPass: Bool, badTouch: Bool) {
+        guard let context = context else { return }
+        guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
+        let turnover = Turnover(context: context)
+        turnover.isBadPass = badPass
+        turnover.isBadTouch = badTouch
+        turnover.half = playingTime.half
+        guard let half = Half(rawValue: Int(turnover.half)) else { return }
+        switch half {
+        case .first:
+            turnover.timeStamp = Int64(match.firstHalfTimeElapsed)
+        case .second:
+            turnover.timeStamp = Int64(match.secondHalfTimeElapsed)
+        case .extra:
+            turnover.timeStamp = Int64(match.extraTimeTimeElaspsed)
+        }
+        playingTime.addToTurnovers(turnover)
+    }
+    
 
     func addFoul(to player: SoccerPlayer, match: Match, teamType: TeamType) {
         guard let context = context else { return }

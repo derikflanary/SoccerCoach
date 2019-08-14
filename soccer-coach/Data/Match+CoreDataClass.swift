@@ -19,6 +19,7 @@ public class Match: NSManagedObject {
     var enterBackgroundCancellable: AnyCancellable? = nil
     var becomeActiveCancellable: AnyCancellable? = nil
     var savedDate = Date()
+    var isRunning = false
 
     @Published var hasStarted = false
     @Published var firstHalfTimeElapsed: TimeInterval = 0
@@ -58,21 +59,14 @@ public class Match: NSManagedObject {
             })
     }
     
-    func start() {
-        let backgroundSub = NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
-            .print()
-            .sink(receiveValue: { _ in
-                self.savedDate = Date()
-                self.pause()
-            })
-        enterBackgroundCancellable = AnyCancellable(backgroundSub)
-            
-        let activeSub = NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+    var becomeActiveSubscriber: AnyCancellable {
+        return NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
             .map({ _ -> TimeInterval in
                 return Date().timeIntervalSince(self.savedDate)
             })
             .print()
             .sink(receiveValue: { timeInterval in
+                guard self.isRunning else { return }
                 switch self.currentHalf {
                 case .first:
                     self.firstHalfTimeElapsed += timeInterval
@@ -83,13 +77,27 @@ public class Match: NSManagedObject {
                 }
                 self.resume()
             })
-        becomeActiveCancellable = AnyCancellable(activeSub)
-
+    }
+    
+    var enterBackgroundSubscriber: AnyCancellable {
+        return NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)
+            .sink(receiveValue: { _ in
+                guard self.isRunning else { return }
+                self.savedDate = Date()
+                self.timerAnyCancellable?.cancel()
+            })
+    }
+    
+    func start() {
+        enterBackgroundCancellable = enterBackgroundSubscriber
+        becomeActiveCancellable = becomeActiveSubscriber
         timerAnyCancellable = AnyCancellable(timerSubscriber)
         savedDate = Date()
+        isRunning = true
     }
     
     func pause() {
+        isRunning = false
         timerAnyCancellable?.cancel()
     }
     

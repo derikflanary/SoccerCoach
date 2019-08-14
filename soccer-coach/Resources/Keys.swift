@@ -12,6 +12,7 @@ enum Keys {
     
     static var savedFillerPlayers: String { return #function }
     static var fillerPlayerName = "🏃🏻‍♀️"
+    static var drawing: String { return #function }
     
     enum Entity {
         static var soccerPlayer = "SoccerPlayer"

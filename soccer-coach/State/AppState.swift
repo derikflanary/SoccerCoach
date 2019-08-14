@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PencilKit
 
 enum App {
     
@@ -18,15 +19,37 @@ enum App {
 class AppState: State {
     
     var matchState = MatchState()
+    var teamCreationState = TeamCreationState()
+    var drawing: PKDrawing?
+    var backgroundImage: UIImage?
     
     func react(to event: Event) {
         switch event {
+        case let event as Updated<PKDrawing>:
+            drawing = event.item
+        case let event as Updated<UIImage?>:
+            backgroundImage = event.item
         default:
             break
         }
         matchState.react(to: event)
+        teamCreationState.react(to: event)
     }
     
+}
+
+class TeamCreationState: State {
+    
+    @Published var players = [SoccerPlayer]()
+    
+    func react(to event: Event) {
+        switch event {
+        case let event as Created<SoccerPlayer>:
+            players.append(event.item)
+        default:
+            break
+        }
+    }
 }
 
 

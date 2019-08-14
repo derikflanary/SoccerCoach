@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JfW-Qu-rRv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JfW-Qu-rRv">
     <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +17,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MK-lh-b6t" customClass="PKCanvasView">
                                 <rect key="frame" x="0.0" y="50" width="1366" height="904"/>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Uoz-y4-ugt" firstAttribute="trailing" secondItem="2MK-lh-b6t" secondAttribute="trailing" id="45J-aT-hsV"/>
                             <constraint firstItem="Uoz-y4-ugt" firstAttribute="bottom" secondItem="2MK-lh-b6t" secondAttribute="bottom" id="GY4-iG-I5B"/>
@@ -37,7 +37,7 @@
                                     <action selector="cancelButtonTapped:" destination="bZ9-11-iui" id="ucH-1k-tZ3"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="photo.on.rectangle.fill" catalog="system" id="LFr-MT-0J5">
+                            <barButtonItem title="Item" image="photo.on.rectangle" catalog="system" id="LFr-MT-0J5">
                                 <connections>
                                     <action selector="imagesButtonTapped:" destination="bZ9-11-iui" id="jUa-X0-qoY"/>
                                 </connections>
@@ -88,7 +88,7 @@
     <resources>
         <image name="arrow.uturn.left.circle" catalog="system" width="64" height="62"/>
         <image name="arrow.uturn.right.circle" catalog="system" width="64" height="62"/>
-        <image name="photo.on.rectangle.fill" catalog="system" width="64" height="48"/>
+        <image name="photo.on.rectangle" catalog="system" width="64" height="48"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
     <color key="tintColor" name="tintGreen"/>

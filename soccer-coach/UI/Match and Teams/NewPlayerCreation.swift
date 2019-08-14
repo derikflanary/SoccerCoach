@@ -51,7 +51,8 @@ class NewPlayerCreation: UIViewController {
             player.number = number
             SoccerPlayerController.shared.update(player)
         } else {
-            _ = SoccerPlayerController.shared.createPlayer(with: name, number: numberTextField.text)
+            guard let player = SoccerPlayerController.shared.createPlayer(with: name, number: numberTextField.text) else { return }
+            App.sharedCore.fire(event: Created(item: player))
         }
         dismiss(animated: true, completion: nil)
     }

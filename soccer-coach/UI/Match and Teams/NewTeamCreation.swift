@@ -9,6 +9,7 @@
 import UIKit
 import VisionKit
 import CoreData
+import Combine
 
 class NewTeamCreation: UIViewController {
     
@@ -16,18 +17,30 @@ class NewTeamCreation: UIViewController {
         case main
     }
 
+    // MARK: - Outlets
+    
     @IBOutlet weak var teamNameTextField: UITextField!
     @IBOutlet weak var addPlayerButton: UIBarButtonItem!
     @IBOutlet weak var scanButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    // MARK: - Properties
+    
     var dataSource: UITableViewDiffableDataSource<Section, SoccerPlayer>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, SoccerPlayer>! = nil
     let cellIdentifier = "cell"
-    var players = [SoccerPlayer]()
+    var players = [SoccerPlayer]() {
+        didSet {
+            updateTableUI()
+        }
+    }
     var tapGesture = UITapGestureRecognizer()
     var selectedPlayer: SoccerPlayer? = nil
+    var playersSubscriber: AnyCancellable?
     
+    
+    // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +48,11 @@ class NewTeamCreation: UIViewController {
         configDataSource()
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
         view.addGestureRecognizer(tapGesture)
+        configureSubscribers()
     }
+    
+    
+    // MARK: - Actions
     
     @IBAction func cancelTapped(_ sender: Any) {
         performSegue(withIdentifier: .unwindToTeamList, sender: nil)
@@ -81,14 +98,18 @@ private extension NewTeamCreation {
     
     
     func updateTableUI(animated: Bool = true) {
-        currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
-        currentSnapshot.appendSections([.main])
-        currentSnapshot.appendItems(players)
-        self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
+        DispatchQueue.main.async {
+            self.currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
+            self.currentSnapshot.appendSections([.main])
+            self.currentSnapshot.appendItems(self.players)
+            self.dataSource.apply(self.currentSnapshot, animatingDifferences: animated)
+        }
     }
     
 }
 
+
+// MARK: - Tableview delegate
 
 extension NewTeamCreation: UITableViewDelegate {
     
@@ -115,6 +136,7 @@ extension NewTeamCreation: UIAdaptivePresentationControllerDelegate {
     
 }
 
+
 // MARK: - Camera Document Delegate
 
 @available(iOS 13.0, *)
@@ -127,7 +149,7 @@ extension NewTeamCreation: VNDocumentCameraViewControllerDelegate {
             DispatchQueue.main.async {
                 for name in resultingStrings {
                     if let newPlayer = SoccerPlayerController.shared.createPlayer(with: name) {
-                        self.players.append(newPlayer)                        
+                        App.sharedCore.fire(event: Created(item: newPlayer))  
                     }
                 }
                 self.updateTableUI()
@@ -152,6 +174,19 @@ extension NewTeamCreation: SegueHandling {
         guard let detailNav = segue.destination as? UINavigationController else { return }
         guard let detail = detailNav.topViewController as? NewPlayerCreation else { return }
         detail.player = selectedPlayer
+    }
+    
+}
+
+
+// MARK: - Subscriberable
+
+extension NewTeamCreation: Subscriberable {
+    
+    func configureSubscribers() {
+        let state = App.sharedCore.state
+        playersSubscriber = state.teamCreationState.$players
+            .assign(to: \.players, on: self)
     }
     
 }

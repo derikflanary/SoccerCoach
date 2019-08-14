@@ -286,8 +286,8 @@ private extension SoccerTeamCollection {
     func showShotRatingView() {
         guard let tempShot = self.temporaryShot else { return }
         shotDescriptionTextView.text = ""
-        ratingSlider.value = 0.5
-        self.addAssistButton.isHidden = !tempShot.isGoal
+        ratingSlider.setValue(0.5, animated: false)
+        addAssistButton.isHidden = !tempShot.isGoal
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.transform = .identity
@@ -323,6 +323,19 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             self.temporaryShot = TemporaryShot(player: player, onTarget: false, isGoal: false)
             self.showShotRatingView()
         }
+        let turnover = UIAlertAction(title: "Turnover", style: .default) { _ in
+            let alert = UIAlertController(title: "Turnover Type", message: nil, preferredStyle: .alert)
+            let badPass = UIAlertAction(title: "Bad Pass", style: .default) { _ in
+                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: true, badTouch: false)
+            }
+            let badTouch = UIAlertAction(title: "Bad Touch", style: .default) { _ in
+                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: false, badTouch: true)
+            }
+            alert.addAction(badPass)
+            alert.addAction(badTouch)
+            alert.view.tintColor = .label
+            self.present(alert, animated: true, completion: nil)
+        }
         let foul = UIAlertAction(title: "Foul", style: .default) { _ in
             PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType)
         }
@@ -334,7 +347,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: self.currentTeamType)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        var actions = [goal, shotOnTarget, shotOffTarget, foul, yellowCard, redCard, cancel]
+        var actions = [goal, shotOnTarget, shotOffTarget, turnover, foul, yellowCard, redCard, cancel]
         
         if let section = Section(rawValue: indexPath.section), section == .goalie {
             let save = UIAlertAction(title: "Save", style: .default) { _ in

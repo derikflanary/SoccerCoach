@@ -40,7 +40,15 @@ class DrawingViewController: UIViewController {
         canvasView.maximumZoomScale = 3 // make it zoomable
         canvasView.bouncesZoom = true
         initializeToolPicker() // hook up the toolkit to the canvasView
-        applyBackground(image: fullFieldImage)
+        applyBackground(image: App.sharedCore.state.backgroundImage ?? fullFieldImage)
+        if let drawing = App.sharedCore.state.drawing {
+            canvasView.drawing = drawing
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let drawing = canvasView.drawing
+        App.sharedCore.fire(event: Updated<PKDrawing>(item: drawing))
     }
 
     
@@ -54,10 +62,12 @@ class DrawingViewController: UIViewController {
         let alertController = UIAlertController(title: "Select Background", message: nil, preferredStyle: .alert)
         let fullFieldAction = UIAlertAction(title: "Full Field", style: .default) { _ in
             self.imageView.image = self.fullFieldImage
+            App.sharedCore.fire(event: Updated<UIImage?>(item: self.fullFieldImage))
             self.canvasView.drawing = PKDrawing()
         }
         let goalBoxAction = UIAlertAction(title: "Half Field", style: .default) { _ in
             self.imageView.image = self.goalBoxImage
+            App.sharedCore.fire(event: Updated<UIImage?>(item: self.goalBoxImage))
             self.canvasView.drawing = PKDrawing()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

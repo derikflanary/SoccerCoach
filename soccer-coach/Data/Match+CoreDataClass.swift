@@ -21,7 +21,7 @@ public class Match: NSManagedObject {
     var savedDate = Date()
     var isRunning = false
 
-    @Published var hasStarted = false
+    @Published var halfHasStarted = false
     @Published var firstHalfTimeElapsed: TimeInterval = 0
     @Published var secondHalfTimeElapsed: TimeInterval = 0
     @Published var extraTimeTimeElaspsed: TimeInterval = 0
@@ -64,7 +64,6 @@ public class Match: NSManagedObject {
             .map({ _ -> TimeInterval in
                 return Date().timeIntervalSince(self.savedDate)
             })
-            .print()
             .sink(receiveValue: { timeInterval in
                 guard self.isRunning else { return }
                 switch self.currentHalf {
@@ -94,6 +93,9 @@ public class Match: NSManagedObject {
         timerAnyCancellable = AnyCancellable(timerSubscriber)
         savedDate = Date()
         isRunning = true
+        if !halfHasStarted {
+            halfHasStarted = true
+        }
     }
     
     func pause() {

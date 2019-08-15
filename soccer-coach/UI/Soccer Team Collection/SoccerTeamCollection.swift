@@ -62,6 +62,27 @@ class SoccerTeamCollection: UIViewController {
         didSet {
             resetPlayers()
             updateSnapshot()
+            halfHasStartedSubscriber = currentMatch?.$halfHasStarted
+                .sink(receiveValue: { hasStarted in
+                    guard let match = self.currentMatch else { return }
+                    if hasStarted {
+                        for player in self.homeActivePlayers {
+                            guard let position = self.position(for: player, teamType: .home) else { continue }
+                            PlayingTimeController.shared.addPlayingTime(to: match, for: player, teamType: .home, position: position, halfHasStarted: hasStarted)
+                        }
+                        for player in self.awayActivePlayers {
+                            guard let position = self.position(for: player, teamType: .away) else { continue }
+                            PlayingTimeController.shared.addPlayingTime(to: match, for: player, teamType: .away, position: position, halfHasStarted: hasStarted)
+                        }                        
+                    } else {
+                        for player in self.homeActivePlayers {
+                            PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home)
+                        }
+                        for player in self.awayActivePlayers {
+                            PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away)
+                        }
+                    }
+                })
         }
     }
     var currentTeamType: TeamType = .home {
@@ -69,6 +90,7 @@ class SoccerTeamCollection: UIViewController {
             updateSnapshot()
         }
     }
+    var halfHasStartedSubscriber: AnyCancellable?
     var currentMatchSubscriber: AnyCancellable?
     var teamTypeSubscriber: AnyCancellable?
 
@@ -85,10 +107,10 @@ class SoccerTeamCollection: UIViewController {
         }
     }
     var homeActivePlayers: [SoccerPlayer] {
-        return homeActivePlayersPerSection.values.flatMap { $0 }.filter  { $0.name != Keys.fillerPlayerName }
+        return homeActivePlayersPerSection.values.flatMap { $0 }.filter  { !$0.isFiller }
     }
     var awayActivePlayers: [SoccerPlayer] {
-        return awayActivePlayersPerSection.values.flatMap { $0 }.filter  { $0.name != Keys.fillerPlayerName }
+        return awayActivePlayersPerSection.values.flatMap { $0 }.filter  { !$0.isFiller }
     }
     var allActivePlayers: [SoccerPlayer] {
         return activePlayersPerSection.values.flatMap { $0 }
@@ -286,13 +308,26 @@ private extension SoccerTeamCollection {
     func showShotRatingView() {
         guard let tempShot = self.temporaryShot else { return }
         shotDescriptionTextView.text = ""
-        ratingSlider.setValue(0.5, animated: false)
         addAssistButton.isHidden = !tempShot.isGoal
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.transform = .identity
             self.shotRatingView.alpha = 1.0
         })
+    }
+    
+    func position(for player: SoccerPlayer, teamType: TeamType) -> Position? {
+        var playerArrays = [[SoccerPlayer]]()
+        switch teamType {
+        case .home:
+            playerArrays = Array(homeActivePlayersPerSection.values)
+        case .away:
+            playerArrays = Array(awayActivePlayersPerSection.values)
+        }
+        let sectionIndex = playerArrays.firstIndex { $0.contains(player) }
+        guard let section = sectionIndex else { return nil }
+        guard let rowIndex = playerArrays[section].firstIndex(of: player) else { return nil }
+        return position(for: IndexPath(row: rowIndex, section: section))
     }
     
     func position(for indexPath: IndexPath) -> Position? {
@@ -324,20 +359,10 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
             self.showShotRatingView()
         }
         let turnover = UIAlertAction(title: "Turnover", style: .default) { _ in
-            let alert = UIAlertController(title: "Turnover Type", message: nil, preferredStyle: .alert)
-            let badPass = UIAlertAction(title: "Bad Pass", style: .default) { _ in
-                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: true, badTouch: false)
-            }
-            let badTouch = UIAlertAction(title: "Bad Touch", style: .default) { _ in
-                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: false, badTouch: true)
-            }
-            alert.addAction(badPass)
-            alert.addAction(badTouch)
-            alert.view.tintColor = .label
-            self.present(alert, animated: true, completion: nil)
+            self.presentTurnoverAlert(player: player, match: match)
         }
         let foul = UIAlertAction(title: "Foul", style: .default) { _ in
-            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType)
+            self.presentFoulAlert(player: player, match: match)
         }
         let yellowCard = UIAlertAction(title: "Yellow Card", style: .default) { _ in
             PlayingTimeController.shared.addCard(to: player, match: match, teamType: self.currentTeamType, cardType: .yellow)
@@ -364,12 +389,39 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         for action in actions {
             alertController.addAction(action)
         }
-        
         let rect = view.convert(cell.nameLabel.bounds, to: view)
         alertController.popoverPresentationController?.sourceView = cell.nameLabel
         alertController.popoverPresentationController?.sourceRect = rect
         alertController.view.tintColor = .label
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentTurnoverAlert(player: SoccerPlayer, match: Match) {
+        let alert = UIAlertController(title: "Turnover Type", message: nil, preferredStyle: .alert)
+        let badPass = UIAlertAction(title: "Bad Pass", style: .default) { _ in
+            PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: true, badTouch: false)
+        }
+        let badTouch = UIAlertAction(title: "Bad Touch", style: .default) { _ in
+            PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: false, badTouch: true)
+        }
+        alert.addAction(badPass)
+        alert.addAction(badTouch)
+        alert.view.tintColor = .label
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentFoulAlert(player: SoccerPlayer, match: Match) {
+        let alert = UIAlertController(title: "Foul Type", message: nil, preferredStyle: .alert)
+        let offsides = UIAlertAction(title: "Offsides", style: .default) { _ in
+            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: true)
+        }
+        let common = UIAlertAction(title: "Common Foul", style: .default) { _ in
+            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: false)
+        }
+        alert.addAction(offsides)
+        alert.addAction(common)
+        alert.view.tintColor = .label
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -428,22 +480,22 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
                     case .home:
                         guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         homeActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
                         
                         guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         homeActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
                     case .away:
                         guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
                         
                         guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         awayActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
                     }
                 }
@@ -456,7 +508,7 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
                 }
                 destinationPlayer.isActive = false
                 guard let match = currentMatch, let position = self.position(for: insertionIndexPath) else { return }
-                PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position)
+                PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position, halfHasStarted: match.halfHasStarted)
                 PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
             }
             movingPlayer.isActive = true

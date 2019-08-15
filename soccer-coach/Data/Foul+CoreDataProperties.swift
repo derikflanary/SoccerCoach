@@ -19,6 +19,7 @@ extension Foul {
 
     @NSManaged public var timeStamp: Int64
     @NSManaged public var half: Int64
+    @NSManaged public var isOffsides: Bool
     @NSManaged public var playingTime: PlayingTime?
 
 }

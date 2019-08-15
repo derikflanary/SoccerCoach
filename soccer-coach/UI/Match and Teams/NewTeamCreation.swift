@@ -61,6 +61,7 @@ class NewTeamCreation: UIViewController {
     @IBAction func saveTapped(_ sender: Any) {
         guard let name = teamNameTextField.text else { return }
         _ = TeamController.shared.createTeam(with: name, players: players)
+        App.sharedCore.fire(event: Reset<TeamCreationState>())
         performSegue(withIdentifier: .unwindToTeamList, sender: nil)
     }
     

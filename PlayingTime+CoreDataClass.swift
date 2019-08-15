@@ -2,7 +2,7 @@
 //  PlayingTime+CoreDataClass.swift
 //  soccer-coach
 //
-//  Created by Derik Flanary on 8/13/19.
+//  Created by Derik Flanary on 8/15/19.
 //  Copyright © 2019 Derik Flanary. All rights reserved.
 //
 //
@@ -12,7 +12,7 @@ import CoreData
 
 
 public class PlayingTime: NSManagedObject {
-
+    
     var isActive = false
     
     var position: Position {

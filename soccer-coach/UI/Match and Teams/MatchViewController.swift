@@ -29,6 +29,15 @@ class MatchViewController: UIViewController {
     
     // MARK: - Properties
     
+    var half: Half = .first
+    var currentMatchSubscriber: AnyCancellable?
+    var homeGoalSubscriber: AnyCancellable?
+    var awayGoalSubscriber: AnyCancellable?
+    var firstHalfTimeSubscriber: AnyCancellable?
+    var secondHalfTimeSubscriber: AnyCancellable?
+    var extraTimeSubscriber: AnyCancellable?
+    var endHalfButton = RoundedButton()
+    
     var match: Match? {
         didSet {
             guard match != oldValue else { return }
@@ -68,24 +77,17 @@ class MatchViewController: UIViewController {
         }
     }
 
-    var half: Half = .first
-    var currentMatchSubscriber: AnyCancellable?
-    var homeGoalSubscriber: AnyCancellable?
-    var awayGoalSubscriber: AnyCancellable?
-    var firstHalfTimeSubscriber: AnyCancellable?
-    var secondHalfTimeSubscriber: AnyCancellable?
-    var extraTimeSubscriber: AnyCancellable?
 
     var isRunning = false {
         didSet {
             guard let match = match else { return }
             if isRunning {
-                if match.hasStarted {
+                if match.halfHasStarted {
                     match.resume()
                 } else {
                     match.start()
                 }
-                match.hasStarted = true
+                
                 startPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             } else {
                 match.pause()
@@ -102,16 +104,18 @@ class MatchViewController: UIViewController {
         configureSubscribers()
         homeStepper.isHidden = true
         awayStepper.isHidden = true
+        halfSegmentedControl.isUserInteractionEnabled = false
+        halfSegmentedControl.isEnabled = false
+        endHalfButton.setTitle("End Half", for: .normal)
+        endHalfButton.addTarget(self, action: #selector(endHalfButtonTapped), for: .touchUpInside)
+        endHalfButton.backgroundColor = .systemBlue
+        mainStackView.addArrangedSubview(endHalfButton)
     }
     
 
     // MARK: - Actions
     
-    @IBAction func startPauseButtonTapped() {
-        isRunning.toggle()
-    }
-    
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    @objc func endHalfButtonTapped() {
         guard let match = match else { return }
         switch half {
         case .first:
@@ -131,6 +135,15 @@ class MatchViewController: UIViewController {
             }
         }
         updateHalfSelected()
+    }
+    
+    
+    @IBAction func startPauseButtonTapped() {
+        isRunning.toggle()
+    }
+    
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        
     }
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
@@ -203,6 +216,8 @@ private extension MatchViewController {
                 self.mainStackView.isUserInteractionEnabled = true
                 self.halfSegmentedControl.alpha = 1.0
                 self.halfSegmentedControl.isUserInteractionEnabled = true
+                self.halfSegmentedControl.selectedSegmentIndex = 0
+                self.endHalfButton.isHidden = false
                 self.endMatchButton.isHidden = false
                 self.createMatchButton.isHidden = true
             }
@@ -223,15 +238,18 @@ private extension MatchViewController {
     }
         
     func updateHalfSelected() {
-        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex) else { return }
+        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex + 1) else { return }
         half = selectedHalf
+        halfSegmentedControl.selectedSegmentIndex = half.rawValue
         isRunning = false
         match.half = Int64(half.rawValue)
+        match.halfHasStarted = false
         switch half {
         case .first:
             timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
         case .second:
             timeLabel.text = Int(match.secondHalfTimeElapsed).timeString()
+            endHalfButton.isHidden = true
         case .extra:
             timeLabel.text = Int(match.extraTimeTimeElaspsed).timeString()
         }

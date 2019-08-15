@@ -46,6 +46,8 @@ class TeamCreationState: State {
         switch event {
         case let event as Created<SoccerPlayer>:
             players.append(event.item)
+        case _ as Reset<TeamCreationState>:
+            players = []
         default:
             break
         }

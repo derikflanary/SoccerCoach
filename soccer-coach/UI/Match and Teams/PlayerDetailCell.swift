@@ -36,8 +36,8 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
         }
         playerStats.assists.forEach { assist in
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-            guard let half = Half(rawValue: Int(assist.half)) else { return }
-            let minute = Int(assist.timeStamp).minutes.minute(halfLength: 40, half: half)
+            guard let half = Half(rawValue: Int(assist.goal!.half)) else { return }
+            let minute = Int(assist.goal!.timeStamp).minutes.minute(halfLength: 40, half: half)
             label.text = "🙋‍♂️ \(minute) "
             label.textAlignment = .right
             label.font = UIFont.systemFont(ofSize: 13)

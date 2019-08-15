@@ -49,7 +49,8 @@ struct PlayingTimeController {
         }
     }
     
-    func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position) {
+    func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position, halfHasStarted: Bool) {
+        guard halfHasStarted else { return }
         guard let context = context else { return }
         let playingTime = PlayingTime(context: context)
         playingTime.player = player
@@ -71,11 +72,11 @@ struct PlayingTimeController {
         case .away:
             match.addToAwayPlayingTime(playingTime)
         }
-        print(playingTime)
+        print("began: \(playingTime)")
     }
     
     func endPlayingTime(for player: SoccerPlayer, match: Match, teamType: TeamType) {
-        guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
+        guard let playingTime = playingTime(for: player, match: match, teamType: teamType), playingTime.isActive else { return }
         playingTime.isActive = false
         if let half = Half(rawValue: Int(playingTime.half)) {
             switch half {
@@ -87,18 +88,27 @@ struct PlayingTimeController {
                 playingTime.length = match.extraTimeTimeElaspsed - playingTime.startTime
             }
         }
+        if playingTime.length < 30 {
+            match.removeFromAwayPlayingTime(playingTime)
+        }
+        print("ended: \(playingTime)")
     }
     
     func addShot(to player: SoccerPlayer, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil, assistee: SoccerPlayer?) {
         guard let context = context else { return }
-        guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
+        guard let playerPlayingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let shot = Shot(context: context)
-        shot.half = playingTime.half
+        shot.half = playerPlayingTime.half
         shot.rating = Int64(rating)
         shot.onTarget = onTarget
         shot.isGoal = isGoal
         shot.shotDescription = description
-        shot.assistee = assistee
+        if let assistee = assistee, let assisteePlayingTime = playingTime(for: assistee, match: match, teamType: teamType) {
+            let assist = Assist(context: context)
+            assist.goal = shot
+            shot.assist = assist
+            assisteePlayingTime.addToAssists(assist)
+        }
         guard let half = Half(rawValue: Int(shot.half)) else { return }
         switch half {
         case .first:
@@ -108,7 +118,7 @@ struct PlayingTimeController {
         case .extra:
             shot.timeStamp = Int64(match.extraTimeTimeElaspsed)
         }
-        playingTime.addToShots(shot)
+        playerPlayingTime.addToShots(shot)
         if shot.isGoal {
             switch teamType {
             case .home:
@@ -139,11 +149,12 @@ struct PlayingTimeController {
     }
     
 
-    func addFoul(to player: SoccerPlayer, match: Match, teamType: TeamType) {
+    func addFoul(to player: SoccerPlayer, match: Match, teamType: TeamType, isOffsides: Bool) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let foul = Foul(context: context)
         foul.half = playingTime.half
+        foul.isOffsides = isOffsides
         guard let half = Half(rawValue: Int(foul.half)) else { return }
         switch half {
         case .first:

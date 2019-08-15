@@ -2,7 +2,7 @@
 //  PlayingTime+CoreDataProperties.swift
 //  soccer-coach
 //
-//  Created by Derik Flanary on 8/13/19.
+//  Created by Derik Flanary on 8/15/19.
 //  Copyright © 2019 Derik Flanary. All rights reserved.
 //
 //
@@ -22,12 +22,13 @@ extension PlayingTime {
     @NSManaged public var positionValue: Int64
     @NSManaged public var startTime: Double
     @NSManaged public var awayMatch: Match?
-    @NSManaged public var cards: Set<Card>
+    @NSManaged public var cards: Set<Card>?
     @NSManaged public var fouls: Set<Foul>?
     @NSManaged public var homeMatch: Match?
     @NSManaged public var player: SoccerPlayer?
-    @NSManaged public var shots: Set<Shot>
+    @NSManaged public var shots: Set<Shot>?
     @NSManaged public var turnovers: Set<Turnover>?
+    @NSManaged public var assists: Set<Assist>?
 
 }
 
@@ -96,5 +97,22 @@ extension PlayingTime {
 
     @objc(removeTurnovers:)
     @NSManaged public func removeFromTurnovers(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for assists
+extension PlayingTime {
+
+    @objc(addAssistsObject:)
+    @NSManaged public func addToAssists(_ value: Assist)
+
+    @objc(removeAssistsObject:)
+    @NSManaged public func removeFromAssists(_ value: Assist)
+
+    @objc(addAssists:)
+    @NSManaged public func addToAssists(_ values: NSSet)
+
+    @objc(removeAssists:)
+    @NSManaged public func removeFromAssists(_ values: NSSet)
 
 }

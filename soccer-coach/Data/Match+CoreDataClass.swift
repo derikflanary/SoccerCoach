@@ -88,6 +88,7 @@ public class Match: NSManagedObject {
     }
     
     func start() {
+        timerPublisher = Timer.publish(every: 1, tolerance: 0, on: .current, in: .default, options: nil)
         enterBackgroundCancellable = enterBackgroundSubscriber
         becomeActiveCancellable = becomeActiveSubscriber
         timerAnyCancellable = AnyCancellable(timerSubscriber)

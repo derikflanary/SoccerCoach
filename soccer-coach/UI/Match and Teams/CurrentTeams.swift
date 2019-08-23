@@ -93,8 +93,8 @@ private extension CurrentTeams {
             self.currentSnapshot = NSDiffableDataSourceSnapshot<TeamType, SoccerPlayer>()
             self.currentSnapshot.appendSections([self.currentSection])
             self.tableView.backgroundView = self.currentMatch == nil ? self.emptyStateView : nil
-            guard let currentTeam = self.currentTeam else { return }
-            let filteredPlayers = currentTeam.players.sorted(by: { (playerOne, playerTwo) -> Bool in
+            
+            let filteredPlayers = self.currentTeam?.players.sorted(by: { (playerOne, playerTwo) -> Bool in
                 if playerOne.isActive && playerTwo.isActive {
                     return playerOne.name < playerTwo.name
                 }
@@ -103,7 +103,7 @@ private extension CurrentTeams {
                 }
                 return playerOne.isActive && !playerTwo.isActive
             })
-            self.currentSnapshot.appendItems(filteredPlayers)
+            self.currentSnapshot.appendItems(filteredPlayers ?? [])
             self.dataSource.apply(self.currentSnapshot, animatingDifferences: animated)
         }
     }

@@ -87,23 +87,23 @@ class MatchDetail: UIViewController {
     func updateTableUI(animated: Bool = true) {
         DispatchQueue.main.async {
             guard let homeTeamDataSource = self.homeTeamDataSource, let awayTeamDataSource = self.awayTeamDataSource else { return }
-            guard let match = self.match, let homeTeam = match.homeTeam, let awayTeam = match.awayTeam else { return }
+            guard let match = self.match else { return }
             self.homeCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
             self.homeCurrentSnapshot?.appendSections([.home])
-            self.homePlayers = homeTeam.players.sorted { playerOne, playerTwo -> Bool in
+            self.homePlayers = match.homeTeam?.players.sorted { playerOne, playerTwo -> Bool in
                 let playingTimesOne = match.homePlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
                 let playingTimesTwo = match.homePlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
                 let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
                 let statsTwo = PlayerMatchStats(player: playerTwo, playingTimes: playingTimesTwo)
                 return statsOne.minutesPlayed > statsTwo.minutesPlayed
-            }
-            self.awayPlayers = awayTeam.players.sorted { playerOne, playerTwo -> Bool in
+            } ?? []
+            self.awayPlayers = match.awayTeam?.players.sorted { playerOne, playerTwo -> Bool in
                 let playingTimesOne = match.awayPlayingTime?.filter { $0.player == playerOne }.compactMap { $0 } ?? []
                 let playingTimesTwo = match.awayPlayingTime?.filter { $0.player == playerTwo }.compactMap { $0 } ?? []
                 let statsOne = PlayerMatchStats(player: playerOne, playingTimes: playingTimesOne)
                 let statsTwo = PlayerMatchStats(player: playerTwo, playingTimes: playingTimesTwo)
                 return statsOne.minutesPlayed > statsTwo.minutesPlayed
-            }
+            } ?? []
 
             self.homeCurrentSnapshot?.appendItems(self.homePlayers)
             self.awayCurrentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
@@ -121,6 +121,7 @@ class MatchDetail: UIViewController {
 extension MatchDetail: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if tableView == homeTableView {
             selectedPlayer = homePlayers[indexPath.row]
             playerTeamType = .home
@@ -129,6 +130,7 @@ extension MatchDetail: UITableViewDelegate {
             selectedPlayer = awayPlayers[indexPath.row]
             playerTeamType = .away
         }
+        performSegue(withIdentifier: .showMatchPlayerDetails, sender: nil)
     }
     
 }

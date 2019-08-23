@@ -50,6 +50,7 @@ class MatchHistoryList: UIViewController {
     
     func fetchData() {
         matches = MatchController.shared.fetchAllMatches()
+        print(matches)
     }
     
 }

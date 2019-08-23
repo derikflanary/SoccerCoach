@@ -50,13 +50,8 @@ class TeamList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         configDataSource()
         fetchData()
-        updateTableUI()
     }
     
     
@@ -64,7 +59,6 @@ class TeamList: UIViewController {
     
     @IBAction func unwindToTeamList(_ segue: UIStoryboardSegue) {
         fetchData()
-        updateTableUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -88,6 +82,7 @@ private extension TeamList {
     
     func fetchData() {
         teams = TeamController.shared.fetchAllTeams()
+        updateTableUI()
     }
     
     func configDataSource() {
@@ -130,7 +125,6 @@ extension TeamList: UITableViewDelegate {
             guard let team = self.dataSource.itemIdentifier(for: indexPath) else { return }
             TeamController.shared.delete(team)
             self.fetchData()
-            self.updateTableUI()
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

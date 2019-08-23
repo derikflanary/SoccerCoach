@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dim-gI-DPa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dim-gI-DPa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--New Match-->
@@ -33,7 +32,7 @@
                                 </connections>
                             </datePicker>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="systemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2a6-az-LnY" firstAttribute="leading" secondItem="9kA-Xg-nVu" secondAttribute="leading" id="Cgl-fF-YML"/>
                             <constraint firstItem="gU9-Kt-To0" firstAttribute="trailing" secondItem="9kA-Xg-nVu" secondAttribute="trailing" id="DP6-Lc-aI1"/>
@@ -70,7 +69,9 @@
         <!--TeamList-->
         <scene sceneID="M20-7q-qQ1">
             <objects>
-                <viewControllerPlaceholder storyboardName="TeamList" id="Slc-4Z-hqb" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="TeamList" id="Slc-4Z-hqb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="H5e-lS-Xn6"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FwV-bV-XaT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2607" y="-3186"/>

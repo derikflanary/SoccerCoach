@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14886.2" systemVersion="19A526h" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A536g" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Assist" representedClassName=".Assist" syncable="YES">
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shot" inverseName="assist" inverseEntity="Shot"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="assists" inverseEntity="PlayingTime"/>
@@ -82,6 +82,7 @@
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="turnovers" inverseEntity="PlayingTime"/>
     </entity>
     <elements>
+        <element name="Assist" positionX="-369" positionY="144" width="128" height="73"/>
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="103"/>
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="208"/>
@@ -91,6 +92,5 @@
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="148"/>
         <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
         <element name="Turnover" positionX="-369" positionY="144" width="128" height="118"/>
-        <element name="Assist" positionX="-369" positionY="144" width="128" height="73"/>
     </elements>
 </model>

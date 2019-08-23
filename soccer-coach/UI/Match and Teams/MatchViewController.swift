@@ -25,6 +25,7 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var createMatchButton: UIButton!
     @IBOutlet weak var endMatchButton: RoundedButton!
     @IBOutlet weak var mainStackView: UIStackView!
+    @IBOutlet weak var endHalfButton: RoundedButton!
     
     
     // MARK: - Properties
@@ -36,7 +37,6 @@ class MatchViewController: UIViewController {
     var firstHalfTimeSubscriber: AnyCancellable?
     var secondHalfTimeSubscriber: AnyCancellable?
     var extraTimeSubscriber: AnyCancellable?
-    var endHalfButton = RoundedButton()
     
     var match: Match? {
         didSet {
@@ -102,20 +102,12 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSubscribers()
-        homeStepper.isHidden = true
-        awayStepper.isHidden = true
-        halfSegmentedControl.isUserInteractionEnabled = false
-        halfSegmentedControl.isEnabled = false
-        endHalfButton.setTitle("End Half", for: .normal)
-        endHalfButton.addTarget(self, action: #selector(endHalfButtonTapped), for: .touchUpInside)
-        endHalfButton.backgroundColor = .systemBlue
-        mainStackView.addArrangedSubview(endHalfButton)
     }
     
 
     // MARK: - Actions
     
-    @objc func endHalfButtonTapped() {
+    @IBAction func endHalfButtonTapped() {
         guard let match = match else { return }
         switch half {
         case .first:
@@ -137,7 +129,6 @@ class MatchViewController: UIViewController {
         updateHalfSelected()
     }
     
-    
     @IBAction func startPauseButtonTapped() {
         isRunning.toggle()
     }
@@ -148,12 +139,12 @@ class MatchViewController: UIViewController {
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
         let goalCount = Int64(sender.value)
-        homeGoalLabel.text = "\(Int(sender.value))"
+        homeGoalLabel.text = "\(goalCount)"
     }
     
     @IBAction func awayStepperChanged(_ sender: UIStepper) {
         let goalCount = Int64(sender.value)
-        awayLabel.text = "\(Int(sender.value))"
+        awayGoalLabel.text = "\(goalCount)"
     }
     
     @IBAction func endMatchTapped() {
@@ -210,6 +201,7 @@ private extension MatchViewController {
                 self.halfSegmentedControl.alpha = 0.2
                 self.halfSegmentedControl.isUserInteractionEnabled = false
                 self.endMatchButton.isHidden = true
+                self.endHalfButton.isHidden = true
                 self.createMatchButton.isHidden = false
             } else {
                 self.mainStackView.alpha = 1.0
@@ -220,6 +212,8 @@ private extension MatchViewController {
                 self.endHalfButton.isHidden = false
                 self.endMatchButton.isHidden = false
                 self.createMatchButton.isHidden = true
+                self.homeLabel.text = match?.homeTeam?.name
+                self.awayLabel.text = match?.awayTeam?.name
             }
         }
     }
@@ -266,11 +260,11 @@ extension MatchViewController: Subscriberable {
         let state = App.sharedCore.state
         currentMatchSubscriber = state.matchState.$currentMatch
             .assign(to: \.match, on: self)
-//        homeGoalSubscriber = state.matchState.$homeGoals
-//            .assign(to: \.homeGoals, on: self)
-//
-//        awayGoalSubscriber = state.matchState.$awayGoals
-//            .assign(to: \.awayGoals, on: self)
+        homeGoalSubscriber = state.matchState.$homeGoals
+            .assign(to: \.homeGoals, on: self)
+
+        awayGoalSubscriber = state.matchState.$awayGoals
+            .assign(to: \.awayGoals, on: self)
     }
     
 }

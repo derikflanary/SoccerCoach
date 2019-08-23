@@ -65,16 +65,7 @@ class SoccerTeamCollection: UIViewController {
             halfHasStartedSubscriber = currentMatch?.$halfHasStarted
                 .sink(receiveValue: { hasStarted in
                     guard let match = self.currentMatch else { return }
-                    if hasStarted {
-                        for player in self.homeActivePlayers {
-                            guard let position = self.position(for: player, teamType: .home) else { continue }
-                            PlayingTimeController.shared.addPlayingTime(to: match, for: player, teamType: .home, position: position, halfHasStarted: hasStarted)
-                        }
-                        for player in self.awayActivePlayers {
-                            guard let position = self.position(for: player, teamType: .away) else { continue }
-                            PlayingTimeController.shared.addPlayingTime(to: match, for: player, teamType: .away, position: position, halfHasStarted: hasStarted)
-                        }                        
-                    } else {
+                    if !hasStarted {
                         for player in self.homeActivePlayers {
                             PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home)
                         }
@@ -292,7 +283,7 @@ private extension SoccerTeamCollection {
         guard let dataSource = dataSource else { return }
         DispatchQueue.main.async {
             self.currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
-            guard let currentSnapshot = self.currentSnapshot else { return }
+            guard var currentSnapshot = self.currentSnapshot else { return }
             Section.allCases.forEach {
                 currentSnapshot.appendSections([$0])
                 currentSnapshot.appendItems(self.activePlayersPerSection[$0] ?? [])
@@ -474,31 +465,35 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
             let insertionIndexPath = destinationIndexPath
             guard let section = Section(rawValue: insertionIndexPath.section) else { continue }
             guard let playersForSection = activePlayersPerSection[section] else { continue }
+           
+            // When moving an active player from one position to another
             if activePlayersContains(movingPlayer) {
                 if let sourceIndexPath = item.sourceIndexPath, let sourceSection = Section(rawValue: sourceIndexPath.section), let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row], let match = currentMatch {
                     switch currentTeamType {
                     case .home:
                         guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         homeActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
                         
                         guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         homeActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
                     case .away:
                         guard let insertionPosition = self.position(for: insertionIndexPath) else { return }
                         awayActivePlayersPerSection[section]?[insertionIndexPath.row] = movingPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: movingPlayer, match: match, teamType: currentTeamType)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: insertionPosition)
                         
                         guard let sourcePosition = self.position(for: sourceIndexPath) else { return }
                         awayActivePlayersPerSection[sourceSection]?[sourceIndexPath.row] = destinationPlayer
-                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition, halfHasStarted: match.halfHasStarted)
                         PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
+                        PlayingTimeController.shared.addPlayingTime(to: match, for: destinationPlayer, teamType: currentTeamType, position: sourcePosition)
                     }
                 }
+            
+            // When adding a new player
             } else if playersForSection.count + 1 >= insertionIndexPath.row, let destinationPlayer = activePlayersPerSection[section]?[insertionIndexPath.row] {
                 switch currentTeamType {
                 case .home:
@@ -508,7 +503,7 @@ extension SoccerTeamCollection: UICollectionViewDropDelegate {
                 }
                 destinationPlayer.isActive = false
                 guard let match = currentMatch, let position = self.position(for: insertionIndexPath) else { return }
-                PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position, halfHasStarted: match.halfHasStarted)
+                PlayingTimeController.shared.addPlayingTime(to: match, for: movingPlayer, teamType: currentTeamType, position: position)
                 PlayingTimeController.shared.endPlayingTime(for: destinationPlayer, match: match, teamType: currentTeamType)
             }
             movingPlayer.isActive = true

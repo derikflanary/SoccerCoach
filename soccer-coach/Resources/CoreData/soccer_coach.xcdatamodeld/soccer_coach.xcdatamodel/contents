@@ -17,10 +17,12 @@
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="fouls" inverseEntity="PlayingTime"/>
     </entity>
     <entity name="Match" representedClassName=".Match" syncable="YES">
+        <attribute name="awayCornerCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="585544500" usesScalarValueType="NO"/>
         <attribute name="firstHalfCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="halfLength" attributeType="Integer 64" defaultValueString="40" usesScalarValueType="YES"/>
+        <attribute name="homeCornerCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String" defaultValueString="0"/>
         <attribute name="secondHalfCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="awayPlayingTime" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="awayMatch" inverseEntity="PlayingTime"/>
@@ -85,7 +87,7 @@
         <element name="Assist" positionX="-369" positionY="144" width="128" height="73"/>
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="103"/>
-        <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="208"/>
+        <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="238"/>
         <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="223"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
         <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="163"/>

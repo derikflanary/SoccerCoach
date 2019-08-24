@@ -52,6 +52,11 @@ class PlayersList: UIViewController {
         title = team?.name
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateTableUI()
+    }
+    
 }
 
 
@@ -74,7 +79,7 @@ private extension PlayersList {
         guard let team = team else { return }
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, SoccerPlayer>()
         currentSnapshot.appendSections([.main])
-        currentSnapshot.appendItems(Array(team.players))
+        currentSnapshot.appendItems(Array(team.players.sorted { $0.name < $1.name }))
         self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
     }
     
@@ -112,11 +117,11 @@ extension PlayersList: SegueHandling {
         case showPlayerDetails
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailNav = segue.destination as? UINavigationController else { return }
         guard let detail = detailNav.topViewController as? NewPlayerCreation else { return }
         detail.player = selectedPlayer
+        detail.team = team
     }
     
 }

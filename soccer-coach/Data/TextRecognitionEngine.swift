@@ -37,7 +37,7 @@ class TextRecognitionEngine {
         requests = [textRecognitionRequest]
     }
     
-    func process(_ scan: VNDocumentCameraScan, completion: @escaping (([String]) -> Void)) {
+    func                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             process(_ scan: VNDocumentCameraScan, completion: @escaping (([String]) -> Void)) {
         let images = scan.images()
         let handlers = images.map { VNImageRequestHandler(cgImage: $0, options: [:]) }
         performRequest(on: handlers, completion: completion)

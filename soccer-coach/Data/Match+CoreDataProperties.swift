@@ -28,6 +28,8 @@ extension Match {
     @NSManaged public var half: Int64
     @NSManaged public var firstHalfCount: Int64
     @NSManaged public var secondHalfCount: Int64
+    @NSManaged public var homeCornerCount: Int64
+    @NSManaged public var awayCornerCount: Int64
 
 }
 

@@ -46,7 +46,7 @@ struct MatchController {
         }
     }
     
-    func end(_ match: Match) {
+    func end(_ match: Match, homeCornerCount: Int64, awayCornerCount: Int64) {
         if let homeTeam = match.homeTeam {
             for player in homeTeam.players {
                 PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home)
@@ -57,6 +57,8 @@ struct MatchController {
                 PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away)
             }
         }
+        match.homeCornerCount = homeCornerCount
+        match.awayCornerCount = awayCornerCount
         save(match)
     }
     

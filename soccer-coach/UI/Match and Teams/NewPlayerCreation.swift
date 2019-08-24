@@ -14,8 +14,10 @@ class NewPlayerCreation: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var numberTextField: UITextField!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var player: SoccerPlayer?
+    var team: Team?
     
     var number: String? {
         guard let text = numberTextField.text else { return nil }
@@ -34,6 +36,8 @@ class NewPlayerCreation: UIViewController {
         nameTextField.text = player?.name
         numberTextField.text = player?.number != "100" ? player?.number : nil
         numberTextField.delegate = self
+        title = player == nil ? "New Player" : "Edit Player"
+        deleteButton.isHidden = player == nil
     }
     
     
@@ -54,6 +58,13 @@ class NewPlayerCreation: UIViewController {
             guard let player = SoccerPlayerController.shared.createPlayer(with: name, number: numberTextField.text) else { return }
             App.sharedCore.fire(event: Created(item: player))
         }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        guard let player = player else { return }
+        SoccerPlayerController.shared.delete(player)
+        self.team?.removeFromPlayers(player)
         dismiss(animated: true, completion: nil)
     }
     

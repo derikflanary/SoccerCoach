@@ -55,6 +55,7 @@ class NewTeamCreation: UIViewController {
     // MARK: - Actions
     
     @IBAction func cancelTapped(_ sender: Any) {
+        App.sharedCore.fire(event: Reset<TeamCreationState>())
         performSegue(withIdentifier: .unwindToTeamList, sender: nil)
     }
     

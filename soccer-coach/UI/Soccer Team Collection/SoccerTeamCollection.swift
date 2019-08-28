@@ -44,10 +44,7 @@ class SoccerTeamCollection: UIViewController {
     @IBOutlet weak var addAssistButton: RoundedButton!
     @IBOutlet weak var assistTableView: UITableView!
     @IBOutlet weak var shotViewTitleLabel: UILabel!
-    @IBOutlet weak var shotDescriptionTextView: UITextView!
-    @IBOutlet weak var addDescriptionButton: RoundedButton!
-    @IBOutlet weak var cancelSaveStackView: UIStackView!
-    @IBOutlet weak var saveShotDetailButton: UIButton!
+    @IBOutlet weak var shotDescriptionTextField: UITextField!
     
     
     // MARK: - Properties
@@ -153,13 +150,8 @@ class SoccerTeamCollection: UIViewController {
             self.shotRatingView.alpha = 0.0
         }) { _ in
             guard let temporaryShot = self.temporaryShot, let match = self.currentMatch else { return }
-            PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: self.shotDescriptionTextView.text, assistee: self.assistee)
-            self.temporaryShot = nil
-            self.assistee = nil
-            self.addAssistButton.setTitle("Add Assist", for: .normal)
-            self.shotDescriptionTextView.text = ""
-            self.shotDescriptionTextView.isHidden = true
-            self.addDescriptionButton.isHidden = false
+            PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: self.shotDescriptionTextField.text, assistee: self.assistee)
+            self.resetShotDetailView()
         }
     }
     
@@ -171,45 +163,17 @@ class SoccerTeamCollection: UIViewController {
     }
     
     @IBAction func addAssistButtonTapped() {
-        self.saveShotDetailButton.isHidden = true
         UIView.animate(withDuration: 0.5) {
             self.assistTableView.alpha = 1.0
-            self.cancelSaveStackView.isHidden = false
         }
         assistTableView.reloadData()
     }
     
-    @IBAction func addDescriptionButtonTapped() {
-        UIView.animate(withDuration: 0.5) {
-            self.shotDescriptionTextView.alpha = 1.0
-            self.cancelSaveStackView.isHidden = false
-            self.saveShotDetailButton.isHidden = false
-        }
-    }
-    
-    @IBAction func saveShotDetailTapped(_ sender: Any) {
-        if shotDescriptionTextView.alpha == 1.0 && shotDescriptionTextView.text != "" {
-            addDescriptionButton.setTitle(shotDescriptionTextView.text, for: .normal)
-        }
-        hideSaveCancelViews()
-    }
-    
     @IBAction func cancelShotDetailTapped(_ sender: Any) {
-        if shotDescriptionTextView.alpha == 1.0 {
-            shotDescriptionTextView.text = ""
+        UIView.animate(withDuration: 0.5) {
+            self.shotRatingView.alpha = 0.0
         }
-        hideSaveCancelViews()
-    }
-    
-    func hideSaveCancelViews() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.cancelSaveStackView.isHidden = true
-            self.shotDescriptionTextView.alpha = 0.0
-            self.assistTableView.alpha = 0.0
-            self.addAssistButton.setTitle("Add Assist", for: .normal)
-        }) { _ in
-            self.saveShotDetailButton.isHidden = false
-        }
+        resetShotDetailView()
     }
     
 }
@@ -298,13 +262,19 @@ private extension SoccerTeamCollection {
     
     func showShotRatingView() {
         guard let tempShot = self.temporaryShot else { return }
-        shotDescriptionTextView.text = ""
         addAssistButton.isHidden = !tempShot.isGoal
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.transform = .identity
             self.shotRatingView.alpha = 1.0
         })
+    }
+    
+    func resetShotDetailView() {
+        temporaryShot = nil
+        assistee = nil
+        shotDescriptionTextField.text = nil
+        self.addAssistButton.setTitle("Add Assist", for: .normal)
     }
     
     func position(for player: SoccerPlayer, teamType: TeamType) -> Position? {

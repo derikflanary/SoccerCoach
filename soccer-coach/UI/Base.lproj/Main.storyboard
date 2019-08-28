@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyP-Bu-AHd">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -14,7 +14,7 @@
             <objects>
                 <viewController id="nlV-Ay-vVf" customClass="SoccerTeamCollection" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3y4-hD-KW5">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-na-RNq">
@@ -43,58 +43,46 @@
                                     <outlet property="delegate" destination="nlV-Ay-vVf" id="3r7-g8-TKc"/>
                                 </connections>
                             </collectionView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
-                                <rect key="frame" x="211" y="212.5" width="281.5" height="343"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
+                                <rect key="frame" x="211" y="181" width="281.5" height="406"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-D4-MId">
-                                        <rect key="frame" x="20" y="12" width="241.5" height="319"/>
+                                        <rect key="frame" x="20" y="12" width="241.5" height="382"/>
                                         <subviews>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="P8e-65-9cq">
-                                                <rect key="frame" x="0.0" y="0.0" width="241.5" height="0.0"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-0l-9j3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="0.0"/>
-                                                        <state key="normal" title="Cancel"/>
-                                                        <connections>
-                                                            <action selector="cancelShotDetailTapped:" destination="nlV-Ay-vVf" eventType="touchUpInside" id="U8U-oz-XUn"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4r-1z-LVw">
-                                                        <rect key="frame" x="207.5" y="0.0" width="34" height="0.0"/>
-                                                        <state key="normal" title="Save"/>
-                                                        <connections>
-                                                            <action selector="saveShotDetailTapped:" destination="nlV-Ay-vVf" eventType="touchUpInside" id="mVv-PL-aJD"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shot Difficulty Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEk-Jq-dyN">
-                                                <rect key="frame" x="36" y="0.0" width="170" height="23.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shot Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEk-Jq-dyN">
+                                                <rect key="frame" x="72.5" y="0.0" width="97" height="24"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average quality shot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="526-JU-WGH">
-                                                <rect key="frame" x="63" y="39.5" width="115.5" height="17"/>
+                                                <rect key="frame" x="63" y="40" width="115.5" height="17"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSA-mu-kNd">
-                                                <rect key="frame" x="-2" y="72.5" width="245.5" height="36"/>
+                                                <rect key="frame" x="-2" y="73" width="245.5" height="36.5"/>
                                                 <connections>
                                                     <action selector="ratingSliderValueChanged" destination="nlV-Ay-vVf" eventType="valueChanged" id="i5t-vS-bQP"/>
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qC-Rp-1kx">
-                                                <rect key="frame" x="114.5" y="123.5" width="12.5" height="27.5"/>
+                                                <rect key="frame" x="114.5" y="124.5" width="12.5" height="28"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Shot Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cl-jW-N6W">
+                                                <rect key="frame" x="0.0" y="168.5" width="241.5" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="QDV-CT-atf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpF-lu-pH5" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="167" width="241.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="224.5" width="241.5" height="40"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="bfI-DI-pkq"/>
@@ -109,25 +97,8 @@
                                                     <action selector="addAssistButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="d6O-pm-c1E"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQW-Ro-yFJ" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="223" width="241.5" height="40"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="kJO-7R-gvk"/>
-                                                </constraints>
-                                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="4" maxY="0.0"/>
-                                                <state key="normal" title="Add Description">
-                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowed" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="addDescriptionButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="9QE-9r-aAl"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAv-mg-yPk" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="279" width="241.5" height="40"/>
+                                                <rect key="frame" x="0.0" y="280.5" width="241.5" height="40"/>
                                                 <color key="backgroundColor" name="tintGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5oj-1G-tw0"/>
@@ -142,24 +113,25 @@
                                                     <action selector="shotRatingSubmitButtonTaped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="2bc-Kd-ocO"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-0l-9j3">
+                                                <rect key="frame" x="97" y="336.5" width="48" height="45.5"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelShotDetailTapped:" destination="nlV-Ay-vVf" eventType="touchUpInside" id="U8U-oz-XUn"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="P8e-65-9cq" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="060-c1-15Z"/>
                                             <constraint firstItem="xpF-lu-pH5" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="0RM-Md-vwV"/>
+                                            <constraint firstItem="1cl-jW-N6W" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="31x-Ax-jnI"/>
                                             <constraint firstItem="NSA-mu-kNd" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="8L9-uY-z8J"/>
                                             <constraint firstItem="zAv-mg-yPk" firstAttribute="width" secondItem="cLs-D4-MId" secondAttribute="width" id="ALP-9A-5Zz"/>
-                                            <constraint firstItem="eQW-Ro-yFJ" firstAttribute="width" secondItem="xpF-lu-pH5" secondAttribute="width" id="Thw-q2-tA8"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DI2-BN-ZxK">
-                                        <rect key="frame" x="8" y="41" width="265.5" height="294"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="foR-YA-M82">
-                                        <rect key="frame" x="0.0" y="41" width="281.5" height="302"/>
+                                        <rect key="frame" x="0.0" y="41" width="281.5" height="365"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="nlV-Ay-vVf" id="jLM-gZ-v29"/>
@@ -170,17 +142,13 @@
                                 <color key="backgroundColor" name="emptyStateBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="foR-YA-M82" secondAttribute="trailing" id="0qw-As-ymt"/>
-                                    <constraint firstItem="DI2-BN-ZxK" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" constant="8" id="2iW-Ov-0UU"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" constant="20" id="7Kt-Dm-wah"/>
                                     <constraint firstItem="foR-YA-M82" firstAttribute="leading" secondItem="eSp-k5-Pa6" secondAttribute="leading" id="BGY-C1-yDC"/>
                                     <constraint firstItem="foR-YA-M82" firstAttribute="top" secondItem="eSp-k5-Pa6" secondAttribute="top" constant="41" id="Bpa-k5-4Ss"/>
-                                    <constraint firstAttribute="trailing" secondItem="DI2-BN-ZxK" secondAttribute="trailing" constant="8" id="DbB-X9-NeB"/>
                                     <constraint firstAttribute="trailing" secondItem="cLs-D4-MId" secondAttribute="trailing" constant="20" id="KDH-M1-JEa"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="top" secondItem="eSp-k5-Pa6" secondAttribute="top" constant="12" id="R9X-2N-ekF"/>
-                                    <constraint firstAttribute="bottom" secondItem="DI2-BN-ZxK" secondAttribute="bottom" constant="8" id="ZO1-dj-fBX"/>
                                     <constraint firstAttribute="bottom" secondItem="foR-YA-M82" secondAttribute="bottom" id="jgG-4i-RTE"/>
                                     <constraint firstItem="cLs-D4-MId" firstAttribute="centerY" secondItem="eSp-k5-Pa6" secondAttribute="centerY" id="kTc-DP-2nG"/>
-                                    <constraint firstItem="DI2-BN-ZxK" firstAttribute="top" secondItem="foR-YA-M82" secondAttribute="top" id="oDj-GE-Agr"/>
                                     <constraint firstAttribute="bottom" secondItem="cLs-D4-MId" secondAttribute="bottom" constant="12" id="ogw-U6-9SG"/>
                                 </constraints>
                             </view>
@@ -204,15 +172,12 @@
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="addAssistButton" destination="xpF-lu-pH5" id="cUP-Fq-xRK"/>
-                        <outlet property="addDescriptionButton" destination="eQW-Ro-yFJ" id="hCP-6h-fxi"/>
                         <outlet property="assistTableView" destination="foR-YA-M82" id="a6U-ox-lfX"/>
-                        <outlet property="cancelSaveStackView" destination="P8e-65-9cq" id="T54-t8-5Rb"/>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                         <outlet property="ratingLabel" destination="8qC-Rp-1kx" id="HFi-ie-5JA"/>
                         <outlet property="ratingSlider" destination="NSA-mu-kNd" id="s2u-4b-iiK"/>
-                        <outlet property="saveShotDetailButton" destination="D4r-1z-LVw" id="SLX-LJ-Yhp"/>
                         <outlet property="shotDescriptionLabel" destination="526-JU-WGH" id="e01-1l-TS6"/>
-                        <outlet property="shotDescriptionTextView" destination="DI2-BN-ZxK" id="XYg-JL-Vb7"/>
+                        <outlet property="shotDescriptionTextField" destination="1cl-jW-N6W" id="t5X-Yj-QTi"/>
                         <outlet property="shotRatingView" destination="eSp-k5-Pa6" id="eFR-m1-DON"/>
                         <outlet property="shotViewTitleLabel" destination="EEk-Jq-dyN" id="B9G-oW-aNw"/>
                         <segue destination="DOV-OY-cYz" kind="presentation" identifier="presentPlayerDetails" destinationCreationSelector="presentPlayerDetails:sender:segueIdentifier:" id="TZe-h8-HSu"/>

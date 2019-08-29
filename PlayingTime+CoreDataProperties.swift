@@ -2,7 +2,7 @@
 //  PlayingTime+CoreDataProperties.swift
 //  soccer-coach
 //
-//  Created by Derik Flanary on 8/15/19.
+//  Created by Derik Flanary on 8/28/19.
 //  Copyright © 2019 Derik Flanary. All rights reserved.
 //
 //
@@ -21,14 +21,32 @@ extension PlayingTime {
     @NSManaged public var length: Double
     @NSManaged public var positionValue: Int64
     @NSManaged public var startTime: Double
+    @NSManaged public var assists: Set<Assist>
     @NSManaged public var awayMatch: Match?
-    @NSManaged public var cards: Set<Card>?
-    @NSManaged public var fouls: Set<Foul>?
+    @NSManaged public var cards: Set<Card>
+    @NSManaged public var fouls: Set<Foul>
     @NSManaged public var homeMatch: Match?
     @NSManaged public var player: SoccerPlayer?
-    @NSManaged public var shots: Set<Shot>?
-    @NSManaged public var turnovers: Set<Turnover>?
-    @NSManaged public var assists: Set<Assist>?
+    @NSManaged public var shots: Set<Shot>
+    @NSManaged public var turnovers: Set<Turnover>
+    @NSManaged public var saves: Set<Save>
+
+}
+
+// MARK: Generated accessors for assists
+extension PlayingTime {
+
+    @objc(addAssistsObject:)
+    @NSManaged public func addToAssists(_ value: Assist)
+
+    @objc(removeAssistsObject:)
+    @NSManaged public func removeFromAssists(_ value: Assist)
+
+    @objc(addAssists:)
+    @NSManaged public func addToAssists(_ values: NSSet)
+
+    @objc(removeAssists:)
+    @NSManaged public func removeFromAssists(_ values: NSSet)
 
 }
 
@@ -100,19 +118,19 @@ extension PlayingTime {
 
 }
 
-// MARK: Generated accessors for assists
+// MARK: Generated accessors for saves
 extension PlayingTime {
 
-    @objc(addAssistsObject:)
-    @NSManaged public func addToAssists(_ value: Assist)
+    @objc(addSavesObject:)
+    @NSManaged public func addToSaves(_ value: Save)
 
-    @objc(removeAssistsObject:)
-    @NSManaged public func removeFromAssists(_ value: Assist)
+    @objc(removeSavesObject:)
+    @NSManaged public func removeFromSaves(_ value: Save)
 
-    @objc(addAssists:)
-    @NSManaged public func addToAssists(_ values: NSSet)
+    @objc(addSaves:)
+    @NSManaged public func addToSaves(_ values: NSSet)
 
-    @objc(removeAssists:)
-    @NSManaged public func removeFromAssists(_ values: NSSet)
+    @objc(removeSaves:)
+    @NSManaged public func removeFromSaves(_ values: NSSet)
 
 }

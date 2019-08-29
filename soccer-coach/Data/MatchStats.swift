@@ -118,13 +118,14 @@ struct PlayerMatchStats {
     var turnovers: [Turnover] {
         return playingTimes.compactMap { $0.turnovers }.flatMap { $0 }
     }
-    
     var badPasses: [Turnover] {
         return turnovers.filter { $0.isBadPass }
     }
-    
     var badTouches: [Turnover] {
         return turnovers.filter { $0.isBadTouch }
+    }
+    var saves: [Save] {
+        return playingTimes.compactMap { $0.saves }.flatMap { $0 }
     }
     
 }

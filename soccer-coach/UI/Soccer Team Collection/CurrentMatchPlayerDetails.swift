@@ -63,6 +63,7 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
         case fouls
         case cards
         case turnovers
+        case saves
         
         var title: String {
             switch self {
@@ -88,6 +89,8 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
                 return "Cards"
             case .turnovers:
                 return "Turnovers"
+            case .saves:
+                return "Saves"
             }
         }
     }
@@ -131,6 +134,8 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
             return 1
         case .turnovers:
             return 2
+        case .saves:
+            return 1
         }
     }
     
@@ -181,6 +186,9 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
             case .none:
                 break
             }
+            cell.accessoryType = .none
+        case .saves:
+            cell.textLabel?.text = "\(playerMatchStats.saves.count)"
             cell.accessoryType = .none
         }
         return cell

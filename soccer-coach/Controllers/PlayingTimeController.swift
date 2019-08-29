@@ -187,4 +187,22 @@ struct PlayingTimeController {
         playingTime.addToCards(card)
     }
     
+    func addSave(to player: SoccerPlayer, match: Match, teamType: TeamType) {
+        guard let context = context else { return }
+        guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
+        let save = Save(context: context)
+        save.half = playingTime.half
+        guard let half = Half(rawValue: Int(save.half)) else { return }
+        switch half {
+        case .first:
+            save.timeStamp = Int64(match.firstHalfTimeElapsed)
+        case .second:
+            save.timeStamp = Int64(match.secondHalfTimeElapsed)
+        case .extra:
+            save.timeStamp = Int64(match.extraTimeTimeElaspsed)
+        }
+        playingTime.addToSaves(save)
+    }
+
+    
 }

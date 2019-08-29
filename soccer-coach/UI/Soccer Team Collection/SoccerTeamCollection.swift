@@ -337,7 +337,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         
         if let section = Section(rawValue: indexPath.section), section == .goalie {
             let save = UIAlertAction(title: "Save", style: .default) { _ in
-                // TODO: Functionality for saves
+                PlayingTimeController.shared.addSave(to: player, match: match, teamType: self.currentTeamType)
             }
             actions.append(save)
         }

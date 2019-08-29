@@ -43,7 +43,7 @@
                                     <outlet property="delegate" destination="nlV-Ay-vVf" id="3r7-g8-TKc"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSp-k5-Pa6">
                                 <rect key="frame" x="211" y="181" width="281.5" height="406"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-D4-MId">

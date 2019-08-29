@@ -15,6 +15,7 @@ class CurrentMatchPlayerDetails: UIViewController {
     
     var playerMatchStats: PlayerMatchStats
     let cellIdentifier = "cell"
+    var selectedShot: Shot?
     
     
     // MARK: - Initializers
@@ -36,8 +37,13 @@ class CurrentMatchPlayerDetails: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.backgroundView = playerMatchStats.playingTimes.isEmpty ? emptyStateView : nil
+        tableView.reloadData()
     }
     
+    @IBSegueAction func showShotDetail(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
+        guard let shot = selectedShot else { return nil }
+        return ShotDetail(coder: coder, shot: shot, match: playerMatchStats.match)
+    }
 }
 
 
@@ -53,9 +59,10 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
         case onTarget
         case offTarget
         case averageShotRating
-        case assits
+        case assists
         case fouls
         case cards
+        case turnovers
         
         var title: String {
             switch self {
@@ -73,14 +80,21 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
                 return "Shots off Target"
             case .averageShotRating:
                 return "Average Shot Rating"
-            case .assits:
+            case .assists:
                 return "Assists"
             case .fouls:
                 return "Fouls"
             case .cards:
                 return "Cards"
+            case .turnovers:
+                return "Turnovers"
             }
         }
+    }
+    
+    enum TurnoverRow: Int, CaseIterable {
+        case badPass
+        case badTouch
     }
     
     
@@ -93,7 +107,31 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let section = Section(rawValue: section) else { return 0 }
+        switch section {
+        case .minutes:
+            return 1
+        case .positions:
+            return 1
+        case .goals:
+            return playerMatchStats.goals.count
+        case .shots:
+            return 1
+        case .onTarget:
+            return playerMatchStats.shotsOnTarget.count
+        case .offTarget:
+            return playerMatchStats.shotsOffTarget.count
+        case .averageShotRating:
+            return 1
+        case .assists:
+            return 1
+        case .fouls:
+            return 1
+        case .cards:
+            return 1
+        case .turnovers:
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,26 +140,86 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
         switch section {
         case .minutes:
             cell.textLabel?.text = "\(playerMatchStats.minutesPlayed)"
+            cell.accessoryType = .none
         case .positions:
             cell.textLabel?.text = playerMatchStats.positions.map { String($0.rawValue) }.joined(separator: ", ")
+            cell.accessoryType = .none
         case .goals:
-            cell.textLabel?.text = "\(playerMatchStats.goals.count)"
+            let goal = playerMatchStats.goals[indexPath.row]
+            cell.textLabel?.text = goal.minuteString(halfLength: Int(playerMatchStats.match.halfLength))
+            cell.accessoryType = .disclosureIndicator
         case .shots:
             cell.textLabel?.text = "\(playerMatchStats.shots.count)"
+            cell.accessoryType = .none
         case .onTarget:
-            cell.textLabel?.text = "\(playerMatchStats.shotsOnTarget.count)"
+            let shot = playerMatchStats.shotsOnTarget[indexPath.row]
+            cell.textLabel?.text = shot.minuteString(halfLength: Int(playerMatchStats.match.halfLength))
+            cell.accessoryType = .disclosureIndicator
         case .offTarget:
-            cell.textLabel?.text = "\(playerMatchStats.shotsOffTarget.count)"
+            let shot = playerMatchStats.shotsOffTarget[indexPath.row]
+            cell.textLabel?.text = shot.minuteString(halfLength: Int(playerMatchStats.match.halfLength))
+            cell.accessoryType = .disclosureIndicator
         case .averageShotRating:
             cell.textLabel?.text = "\(playerMatchStats.averageShotRating)"
-        case .assits:
+            cell.accessoryType = .none
+        case .assists:
             cell.textLabel?.text = "\(playerMatchStats.assists.count)"
+            cell.accessoryType = .none
         case .fouls:
             cell.textLabel?.text = "\(playerMatchStats.fouls.count)"
+            cell.accessoryType = .none
         case .cards:
             cell.textLabel?.text = playerMatchStats.cards.isEmpty ? "-" : playerMatchStats.cards.map { $0.cardType.rawValue }.joined(separator: ", ")
+            cell.accessoryType = .none
+        case .turnovers:
+            let turnoverRow = TurnoverRow(rawValue: indexPath.row)
+            switch turnoverRow {
+            case .badPass:
+                cell.textLabel?.text = "Poor Passes: \(playerMatchStats.badPasses.count)"
+            case .badTouch:
+                cell.textLabel?.text = "Poor Touches: \(playerMatchStats.badTouches.count)"
+            case .none:
+                break
+            }
+            cell.accessoryType = .none
         }
         return cell
+    }
+    
+}
+
+
+// MARK: - Tableview delgate
+
+extension CurrentMatchPlayerDetails: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let section = Section(rawValue: indexPath.section) else { return }
+        switch section {
+        case .goals:
+            selectedShot = playerMatchStats.goals[indexPath.row]
+            performSegue(withIdentifier: .showShotDetail, sender: nil)
+        case .onTarget:
+            selectedShot = playerMatchStats.shotsOnTarget[indexPath.row]
+            performSegue(withIdentifier: .showShotDetail, sender: nil)
+        case .offTarget:
+            selectedShot = playerMatchStats.shotsOffTarget[indexPath.row]
+            performSegue(withIdentifier: .showShotDetail, sender: nil)
+        default:
+            break
+        }
+    }
+    
+}
+
+
+// MARK: - Segue handling
+
+extension CurrentMatchPlayerDetails: SegueHandling {
+    
+    enum SegueIdentifier: String {
+        case showShotDetail
     }
     
 }

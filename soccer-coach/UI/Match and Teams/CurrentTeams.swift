@@ -66,7 +66,7 @@ class CurrentTeams: UIViewController {
     @IBSegueAction func presentPlayerMatchDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
         guard let player = selectedPlayer, let match = currentMatch else { return nil }
         let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: currentSection)
-        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime)
+        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime, match: match)
         return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
     }
     

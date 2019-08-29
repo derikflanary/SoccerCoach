@@ -125,6 +125,12 @@ struct PlayingTimeController {
         }
     }
     
+    func deleteShot(_ shot: Shot) {
+        guard let context = context else { return }
+        context.delete(shot)
+        try? context.save()
+    }
+    
     func addTurnover(to player: SoccerPlayer, match: Match, teamType: TeamType, badPass: Bool, badTouch: Bool) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }

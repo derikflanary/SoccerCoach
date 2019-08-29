@@ -34,7 +34,7 @@ extension Int {
         let minute = self == 0 ? 1 : self
         switch half {
         case .first:
-            return minute > halfLength ? "\(halfLength)" : "\(minute)'"
+            return minute > halfLength ? "\(halfLength)'" : "\(minute)'"
         case .second:
             return "\(minute + halfLength)'"
         case .extra:

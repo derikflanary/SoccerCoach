@@ -46,11 +46,15 @@ class MatchHistoryList: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
+        tableView.reloadData()
     }
     
     func fetchData() {
         matches = MatchController.shared.fetchAllMatches()
-        print(matches)
+    }
+    
+    @IBAction func unwindToHistory(_ segue: UIStoryboardSegue) {
+        tableView.reloadData()
     }
     
 }

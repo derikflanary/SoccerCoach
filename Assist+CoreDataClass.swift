@@ -12,5 +12,4 @@ import CoreData
 
 @objc(Assist)
 public class Assist: NSManagedObject {
-
 }

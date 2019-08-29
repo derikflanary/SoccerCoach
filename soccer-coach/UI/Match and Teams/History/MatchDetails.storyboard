@@ -80,9 +80,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="delegate" destination="FVu-QH-K4Z" id="9hF-ly-nUP"/>
-                                </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bAA-gk-4lB">
                                 <rect key="frame" x="207" y="88" width="207" height="808"/>
@@ -167,16 +164,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a22-Z3-Qe7"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="hkS-in-Ifa"/>
-                        <barButtonItem title="Delete" id="dPR-g4-Aji">
-                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="deleteButtonTapped:" destination="FVu-QH-K4Z" id="mCf-6U-eHr"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0br-M2-DJU"/>
-                    </toolbarItems>
                     <navigationItem key="navigationItem" id="IE9-cz-WwG">
                         <barButtonItem key="rightBarButtonItem" image="xmark" catalog="system" id="qeZ-dg-icV">
                             <connections>
@@ -184,18 +171,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="awaySectionHeaderTitleLabel" destination="KT2-oS-bMA" id="f99-Qr-1g1"/>
                         <outlet property="awayTableView" destination="bAA-gk-4lB" id="w1m-hK-5j3"/>
                         <outlet property="homeSectionHeaderTitleLabel" destination="aeo-BG-Kup" id="NmO-5s-vE4"/>
                         <outlet property="homeTableView" destination="KNH-7J-88F" id="yvP-Sx-lzL"/>
                         <segue destination="JBW-Bo-vyS" kind="show" identifier="showMatchPlayerDetails" destinationCreationSelector="showMatchPlayerDetails:sender:segueIdentifier:" id="KmL-eN-FqZ"/>
-                        <segue destination="pVi-bt-lz4" kind="unwind" identifier="unwindToHistory" unwindAction="unwindToHistory:" id="2TT-zJ-cPM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSe-1C-DzW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="pVi-bt-lz4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="813.04347826086962" y="44.866071428571423"/>
         </scene>
@@ -210,17 +194,13 @@
         <!--Navigation Controller-->
         <scene sceneID="OpG-bb-2Tl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="n2w-Tn-saM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n2w-Tn-saM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5XL-Du-OmZ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7Y6-TV-4Gd">
-                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
                         <segue destination="FVu-QH-K4Z" kind="relationship" relationship="rootViewController" id="G6w-yv-dcy"/>
                     </connections>

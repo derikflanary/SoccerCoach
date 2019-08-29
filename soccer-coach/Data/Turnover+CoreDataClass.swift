@@ -13,4 +13,8 @@ import CoreData
 @objc(Turnover)
 public class Turnover: NSManagedObject {
 
+    var summary: String {
+        return isBadPass ? "Poor Pass" : "Poor Touch"
+    }
+    
 }

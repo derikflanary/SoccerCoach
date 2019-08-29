@@ -80,28 +80,29 @@ struct PlayerMatchStats {
     
     let player: SoccerPlayer
     let playingTimes: [PlayingTime]
+    let match: Match
     
     var minutesPlayed: Int {
         let seconds = playingTimes.map { $0.length }.reduce(0, +)
-        return Int(seconds).minutes
+        let totalMins = match.halfLength * 2
+        return min(Int(seconds).minutes, Int(totalMins))
     }
     var positions: [Position] {
-        return playingTimes.compactMap { $0.position }
+        return Array(Set(playingTimes.compactMap { $0.position } ))
     }
     var goals: [Shot] {
-        return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { $0.isGoal }
+        return shots.filter { $0.isGoal }
     }
     var shots: [Shot] {
         return playingTimes.compactMap { $0.shots }.flatMap { $0 }
     }
     var shotsOnTarget: [Shot] {
-        return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { $0.onTarget }
+        return shots.filter { $0.onTarget }
     }
     var shotsOffTarget: [Shot] {
-        return playingTimes.compactMap { $0.shots }.flatMap { $0 }.filter { !$0.onTarget }
+        return shots.filter { !$0.onTarget }
     }
     var averageShotRating: Int {
-        let shots = playingTimes.compactMap { $0.shots }.flatMap { $0 }
         guard shots.count > 0 else { return 0 }
         return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }
@@ -113,6 +114,17 @@ struct PlayerMatchStats {
     }
     var cards: [Card] {
         return playingTimes.compactMap { $0.cards }.flatMap { $0 }
+    }
+    var turnovers: [Turnover] {
+        return playingTimes.compactMap { $0.turnovers }.flatMap { $0 }
+    }
+    
+    var badPasses: [Turnover] {
+        return turnovers.filter { $0.isBadPass }
+    }
+    
+    var badTouches: [Turnover] {
+        return turnovers.filter { $0.isBadTouch }
     }
     
 }

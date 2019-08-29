@@ -40,7 +40,6 @@ class MatchDetail: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
-        navigationController?.isToolbarHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,21 +48,6 @@ class MatchDetail: UIViewController {
         title = match.summary
         homeSectionHeaderTitleLabel.text = match.homeTeam?.name
         awaySectionHeaderTitleLabel.text = match.awayTeam?.name
-        homeTableView.reloadData()
-        awayTableView.reloadData()
-    }
-    
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-        guard let match = match else { return }
-        let alert = UIAlertController(title: "Delete Match?", message: "Are you sure you want to delete this match?", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
-            MatchController.shared.delete(match)
-            self.performSegue(withIdentifier: .unwindToHistory, sender: nil)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(yesAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func dismissTapped(_ sender: Any) {
@@ -158,7 +142,6 @@ extension MatchDetail: SegueHandling {
     
     enum SegueIdentifier: String {
         case showMatchPlayerDetails
-        case unwindToHistory
     }
     
 }

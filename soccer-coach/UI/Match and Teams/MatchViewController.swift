@@ -14,8 +14,6 @@ class MatchViewController: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var halfSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var startPauseButton: UIButton!
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var awayLabel: UILabel!
     @IBOutlet weak var homeGoalLabel: UILabel!
@@ -23,6 +21,7 @@ class MatchViewController: UIViewController {
     @IBOutlet weak var awayGoalLabel: UILabel!
     @IBOutlet weak var awayStepper: UIStepper!
     @IBOutlet weak var createMatchButton: UIButton!
+    @IBOutlet weak var beginHalfButton: RoundedButton!
     @IBOutlet weak var endMatchButton: RoundedButton!
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var endHalfButton: RoundedButton!
@@ -36,32 +35,12 @@ class MatchViewController: UIViewController {
     var currentMatchSubscriber: AnyCancellable?
     var homeGoalSubscriber: AnyCancellable?
     var awayGoalSubscriber: AnyCancellable?
-    var firstHalfTimeSubscriber: AnyCancellable?
-    var secondHalfTimeSubscriber: AnyCancellable?
-    var extraTimeSubscriber: AnyCancellable?
-    
+    var halfStarted = false
+        
     var match: Match? {
         didSet {
             guard match != oldValue else { return }
             updateUI(with: match)
-            firstHalfTimeSubscriber = match?.$firstHalfTimeElapsed
-                .map({
-                    Int($0).timeString()
-                })
-                .receive(on: RunLoop.main)
-                .assign(to: \.timeLabel.text, on: self)
-            secondHalfTimeSubscriber = match?.$secondHalfTimeElapsed
-                .map({
-                    Int($0).timeString()
-                })
-                .receive(on: RunLoop.main)
-                .assign(to: \.timeLabel.text, on: self)
-            extraTimeSubscriber = match?.$firstHalfTimeElapsed
-                .map({
-                    Int($0).timeString()
-                })
-                .receive(on: RunLoop.main)
-                .assign(to: \.timeLabel.text, on: self)
         }
     }
     var homeGoals: Int = 0 {
@@ -78,25 +57,6 @@ class MatchViewController: UIViewController {
             }
         }
     }
-
-
-    var isRunning = false {
-        didSet {
-            guard let match = match else { return }
-            if isRunning {
-                if match.halfHasStarted {
-                    match.resume()
-                } else {
-                    match.start()
-                }
-                
-                startPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            } else {
-                match.pause()
-                startPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            }
-        }
-    }
     
     
     // MARK: - View life cycle
@@ -110,29 +70,18 @@ class MatchViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func endHalfButtonTapped() {
-        guard let match = match else { return }
-        switch half {
-        case .first:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
-                showHalfNotOverAlert()
-                return
-            }
-        case .second:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
-                showHalfNotOverAlert()
-                return
-            }
-        case .extra:
-            if match.firstHalfTimeElapsed < Double(match.halfLength) * 60 {
-                showHalfNotOverAlert()
-                return
-            }
-        }
+        App.sharedCore.fire(event: HalfEnded())
         updateHalfSelected()
     }
     
-    @IBAction func startPauseButtonTapped() {
-        isRunning.toggle()
+    @IBAction func beginHalfButonTapped() {
+        App.sharedCore.fire(event: HalfStarted())
+        UIView.animate(withDuration: 0.5) {
+            self.beginHalfButton.isHidden = true
+            self.beginHalfButton.alpha = 0.0
+            self.endHalfButton.isHidden = false
+            self.endHalfButton.alpha = 1.0
+        }
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -196,6 +145,7 @@ private extension MatchViewController {
                 self.halfSegmentedControl.isUserInteractionEnabled = false
                 self.endMatchButton.isHidden = true
                 self.endHalfButton.isHidden = true
+                self.beginHalfButton.isHidden = true
                 self.createMatchButton.isHidden = false
             } else {
                 self.mainStackView.alpha = 1.0
@@ -203,8 +153,11 @@ private extension MatchViewController {
                 self.halfSegmentedControl.alpha = 1.0
                 self.halfSegmentedControl.isUserInteractionEnabled = true
                 self.halfSegmentedControl.selectedSegmentIndex = 0
-                self.endHalfButton.isHidden = false
                 self.endMatchButton.isHidden = false
+                self.endHalfButton.isHidden = !App.sharedCore.state.matchState.halfStarted
+                self.endHalfButton.alpha = self.endHalfButton.isHidden ? 0.0 : 1.0
+                self.beginHalfButton.isHidden = App.sharedCore.state.matchState.halfStarted
+                self.beginHalfButton.alpha = self.beginHalfButton.isHidden ? 0.0 : 1.0
                 self.createMatchButton.isHidden = true
                 self.homeLabel.text = match?.homeTeam?.name
                 self.awayLabel.text = match?.awayTeam?.name
@@ -228,19 +181,24 @@ private extension MatchViewController {
     func updateHalfSelected() {
         guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex + 1) else { return }
         half = selectedHalf
-        halfSegmentedControl.selectedSegmentIndex = half.rawValue
-        isRunning = false
-        match.half = Int64(half.rawValue)
-        match.halfHasStarted = false
         switch half {
-        case .first:
-            timeLabel.text = Int(match.firstHalfTimeElapsed).timeString()
-        case .second:
-            timeLabel.text = Int(match.secondHalfTimeElapsed).timeString()
-            endHalfButton.isHidden = true
+        case .first, .second:
+            UIView.animate(withDuration: 0.5) {
+                self.beginHalfButton.isHidden = false
+                self.beginHalfButton.alpha = 1.0
+                self.endHalfButton.isHidden = true
+                self.endHalfButton.alpha = 0.0
+            }
         case .extra:
-            timeLabel.text = Int(match.extraTimeTimeElaspsed).timeString()
+            UIView.animate(withDuration: 0.5) {
+                self.beginHalfButton.isHidden = true
+                self.beginHalfButton.alpha = 0.0
+                self.endHalfButton.isHidden = true
+                self.endHalfButton.alpha = 0.0
+            }
         }
+        halfSegmentedControl.selectedSegmentIndex = half.rawValue
+        match.half = Int64(half.rawValue)
     }
     
 }
@@ -256,7 +214,6 @@ extension MatchViewController: Subscriberable {
             .assign(to: \.match, on: self)
         homeGoalSubscriber = state.matchState.$homeGoals
             .assign(to: \.homeGoals, on: self)
-
         awayGoalSubscriber = state.matchState.$awayGoals
             .assign(to: \.awayGoals, on: self)
     }

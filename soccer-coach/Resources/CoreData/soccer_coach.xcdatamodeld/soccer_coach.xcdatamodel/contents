@@ -32,6 +32,7 @@
         <relationship name="score" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Score" inverseName="match" inverseEntity="Score"/>
     </entity>
     <entity name="PlayingTime" representedClassName=".PlayingTime" syncable="YES">
+        <attribute name="endTime" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="half" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="length" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="positionValue" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
@@ -94,12 +95,12 @@
         <element name="Card" positionX="-9.70703125" positionY="286.90625" width="128" height="103"/>
         <element name="Foul" positionX="15.4140625" positionY="342.4375" width="128" height="103"/>
         <element name="Match" positionX="-576.33984375" positionY="225.4765625" width="128" height="238"/>
-        <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="238"/>
+        <element name="PlayingTime" positionX="-295.94140625" positionY="488.125" width="128" height="253"/>
+        <element name="Save" positionX="-369" positionY="144" width="128" height="88"/>
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
         <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="163"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="148"/>
         <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
         <element name="Turnover" positionX="-369" positionY="144" width="128" height="118"/>
-        <element name="Save" positionX="-369" positionY="144" width="128" height="88"/>
     </elements>
 </model>

@@ -21,6 +21,7 @@ extension PlayingTime {
     @NSManaged public var length: Double
     @NSManaged public var positionValue: Int64
     @NSManaged public var startTime: Double
+    @NSManaged public var endTime: Double
     @NSManaged public var assists: Set<Assist>
     @NSManaged public var awayMatch: Match?
     @NSManaged public var cards: Set<Card>

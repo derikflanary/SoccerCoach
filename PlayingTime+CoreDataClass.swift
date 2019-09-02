@@ -18,16 +18,5 @@ public class PlayingTime: NSManagedObject {
     var position: Position {
         return Position(rawValue: Int(positionValue)) ?? .six
     }
-    
-    func setCurrentLength(match: Match) {
-        switch match.currentHalf {
-        case .first:
-            length = match.firstHalfTimeElapsed - startTime
-        case .second:
-            length = match.secondHalfTimeElapsed - startTime
-        case .extra:
-            length = match.extraTimeTimeElaspsed - startTime
-        }
-    }
 
 }

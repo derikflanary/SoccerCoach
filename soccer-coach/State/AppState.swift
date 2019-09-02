@@ -63,6 +63,7 @@ class MatchState: State {
     @Published var selectedTeamType: TeamType = .home
     @Published var homeGoals: Int = 0
     @Published var awayGoals: Int = 0
+    @Published var halfStarted = false
     
     func react(to event: Event) {
         switch event {
@@ -83,6 +84,10 @@ class MatchState: State {
             homeGoals += 1
         case _ as AwayGoalScored:
             awayGoals += 1
+        case _ as HalfStarted:
+            halfStarted = true
+        case _ as HalfEnded:
+            halfStarted = false
         default:
             break
         }

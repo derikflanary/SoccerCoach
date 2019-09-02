@@ -37,3 +37,7 @@ struct Reset<T>: Event {
 struct HomeGoalScored: Event { }
 
 struct AwayGoalScored: Event { }
+
+struct HalfStarted: Event { }
+
+struct HalfEnded: Event { }

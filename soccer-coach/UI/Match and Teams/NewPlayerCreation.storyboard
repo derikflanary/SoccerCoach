@@ -33,7 +33,7 @@
                                                     <constraint firstAttribute="height" constant="44" id="6Xs-dv-R3O"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                             </textField>
                                         </subviews>
                                     </stackView>

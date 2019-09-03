@@ -23,7 +23,13 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
         }
         
         nameLabel.text = playerStats.player.name
-        minutesPlayedLabel.text = playerStats.minutesPlayed > 0 ? "\(playerStats.minutesPlayed) minutes" : "DNP"
+        if playerStats.minutesPlayed > 0 {
+            minutesPlayedLabel.text = "\(playerStats.minutesPlayed) minutes"
+        } else if playerStats.minutesPlayed < 0 || !playerStats.playingTimes.isEmpty {
+            minutesPlayedLabel.text = "Played"
+        } else {
+            minutesPlayedLabel.text = "DNP"
+        }
         playerStats.goals.forEach { goal in
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
             guard let half = Half(rawValue: Int(goal.half)) else { return }

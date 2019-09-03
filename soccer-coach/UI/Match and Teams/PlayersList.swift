@@ -57,6 +57,15 @@ class PlayersList: UIViewController {
         updateTableUI()
     }
     
+    @IBAction func addPlayerTapped(_ sender: UIBarButtonItem) {
+        selectedPlayer = nil
+        performSegue(withIdentifier: .showPlayerDetails, sender: nil)
+    }
+    
+    @IBAction func unwindToPlayerList(_ segue: UIStoryboardSegue) {
+        updateTableUI()
+    }
+    
 }
 
 

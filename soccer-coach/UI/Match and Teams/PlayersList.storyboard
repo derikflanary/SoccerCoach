@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NUl-5a-dnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NUl-5a-dnL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,13 +17,13 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="DPj-Na-GoT">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="delegate" destination="NUl-5a-dnL" id="Ir0-t2-TVp"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="DPj-Na-GoT" secondAttribute="trailing" id="7hZ-TM-m0q"/>
                             <constraint firstItem="DPj-Na-GoT" firstAttribute="leading" secondItem="taT-hN-79D" secondAttribute="leading" id="Kf4-CN-xyk"/>
@@ -32,6 +32,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="taT-hN-79D"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Wt1-fk-58j">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="Bxf-Cg-auR">
+                            <connections>
+                                <action selector="addPlayerTapped:" destination="NUl-5a-dnL" id="uvI-cb-1uh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DPj-Na-GoT" id="YkA-DV-RSQ"/>
                         <segue destination="ZRl-Tc-iwS" kind="presentation" identifier="showPlayerDetails" id="2IE-EN-qIi"/>
@@ -39,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tRm-nH-TdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2.8985507246376816" y="26.785714285714285"/>
+            <point key="canvasLocation" x="913.04347826086962" y="26.785714285714285"/>
         </scene>
         <!--NewPlayerCreation-->
         <scene sceneID="Izu-HP-avb">
@@ -47,7 +54,10 @@
                 <viewControllerPlaceholder storyboardName="NewPlayerCreation" id="ZRl-Tc-iwS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vV1-Wf-gIh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="649" y="-24"/>
+            <point key="canvasLocation" x="1557.9710144927537" y="-24.107142857142858"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus" catalog="system" width="64" height="58"/>
+    </resources>
 </document>

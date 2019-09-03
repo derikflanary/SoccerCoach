@@ -35,6 +35,7 @@ class MatchViewController: UIViewController {
     var currentMatchSubscriber: AnyCancellable?
     var homeGoalSubscriber: AnyCancellable?
     var awayGoalSubscriber: AnyCancellable?
+    var halfHasStartedSubscriber: AnyCancellable?
     var halfStarted = false
         
     var match: Match? {
@@ -76,17 +77,9 @@ class MatchViewController: UIViewController {
     
     @IBAction func beginHalfButonTapped() {
         App.sharedCore.fire(event: HalfStarted())
-        UIView.animate(withDuration: 0.5) {
-            self.beginHalfButton.isHidden = true
-            self.beginHalfButton.alpha = 0.0
-            self.endHalfButton.isHidden = false
-            self.endHalfButton.alpha = 1.0
-        }
     }
     
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        
-    }
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) { }
     
     @IBAction func homeStepperChanged(_ sender: UIStepper) {
         let goalCount = Int64(sender.value)
@@ -154,13 +147,11 @@ private extension MatchViewController {
                 self.halfSegmentedControl.isUserInteractionEnabled = true
                 self.halfSegmentedControl.selectedSegmentIndex = 0
                 self.endMatchButton.isHidden = false
-                self.endHalfButton.isHidden = !App.sharedCore.state.matchState.halfStarted
-                self.endHalfButton.alpha = self.endHalfButton.isHidden ? 0.0 : 1.0
-                self.beginHalfButton.isHidden = App.sharedCore.state.matchState.halfStarted
-                self.beginHalfButton.alpha = self.beginHalfButton.isHidden ? 0.0 : 1.0
                 self.createMatchButton.isHidden = true
                 self.homeLabel.text = match?.homeTeam?.name
                 self.awayLabel.text = match?.awayTeam?.name
+                self.beginHalfButton.isHidden = false
+
             }
         }
     }
@@ -181,22 +172,6 @@ private extension MatchViewController {
     func updateHalfSelected() {
         guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex + 1) else { return }
         half = selectedHalf
-        switch half {
-        case .first, .second:
-            UIView.animate(withDuration: 0.5) {
-                self.beginHalfButton.isHidden = false
-                self.beginHalfButton.alpha = 1.0
-                self.endHalfButton.isHidden = true
-                self.endHalfButton.alpha = 0.0
-            }
-        case .extra:
-            UIView.animate(withDuration: 0.5) {
-                self.beginHalfButton.isHidden = true
-                self.beginHalfButton.alpha = 0.0
-                self.endHalfButton.isHidden = true
-                self.endHalfButton.alpha = 0.0
-            }
-        }
         halfSegmentedControl.selectedSegmentIndex = half.rawValue
         match.half = Int64(half.rawValue)
     }
@@ -216,6 +191,33 @@ extension MatchViewController: Subscriberable {
             .assign(to: \.homeGoals, on: self)
         awayGoalSubscriber = state.matchState.$awayGoals
             .assign(to: \.awayGoals, on: self)
+        halfHasStartedSubscriber = state.matchState.$halfStarted
+        .sink(receiveValue: { halfStarted in
+            DispatchQueue.main.async {
+                if let match = self.match, match.currentHalf == .extra {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.beginHalfButton.alpha = 0.0
+                        self.endHalfButton.alpha = 0.0
+                    }) { _ in
+                        self.beginHalfButton.isHidden = true
+                        self.endHalfButton.isHidden = true
+                    }
+                } else if self.match == nil {
+                    self.beginHalfButton.isHidden = true
+                    self.endHalfButton.isHidden = true
+                    self.endHalfButton.isHidden = true
+                    self.beginHalfButton.isHidden = true
+                } else {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.endHalfButton.alpha = !halfStarted ? 0.0 : 1.0
+                        self.beginHalfButton.alpha = halfStarted ? 0.0 : 1.0
+                    }) { _ in
+                        self.beginHalfButton.isHidden = halfStarted
+                        self.endHalfButton.isHidden = !halfStarted
+                    }
+                }
+            }
+        })
     }
     
 }

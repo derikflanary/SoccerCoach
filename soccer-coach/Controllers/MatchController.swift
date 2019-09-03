@@ -70,6 +70,7 @@ struct MatchController {
     func delete(_ match: Match) {
         guard let context = context else { return }
         context.delete(match)
+        try? context.save()
     }
     
 }

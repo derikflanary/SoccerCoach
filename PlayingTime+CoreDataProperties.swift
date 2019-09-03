@@ -18,7 +18,6 @@ extension PlayingTime {
     }
 
     @NSManaged public var half: Int64
-    @NSManaged public var length: Double
     @NSManaged public var positionValue: Int64
     @NSManaged public var startTime: Double
     @NSManaged public var endTime: Double

@@ -44,6 +44,7 @@ class NewTeamCreation: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        App.sharedCore.fire(event: Reset<TeamCreationState>())
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         configDataSource()
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))

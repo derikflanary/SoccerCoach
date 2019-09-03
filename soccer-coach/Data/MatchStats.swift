@@ -83,9 +83,7 @@ struct PlayerMatchStats {
     let match: Match
     
     var minutesPlayed: Int {
-        let seconds = playingTimes.map { $0.length }.reduce(0, +)
-        let totalMins = match.halfLength * 2
-        return min(Int(seconds).minutes, Int(totalMins))
+        return playingTimes.map { $0.length }.reduce(0, +)
     }
     var positions: [Position] {
         return Array(Set(playingTimes.compactMap { $0.position } ))

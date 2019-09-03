@@ -19,8 +19,8 @@
                             <stackView opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xu2-95-WjX">
                                 <rect key="frame" x="0.0" y="143" width="414" height="299.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-6w-tBw">
-                                        <rect key="frame" x="92.5" y="0.0" width="229.5" height="161"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-6w-tBw">
+                                        <rect key="frame" x="101.5" y="0.0" width="211" height="161"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="j7U-0Z-IuQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="95.5" height="161"/>
@@ -38,7 +38,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="lpD-u4-dgY">
-                                                        <rect key="frame" x="0.5" y="129" width="94" height="32"/>
+                                                        <rect key="frame" x="1" y="129" width="94" height="32"/>
                                                         <connections>
                                                             <action selector="homeStepperChanged:" destination="fSF-x3-pRi" eventType="valueChanged" id="kbs-Oa-0dj"/>
                                                         </connections>
@@ -46,22 +46,22 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eci-HB-T1y">
-                                                <rect key="frame" x="135.5" y="0.0" width="94" height="161"/>
+                                                <rect key="frame" x="115.5" y="0.0" width="95.5" height="161"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhR-N4-CCG">
-                                                        <rect key="frame" x="3.5" y="0.0" width="87" height="47"/>
+                                                        <rect key="frame" x="4.5" y="0.0" width="87" height="47"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="36"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ais-9k-Q8r">
-                                                        <rect key="frame" x="27.5" y="47" width="38.5" height="79"/>
+                                                        <rect key="frame" x="28.5" y="47" width="38.5" height="79"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="60"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="b4u-Gu-W7u">
-                                                        <rect key="frame" x="0.0" y="126" width="94" height="35"/>
+                                                        <rect key="frame" x="1" y="126" width="94" height="35"/>
                                                         <connections>
                                                             <action selector="awayStepperChanged:" destination="fSF-x3-pRi" eventType="valueChanged" id="IaK-bT-Gcx"/>
                                                         </connections>
@@ -153,7 +153,7 @@
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-7I-GlM" customClass="RoundedButton" customModule="soccer_coach" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                        <color key="backgroundColor" name="FieldGreen"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="SvY-nU-vyF"/>
                                         </constraints>

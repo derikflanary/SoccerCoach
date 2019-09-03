@@ -45,7 +45,6 @@ struct PlayingTimeController {
         guard let context = context else { return }
         let playingTime = PlayingTime(context: context)
         playingTime.player = player
-        playingTime.length = 0
         playingTime.half = match.half
         playingTime.isActive = true
         playingTime.positionValue = Int64(position.rawValue)
@@ -144,6 +143,5 @@ struct PlayingTimeController {
         save.timeStamp = Int64(timeStamp)
         playingTime.addToSaves(save)
     }
-
     
 }

@@ -18,5 +18,9 @@ public class PlayingTime: NSManagedObject {
     var position: Position {
         return Position(rawValue: Int(positionValue)) ?? .six
     }
+    
+    var length: Int {
+        return Int(endTime - startTime)
+    }
 
 }

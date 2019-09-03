@@ -539,7 +539,7 @@ extension SoccerTeamCollection: Subscriberable {
         .sink(receiveValue: { hasStarted in
             guard let match = self.currentMatch else { return }
             if !hasStarted {
-                let endTime = match.half + 1 * match.halfLength
+                let endTime = (match.half + 1) * match.halfLength
                 for player in self.homeActivePlayers {
                     PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home, endTime: Int(endTime))
                 }

@@ -30,16 +30,9 @@ extension Int {
         return days / 7
     }
     
-    func minute(halfLength: Int, half: Half) -> String {
+    func minute() -> String {
         let minute = self == 0 ? 1 : self
-        switch half {
-        case .first:
-            return minute > halfLength ? "\(halfLength)'" : "\(minute)'"
-        case .second:
-            return "\(minute + halfLength)'"
-        case .extra:
-            return "\(minute + (halfLength * 2))'"
-        }
+        return "\(minute)'"
     }
     
     func timeString() -> String {
@@ -80,4 +73,24 @@ enum CardType: String {
 
 enum Half: Int {
     case first, second, extra
+    
+    func minute(for timeStamp: Int, halfLength: Int64) -> Double {
+        switch self {
+        case .first:
+            return Double(timeStamp)
+        case .second:
+            if timeStamp < halfLength {
+                return Double(timeStamp + Int(halfLength))
+            } else {
+                return Double(timeStamp)
+            }
+        case .extra:
+            if timeStamp < halfLength {
+                return Double(timeStamp + Int(halfLength * 2))
+            } else {
+                return Double(timeStamp)
+            }
+        }
+
+    }
 }

@@ -14,8 +14,7 @@ import CoreData
 public class Shot: NSManagedObject {
 
     func minuteString(halfLength: Int) -> String {
-        let shotHalf = Half(rawValue: (Int(half))) ?? .first
-        return "\(Int(timeStamp).minutes.minute(halfLength: halfLength, half: shotHalf))"
+        return "\(Int(timeStamp).minute())"
     }
     
 }

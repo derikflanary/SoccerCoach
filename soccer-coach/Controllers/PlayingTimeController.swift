@@ -48,7 +48,8 @@ struct PlayingTimeController {
         playingTime.half = match.half
         playingTime.isActive = true
         playingTime.positionValue = Int64(position.rawValue)
-        playingTime.startTime = Double(startTime)
+        playingTime.startTime = match.currentHalf.minute(for: startTime, halfLength: match.halfLength)
+        
         switch teamType {
         case .home:
             match.addToHomePlayingTime(playingTime)
@@ -61,7 +62,7 @@ struct PlayingTimeController {
     func endPlayingTime(for player: SoccerPlayer, match: Match, teamType: TeamType, endTime: Int) {
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType), playingTime.isActive else { return }
         playingTime.isActive = false
-        playingTime.endTime = Double(endTime)
+        playingTime.endTime = match.currentHalf.minute(for: endTime, halfLength: match.halfLength)
         if playingTime.startTime == playingTime.endTime {
             context?.delete(playingTime)
             print("deleted: \(playingTime)")
@@ -85,7 +86,7 @@ struct PlayingTimeController {
             shot.assist = assist
             assisteePlayingTime.addToAssists(assist)
         }
-        shot.timeStamp = Int64(timeStamp)
+        shot.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playerPlayingTime.addToShots(shot)
         if shot.isGoal {
             switch teamType {
@@ -110,7 +111,7 @@ struct PlayingTimeController {
         turnover.isBadPass = badPass
         turnover.isBadTouch = badTouch
         turnover.half = playingTime.half
-        turnover.timeStamp = Int64(timeStamp)
+        turnover.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playingTime.addToTurnovers(turnover)
     }
     
@@ -121,7 +122,7 @@ struct PlayingTimeController {
         let foul = Foul(context: context)
         foul.half = playingTime.half
         foul.isOffsides = isOffsides
-        foul.timeStamp = Int64(timeStamp)
+        foul.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playingTime.addToFouls(foul)
     }
     
@@ -131,7 +132,7 @@ struct PlayingTimeController {
         let card = Card(context: context)
         card.half = playingTime.half
         card.type = cardType.rawValue
-        card.timeStamp = Int64(timeStamp)
+        card.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playingTime.addToCards(card)
     }
     
@@ -140,7 +141,7 @@ struct PlayingTimeController {
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let save = Save(context: context)
         save.half = playingTime.half
-        save.timeStamp = Int64(timeStamp)
+        save.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playingTime.addToSaves(save)
     }
     

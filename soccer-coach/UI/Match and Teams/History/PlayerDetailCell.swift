@@ -32,8 +32,7 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
         }
         playerStats.goals.forEach { goal in
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-            guard let half = Half(rawValue: Int(goal.half)) else { return }
-            let minute = Int(goal.timeStamp).minutes.minute(halfLength: 40, half: half)
+            let minute = Int(goal.timeStamp).minute()
             label.text = "⚽️ \(minute) "
             label.font = UIFont.systemFont(ofSize: 13)
             label.textAlignment = .right
@@ -42,8 +41,7 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
         }
         playerStats.assists.forEach { assist in
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-            guard let half = Half(rawValue: Int(assist.goal!.half)) else { return }
-            let minute = Int(assist.goal!.timeStamp).minutes.minute(halfLength: 40, half: half)
+            let minute = Int(assist.goal!.timeStamp).minute()
             label.text = "🙋‍♂️ \(minute) "
             label.textAlignment = .right
             label.font = UIFont.systemFont(ofSize: 13)

@@ -90,6 +90,7 @@ extension MatchHistoryList: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedMatch = matches[indexPath.row]
+        let teams = TeamController.shared.fetchAllTeams()
         performSegue(withIdentifier: .presentMatchDetails, sender: nil)
     }
     

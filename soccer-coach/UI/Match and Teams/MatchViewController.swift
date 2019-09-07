@@ -104,7 +104,7 @@ class MatchViewController: UIViewController {
         let alert = UIAlertController(title: "End Match?", message: "Are you sure you want to end and save this match?", preferredStyle: .alert)
         let save = UIAlertAction(title: "Save and End", style: .default) { _ in
             guard let homeCorners = Int64(self.homeCornersLabel.text ?? "0"), let awayCorners = Int64(self.awayCornersLabel.text ?? "0") else { return }
-            MatchController.shared.end(match, homeCornerCount: homeCorners, awayCornerCount: awayCorners)
+            MatchController.shared.end(match, homeCornerCount: homeCorners, awayCornerCount: awayCorners, homeScore: Int64(self.homeStepper.value), awayScore: Int64(self.awayStepper.value))
             App.sharedCore.fire(event: Selected<Match?>(item: nil))
         }
         let noSave = UIAlertAction(title: "End without Saving", style: .destructive) { _ in

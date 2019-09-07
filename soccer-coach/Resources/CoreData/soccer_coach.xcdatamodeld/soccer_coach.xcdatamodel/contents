@@ -78,7 +78,7 @@
     <entity name="Team" representedClassName=".Team" syncable="YES">
         <attribute name="id" attributeType="String" defaultValueString="0"/>
         <attribute name="name" attributeType="String" defaultValueString="Team"/>
-        <relationship name="awayMatches" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match" inverseName="awayTeam" inverseEntity="Match"/>
+        <relationship name="awayMatches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="awayTeam" inverseEntity="Match"/>
         <relationship name="homeMatches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="homeTeam" inverseEntity="Match"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoccerPlayer" inverseName="team" inverseEntity="SoccerPlayer"/>
     </entity>
@@ -99,7 +99,7 @@
         <element name="Score" positionX="-23.6640625" positionY="234.9296875" width="128" height="88"/>
         <element name="Shot" positionX="80.6015625" positionY="455.59375" width="128" height="163"/>
         <element name="SoccerPlayer" positionX="-383.734375" positionY="-7.9140625" width="128" height="148"/>
-        <element name="Team" positionX="-25.09765625" positionY="60.33984375" width="128" height="118"/>
+        <element name="Team" positionX="-954.30078125" positionY="227.16015625" width="128" height="118"/>
         <element name="Turnover" positionX="-369" positionY="144" width="128" height="118"/>
     </elements>
 </model>

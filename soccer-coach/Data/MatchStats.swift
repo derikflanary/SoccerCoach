@@ -14,10 +14,10 @@ struct MatchStats {
     var awayPlayingTime = [PlayingTime]()
     
     var homeTotalShots: Int {
-        return homePlayingTime.compactMap { $0.shots }.count
+        return homePlayingTime.compactMap { $0.shots }.flatMap { $0 }.count
     }
     var awayTotalShots: Int {
-        return awayPlayingTime.compactMap { $0.shots }.count
+        return awayPlayingTime.compactMap { $0.shots }.flatMap { $0 }.count
     }
     var homeShotsOnTarget: Int {
         let shots = homePlayingTime.compactMap { $0.shots }.flatMap { $0 }
@@ -36,10 +36,12 @@ struct MatchStats {
         return shots.filter { !$0.onTarget }.count
     }
     var homeAverageShotQuality: Int {
+        guard homeTotalShots > 0 else { return 0 }
         let shots = homePlayingTime.compactMap { $0.shots }.flatMap { $0 }
         return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }
     var awayAverageShotQuality: Int {
+        guard awayTotalShots > 0 else { return 0 }
         let shots = awayPlayingTime.compactMap { $0.shots }.flatMap { $0 }
         return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
     }

@@ -43,7 +43,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-jd-Da4">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-jd-Da4">
                                                     <rect key="frame" x="16" y="12" width="159" height="37"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Cq-td-wW0">
@@ -81,6 +81,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
+                                    <outlet property="dataSource" destination="CYh-id-tQL" id="mE7-j7-Lhf"/>
                                     <outlet property="delegate" destination="FVu-QH-K4Z" id="9hF-ly-nUP"/>
                                 </connections>
                             </tableView>
@@ -112,7 +113,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gbh-w5-fwm">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gbh-w5-fwm">
                                                     <rect key="frame" x="16" y="12" width="159" height="37"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gsw-rS-a4Z">
@@ -150,6 +151,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
+                                    <outlet property="dataSource" destination="0wO-7W-pEH" id="vCp-6f-BgC"/>
                                     <outlet property="delegate" destination="FVu-QH-K4Z" id="zl4-6r-7XO"/>
                                 </connections>
                             </tableView>
@@ -186,8 +188,10 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="awayDataSource" destination="0wO-7W-pEH" id="Cre-p4-8xU"/>
                         <outlet property="awaySectionHeaderTitleLabel" destination="KT2-oS-bMA" id="f99-Qr-1g1"/>
                         <outlet property="awayTableView" destination="bAA-gk-4lB" id="w1m-hK-5j3"/>
+                        <outlet property="homeDataSource" destination="CYh-id-tQL" id="PUo-gz-L55"/>
                         <outlet property="homeSectionHeaderTitleLabel" destination="aeo-BG-Kup" id="NmO-5s-vE4"/>
                         <outlet property="homeTableView" destination="KNH-7J-88F" id="yvP-Sx-lzL"/>
                         <segue destination="JBW-Bo-vyS" kind="show" identifier="showMatchPlayerDetails" destinationCreationSelector="showMatchPlayerDetails:sender:segueIdentifier:" id="KmL-eN-FqZ"/>
@@ -195,6 +199,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSe-1C-DzW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="CYh-id-tQL" customClass="MatchDetailDataSource" customModule="soccer_coach" customModuleProvider="target"/>
+                <customObject id="0wO-7W-pEH" customClass="MatchDetailDataSource" customModule="soccer_coach" customModuleProvider="target"/>
                 <exit id="pVi-bt-lz4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="813.04347826086962" y="44.866071428571423"/>

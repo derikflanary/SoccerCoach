@@ -51,7 +51,8 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
         for card in playerStats.cards {
             let image = UIImage(systemName: "rectangle.fill")
             let tintColor: UIColor = card.cardType == .yellow ? UIColor.systemYellow : UIColor.systemRed
-            let imageView = UIImageView(image: image)
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 44))
+            imageView.image = image
             imageView.tintColor = tintColor
             stackView.addArrangedSubview(imageView)
             arrangedViews.append(imageView)

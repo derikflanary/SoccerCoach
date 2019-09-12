@@ -20,7 +20,7 @@ public class Shot: NSManagedObject {
 }
 
 struct TemporaryShot {
-    let player: SoccerPlayer
+    let player: SoccerPlayer?
     let onTarget: Bool
     let isGoal: Bool
 }

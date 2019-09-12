@@ -19,16 +19,20 @@ struct PlayingTimeController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func playingTime(for player: SoccerPlayer, match: Match, teamType: TeamType) -> PlayingTime? {
-        switch teamType {
-        case .home:
-            return match.homePlayingTime?.first(where: { (playingTime) -> Bool in
-                return playingTime.player == player && playingTime.isActive
-            })
-        case .away:
-            return match.awayPlayingTime?.first(where: { (playingTime) -> Bool in
-                return playingTime.player == player && playingTime.isActive
-            })
+    func playingTime(for player: SoccerPlayer?, match: Match, teamType: TeamType) -> PlayingTime? {
+        if let player = player {
+            switch teamType {
+            case .home:
+                return match.homePlayingTime?.first(where: { (playingTime) -> Bool in
+                    return playingTime.player == player && playingTime.isActive
+                })
+            case .away:
+                return match.awayPlayingTime?.first(where: { (playingTime) -> Bool in
+                    return playingTime.player == player && playingTime.isActive
+                })
+            }
+        } else {
+            return nil
         }
     }
     
@@ -39,6 +43,24 @@ struct PlayingTimeController {
         case .away:
              return match.awayPlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
         }
+    }
+    
+    func addGeneralTeamPlayingTime(to match: Match, teamType: TeamType) {
+        guard let context = context else { return }
+        let playingTime = PlayingTime(context: context)
+        playingTime.player = nil
+        playingTime.half = match.half
+        playingTime.isActive = true
+        playingTime.positionValue = 0
+        playingTime.startTime = match.currentHalf.minute(for: 0, halfLength: match.halfLength)
+        playingTime.endTime = match.currentHalf.minute(for: Int(match.halfLength), halfLength: match.halfLength)
+        switch teamType {
+        case .home:
+            match.addToHomePlayingTime(playingTime)
+        case .away:
+            match.addToAwayPlayingTime(playingTime)
+        }
+        print("began: \(playingTime)")
     }
     
     func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position, startTime: Int) {
@@ -71,7 +93,7 @@ struct PlayingTimeController {
         }
     }
     
-    func addShot(to player: SoccerPlayer, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil, timeStamp: Int, assistee: SoccerPlayer?) {
+    func addShot(to player: SoccerPlayer?, match: Match, teamType: TeamType, rating: Int, onTarget: Bool, isGoal: Bool, description: String? = nil, timeStamp: Int, assistee: SoccerPlayer?) {
         guard let context = context else { return }
         guard let playerPlayingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let shot = Shot(context: context)
@@ -104,7 +126,7 @@ struct PlayingTimeController {
         try? context.save()
     }
     
-    func addTurnover(to player: SoccerPlayer, match: Match, teamType: TeamType, badPass: Bool, badTouch: Bool, timeStamp: Int) {
+    func addTurnover(to player: SoccerPlayer?, match: Match, teamType: TeamType, badPass: Bool, badTouch: Bool, timeStamp: Int) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let turnover = Turnover(context: context)
@@ -116,7 +138,7 @@ struct PlayingTimeController {
     }
     
 
-    func addFoul(to player: SoccerPlayer, match: Match, teamType: TeamType, isOffsides: Bool, timeStamp: Int) {
+    func addFoul(to player: SoccerPlayer?, match: Match, teamType: TeamType, isOffsides: Bool, timeStamp: Int) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let foul = Foul(context: context)
@@ -126,7 +148,7 @@ struct PlayingTimeController {
         playingTime.addToFouls(foul)
     }
     
-    func addCard(to player: SoccerPlayer, match: Match, teamType: TeamType, cardType: CardType, timeStamp: Int) {
+    func addCard(to player: SoccerPlayer?, match: Match, teamType: TeamType, cardType: CardType, timeStamp: Int) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let card = Card(context: context)
@@ -136,7 +158,7 @@ struct PlayingTimeController {
         playingTime.addToCards(card)
     }
     
-    func addSave(to player: SoccerPlayer, match: Match, teamType: TeamType, timeStamp: Int) {
+    func addSave(to player: SoccerPlayer?, match: Match, teamType: TeamType, timeStamp: Int) {
         guard let context = context else { return }
         guard let playingTime = playingTime(for: player, match: match, teamType: teamType) else { return }
         let save = Save(context: context)
@@ -144,5 +166,5 @@ struct PlayingTimeController {
         save.timeStamp = Int64(match.currentHalf.minute(for: timeStamp, halfLength: match.halfLength))
         playingTime.addToSaves(save)
     }
-    
+        
 }

@@ -152,11 +152,25 @@
                                     <constraint firstAttribute="bottom" secondItem="cLs-D4-MId" secondAttribute="bottom" constant="12" id="ogw-U6-9SG"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paJ-27-Vfp">
+                                <rect key="frame" x="623.5" y="688" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mad-hF-xS2"/>
+                                    <constraint firstAttribute="width" constant="40" id="z7s-Ma-hpm"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="generalStatButtonTapped" destination="nlV-Ay-vVf" eventType="touchUpInside" id="hZR-OV-LLV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="FieldGreen"/>
                         <constraints>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="XOF-na-RNq" secondAttribute="bottom" id="9ck-B3-hiQ"/>
                             <constraint firstItem="eSp-k5-Pa6" firstAttribute="width" secondItem="fLt-S8-nS1" secondAttribute="width" multiplier="0.4" id="DeB-w9-gSR"/>
+                            <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="paJ-27-Vfp" secondAttribute="trailing" constant="40" id="E9a-ii-26T"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="top" secondItem="3y4-hD-KW5" secondAttribute="top" id="FEE-Ca-BaM"/>
                             <constraint firstItem="eSp-k5-Pa6" firstAttribute="centerX" secondItem="fLt-S8-nS1" secondAttribute="centerX" id="JfA-yT-YCA"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="trailing" secondItem="5lD-S4-tjA" secondAttribute="trailing" id="R0L-hH-Fv5"/>
@@ -164,6 +178,7 @@
                             <constraint firstItem="eSp-k5-Pa6" firstAttribute="centerY" secondItem="fLt-S8-nS1" secondAttribute="centerY" id="m8W-7d-b1B"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="vYE-IA-AWE"/>
                             <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="5lD-S4-tjA" secondAttribute="bottom" id="xW8-mF-RCK"/>
+                            <constraint firstItem="fLt-S8-nS1" firstAttribute="bottom" secondItem="paJ-27-Vfp" secondAttribute="bottom" constant="40" id="xZI-mW-LeT"/>
                             <constraint firstItem="XOF-na-RNq" firstAttribute="leading" secondItem="fLt-S8-nS1" secondAttribute="leading" id="ybM-BU-Mgv"/>
                             <constraint firstItem="5lD-S4-tjA" firstAttribute="top" secondItem="fLt-S8-nS1" secondAttribute="top" id="yiV-cA-2s1"/>
                         </constraints>
@@ -172,6 +187,7 @@
                     <navigationItem key="navigationItem" id="DZR-HA-31D"/>
                     <connections>
                         <outlet property="addAssistButton" destination="xpF-lu-pH5" id="cUP-Fq-xRK"/>
+                        <outlet property="addStatButton" destination="paJ-27-Vfp" id="0cZ-YB-j6P"/>
                         <outlet property="assistTableView" destination="foR-YA-M82" id="a6U-ox-lfX"/>
                         <outlet property="collectionView" destination="5lD-S4-tjA" id="rbw-3a-kaN"/>
                         <outlet property="ratingLabel" destination="8qC-Rp-1kx" id="HFi-ie-5JA"/>
@@ -400,6 +416,7 @@
         <image name="list.dash" catalog="system" width="64" height="44"/>
         <image name="notFound" width="1216" height="912"/>
         <image name="pencil.and.outline" catalog="system" width="64" height="60"/>
+        <image name="plus.circle.fill" catalog="system" width="64" height="62"/>
         <namedColor name="FieldGreen">
             <color red="0.25490196078431371" green="0.45882352941176469" blue="0.019607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -45,7 +45,7 @@ class SoccerTeamCollection: UIViewController {
     @IBOutlet weak var assistTableView: UITableView!
     @IBOutlet weak var shotViewTitleLabel: UILabel!
     @IBOutlet weak var shotDescriptionTextField: UITextField!
-    
+    @IBOutlet weak var addStatButton: UIButton!
     
     // MARK: - Properties
     
@@ -60,6 +60,9 @@ class SoccerTeamCollection: UIViewController {
         didSet {
             resetPlayers()
             updateSnapshot()
+            DispatchQueue.main.async {
+                self.addStatButton.isHidden = self.currentMatch == nil                
+            }
         }
     }
     var currentTeamType: TeamType = .home {
@@ -167,6 +170,10 @@ class SoccerTeamCollection: UIViewController {
         resetShotDetailView()
     }
     
+    @IBAction func generalStatButtonTapped() {
+        showAddStatAlert(for: nil, cell: nil, section: .goalie)
+    }
+    
 }
 
 
@@ -258,7 +265,7 @@ private extension SoccerTeamCollection {
     
     func showShotRatingView() {
         guard let tempShot = self.temporaryShot else { return }
-        addAssistButton.isHidden = !tempShot.isGoal
+        addAssistButton.isHidden = !tempShot.isGoal || tempShot.player == nil
         shotRatingView.transform = CGAffineTransform(scaleX: 0.10, y: 0.10)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.shotRatingView.transform = .identity
@@ -316,42 +323,49 @@ private extension SoccerTeamCollection {
 extension SoccerTeamCollection: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell else { return }
-        guard let player = cell.player, let match = currentMatch else { return }
-        selectedPlayer = player
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ActivePlayerCell, let section = Section(rawValue: indexPath.section) else { return }
+        selectedPlayer = cell.player
+        showAddStatAlert(for: cell.player, cell: cell, section: section)
+        
+    }
+    
+    func showAddStatAlert(for player: SoccerPlayer?, cell: ActivePlayerCell?, section: Section) {
+        guard let match = currentMatch else { return }
         let goal = UIAlertAction(title: "Goal", style: .default) { _ in
-            self.temporaryShot = TemporaryShot(player: player, onTarget: true, isGoal: true)
+            self.temporaryShot = TemporaryShot(player: self.selectedPlayer, onTarget: true, isGoal: true)
             self.showShotRatingView()
         }
         let shotOnTarget = UIAlertAction(title: "Shot on Target", style: .default) { _ in
-            self.temporaryShot = TemporaryShot(player: player, onTarget: true, isGoal: false)
+            self.temporaryShot = TemporaryShot(player: self.selectedPlayer, onTarget: true, isGoal: false)
             self.showShotRatingView()
         }
         let shotOffTarget = UIAlertAction(title: "Shot off Target", style: .default) { _ in
-            self.temporaryShot = TemporaryShot(player: player, onTarget: false, isGoal: false)
+            self.temporaryShot = TemporaryShot(player: self.selectedPlayer, onTarget: false, isGoal: false)
             self.showShotRatingView()
         }
         let turnover = UIAlertAction(title: "Turnover", style: .default) { _ in
-            self.presentTurnoverAlert(player: player, match: match)
+            self.presentTurnoverAlert(player: self.selectedPlayer, match: match)
         }
         let foul = UIAlertAction(title: "Foul", style: .default) { _ in
-            self.presentFoulAlert(player: player, match: match)
+            self.presentFoulAlert(player: self.selectedPlayer, match: match)
         }
         let yellowCard = UIAlertAction(title: "Yellow Card", style: .default) { _ in
             self.showMinuteAlert() {
-                PlayingTimeController.shared.addCard(to: player, match: match, teamType: self.currentTeamType, cardType: .yellow, timeStamp: self.minuteTimeStamp)
+                PlayingTimeController.shared.addCard(to: self.selectedPlayer, match: match, teamType: self.currentTeamType, cardType: .yellow, timeStamp: self.minuteTimeStamp)
             }
         }
         let redCard = UIAlertAction(title: "Red Card", style: .default) { _ in
             self.showMinuteAlert() {
-                PlayingTimeController.shared.addCard(to: player, match: match, teamType: self.currentTeamType, cardType: .red, timeStamp: self.minuteTimeStamp)
-                PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: self.currentTeamType, endTime: self.minuteTimeStamp)
+                PlayingTimeController.shared.addCard(to: self.selectedPlayer, match: match, teamType: self.currentTeamType, cardType: .red, timeStamp: self.minuteTimeStamp)
+                if let player = self.selectedPlayer {
+                    PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: self.currentTeamType, endTime: self.minuteTimeStamp)
+                }
             }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         var actions = [goal, shotOnTarget, shotOffTarget, turnover, foul, yellowCard, redCard, cancel]
         
-        if let section = Section(rawValue: indexPath.section), section == .goalie {
+        if section == .goalie {
             let save = UIAlertAction(title: "Save", style: .default) { _ in
                 self.showMinuteAlert() {
                     PlayingTimeController.shared.addSave(to: player, match: match, teamType: self.currentTeamType, timeStamp: self.minuteTimeStamp)
@@ -364,18 +378,26 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         }
         actions.append(details)
         
-        let alertController = UIAlertController(title: "Player Actions", message: nil, preferredStyle: .actionSheet)
-        for action in actions {
-            alertController.addAction(action)
+        if let cell = cell {
+            let alertController = UIAlertController(title: "Player Actions", message: nil, preferredStyle: .actionSheet)
+            for action in actions {
+                alertController.addAction(action)
+            }
+            let rect = view.convert(cell.nameLabel.bounds, to: view)
+            alertController.popoverPresentationController?.sourceView = cell.nameLabel
+            alertController.popoverPresentationController?.sourceRect = rect
+            alertController.view.tintColor = .label
+            present(alertController, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "Player Actions", message: nil, preferredStyle: .alert)
+            for action in actions {
+                alertController.addAction(action)
+            }
+            present(alertController, animated: true, completion: nil)
         }
-        let rect = view.convert(cell.nameLabel.bounds, to: view)
-        alertController.popoverPresentationController?.sourceView = cell.nameLabel
-        alertController.popoverPresentationController?.sourceRect = rect
-        alertController.view.tintColor = .label
-        present(alertController, animated: true, completion: nil)
     }
     
-    func presentTurnoverAlert(player: SoccerPlayer, match: Match) {
+    func presentTurnoverAlert(player: SoccerPlayer?, match: Match) {
         let alert = UIAlertController(title: "Turnover Type", message: nil, preferredStyle: .alert)
         let badPass = UIAlertAction(title: "Bad Pass", style: .default) { _ in
             self.showMinuteAlert() {
@@ -393,7 +415,7 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func presentFoulAlert(player: SoccerPlayer, match: Match) {
+    func presentFoulAlert(player: SoccerPlayer?, match: Match) {
         let alert = UIAlertController(title: "Foul Type", message: nil, preferredStyle: .alert)
         let offsides = UIAlertAction(title: "Offsides", style: .default) { _ in
             self.showMinuteAlert() {
@@ -549,6 +571,8 @@ extension SoccerTeamCollection: Subscriberable {
             } else {
                 DispatchQueue.main.async {
                     let startTime = match.half * match.halfLength
+                    PlayingTimeController.shared.addGeneralTeamPlayingTime(to: match, teamType: .home)
+                    PlayingTimeController.shared.addGeneralTeamPlayingTime(to: match, teamType: .away)
                     for player in self.homeActivePlayers {
                         guard let position = self.position(for: player, teamType: .home) else { continue }
                         PlayingTimeController.shared.addPlayingTime(to: match, for: player, teamType: .home, position: position, startTime: Int(startTime))

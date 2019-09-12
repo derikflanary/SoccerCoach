@@ -73,6 +73,7 @@
 		EE7E643D22F0A3AC00E006D7 /* MatchStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7E643C22F0A3AC00E006D7 /* MatchStats.swift */; };
 		EE7E9B0022C9A56B001773AA /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7E9AFF22C9A56B001773AA /* MatchViewController.swift */; };
 		EE7E9B0222C9A57E001773AA /* MatchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7E9B0122C9A57E001773AA /* MatchViewController.storyboard */; };
+		EEA24A762329FFF6004696FE /* MatchDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA24A752329FFF6004696FE /* MatchDetailDataSource.swift */; };
 		EECCE55D230351A1006B5A4B /* Turnover+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCE55B230351A1006B5A4B /* Turnover+CoreDataClass.swift */; };
 		EECCE55E230351A1006B5A4B /* Turnover+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCE55C230351A1006B5A4B /* Turnover+CoreDataProperties.swift */; };
 		EEE0D30722EF769E001433D9 /* MatchDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE0D30622EF769E001433D9 /* MatchDetails.storyboard */; };
@@ -156,6 +157,7 @@
 		EE7E643C22F0A3AC00E006D7 /* MatchStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchStats.swift; path = "../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/Data/MatchStats.swift"; sourceTree = "<group>"; };
 		EE7E9AFF22C9A56B001773AA /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		EE7E9B0122C9A57E001773AA /* MatchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchViewController.storyboard; sourceTree = "<group>"; };
+		EEA24A752329FFF6004696FE /* MatchDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailDataSource.swift; sourceTree = "<group>"; };
 		EECCE55B230351A1006B5A4B /* Turnover+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Turnover+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EECCE55C230351A1006B5A4B /* Turnover+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Turnover+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEE0D30622EF769E001433D9 /* MatchDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = MatchDetails.storyboard; path = "../../../../../../../../System/Volumes/Data/Users/derikflanary/Documents/code/soccer-coach/soccer-coach/UI/Match and Teams/MatchDetails.storyboard"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				EE3729B422CBEBBE003FBBFE /* NewPlayerCreation.storyboard */,
 				EE00FF41231771FB00BEB05A /* History */,
 				EEE0D30822EF8A48001433D9 /* MatchDetail.swift */,
+				EEA24A752329FFF6004696FE /* MatchDetailDataSource.swift */,
 				EEE0D30622EF769E001433D9 /* MatchDetails.storyboard */,
 				EEE0D30A22EF95A3001433D9 /* PlayerCollectionViewCell.swift */,
 				EEE0D30B22EF95A3001433D9 /* PlayerCollectionViewCell.xib */,
@@ -484,6 +487,7 @@
 				EE16B9D822E6BA7E00EFE52B /* Score+CoreDataClass.swift in Sources */,
 				EE16B9D422E6BA7E00EFE52B /* Match+CoreDataClass.swift in Sources */,
 				EECCE55E230351A1006B5A4B /* Turnover+CoreDataProperties.swift in Sources */,
+				EEA24A762329FFF6004696FE /* MatchDetailDataSource.swift in Sources */,
 				EE3D61E722E7B5540092CBB6 /* MatchController.swift in Sources */,
 				EE59118B22C2D46F0049B71E /* Int+Extensions.swift in Sources */,
 				EE01FF522305BAE100CAA397 /* Assist+CoreDataProperties.swift in Sources */,

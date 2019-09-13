@@ -86,8 +86,9 @@ class MatchState: State {
             awayGoals += 1
         case _ as HalfStarted:
             halfStarted = true
-        case _ as HalfEnded:
+        case let event as HalfEnded:
             halfStarted = false
+            currentMatch?.isOver = true
         default:
             break
         }

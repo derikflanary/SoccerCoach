@@ -40,4 +40,6 @@ struct AwayGoalScored: Event { }
 
 struct HalfStarted: Event { }
 
-struct HalfEnded: Event { }
+struct HalfEnded: Event {
+    let isMatchOver: Bool
+}

@@ -32,16 +32,38 @@ struct PlayingTimeController {
                 })
             }
         } else {
-            return nil
+            switch teamType {
+            case .home:
+                return match.homePlayingTime?.first(where: { (playingTime) -> Bool in
+                    return playingTime.player == nil && playingTime.isActive
+                })
+            case .away:
+                return match.awayPlayingTime?.first(where: { (playingTime) -> Bool in
+                    return playingTime.player == nil && playingTime.isActive
+                })
+            }
         }
     }
     
-    func playingTimes(for player: SoccerPlayer, match: Match, teamType: TeamType) -> [PlayingTime] {
+    func playingTimes(for player: SoccerPlayer?, match: Match, teamType: TeamType) -> [PlayingTime] {
+        if let player = player {
+            switch teamType {
+            case .home:
+                return match.homePlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            case .away:
+                return match.awayPlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            }
+        } else {
+            return generalPlayingTime(for: match, teamType: teamType)
+        }
+    }
+    
+    func generalPlayingTime(for match: Match, teamType: TeamType) -> [PlayingTime] {
         switch teamType {
         case .home:
-            return match.homePlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+            return match.homePlayingTime?.filter { $0.player == nil }.compactMap { $0 } ?? []
         case .away:
-             return match.awayPlayingTime?.filter { $0.player == player }.compactMap { $0 } ?? []
+             return match.awayPlayingTime?.filter { $0.player == nil }.compactMap { $0 } ?? []
         }
     }
     
@@ -61,6 +83,13 @@ struct PlayingTimeController {
             match.addToAwayPlayingTime(playingTime)
         }
         print("began: \(playingTime)")
+    }
+    
+    func endGeneralTeamPlayingTime(for match: Match, teamType: TeamType) {
+        guard let context = context else { return }
+        let generalPlayingTime = playingTime(for: nil, match: match, teamType: teamType)
+        generalPlayingTime?.isActive = false
+        try? context.save()
     }
     
     func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position, startTime: Int) {

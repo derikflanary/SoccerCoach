@@ -22,7 +22,7 @@ class PlayerDetailCell: UITableViewCell, ReusableView {
             $0.removeFromSuperview()
         }
         
-        nameLabel.text = playerStats.player.name
+        nameLabel.text = playerStats.player?.name
         if playerStats.minutesPlayed > 0 {
             minutesPlayedLabel.text = "\(playerStats.minutesPlayed) minutes"
         } else if playerStats.minutesPlayed < 0 || !playerStats.playingTimes.isEmpty {

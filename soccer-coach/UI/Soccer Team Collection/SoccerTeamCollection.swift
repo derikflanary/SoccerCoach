@@ -150,9 +150,9 @@ class SoccerTeamCollection: UIViewController {
     }
     
     @IBSegueAction func presentPlayerDetails(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> UIViewController? {
-        guard let player = selectedPlayer, let match = currentMatch else { return nil }
-        let playingTime = PlayingTimeController.shared.playingTimes(for: player, match: match, teamType: currentTeamType)
-        let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime, match: match)
+        guard let match = currentMatch else { return nil }
+        let playingTime = PlayingTimeController.shared.playingTimes(for: selectedPlayer, match: match, teamType: currentTeamType)
+        let playerMatchStats = PlayerMatchStats(player: selectedPlayer, playingTimes: playingTime, match: match)
         return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
     }
     

@@ -13,6 +13,8 @@ import UIKit
 import Combine
 
 public class Match: NSManagedObject {
+    
+    var isOver = false
 
     var summary: String {
         let homeTeamName = homeTeam?.name ?? "Home Team"

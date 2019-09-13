@@ -80,7 +80,7 @@ struct MatchStats {
 
 struct PlayerMatchStats {
     
-    let player: SoccerPlayer
+    let player: SoccerPlayer?
     let playingTimes: [PlayingTime]
     let match: Match
     

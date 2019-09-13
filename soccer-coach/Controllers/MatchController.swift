@@ -51,11 +51,13 @@ struct MatchController {
             for player in homeTeam.players {
                 PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home, endTime: Int(match.halfLength))
             }
+            PlayingTimeController.shared.endGeneralTeamPlayingTime(for: match, teamType: .home)
         }
         if let awayTeam = match.awayTeam {
             for player in awayTeam.players {
                 PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away, endTime: Int(match.halfLength * 2))
             }
+            PlayingTimeController.shared.endGeneralTeamPlayingTime(for: match, teamType: .away)
         }
         match.score?.home = max(homeScore, Int64(match.homeGoals))
         match.score?.away = max(awayScore, Int64(match.awayGoals))

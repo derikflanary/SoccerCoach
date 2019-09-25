@@ -401,14 +401,10 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     func presentTurnoverAlert(player: SoccerPlayer?, match: Match) {
         let alert = UIAlertController(title: "Turnover Type", message: nil, preferredStyle: .alert)
         let badPass = UIAlertAction(title: "Bad Pass", style: .default) { _ in
-            self.showMinuteAlert() {
-                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: true, badTouch: false, timeStamp: self.minuteTimeStamp)
-            }
+            PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: true, badTouch: false, timeStamp: self.minuteTimeStamp)
         }
         let badTouch = UIAlertAction(title: "Bad Touch", style: .default) { _ in
-            self.showMinuteAlert() {
-                PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: false, badTouch: true, timeStamp: self.minuteTimeStamp)
-            }
+            PlayingTimeController.shared.addTurnover(to: player, match: match, teamType: self.currentTeamType, badPass: false, badTouch: true, timeStamp: self.minuteTimeStamp)
         }
         alert.addAction(badPass)
         alert.addAction(badTouch)

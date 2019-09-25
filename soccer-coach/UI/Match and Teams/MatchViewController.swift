@@ -199,10 +199,9 @@ private extension MatchViewController {
     }
         
     func updateHalfSelected() {
-        guard let match = match, let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex + 1), selectedHalf != .extra else { return }
+        guard let selectedHalf = Half(rawValue: halfSegmentedControl.selectedSegmentIndex + 1), selectedHalf != .extra else { return }
         half = selectedHalf
         halfSegmentedControl.selectedSegmentIndex = half.rawValue
-        match.half = Int64(half.rawValue)
     }
     
 }

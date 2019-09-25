@@ -79,10 +79,12 @@ enum Half: Int {
         case .first:
             return Double(timeStamp)
         case .second:
-            if timeStamp < halfLength {
+            if timeStamp == 0 {
                 return Double(timeStamp + Int(halfLength))
-            } else {
+            } else if timeStamp > halfLength {
                 return Double(timeStamp)
+            } else {
+                return Double(timeStamp + Int(halfLength))
             }
         case .extra:
             if timeStamp < halfLength {

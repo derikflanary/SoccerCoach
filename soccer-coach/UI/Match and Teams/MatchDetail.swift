@@ -27,8 +27,6 @@ class MatchDetail: UIViewController {
     var match: Match?
     var selectedPlayer: SoccerPlayer? = nil
     var playerTeamType: TeamType = .home
-    var homePlayers = [SoccerPlayer]()
-    var awayPlayers = [SoccerPlayer]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,11 +98,11 @@ extension MatchDetail: UITableViewDelegate {
         guard let section = MatchDetailDataSource.Section(rawValue: indexPath.section), section == .players else { return }
         
         if tableView == homeTableView {
-            selectedPlayer = homePlayers[indexPath.row]
+            selectedPlayer = homeDataSource.players[indexPath.row]
             playerTeamType = .home
         }
         if tableView == awayTableView {
-            selectedPlayer = awayPlayers[indexPath.row]
+            selectedPlayer = awayDataSource.players[indexPath.row]
             playerTeamType = .away
         }
         performSegue(withIdentifier: .showMatchPlayerDetails, sender: nil)

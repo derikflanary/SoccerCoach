@@ -224,7 +224,7 @@
         <!--Split View Controller-->
         <scene sceneID="J84-Tp-JJI">
             <objects>
-                <splitViewController maximumPrimaryColumnWidth="400" preferredPrimaryColumnWidthFraction="1" id="xyP-Bu-AHd" sceneMemberID="viewController">
+                <splitViewController maximumPrimaryColumnWidth="440" preferredPrimaryColumnWidthFraction="1" id="xyP-Bu-AHd" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HdY-5x-oAb" kind="relationship" relationship="masterViewController" id="Mfk-P7-ecv"/>
                         <segue destination="nlV-Ay-vVf" kind="relationship" relationship="detailViewController" id="eVN-xE-a2I"/>

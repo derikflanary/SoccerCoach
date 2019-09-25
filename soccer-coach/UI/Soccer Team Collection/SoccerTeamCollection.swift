@@ -144,8 +144,8 @@ class SoccerTeamCollection: UIViewController {
             guard let temporaryShot = self.temporaryShot, let match = self.currentMatch else { return }
             self.showMinuteAlert() {
                 PlayingTimeController.shared.addShot(to: temporaryShot.player, match: match, teamType: self.currentTeamType, rating: Int(self.ratingSlider.value * 100), onTarget: temporaryShot.onTarget, isGoal: temporaryShot.isGoal, description: self.shotDescriptionTextField.text, timeStamp: self.minuteTimeStamp, assistee: self.assistee)
+                self.resetShotDetailView()
             }
-            self.resetShotDetailView()
         }
     }
     
@@ -274,10 +274,11 @@ private extension SoccerTeamCollection {
     }
     
     func resetShotDetailView() {
+        selectedPlayer = nil
         temporaryShot = nil
         assistee = nil
         shotDescriptionTextField.text = nil
-        self.addAssistButton.setTitle("Add Assist", for: .normal)
+        addAssistButton.setTitle("Add Assist", for: .normal)
     }
     
     func position(for player: SoccerPlayer, teamType: TeamType) -> Position? {
@@ -418,14 +419,10 @@ extension SoccerTeamCollection: UICollectionViewDelegate {
     func presentFoulAlert(player: SoccerPlayer?, match: Match) {
         let alert = UIAlertController(title: "Foul Type", message: nil, preferredStyle: .alert)
         let offsides = UIAlertAction(title: "Offsides", style: .default) { _ in
-            self.showMinuteAlert() {
-                PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: true, timeStamp: self.minuteTimeStamp)
-            }
+            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: true, timeStamp: self.minuteTimeStamp)
         }
         let common = UIAlertAction(title: "Common Foul", style: .default) { _ in
-            self.showMinuteAlert() {
-                PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: false, timeStamp: self.minuteTimeStamp)
-            }
+            PlayingTimeController.shared.addFoul(to: player, match: match, teamType: self.currentTeamType, isOffsides: false, timeStamp: self.minuteTimeStamp)
         }
         alert.addAction(offsides)
         alert.addAction(common)
@@ -561,16 +558,23 @@ extension SoccerTeamCollection: Subscriberable {
         .sink(receiveValue: { hasStarted in
             guard let match = self.currentMatch else { return }
             if !hasStarted {
-                let endTime = (match.half + 1) * match.halfLength
-                for player in self.homeActivePlayers {
-                    PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home, endTime: Int(endTime))
-                }
-                for player in self.awayActivePlayers {
-                    PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away, endTime: Int(endTime))
+                DispatchQueue.main.async {
+                    let endTime = (match.half + 1) * match.halfLength
+                    for player in self.homeActivePlayers {
+                        PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .home, endTime: Int(endTime))
+                    }
+                    for player in self.awayActivePlayers {
+                        PlayingTimeController.shared.endPlayingTime(for: player, match: match, teamType: .away, endTime: Int(endTime))
+                    }
+                    PlayingTimeController.shared.endGeneralTeamPlayingTime(for: match, teamType: .home)
+                    PlayingTimeController.shared.endGeneralTeamPlayingTime(for: match, teamType: .away)
+                    if match.half == 0 {
+                        match.half += 1
+                    }
                 }
             } else {
                 DispatchQueue.main.async {
-                    let startTime = match.half * match.halfLength
+                    let startTime = 0
                     PlayingTimeController.shared.addGeneralTeamPlayingTime(to: match, teamType: .home)
                     PlayingTimeController.shared.addGeneralTeamPlayingTime(to: match, teamType: .away)
                     for player in self.homeActivePlayers {

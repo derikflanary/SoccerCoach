@@ -90,6 +90,7 @@ struct PlayingTimeController {
         let generalPlayingTime = playingTime(for: nil, match: match, teamType: teamType)
         generalPlayingTime?.isActive = false
         try? context.save()
+        print("ended: \(generalPlayingTime)")
     }
     
     func addPlayingTime(to match: Match, for player: SoccerPlayer, teamType: TeamType, position: Position, startTime: Int) {

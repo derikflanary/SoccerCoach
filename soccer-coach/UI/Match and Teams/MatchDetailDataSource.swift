@@ -116,7 +116,7 @@ extension MatchDetailDataSource: UITableViewDataSource {
             case .home:
                 cell.textLabel?.text = "\(match.homeCornerCount)"
             case .away:
-                cell.textLabel?.text = "\(match.awayCornerCount)po "
+                cell.textLabel?.text = "\(match.awayCornerCount)"
             }
             return cell
         case .assists:

@@ -88,7 +88,7 @@ class MatchState: State {
             halfStarted = true
         case let event as HalfEnded:
             halfStarted = false
-            currentMatch?.isOver = true
+            currentMatch?.isOver = event.isMatchOver
         default:
             break
         }

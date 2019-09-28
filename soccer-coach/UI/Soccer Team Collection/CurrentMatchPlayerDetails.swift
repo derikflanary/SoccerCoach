@@ -44,6 +44,10 @@ class CurrentMatchPlayerDetails: UIViewController {
         guard let shot = selectedShot else { return nil }
         return ShotDetail(coder: coder, shot: shot, match: playerMatchStats.match)
     }
+    @IBSegueAction func showPositionDetail(_ coder: NSCoder) -> UIViewController? {
+        return PlayerPositionMatchDetail(coder: coder, playerMatchStats: playerMatchStats)
+    }
+    
 }
 
 
@@ -148,7 +152,7 @@ extension CurrentMatchPlayerDetails: UITableViewDataSource {
             cell.accessoryType = .none
         case .positions:
             cell.textLabel?.text = playerMatchStats.positions.map { String($0.rawValue) }.joined(separator: ", ")
-            cell.accessoryType = .none
+            cell.accessoryType = .disclosureIndicator
         case .goals:
             let goal = playerMatchStats.goals[indexPath.row]
             cell.textLabel?.text = goal.minuteString(halfLength: Int(playerMatchStats.match.halfLength))
@@ -205,6 +209,8 @@ extension CurrentMatchPlayerDetails: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let section = Section(rawValue: indexPath.section) else { return }
         switch section {
+        case .positions:
+            performSegue(withIdentifier: .showPositionDetail, sender: nil)
         case .goals:
             selectedShot = playerMatchStats.goals[indexPath.row]
             performSegue(withIdentifier: .showShotDetail, sender: nil)
@@ -228,6 +234,7 @@ extension CurrentMatchPlayerDetails: SegueHandling {
     
     enum SegueIdentifier: String {
         case showShotDetail
+        case showPositionDetail
     }
     
 }

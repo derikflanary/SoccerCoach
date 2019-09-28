@@ -84,6 +84,17 @@ struct PlayerMatchStats {
     let playingTimes: [PlayingTime]
     let match: Match
     
+    var teamType: TeamType? {
+        guard let homePlayers = match.homeTeam?.players, let awayPlayers = match.awayTeam?.players, let player = player else { return nil }
+        if homePlayers.contains(player) {
+            return .home
+        } else if awayPlayers.contains(player) {
+            return.away
+        } else {
+            return nil
+        }
+    }
+    
     var minutesPlayed: Int {
         return playingTimes.map { $0.length }.reduce(0, +)
     }
@@ -128,4 +139,77 @@ struct PlayerMatchStats {
         return playingTimes.compactMap { $0.saves }.flatMap { $0 }
     }
     
+    
+    func minutesPlayed(at postion: Position) -> Int {
+        return playingTimes.filter { $0.position == postion }.map { $0.length }.reduce(0, +)
+    }
+    
+    func teamShots(at position: Position) -> [Shot] {
+        guard let teamType = teamType else { return [] }
+        let windows = playingTimes.filter { $0.position == position }.map { MinuteWindow(startTime: Int($0.startTime), endTime: Int($0.endTime)) }
+        switch teamType {
+        case .home:
+            let homeShots = match.homePlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+            var shotsForPosition = [Shot]()
+            for window in windows {
+                shotsForPosition.append(contentsOf: homeShots?.filter { window.contains(timeStamp: Int($0.timeStamp))  } ?? [] )
+            }
+            return shotsForPosition
+        case .away:
+            let awayShots = match.awayPlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+            var shotsForPosition = [Shot]()
+            for window in windows {
+                shotsForPosition.append(contentsOf: awayShots?.filter { window.contains(timeStamp: Int($0.timeStamp))  } ?? [] )
+            }
+            return shotsForPosition
+        }
+    }
+    
+    func opposingTeamShots(at position: Position) -> [Shot] {
+        guard let teamType = teamType else { return [] }
+        let windows = playingTimes.filter { $0.position == position }.map { MinuteWindow(startTime: Int($0.startTime), endTime: Int($0.endTime)) }
+        switch teamType {
+        case .home:
+            let awayShots = match.awayPlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+            var shotsForPosition = [Shot]()
+            for window in windows {
+                shotsForPosition.append(contentsOf: awayShots?.filter { window.contains(timeStamp: Int($0.timeStamp))  } ?? [] )
+            }
+            return shotsForPosition
+        case .away:
+            let homeShots = match.homePlayingTime?.compactMap { $0.shots }.flatMap { $0 }
+            var shotsForPosition = [Shot]()
+            for window in windows {
+                shotsForPosition.append(contentsOf: homeShots?.filter { window.contains(timeStamp: Int($0.timeStamp))  } ?? [] )
+            }
+            return shotsForPosition
+        }
+    }
+    
+    func teamShotsPerMinute(at position: Position) -> Double {
+        let minutes = minutesPlayed(at: position)
+        return (Double(teamShots(at: position).count) / Double(minutes))
+    }
+    
+    func teamShotQualityAverage(at position: Position) -> Int {
+        let shots = teamShots(at: position)
+        guard shots.count > 0 else { return 0 }
+        return shots.map { Int($0.rating) }.reduce(0, +) / shots.count
+    }
+    
+    func plusMinus(at position: Position) -> Int {
+        let teamGoalCount = teamShots(at: position).filter { $0.isGoal }.count
+        let opposingTeamGoalCount = opposingTeamShots(at: position).filter { $0.isGoal }.count
+        return teamGoalCount - opposingTeamGoalCount
+    }
+    
+}
+
+struct MinuteWindow {
+    let startTime: Int
+    let endTime: Int
+    
+    func contains(timeStamp: Int) -> Bool {
+        return timeStamp >= startTime && timeStamp <= endTime
+    }
 }

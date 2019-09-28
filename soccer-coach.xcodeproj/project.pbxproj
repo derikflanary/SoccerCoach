@@ -14,6 +14,8 @@
 		EE018CC722F0B35B00C45ACA /* PlayerDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE018CC622F0B35B00C45ACA /* PlayerDetailCell.swift */; };
 		EE01FF512305BAE100CAA397 /* Assist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01FF4F2305BAE100CAA397 /* Assist+CoreDataClass.swift */; };
 		EE01FF522305BAE100CAA397 /* Assist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01FF502305BAE100CAA397 /* Assist+CoreDataProperties.swift */; };
+		EE127D19233FB600008DAEE4 /* PlayerPositionMatchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE127D18233FB600008DAEE4 /* PlayerPositionMatchDetail.swift */; };
+		EE127D1B233FB614008DAEE4 /* PlayerPositionMatchDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE127D1A233FB614008DAEE4 /* PlayerPositionMatchDetail.storyboard */; };
 		EE16B9D222E6BA7E00EFE52B /* Foul+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C422E6BA7E00EFE52B /* Foul+CoreDataClass.swift */; };
 		EE16B9D322E6BA7E00EFE52B /* Foul+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C522E6BA7E00EFE52B /* Foul+CoreDataProperties.swift */; };
 		EE16B9D422E6BA7E00EFE52B /* Match+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE16B9C622E6BA7E00EFE52B /* Match+CoreDataClass.swift */; };
@@ -96,6 +98,8 @@
 		EE018CC622F0B35B00C45ACA /* PlayerDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailCell.swift; sourceTree = "<group>"; };
 		EE01FF4F2305BAE100CAA397 /* Assist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE01FF502305BAE100CAA397 /* Assist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EE127D18233FB600008DAEE4 /* PlayerPositionMatchDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPositionMatchDetail.swift; sourceTree = "<group>"; };
+		EE127D1A233FB614008DAEE4 /* PlayerPositionMatchDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerPositionMatchDetail.storyboard; sourceTree = "<group>"; };
 		EE16B9C422E6BA7E00EFE52B /* Foul+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foul+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE16B9C522E6BA7E00EFE52B /* Foul+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foul+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE16B9C622E6BA7E00EFE52B /* Match+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Match+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -306,6 +310,8 @@
 				EEF7609722B82EF6004D92CF /* ActivePlayerCell.xib */,
 				EE2CBAF722FB4D9A00291D4C /* CurrentMatchPlayerDetails.swift */,
 				EE2CBAF922FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard */,
+				EE127D18233FB600008DAEE4 /* PlayerPositionMatchDetail.swift */,
+				EE127D1A233FB614008DAEE4 /* PlayerPositionMatchDetail.storyboard */,
 			);
 			path = "Soccer Team Collection";
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				EE7E9B0222C9A57E001773AA /* MatchViewController.storyboard in Resources */,
 				EE27686122B7E70B008E4CA1 /* LaunchScreen.storyboard in Resources */,
 				EE20114D22D698B4007A1DAC /* Drawing.storyboard in Resources */,
+				EE127D1B233FB614008DAEE4 /* PlayerPositionMatchDetail.storyboard in Resources */,
 				EE2CBAFA22FB4DA500291D4C /* CurrentMatchPlayerDetails.storyboard in Resources */,
 				EE27685E22B7E70B008E4CA1 /* Assets.xcassets in Resources */,
 				EEF7609922B82EF6004D92CF /* ActivePlayerCell.xib in Resources */,
@@ -522,6 +529,7 @@
 				EE7E643D22F0A3AC00E006D7 /* MatchStats.swift in Sources */,
 				EE00FF4D2317725600BEB05A /* ShotDetail.swift in Sources */,
 				EE16B9DB22E6BA7E00EFE52B /* Card+CoreDataProperties.swift in Sources */,
+				EE127D19233FB600008DAEE4 /* PlayerPositionMatchDetail.swift in Sources */,
 				EE6D438A22E62CE2005B759D /* Team+CoreDataClass.swift in Sources */,
 				EE4393E523177DBE007F7B7A /* Save+CoreDataProperties.swift in Sources */,
 				EE3729AF22CBBDF5003FBBFE /* NewTeamCreation.swift in Sources */,

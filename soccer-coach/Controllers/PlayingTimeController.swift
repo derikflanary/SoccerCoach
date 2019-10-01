@@ -19,6 +19,12 @@ struct PlayingTimeController {
         return appDelegate.persistentContainer.viewContext
     }
     
+    func playingTimes(for player: SoccerPlayer, match: Match) -> [PlayingTime] {
+        guard let homePlayingTimes = match.homePlayingTime, let awayPlayingTimes = match.awayPlayingTime else { return [] }
+        let playingTimes = homePlayingTimes.union(awayPlayingTimes)
+        return playingTimes.filter { $0.player == player }
+    }
+    
     func playingTime(for player: SoccerPlayer?, match: Match, teamType: TeamType) -> PlayingTime? {
         if let player = player {
             switch teamType {

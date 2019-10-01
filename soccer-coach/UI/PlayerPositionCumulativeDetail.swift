@@ -8,19 +8,19 @@
 
 import UIKit
 
-class PlayerPositionMatchDetail: UIViewController {
+class PlayerPositionCumulativeDetail: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var playerMatchStats: PlayerMatchStats
+    var playerStats: PlayerCumulativeStats
     let cellIdentifier = "cell"
     var positions: [Position]
     
     // MARK: - Initializers
     
-    init?(coder: NSCoder, playerMatchStats: PlayerMatchStats) {
-        self.playerMatchStats = playerMatchStats
-        positions = playerMatchStats.positions
+    init?(coder: NSCoder, playerStats: PlayerCumulativeStats) {
+        self.playerStats = playerStats
+        positions = playerStats.positions
         super.init(coder: coder)
     }
     
@@ -38,31 +38,31 @@ class PlayerPositionMatchDetail: UIViewController {
 
 // MARK: - Tableview datasource
 
-extension PlayerPositionMatchDetail: UITableViewDataSource {
+extension PlayerPositionCumulativeDetail: UITableViewDataSource {
     
     enum Row: Int, CaseIterable {
-        case minutes
-        case totalTeamShots
+        case minutesPerGame
+        case teamShotsPerGame
         case teamShotsPerMinute
         case averageTeamShotRating
         case plusMinus
-        case personalShots
+        case personalShotsPerGame
         case personalShotRating
                 
         var title: String {
             switch self {
-            case .minutes:
-                return "Minutes Played"
-            case .totalTeamShots:
-                return "Total Team Shots"
+            case .minutesPerGame:
+                return "Minutes Per Game"
+            case .teamShotsPerGame:
+                return "Average Team Shots Per Game"
             case .teamShotsPerMinute:
-                return "Team Shots / Minute"
+                return "Team Shots Per Minute Played"
             case .averageTeamShotRating:
                 return "Average Team Shot Rating"
             case .plusMinus:
                 return "+/-"
-            case .personalShots:
-                return "Total Personal Shots"
+            case .personalShotsPerGame:
+                return "Personal Shots Per Game"
             case .personalShotRating:
                 return "Average Personal Shot Rating"
             }
@@ -87,27 +87,27 @@ extension PlayerPositionMatchDetail: UITableViewDataSource {
         let position = positions[indexPath.section]
         guard let row = Row(rawValue: indexPath.row) else { return cell }
         switch row {
-        case .minutes:
+        case .minutesPerGame:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.minutesPlayed(at: position))"
-        case .totalTeamShots:
+            cell.detailTextLabel?.text = "\(playerStats.minutesPerGame(for: position))"
+        case .teamShotsPerGame:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.teamShots(at: position).count)"
+            cell.detailTextLabel?.text = "\(playerStats.teamShotsPerGame(for: position))"
         case .teamShotsPerMinute:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = String(format: "%.1f", playerMatchStats.teamShotsPerMinute(at: position))
+            cell.detailTextLabel?.text = String(format: "%.1f", playerStats.teamShotsPerMinute(for: position))
         case .averageTeamShotRating:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.teamShotQualityAverage(at: position))"
+            cell.detailTextLabel?.text = "\(playerStats.averageTeamShotRating(for: position))"
         case .plusMinus:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.plusMinus(at: position))"
-        case .personalShots:
+            cell.detailTextLabel?.text = "\(playerStats.plusMinus(for: position))"
+        case .personalShotsPerGame:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.personalShots(at: position).count)"
+            cell.detailTextLabel?.text = String(format: "%.1f", playerStats.personalShotsPerGame(for: position))
         case .personalShotRating:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerMatchStats.personalShotsAverageRating(at: position))"
+            cell.detailTextLabel?.text = "\(playerStats.personalShotRatingAverage(for: position))"
         }
         return cell
     }

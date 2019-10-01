@@ -144,6 +144,16 @@ struct PlayerMatchStats {
         return playingTimes.filter { $0.position == postion }.map { $0.length }.reduce(0, +)
     }
     
+    func personalShots(at position: Position) -> [Shot] {
+        return shots.filter { $0.playingTime?.position == position }
+    }
+    
+    func personalShotsAverageRating(at position: Position) -> Int {
+        let personalShots = shots.filter { $0.playingTime?.position == position }
+        guard personalShots.count > 0 else { return 0 }
+        return personalShots.map { Int($0.rating) }.reduce(0, +) / personalShots.count
+    }
+    
     func teamShots(at position: Position) -> [Shot] {
         guard let teamType = teamType else { return [] }
         let windows = playingTimes.filter { $0.position == position }.map { MinuteWindow(startTime: Int($0.startTime), endTime: Int($0.endTime)) }
@@ -186,9 +196,9 @@ struct PlayerMatchStats {
         }
     }
     
-    func teamShotsPerMinute(at position: Position) -> Double {
+    func teamShotsPerMinute(at position: Position) -> Float {
         let minutes = minutesPlayed(at: position)
-        return (Double(teamShots(at: position).count) / Double(minutes))
+        return (Float(teamShots(at: position).count) / Float(minutes))
     }
     
     func teamShotQualityAverage(at position: Position) -> Int {
@@ -212,4 +222,84 @@ struct MinuteWindow {
     func contains(timeStamp: Int) -> Bool {
         return timeStamp >= startTime && timeStamp <= endTime
     }
+}
+
+
+struct PlayerCumulativeStats {
+    
+    let player: SoccerPlayer
+    let matches: [Match]
+    var playerMatchStats = [PlayerMatchStats]()
+    var positions = [Position]()
+    
+    init(player: SoccerPlayer, matches: [Match]) {
+        self.player = player
+        self.matches = matches
+        for match in matches {
+            let playingTimes = PlayingTimeController.shared.playingTimes(for: player, match: match)
+            playerMatchStats.append(PlayerMatchStats(player: player, playingTimes: playingTimes, match: match))
+        }
+        self.positions = Array(Set(playerMatchStats.flatMap { $0.positions }))
+    }
+    
+    var minutesPerGame: Int {
+        guard matches.count > 0 else { return 0 }
+        return playerMatchStats.map { $0.minutesPlayed }.reduce(0, +) / matches.count
+    }
+    
+    var totalGoals: [Shot] {
+        return playerMatchStats.flatMap { $0.goals }.filter { $0.playingTime?.player == player }
+    }
+    
+    var assists: [Assist] {
+        return playerMatchStats.flatMap { $0.assists }
+    }
+    
+    var foulsPerGame: Float {
+        guard matches.count > 0 else { return 0 }
+        return Float(playerMatchStats.flatMap { $0.fouls }.filter { $0.playingTime?.player == player }.count) / Float(matches.count)
+    }
+    
+    var shotsPerGame: Float {
+        guard matches.count > 0 else { return 0 }
+        return Float(playerMatchStats.flatMap { $0.shots }.filter { $0.playingTime?.player == player }.count) / Float(matches.count)
+    }
+    
+    var averageShotRating: Int {
+        guard matches.count > 0 else { return 0 }
+        return playerMatchStats.map { $0.averageShotRating }.reduce(0, +) / matches.count
+    }
+    
+    func minutesPerGame(for position: Position) -> Int {
+        guard matches.count > 0 else { return 0 }
+        return playerMatchStats.map { $0.minutesPlayed(at: position) }.reduce(0, +) / matches.count
+    }
+    
+    func teamShotsPerGame(for position: Position) -> [Shot] {
+        return playerMatchStats.flatMap { $0.teamShots(at: position) }
+    }
+    
+    func teamShotsPerMinute(for position: Position) -> Float {
+        guard matches.count > 0 else { return 0 }
+        return playerMatchStats.map { $0.teamShotsPerMinute(at: position) }.reduce(0, +) / Float(matches.count)
+    }
+    
+    func averageTeamShotRating(for position: Position) -> Int {
+        guard matches.count > 0 else { return 0 }
+        return playerMatchStats.map { $0.teamShotQualityAverage(at: position)}.reduce(0, +) / matches.count
+    }
+    
+    func plusMinus(for position: Position) -> Int {
+        return playerMatchStats.map { $0.plusMinus(at: position) }.reduce(0, +)
+    }
+    
+    func personalShotsPerGame(for position: Position) -> Float {
+        guard matches.count > 0 else { return 0 }
+        return Float(playerMatchStats.flatMap { $0.personalShots(at: position) }.count) / Float(matches.count)
+    }
+    
+    func personalShotRatingAverage(for position: Position) -> Int {
+        return playerMatchStats.map { $0.personalShotsAverageRating(at: position) }.reduce(0, +) / matches.count
+    }
+    
 }

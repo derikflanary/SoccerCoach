@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Cid-eV-qeP">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Team Stats List-->
+        <scene sceneID="iRg-ok-f7E">
+            <objects>
+                <viewController id="iJa-rT-aGQ" customClass="TeamStatsList" customModule="soccer_coach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6NJ-mJ-v8F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="rBs-ig-Ebc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iJa-rT-aGQ" id="vLu-sN-t0l"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rBs-ig-Ebc" firstAttribute="leading" secondItem="pBA-Fp-Zlg" secondAttribute="leading" id="AEV-ri-LBd"/>
+                            <constraint firstItem="rBs-ig-Ebc" firstAttribute="top" secondItem="pBA-Fp-Zlg" secondAttribute="top" id="Upe-en-pBh"/>
+                            <constraint firstAttribute="bottom" secondItem="rBs-ig-Ebc" secondAttribute="bottom" id="eVV-9Y-pHx"/>
+                            <constraint firstItem="rBs-ig-Ebc" firstAttribute="trailing" secondItem="pBA-Fp-Zlg" secondAttribute="trailing" id="tch-6Z-7js"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pBA-Fp-Zlg"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="pVu-rm-CFS">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="f3h-a8-SgE">
+                            <connections>
+                                <segue destination="tk9-YH-clH" kind="presentation" id="rL1-5g-axl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="emptyView" destination="SZO-1N-Qzv" id="bmm-ka-7PS"/>
+                        <outlet property="tableView" destination="rBs-ig-Ebc" id="5cL-Ec-QRf"/>
+                        <segue destination="yCr-Yo-ph9" kind="show" identifier="showPlayersList" destinationCreationSelector="showPlayersList:sender:segueIdentifier:" id="GKf-Fl-Qad"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wxq-8c-1EM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="SZO-1N-Qzv">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZH3-G4-tYY">
+                            <rect key="frame" x="40" y="414.5" width="334" height="77"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing Here..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5g-RH-aNv">
+                                    <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create and save a new team to see it appear here!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RX0-u4-eTA">
+                                    <rect key="frame" x="0.0" y="36.5" width="334" height="40.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="desert" translatesAutoresizingMaskIntoConstraints="NO" id="lP9-Op-F0r">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="406.5"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" name="emptyStateBackground"/>
+                    <constraints>
+                        <constraint firstItem="lP9-Op-F0r" firstAttribute="top" secondItem="SZO-1N-Qzv" secondAttribute="top" id="5aR-gP-kO2"/>
+                        <constraint firstItem="ZH3-G4-tYY" firstAttribute="centerX" secondItem="8Gh-py-RS0" secondAttribute="centerX" id="Dko-89-M7q"/>
+                        <constraint firstItem="lP9-Op-F0r" firstAttribute="leading" secondItem="8Gh-py-RS0" secondAttribute="leading" id="Sfs-er-yqh"/>
+                        <constraint firstItem="8Gh-py-RS0" firstAttribute="trailing" secondItem="ZH3-G4-tYY" secondAttribute="trailing" constant="40" id="dDW-dM-ONy"/>
+                        <constraint firstAttribute="trailing" secondItem="lP9-Op-F0r" secondAttribute="trailing" id="hcQ-Oc-1iO"/>
+                        <constraint firstItem="ZH3-G4-tYY" firstAttribute="top" secondItem="lP9-Op-F0r" secondAttribute="bottom" constant="8" id="jTF-fb-K5b"/>
+                        <constraint firstItem="ZH3-G4-tYY" firstAttribute="centerY" secondItem="8Gh-py-RS0" secondAttribute="centerY" id="nCZ-vJ-9Lb"/>
+                        <constraint firstItem="ZH3-G4-tYY" firstAttribute="leading" secondItem="8Gh-py-RS0" secondAttribute="leading" constant="40" id="wCx-hD-gFv"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="8Gh-py-RS0"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="-602.89855072463774" y="-476.11607142857139"/>
+        </scene>
+        <!--NewTeamCreation-->
+        <scene sceneID="Uzd-m9-9gE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewTeamCreation" id="tk9-YH-clH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="OJC-Ti-EOb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Haf-Tj-PNf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="25" y="-581"/>
+        </scene>
+        <!--PlayersList-->
+        <scene sceneID="XWU-6g-WTT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PlayersList" id="yCr-Yo-ph9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="I5V-Mz-q3n"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wZt-ib-hqm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="23" y="-448"/>
+        </scene>
+        <!--Teams-->
+        <scene sceneID="rPJ-g8-6ue">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cid-eV-qeP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Teams" image="list.dash" catalog="system" id="aPE-gD-hJt"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WBs-VE-zsp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iJa-rT-aGQ" kind="relationship" relationship="rootViewController" id="zIc-mg-QoV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bKg-aa-xtE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1513.0434782608697" y="-476.11607142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="desert" width="1216" height="912"/>
+        <image name="list.dash" catalog="system" width="64" height="44"/>
+        <image name="plus" catalog="system" width="64" height="58"/>
+        <namedColor name="emptyStateBackground">
+            <color red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

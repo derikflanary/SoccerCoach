@@ -77,5 +77,10 @@ struct MatchController {
         try? context.save()
     }
     
+    func fetchMatches(for player: SoccerPlayer) -> [Match] {
+        let matches = fetchAllMatches()
+        return matches.filter { $0.homeTeam?.players.contains(player) ?? false || $0.awayTeam?.players.contains(player) ?? false }
+    }
+    
 }
 

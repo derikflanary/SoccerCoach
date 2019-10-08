@@ -270,13 +270,13 @@ struct PlayerCumulativeStats {
         return playerMatchStats.map { $0.averageShotRating }.reduce(0, +) / matches.count
     }
     
-    func minutesPerGame(for position: Position) -> Int {
+    func minutesPerGame(for position: Position) -> Float {
         guard matches.count > 0 else { return 0 }
-        return playerMatchStats.map { $0.minutesPlayed(at: position) }.reduce(0, +) / matches.count
+        return Float(playerMatchStats.map { $0.minutesPlayed(at: position) }.reduce(0, +)) / Float(matches.count)
     }
     
-    func teamShotsPerGame(for position: Position) -> [Shot] {
-        return playerMatchStats.flatMap { $0.teamShots(at: position) }
+    func teamShotsPerGame(for position: Position) -> Float {
+        return Float(playerMatchStats.flatMap { $0.teamShots(at: position) }.count) / Float(matches.count)
     }
     
     func teamShotsPerMinute(for position: Position) -> Float {

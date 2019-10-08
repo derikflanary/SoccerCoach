@@ -205,11 +205,18 @@
                         <viewLayoutGuide key="safeArea" id="3WK-tl-tAe"/>
                     </view>
                     <navigationItem key="navigationItem" title="Current Match" id="BBi-hc-yry">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="pencil.and.outline" catalog="system" id="fMM-pX-uMz">
-                            <connections>
-                                <segue destination="Qrj-W5-Wf6" kind="presentation" modalPresentationStyle="fullScreen" id="2vx-cm-d9i"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Summary" id="x7e-2W-fNU">
+                                <connections>
+                                    <segue destination="y1q-Wa-vzz" kind="presentation" identifier="presentMatchDetail" id="txF-z2-ZMe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="pencil.and.outline" catalog="system" id="fMM-pX-uMz">
+                                <connections>
+                                    <segue destination="Qrj-W5-Wf6" kind="presentation" modalPresentationStyle="fullScreen" id="2vx-cm-d9i"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="URq-PQ-UJk">
                                 <connections>
@@ -260,7 +267,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new match and the teams will show up here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ooT-Zh-KzU">
                                     <rect key="frame" x="0.0" y="36.5" width="662" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -284,6 +291,14 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="-872.46376811594212" y="-725.22321428571422"/>
+        </scene>
+        <!--MatchDetails-->
+        <scene sceneID="Zai-pf-UuN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MatchDetails" id="y1q-Wa-vzz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T1X-CW-gwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-276" y="-950"/>
         </scene>
         <!--Drawing-->
         <scene sceneID="DNo-OH-qTW">

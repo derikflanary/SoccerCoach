@@ -69,7 +69,7 @@ class MatchViewController: UIViewController {
     var awayGoals: Int = 0 {
         didSet {
             DispatchQueue.main.async {
-                self.awayGoalLabel.text = String(self.homeGoals)
+                self.awayGoalLabel.text = String(self.awayGoals)
             }
         }
     }
@@ -103,7 +103,8 @@ class MatchViewController: UIViewController {
         let playerMatchStats = PlayerMatchStats(player: player, playingTimes: playingTime, match: match)
         return CurrentMatchPlayerDetails(coder: coder, playerMatchStats: playerMatchStats)
     }
-        
+
+    
     @IBAction func endHalfButtonTapped() {
         App.sharedCore.fire(event: HalfEnded(isMatchOver: half == .second))
         updateHalfSelected()
@@ -319,6 +320,12 @@ extension MatchViewController: SegueHandling {
     
     enum SegueIdentifier: String {
         case presentPlayerDetails
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailNav = segue.destination as? UINavigationController else { return }
+        guard let detail = detailNav.topViewController as? MatchDetail else { return }
+        detail.match = match
     }
     
 }

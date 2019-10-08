@@ -92,7 +92,7 @@ extension PlayerPositionCumulativeDetail: UITableViewDataSource {
             cell.detailTextLabel?.text = "\(playerStats.minutesPerGame(for: position))"
         case .teamShotsPerGame:
             cell.textLabel?.text = "\(row.title):"
-            cell.detailTextLabel?.text = "\(playerStats.teamShotsPerGame(for: position))"
+            cell.detailTextLabel?.text = String(format: "%.1f", playerStats.teamShotsPerGame(for: position))
         case .teamShotsPerMinute:
             cell.textLabel?.text = "\(row.title):"
             cell.detailTextLabel?.text = String(format: "%.1f", playerStats.teamShotsPerMinute(for: position))

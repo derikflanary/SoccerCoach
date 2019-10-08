@@ -17,5 +17,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5AF10A9F-628A-4A38-ABD1-67A20E0459C8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "soccer-coach/UI/Match and Teams/MatchViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "homeGoals"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5AF10A9F-628A-4A38-ABD1-67A20E0459C8 - 96917951aefa94bd"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "soccer_coach.MatchViewController.homeGoals.didset : Swift.Int"
+                  moduleName = "soccer-coach"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/derikflanary/Documents/code/soccer-coach/soccer-coach/UI/Match%20and%20Teams/MatchViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "5AF10A9F-628A-4A38-ABD1-67A20E0459C8 - 5445b757f15ed8a1"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in soccer_coach.MatchViewController.homeGoals.didset : Swift.Int"
+                  moduleName = "soccer-coach"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/derikflanary/Documents/code/soccer-coach/soccer-coach/UI/Match%20and%20Teams/MatchViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

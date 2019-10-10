@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14897.2" systemVersion="19A536g" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A582a" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Assist" representedClassName=".Assist" syncable="YES">
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shot" inverseName="assist" inverseEntity="Shot"/>
         <relationship name="playingTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayingTime" inverseName="assists" inverseEntity="PlayingTime"/>

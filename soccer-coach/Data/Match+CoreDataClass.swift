@@ -19,9 +19,7 @@ public class Match: NSManagedObject {
     var summary: String {
         let homeTeamName = homeTeam?.name ?? "Home Team"
         let awayTeamName = awayTeam?.name ?? "Away Team"
-        let homeScore = max(score?.home ?? 0, Int64(homeGoals))
-        let awayScore = max(score?.away ?? 0, Int64(awayGoals))
-        return "\(homeTeamName) \(homeScore) - \(awayScore) \(awayTeamName)"
+        return "\(homeTeamName) \(homeGoals) - \(awayGoals) \(awayTeamName)"
     }
     var currentHalf: Half {
         return Half(rawValue: Int(half)) ?? .first

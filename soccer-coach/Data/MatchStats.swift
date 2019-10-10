@@ -13,6 +13,12 @@ struct MatchStats {
     var homePlayingTime = [PlayingTime]()
     var awayPlayingTime = [PlayingTime]()
     
+    var homeTotalGoals: Int {
+        return homePlayingTime.compactMap { $0.shots }.flatMap { $0 }.filter { $0.isGoal }.count
+    }
+    var awayTotalGoals: Int {
+        return homePlayingTime.compactMap { $0.shots }.flatMap { $0 }.filter { $0.isGoal }.count
+    }
     var homeTotalShots: Int {
         return homePlayingTime.compactMap { $0.shots }.flatMap { $0 }.count
     }

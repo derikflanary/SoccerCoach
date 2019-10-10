@@ -217,12 +217,6 @@
 		EE27684322B7E708008E4CA1 = {
 			isa = PBXGroup;
 			children = (
-				EE4393EA23177E6E007F7B7A /* PlayingTime+CoreDataClass.swift */,
-				EE4393EB23177E6E007F7B7A /* PlayingTime+CoreDataProperties.swift */,
-				EE4393E223177DBE007F7B7A /* Save+CoreDataClass.swift */,
-				EE4393E323177DBE007F7B7A /* Save+CoreDataProperties.swift */,
-				EE01FF4F2305BAE100CAA397 /* Assist+CoreDataClass.swift */,
-				EE01FF502305BAE100CAA397 /* Assist+CoreDataProperties.swift */,
 				EE27684E22B7E708008E4CA1 /* soccer-coach */,
 				EE27684D22B7E708008E4CA1 /* Products */,
 			);
@@ -292,6 +286,12 @@
 		EE27686D22B7EE70008E4CA1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				EE4393EA23177E6E007F7B7A /* PlayingTime+CoreDataClass.swift */,
+				EE4393EB23177E6E007F7B7A /* PlayingTime+CoreDataProperties.swift */,
+				EE4393E223177DBE007F7B7A /* Save+CoreDataClass.swift */,
+				EE4393E323177DBE007F7B7A /* Save+CoreDataProperties.swift */,
+				EE01FF4F2305BAE100CAA397 /* Assist+CoreDataClass.swift */,
+				EE01FF502305BAE100CAA397 /* Assist+CoreDataProperties.swift */,
 				EECCE55B230351A1006B5A4B /* Turnover+CoreDataClass.swift */,
 				EECCE55C230351A1006B5A4B /* Turnover+CoreDataProperties.swift */,
 				EE6D438522E62CE1005B759D /* SoccerPlayer+CoreDataClass.swift */,
